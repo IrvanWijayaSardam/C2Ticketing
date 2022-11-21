@@ -16,9 +16,9 @@
     </fragment>
     <fragment
         android:id="@+id/signinFragment"
-        android:name="com.ctwofinalproject.ticketing.view.ui.signin.SigninFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.signup.SignupFragment"
         android:label="fragment_signin"
-        tools:layout="@layout/fragment_signin" >
+        tools:layout="@layout/fragment_signup" >
         <action
             android:id="@+id/action_signinFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
