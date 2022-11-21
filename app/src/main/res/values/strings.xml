@@ -2,4 +2,45 @@
     <string name="app_name">Ticketing</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skip">skip</string>
+    <string name="firstname">firstname</string>
+    <string name="lastname">lastname</string>
+    <string name="email">email</string>
+    <string name="phone_number">phone number</string>
+    <string name="select_country">select country</string>
+    <string name="province">province</string>
+    <string name="address">address</string>
+    <string name="city">city</string>
+    <string name="birthday">Birthday</string>
+    <string name="postal_code">postal code</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">password</string>
+    <string name="have_an_account">Have an Account</string>
+    <string name="login_with_google">Login with Google</string>
+
+    <!--  dummy country  -->
+    <string-array name="country">
+        <item>Saudi Arabia</item>
+        <item>England</item>
+        <item>United State</item>
+        <item>Indonesia</item>
+    </string-array>
+
+    <!--  dummy province  -->
+    <string-array name="province">
+        <item>Papua</item>
+        <item>Yogyakarta</item>
+        <item>Jakarta</item>
+        <item>Jawa Timur</item>
+        <item>Sumatera Barat</item>
+    </string-array>
+
+    <!--  dummy City  -->
+    <string-array name="city">
+        <item>Sleman</item>
+        <item>Jayapura</item>
+        <item>Jakarta Selatan</item>
+        <item>Surabaya</item>
+        <item>Samarinda</item>
+    </string-array>
 </resources>
