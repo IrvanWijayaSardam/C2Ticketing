@@ -8,14 +8,10 @@
     <color name="black">#FF000000</color>
 
     <!--  ticketting color  -->
-    <color name="white">#FFFFFFFF</color>
-    <color name="white_100">#EAEBEC</color>
-    <color name="blue_100">#A7AFC5</color>
-    <color name="blue_200">#7886B9</color>
-    <color name="blue_300">#556BAF</color>
-    <color name="blue_400">#314AA3</color>
-    <color name="blue_600">#05148B</color>
-    <color name="blue_700">#010A6A</color>
-    <color name="brown_100">#504F5D</color>
-    <color name="black_font">#110F1E</color>
+    <color name="primary_blue_1">#2663FF</color>
+    <color name="background_color_white">#ffffff</color>
+    <color name="primary_font_color">#575964</color>
+    <color name="secondary_font_color">#BABABA</color>
+    <color name="variant_color_orange">#F5BF5D</color>
+    <color name="toska_variant">#0A1531</color>
 </resources>

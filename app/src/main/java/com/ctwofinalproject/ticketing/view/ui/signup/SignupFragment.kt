@@ -27,45 +27,5 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //        selected country
-        binding.spinnerCountrySignUp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(requireContext(),
-                    "You selected ${adapterView?.getItemAtPosition(position).toString()}",
-                    Toast.LENGTH_LONG).show()
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
-//        selected province
-        binding.spinnerProvinceSignUp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(requireContext(),
-                    "You selected ${adapterView?.getItemAtPosition(position).toString()}",
-                    Toast.LENGTH_LONG).show()
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
-
-//        selected city
-        binding.spinnerCitySignUp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(requireContext(),
-                    "You selected ${adapterView?.getItemAtPosition(position).toString()}",
-                    Toast.LENGTH_LONG).show()
-            }
-
-            override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
     }
 }

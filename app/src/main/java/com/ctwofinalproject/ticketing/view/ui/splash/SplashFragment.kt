@@ -24,8 +24,7 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding?.tvSkipSplash?.setOnClickListener {
+        binding?.cvGetStarted?.setOnClickListener{
             goToLogin()
         }
     }
