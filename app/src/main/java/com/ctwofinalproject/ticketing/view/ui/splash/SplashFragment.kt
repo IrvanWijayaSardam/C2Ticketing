@@ -25,10 +25,13 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.cvGetStarted?.setOnClickListener{
-            goToLogin()
+            goToSignUp()
         }
     }
     fun goToLogin(){
         Navigation.findNavController(requireView()).navigate(R.id.action_splashFragment_to_loginFragment)
+    }
+    fun goToSignUp(){
+        Navigation.findNavController(requireView()).navigate(R.id.action_splashFragment_to_signupFragment)
     }
 }
