@@ -10,6 +10,7 @@ import android.view.ViewTreeObserver
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentSignupBinding
 import com.google.android.material.textfield.TextInputEditText
@@ -52,5 +53,12 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.tvHaveAnAccountSignUp.setOnClickListener {
+            goToLogin()
+        }
+
+    }
+    fun goToLogin(){
+        Navigation.findNavController(requireView()).navigate(R.id.action_signupFragment_to_loginFragment)
     }
 }
