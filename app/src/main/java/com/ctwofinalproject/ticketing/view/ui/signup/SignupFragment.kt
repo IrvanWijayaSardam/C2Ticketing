@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentSignupBinding
@@ -18,6 +19,24 @@ class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding? = null
     private val binding get() = _binding!!
 
+
+    override fun onResume() {
+        super.onResume()
+//        data dummy Select City
+        val city = resources.getStringArray(R.array.city)
+        val arrayAdapterCity = ArrayAdapter(requireContext(), R.layout.drop_down_item, city)
+        binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
+
+//        data dummy Select Province
+        val province = resources.getStringArray(R.array.province)
+        val arrayAdapterProvince = ArrayAdapter(requireContext(), R.layout.drop_down_item, province)
+        binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
+//        data dummy Select Country
+        val country = resources.getStringArray(R.array.country)
+        val arrayAdapterCountry = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
+        binding.aCtCountrySignUp.setAdapter(arrayAdapterCountry)
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
