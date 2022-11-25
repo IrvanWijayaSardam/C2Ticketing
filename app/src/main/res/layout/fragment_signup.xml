@@ -68,6 +68,24 @@
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tIlFirstnameSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                android:layout_marginBottom="25dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tIetFirstnameSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="ex: moehamad"
+                />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -78,6 +96,25 @@
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tIlLastnameSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                android:layout_marginBottom="25dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tIetLastnameSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="ex: roisul"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -341,6 +378,100 @@
                     android:hint="xxxx"
                     />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnApplySignUp"
+                android:layout_width="172dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="Let's Go"
+                android:textAllCaps="false"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:background="@drawable/custom_button"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or"
+                android:textSize="15sp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/secondary_font_color"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAuthWithGoogle"
+                android:layout_width="184dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="7dp"
+                app:cardElevation="@dimen/cardview_default_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
+                        android:layout_marginEnd="3.5dp"
+                        android:src="@drawable/ic_logo_google"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3.5dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/login_with_google"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAuthWithApple"
+                android:layout_width="184dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="30dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                app:cardElevation="@dimen/cardview_default_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
+                        android:layout_marginEnd="3.5dp"
+                        android:src="@drawable/ic_logo_apple"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="3.5dp"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/login_with_apple"/>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvHaveAnAccountSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/have_an_account"
+                android:layout_gravity="center"
+                android:textColor="@color/primary_blue_1"
+                android:fontFamily="@font/poppins_semibold"/>
 
         </LinearLayout>
 

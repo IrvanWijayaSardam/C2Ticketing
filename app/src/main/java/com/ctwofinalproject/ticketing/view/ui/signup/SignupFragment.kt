@@ -12,6 +12,7 @@ import android.view.ViewTreeObserver
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ctwofinalproject.ticketing.R
@@ -53,9 +54,7 @@ class SignupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentSignupBinding.inflate(inflater,container, false)
-
-
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -93,5 +92,12 @@ class SignupFragment : Fragment() {
             }
         })
 
+        binding?.tvHaveAnAccountSignUp?.setOnClickListener {
+            goToLogin()
+        }
+
+    }
+    private fun goToLogin(){
+        Navigation.findNavController(requireView()).navigate(R.id.action_signupFragment_to_loginFragment)
     }
 }
