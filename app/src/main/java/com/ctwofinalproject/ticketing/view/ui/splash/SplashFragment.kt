@@ -12,7 +12,7 @@ import com.ctwofinalproject.ticketing.databinding.FragmentSplashBinding
 class SplashFragment : Fragment() {
 
     private var _binding : FragmentSplashBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,10 +28,10 @@ class SplashFragment : Fragment() {
             goToSignUp()
         }
     }
-    fun goToLogin(){
+    private fun goToLogin(){
         Navigation.findNavController(requireView()).navigate(R.id.action_splashFragment_to_loginFragment)
     }
-    fun goToSignUp(){
+    private fun goToSignUp(){
         Navigation.findNavController(requireView()).navigate(R.id.action_splashFragment_to_signupFragment)
     }
 }

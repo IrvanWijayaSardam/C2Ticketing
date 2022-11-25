@@ -45,20 +45,18 @@ class SignupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentSignupBinding.inflate(inflater,container, false)
-
-
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.tvHaveAnAccountSignUp.setOnClickListener {
+        binding?.tvHaveAnAccountSignUp?.setOnClickListener {
             goToLogin()
         }
 
     }
-    fun goToLogin(){
+    private fun goToLogin(){
         Navigation.findNavController(requireView()).navigate(R.id.action_signupFragment_to_loginFragment)
     }
 }
