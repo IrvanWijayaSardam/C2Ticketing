@@ -33,17 +33,17 @@ class SignupFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 //        data dummy Select City
-        val city                                    = resources.getStringArray(R.array.city)
-        val arrayAdapterCity                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, city)
+        val city                                        = resources.getStringArray(R.array.city)
+        val arrayAdapterCity                            = ArrayAdapter(requireContext(), R.layout.drop_down_item, city)
         binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
 
 //        data dummy Select Province
         val province = resources.getStringArray(R.array.province)
-        val arrayAdapterProvince                    = ArrayAdapter(requireContext(), R.layout.drop_down_item, province)
+        val arrayAdapterProvince                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, province)
         binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
 //        data dummy Select Country
-        val country                                         = resources.getStringArray(R.array.country)
-        val arrayAdapterCountry                     = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
+        val country                                     = resources.getStringArray(R.array.country)
+        val arrayAdapterCountry                         = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
         binding.aCtCountrySignUp.setAdapter(arrayAdapterCountry)
 
     }
@@ -59,13 +59,13 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val country                                         = resources.getStringArray(R.array.country)
+        val country                                 = resources.getStringArray(R.array.country)
         viewModelProvinces                          = ViewModelProvider(this).get(ProvinceViewModel::class.java)
         viewModelProvinces.retrieveProvince()
 
         binding.aCtCountrySignUp.setOnItemClickListener { adapterView, view, i, l ->
             if(country[i].toString().equals("Indonesia")) {
-                val arrayAdapterProvince                    = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsProvince)
+                val arrayAdapterProvince             = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsProvince)
                 binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
             }
         }
@@ -73,7 +73,7 @@ class SignupFragment : Fragment() {
         binding.aCtProvinceSignUp.setOnItemClickListener { adapterView, view, i, l ->
             itemsCity.clear()
             viewModelProvinces.retrieveCity(itemNumber[i].toInt())
-            val arrayAdapterCity                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsCity)
+            val arrayAdapterCity                    = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsCity)
             binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
         }
 
@@ -92,7 +92,7 @@ class SignupFragment : Fragment() {
             }
         })
 
-        binding?.tvHaveAnAccountSignUp?.setOnClickListener {
+        binding.tvHaveAnAccountSignUp.setOnClickListener {
             goToLogin()
         }
 
