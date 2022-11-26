@@ -31,7 +31,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginRight="2.5dp"
+            android:layout_marginEnd="2.5dp"
             android:src="@drawable/ic_logo_v2_blue"/>
         <TextView
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:text="@string/slogan"
             android:layout_gravity="center"
             android:textSize="15sp"
-            android:layout_marginEnd="2.5dp"
+            android:layout_marginStart="2.5dp"
             android:fontFamily="@font/poppins_medium"/>
     </LinearLayout>
     <ScrollView
@@ -64,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/firstname"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -92,7 +91,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lastname"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -121,7 +119,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/email"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -149,7 +146,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/phone_number"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -181,7 +177,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/country"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -210,7 +205,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/province"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -238,7 +232,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/city"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
@@ -267,11 +260,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/address"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tIlAddressSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:layout_marginBottom="25dp"
@@ -283,6 +276,7 @@
                 app:boxCornerRadiusTopStart="10dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tIetAddressSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="Perumahan xxxx RT/xx, RW/xx"
@@ -296,11 +290,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/postal_code"
                 android:textSize="15sp"
-                android:layout_marginBottom="5dp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tIlPostalCodeSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
@@ -312,6 +306,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tIetPostalCodeSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="963xxx"
@@ -402,7 +397,7 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:textColor="@color/secondary_font_color"/>
             <androidx.cardview.widget.CardView
-                android:id="@+id/cvAuthWithGoogle"
+                android:id="@+id/cvAuthWithGoogleSignUp"
                 android:layout_width="184dp"
                 android:layout_height="48dp"
                 app:cardCornerRadius="30dp"
@@ -433,7 +428,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cvAuthWithApple"
+                android:id="@+id/cvAuthWithAppleSignUp"
                 android:layout_width="184dp"
                 android:layout_height="48dp"
                 app:cardCornerRadius="30dp"
