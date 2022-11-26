@@ -200,10 +200,10 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/tvHaveAnAccountLogin"
+                android:id="@+id/tvDontHaveAnAccountLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/have_an_account"
+                android:text="@string/don_t_have_an_account"
                 android:layout_gravity="center"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_semibold"/>
