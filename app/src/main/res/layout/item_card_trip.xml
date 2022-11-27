@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginBottom="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/background_color_white">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <RelativeLayout
+            android:id="@+id/rlDetailTripFragmentHome"
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_detail_item_trip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detail"
+                android:layout_centerInParent="true"
+                android:textColor="@color/background_color_white"
+                android:fontFamily="@font/poppins_semibold" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llFromAndToAirport"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/from"
+                android:textSize="8sp"
+                android:textColor="@color/secondary_font_color"
+                tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/tvNameFromAirportFragmentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cgk"
+                android:textColor="@color/primary_font_color"
+                android:textSize="20sp"
+                android:fontFamily="@font/poppins_semibold"/>
+
+            <TextView
+                android:id="@+id/tvNameFromLocationAirportFragmentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:textSize="10sp"
+                android:text="@string/jakarta" />
+            <View
+                android:layout_width="92dp"
+                android:layout_height="1dp"
+                android:background="@color/secondary_font_color"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_light"
+                android:text="@string/to"
+                android:textSize="8sp"
+                android:textColor="@color/secondary_font_color"
+                tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/tvNameToAirportFragmentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cgk"
+                android:textColor="@color/primary_font_color"
+                android:textSize="20sp"
+                android:fontFamily="@font/poppins_semibold"/>
+            <TextView
+                android:id="@+id/tvNameToLocationAirportFragmentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:textSize="10sp"
+                android:text="@string/jakarta" />
+        </LinearLayout>
+        <View
+            android:id="@+id/vVerticalLined"
+            android:layout_width="1dp"
+            android:layout_height="130dp"
+            android:background="@color/secondary_font_color"
+            app:layout_constraintLeft_toRightOf="@+id/llFromAndToAirport"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toRightOf="@+id/vVerticalLined"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/rlDetailTripFragmentHome"
+            android:paddingLeft="15dp"
+            android:paddingTop="20dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/flight_number"
+                android:fontFamily="@font/poppins_light"
+                android:textSize="8sp"
+                android:textColor="@color/secondary_font_color"
+                tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/tvItemCardTripFlightNumberFragmentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hn09k"
+                android:textColor="@color/primary_font_color"
+                android:textSize="20sp"
+                android:fontFamily="@font/poppins_semibold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:fontFamily="@font/poppins_light"
+                android:textSize="8sp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/secondary_font_color"
+                tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/tvItemCardTripDateFragmentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="14/12/2022"
+                android:fontFamily="@font/poppins_light"
+                android:textSize="10sp"
+                android:textColor="@color/primary_font_color"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_light"
+                android:textSize="8sp"
+                android:textColor="@color/secondary_font_color"
+                tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/tvItemCardTripTimeFragmentHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:45 AM"
+                android:fontFamily="@font/poppins_light"
+                android:textSize="10sp"
+                android:textColor="@color/primary_font_color"
+                tools:ignore="SmallSp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
