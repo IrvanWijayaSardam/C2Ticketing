@@ -5,14 +5,16 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_color_white"
-    android:padding="30dp"
     tools:context=".view.ui.home.HomeFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCardMyTripHomeFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Home"
+        android:layout_height="500dp"
+        tools:listitem="@layout/item_card_trip"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
