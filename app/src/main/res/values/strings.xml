@@ -39,6 +39,9 @@
     <string name="hn09k">HN09K</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
+    <string name="good_morning">Good Morning</string>
+    <string name="roisul">ROISUL</string>
+    <string name="hope_you_enjoy_and_have_the_best_trip">Hope you enjoy and have the best trip</string>
 
     <!--  dummy country  -->
     <string-array name="country">

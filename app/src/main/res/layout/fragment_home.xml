@@ -7,6 +7,39 @@
     android:background="@color/background_color_white"
     tools:context=".view.ui.home.HomeFragment">
 
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="28dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tvGreeting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/good_morning"
+            android:fontFamily="@font/poppins_light"
+            android:textSize="12sp"
+            android:textColor="@color/secondary_font_color"/>
+        <TextView
+            android:id="@+id/tvUsernameOrLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/roisul"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondary_font_color"
+            android:fontFamily="@font/poppins"
+            android:text="@string/hope_you_enjoy_and_have_the_best_trip"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCardMyTripHomeFragment"
         android:layout_width="match_parent"
