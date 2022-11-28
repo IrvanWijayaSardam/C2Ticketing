@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Ticketing"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivityHome"
+            android:name=".view.MainActivityHome"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

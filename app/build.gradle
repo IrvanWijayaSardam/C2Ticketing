@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id "com.google.protobuf" version "0.8.17"
 }
 
 android {
@@ -71,4 +72,36 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.0'
     //implementation firebase analytic and crashlytic for firebase crashlytics
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    //datastore preferences
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+    // Lifecycle
+    def lifecycle_version = "2.4.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    //Proto
+    implementation  "com.google.protobuf:protobuf-javalite:3.18.0"
+
+
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.14.0"
+    }
+
+    // Generates the java Protobuf-lite code for the Protobufs in this project. See
+    // https://github.com/google/protobuf-gradle-plugin#customizing-protobuf-compilation
+    // for more information.
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                java {
+                    option 'lite'
+                }
+            }
+        }
+    }
 }
