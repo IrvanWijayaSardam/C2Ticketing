@@ -9,12 +9,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
+import com.ctwofinalproject.ticketing.model.ResponseLogin
+import com.ctwofinalproject.ticketing.viewmodel.LoginViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding?                 = null
     private val binding get()                                   = _binding!!
     lateinit var viewModelProto                                 : ProtoViewModel
+    lateinit var viewModelLogin                                 : LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +33,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModelProto                                          = ViewModelProvider(this).get(ProtoViewModel::class.java)
+        viewModelLogin                                          = ViewModelProvider(this).get(LoginViewModel::class.java)
         initListener()
 
     }
@@ -40,8 +46,14 @@ class LoginFragment : Fragment() {
                 goToSignUp()
             }
             btnApplyLogin.setOnClickListener {
+
+                viewModelLogin.auth(tIetEmailLogin.text.toString(),tIetPasswordLogin.text.toString())
+
+                /*
                 viewModelProto.editData("irvan","wijaya","pria","irfanwijayasardam@gmail.com"
                 ,"0813492832938","linkpictures","ada dirumah","ASJK1283123897KASJDH.ASJKDHASKDU82137",true)
+                */
+
             }
         }
     }

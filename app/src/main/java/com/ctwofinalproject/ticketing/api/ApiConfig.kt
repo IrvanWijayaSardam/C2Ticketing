@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -25,7 +26,7 @@ object ApiConfig {
             }
         }
 
-    private val client = OkHttpClient.Builder().addInterceptor(logging).build()
+    private val client = OkHttpClient.Builder().connectTimeout(2,TimeUnit.MINUTES).addInterceptor(logging).build()
 
     @Singleton
     @Provides

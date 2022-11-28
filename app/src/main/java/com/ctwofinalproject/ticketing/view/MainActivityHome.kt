@@ -2,6 +2,7 @@ package com.ctwofinalproject.ticketing.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.replace
 import com.ctwofinalproject.ticketing.R
@@ -17,6 +18,7 @@ class MainActivityHome : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(HomeFragment())
 
+//        binding.bottomNav.visibility = View.GONE
 
         binding.bottomNav.setOnItemReselectedListener{
 

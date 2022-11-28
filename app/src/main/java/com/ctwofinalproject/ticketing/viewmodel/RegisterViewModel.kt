@@ -1,11 +1,11 @@
 package com.ctwofinalproject.ticketing.viewmodel
 
-import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.ctwofinalproject.ticketing.api.RestServiceMain
-import com.ctwofinalproject.ticketing.api.RestServiceProvince
 import com.ctwofinalproject.ticketing.data.User
+import com.ctwofinalproject.ticketing.model.ResponseMessage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,28 +15,18 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(var api : RestServiceMain):ViewModel() {
 
-
     fun registUser(user: User){
         val client = api.createUser(user)
-        client.enqueue(object : Callback<User> {
+        client.enqueue(object : Callback<ResponseMessage>{
             override fun onResponse(
-                call: Call<User>,
-                response: Response<User>
+                call: Call<ResponseMessage>,
+                response: Response<ResponseMessage>
             ) {
-                val responseBody = response.body()
-                if (response.isSuccessful && responseBody != null) {
-                    Log.d(ContentValues.TAG, "onResponse: uSER Inserted")
-                    Log.e(ContentValues.TAG, "onSuccess: ${responseBody}")
-                    //dialog.dismiss()
-
-            }else{
-                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
-
-                }
+                Log.d(TAG, "onResponse: Response Success")
             }
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.e(ContentValues.TAG, "onFailure: ${t.message}")
 
+            override fun onFailure(call: Call<ResponseMessage>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
             }
         })
     }

@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding?                = null
     private val binding get()                                   = _binding!!
-    private lateinit var viewModelProvinces                     :  ProvinceViewModel
+    private lateinit var viewModelProvinces                     : ProvinceViewModel
     private lateinit var viewModelRegist                        : RegisterViewModel
     private var itemsProvince                                   = ArrayList<String>()
     private var itemsCity                                       = ArrayList<String>()
@@ -53,11 +53,9 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModelProvinces                          = ViewModelProvider(this).get(ProvinceViewModel::class.java)
-        viewModelRegist = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModelRegist                             = ViewModelProvider(this).get(RegisterViewModel::class.java)
         viewModelProvinces.retrieveProvince()
         initListener()
-
-
 
         viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner,{
             Log.d(TAG, "onViewCreated: Observer Provinces : ${it}")
@@ -98,6 +96,10 @@ class SignupFragment : Fragment() {
                 viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(),
                 "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), aCtCitySignUp.text.toString(), tIetAddressSignUp.text.toString(), tIetPasswordSignUp.text.toString(),
                 tIetPasswordSignUp.text.toString(), aCtCountrySignUp.text.toString(), aCtProvinceSignUp.text.toString()))
+                var user : User = User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(),
+                    "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), aCtCitySignUp.text.toString(), tIetAddressSignUp.text.toString(), tIetPasswordSignUp.text.toString(),
+                    tIetPasswordSignUp.text.toString(), aCtCountrySignUp.text.toString(), aCtProvinceSignUp.text.toString())
+                Log.d(TAG, "initListener: ${user.toString()}")
             }
         }
     }
