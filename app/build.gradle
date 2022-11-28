@@ -71,7 +71,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.0'
     //implementation firebase analytic and crashlytic for firebase crashlytics
     implementation 'com.google.firebase:firebase-analytics-ktx'
-
-
-
 }
