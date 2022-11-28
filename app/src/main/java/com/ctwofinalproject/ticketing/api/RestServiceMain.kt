@@ -6,7 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface RestServiceMain {
-    @POST("api/auth/register")
+    @POST("api/register")
     fun createUser(
         @Body body :User
     ) : Call<User>

@@ -16,8 +16,10 @@ import androidx.navigation.Navigation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ctwofinalproject.ticketing.R
+import com.ctwofinalproject.ticketing.data.User
 import com.ctwofinalproject.ticketing.databinding.FragmentSignupBinding
 import com.ctwofinalproject.ticketing.viewmodel.ProvinceViewModel
+import com.ctwofinalproject.ticketing.viewmodel.RegisterViewModel
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,9 +29,12 @@ class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding?                = null
     private val binding get()                                   = _binding!!
     private lateinit var viewModelProvinces                     :  ProvinceViewModel
+    private lateinit var viewModelRegist                        : RegisterViewModel
     private var itemsProvince                                   = ArrayList<String>()
     private var itemsCity                                       = ArrayList<String>()
     private var itemNumber                                      = ArrayList<Number>()
+
+
 
     override fun onResume() {
         super.onResume()
@@ -48,8 +53,11 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModelProvinces                          = ViewModelProvider(this).get(ProvinceViewModel::class.java)
+        viewModelRegist = ViewModelProvider(this).get(RegisterViewModel::class.java)
         viewModelProvinces.retrieveProvince()
         initListener()
+
+
 
         viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner,{
             Log.d(TAG, "onViewCreated: Observer Provinces : ${it}")
@@ -85,6 +93,11 @@ class SignupFragment : Fragment() {
                     val arrayAdapterProvince             = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsProvince)
                     binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
                 }
+            }
+            btnApplySignUp.setOnClickListener(){
+                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(),
+                "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), aCtCitySignUp.text.toString(), tIetAddressSignUp.text.toString(), tIetPasswordSignUp.text.toString(),
+                tIetPasswordSignUp.text.toString(), aCtCountrySignUp.text.toString(), aCtProvinceSignUp.text.toString()))
             }
         }
     }

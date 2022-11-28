@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object ApiConfig {
     const val BASE_URL_PROVINCE= "https://irvanwijayasardam.github.io/api-wilayah-indonesia/"
-    const val BASE_URL_MAIN= "https://mynotesapp-production-95d8.up.railway.app"
+    const val BASE_URL_MAIN= "https://platinum-project-backend-production.up.railway.app/v1/"
 
     private  val logging : HttpLoggingInterceptor
         get(){

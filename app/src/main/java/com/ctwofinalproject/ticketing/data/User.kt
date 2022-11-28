@@ -4,22 +4,32 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-@Entity
-@Parcelize
 class User(
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    var id: Int = 0,
-    @ColumnInfo(name = "name")
-    var name: String? = null,
-    @ColumnInfo(name = "email")
-    var email: String? = null,
-    @ColumnInfo(name = "password")
-    var password: String? = null,
-    @ColumnInfo(name = "profile")
-    var profile: String? = null,
-    @ColumnInfo(name = "jk")
-    var jk: String? = null,
-) : Parcelable
+    @SerializedName("email")
+    val email: String?,
+    @SerializedName("firstname")
+    val firstname: String?,
+    @SerializedName("lastname")
+    val lastname: String?,
+    @SerializedName("gender")
+    val gender: String?,
+    @SerializedName("phone")
+    val phone: String?,
+    @SerializedName("birthdate")
+    val birthdate: String?,
+    @SerializedName("city")
+    val city: String?,
+    @SerializedName("homeAddress")
+    val homeAddress: String?,
+    @SerializedName("password")
+    val password: String?,
+    @SerializedName("confPassword")
+    val confPassword: String?,
+    @SerializedName("country")
+    val country: String?,
+    @SerializedName("province")
+    val province: String?
+)
