@@ -13,8 +13,8 @@ import com.ctwofinalproject.ticketing.view.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
-const val channelId = "notification_channel"
-const val channelName = "com.ctwofinalproject.ticketing"
+const val channelId                     = "notification_channel"
+const val channelName                   = "com.ctwofinalproject.ticketing"
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {

@@ -27,25 +27,13 @@ class SignupFragment : Fragment() {
     private var _binding: FragmentSignupBinding?                = null
     private val binding get()                                   = _binding!!
     private lateinit var viewModelProvinces                     :  ProvinceViewModel
-    private var itemsProvince = ArrayList<String>()
-    private var itemsCity = ArrayList<String>()
-    private var itemNumber = ArrayList<Number>()
+    private var itemsProvince                                   = ArrayList<String>()
+    private var itemsCity                                       = ArrayList<String>()
+    private var itemNumber                                      = ArrayList<Number>()
+
     override fun onResume() {
         super.onResume()
-//        data dummy Select City
-        val city                                        = resources.getStringArray(R.array.city)
-        val arrayAdapterCity                            = ArrayAdapter(requireContext(), R.layout.drop_down_item, city)
-        binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
-
-//        data dummy Select Province
-        val province = resources.getStringArray(R.array.province)
-        val arrayAdapterProvince                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, province)
-        binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
-//        data dummy Select Country
-        val country                                     = resources.getStringArray(R.array.country)
-        val arrayAdapterCountry                         = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
-        binding.aCtCountrySignUp.setAdapter(arrayAdapterCountry)
-
+        setAdapter()
     }
 
     override fun onCreateView(
@@ -59,23 +47,9 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val country                                 = resources.getStringArray(R.array.country)
         viewModelProvinces                          = ViewModelProvider(this).get(ProvinceViewModel::class.java)
         viewModelProvinces.retrieveProvince()
-
-        binding.aCtCountrySignUp.setOnItemClickListener { adapterView, view, i, l ->
-            if(country[i].toString().equals("Indonesia")) {
-                val arrayAdapterProvince             = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsProvince)
-                binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
-            }
-        }
-
-        binding.aCtProvinceSignUp.setOnItemClickListener { adapterView, view, i, l ->
-            itemsCity.clear()
-            viewModelProvinces.retrieveCity(itemNumber[i].toInt())
-            val arrayAdapterCity                    = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsCity)
-            binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
-        }
+        initListener()
 
         viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner,{
             Log.d(TAG, "onViewCreated: Observer Provinces : ${it}")
@@ -92,11 +66,46 @@ class SignupFragment : Fragment() {
             }
         })
 
-        binding.tvHaveAnAccountSignUp.setOnClickListener {
-            goToLogin()
-        }
-
     }
+
+    private fun initListener(){
+        val country                                         = resources.getStringArray(R.array.country)
+        binding?.run {
+            tvHaveAnAccountSignUp.setOnClickListener {
+                goToLogin()
+            }
+            aCtProvinceSignUp.setOnItemClickListener { adapterView, view, i, l ->
+                itemsCity.clear()
+                viewModelProvinces.retrieveCity(itemNumber[i].toInt())
+                val arrayAdapterCity                    = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsCity)
+                binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
+            }
+            aCtCountrySignUp.setOnItemClickListener { adapterView, view, i, l ->
+                if(country[i].toString().equals("Indonesia")) {
+                    val arrayAdapterProvince             = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsProvince)
+                    binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
+                }
+            }
+        }
+    }
+
+    private fun setAdapter(){
+        //        data dummy Select City
+        val city                                        = resources.getStringArray(R.array.city)
+        val arrayAdapterCity                            = ArrayAdapter(requireContext(), R.layout.drop_down_item, city)
+        binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
+
+//        data dummy Select Province
+        val province = resources.getStringArray(R.array.province)
+        val arrayAdapterProvince                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, province)
+        binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
+//        data dummy Select Country
+        val country                                     = resources.getStringArray(R.array.country)
+        val arrayAdapterCountry                         = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
+        binding.aCtCountrySignUp.setAdapter(arrayAdapterCountry)
+    }
+
+
     private fun goToLogin(){
         Navigation.findNavController(requireView()).navigate(R.id.action_signupFragment_to_loginFragment)
     }
