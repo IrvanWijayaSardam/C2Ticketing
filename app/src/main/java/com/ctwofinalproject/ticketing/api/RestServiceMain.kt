@@ -1,5 +1,6 @@
 package com.ctwofinalproject.ticketing.api
 
+import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.data.User
 import com.ctwofinalproject.ticketing.model.ResponseLogin
 import com.ctwofinalproject.ticketing.model.ResponseMessage
@@ -17,10 +18,8 @@ interface RestServiceMain {
         @Body body :User
     ) : Call<ResponseMessage>
 
-    @FormUrlEncoded
     @POST("api/login")
     fun auth(
-        @Field("email") email: String,
-        @Field("password") password: String
+        @Body body: Login
     ) : Call<ResponseLogin>
 }

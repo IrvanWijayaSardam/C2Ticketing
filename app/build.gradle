@@ -84,6 +84,9 @@ dependencies {
     //Proto
     implementation  "com.google.protobuf:protobuf-javalite:3.18.0"
 
+    //JWT DECODER FOR DECODE JWT
+    implementation 'com.auth0.android:jwtdecode:2.0.1'
+
 
 }
 

@@ -54,4 +54,7 @@ class SplashFragment : Fragment() {
     private fun goToSignUp(){
         Navigation.findNavController(requireView()).navigate(R.id.action_splashFragment_to_signupFragment)
     }
+    private fun goToHome(){
+        Navigation.findNavController(requireView()).navigate(R.id.action_splashFragment_to_homeFragment)
+    }
 }
