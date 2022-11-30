@@ -20,9 +20,13 @@ import com.ctwofinalproject.ticketing.data.User
 import com.ctwofinalproject.ticketing.databinding.FragmentSignupBinding
 import com.ctwofinalproject.ticketing.viewmodel.ProvinceViewModel
 import com.ctwofinalproject.ticketing.viewmodel.RegisterViewModel
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class SignupFragment : Fragment() {
@@ -51,6 +55,7 @@ class SignupFragment : Fragment() {
         viewModelProvinces.retrieveProvince()
         initListener()
 
+
         viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner,{
             Log.d(TAG, "onViewCreated: Observer Provinces : ${it}")
             for(i in 0 until it!!.size){
@@ -69,10 +74,22 @@ class SignupFragment : Fragment() {
     }
 
     private fun initListener(){
-        val country                                         = resources.getStringArray(R.array.country)
         binding?.run {
             tvHaveAnAccountSignUp.setOnClickListener {
                 goToLogin()
+            }
+            ivDatePicker.setOnClickListener{
+                val datePicker = MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("CHOOSE BIRTHDAY DATE")
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+                datePicker.show(this@SignupFragment.requireActivity().supportFragmentManager,"datePicker")
+                datePicker.addOnPositiveButtonClickListener {
+                    val birthdayFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                    val birthdayDate = birthdayFormat.format(Date(it).time)
+                    tIetBirthdaySignUp.setText(birthdayDate)
+                }
+
             }
             /*
             aCtProvinceSignUp.setOnItemClickListener { adapterView, view, i, l ->
