@@ -47,6 +47,7 @@
     <string name="airport_name">airport name</string>
     <string name="airport_code">YIA</string>
     <string name="select">Select</string>
+    <string name="choose_airport">choose airport</string>
 
     <!--  dummy country  -->
     <string-array name="country">
