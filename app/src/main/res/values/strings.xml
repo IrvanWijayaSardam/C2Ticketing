@@ -42,6 +42,7 @@
     <string name="good_morning">Good Morning</string>
     <string name="roisul">ROISUL</string>
     <string name="hope_you_enjoy_and_have_the_best_trip">Hope you enjoy and have the best trip</string>
+    <string name="confirm_password">Confirm Password</string>
 
     <!--  dummy country  -->
     <string-array name="country">

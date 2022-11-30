@@ -149,6 +149,7 @@
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tIlPhoneNumber"
                 android:layout_width="match_parent"
@@ -170,149 +171,6 @@
                     android:maxLength="13"
                     />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/country"
-                android:textSize="15sp"
-                android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_medium"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tIlCountrySignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/aCtCountrySignUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/select_country"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/province"
-                android:textSize="15sp"
-                android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_medium"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tIlProvinceSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                >
-                <AutoCompleteTextView
-                    android:id="@+id/aCtProvinceSignUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/select_province"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/city"
-                android:textSize="15sp"
-                android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_medium"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tIlCitySignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-                <AutoCompleteTextView
-                    android:id="@+id/aCtCitySignUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/select_city"
-                    />
-                
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/address"
-                android:textSize="15sp"
-                android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_medium"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tIlAddressSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginBottom="25dp"
-                app:counterEnabled="true"
-                app:counterMaxLength="100"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tIetAddressSignUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Perumahan xxxx RT/xx, RW/xx"
-                    android:gravity="top"
-                    android:maxLength="100"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/postal_code"
-                android:textSize="15sp"
-                android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_medium"
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tIlPostalCodeSignUp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:counterEnabled="true"
-                app:counterMaxLength="6"
-                app:boxCornerRadiusBottomEnd="10dp"
-                app:boxCornerRadiusBottomStart="10dp"
-                app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                >
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tIetPostalCodeSignUp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="963xxx"
-                    android:inputType="number"
-                    android:maxLength="6"
-                    />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
@@ -366,6 +224,36 @@
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tIetPasswordSignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="30"
+                    android:inputType="textPassword"
+                    android:hint="xxxx"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/confirm_password"
+                android:textSize="15sp"
+                android:textColor="@color/primary_blue_1"
+                android:fontFamily="@font/poppins_medium"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tIlConfPasswordSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="password_toggle"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tIetConfPasswordSignUp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLength="30"

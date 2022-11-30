@@ -35,12 +35,6 @@ class SignupFragment : Fragment() {
     private var itemNumber                                      = ArrayList<Number>()
 
 
-
-    override fun onResume() {
-        super.onResume()
-        setAdapter()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -80,6 +74,7 @@ class SignupFragment : Fragment() {
             tvHaveAnAccountSignUp.setOnClickListener {
                 goToLogin()
             }
+            /*
             aCtProvinceSignUp.setOnItemClickListener { adapterView, view, i, l ->
                 itemsCity.clear()
                 viewModelProvinces.retrieveCity(itemNumber[i].toInt())
@@ -101,26 +96,9 @@ class SignupFragment : Fragment() {
                     tIetPasswordSignUp.text.toString(), aCtCountrySignUp.text.toString(), aCtProvinceSignUp.text.toString())
                 Log.d(TAG, "initListener: ${user.toString()}")
             }
+             */
         }
     }
-
-    private fun setAdapter(){
-        //        data dummy Select City
-        val city                                        = resources.getStringArray(R.array.city)
-        val arrayAdapterCity                            = ArrayAdapter(requireContext(), R.layout.drop_down_item, city)
-        binding.aCtCitySignUp.setAdapter(arrayAdapterCity)
-
-//        data dummy Select Province
-        val province = resources.getStringArray(R.array.province)
-        val arrayAdapterProvince                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, province)
-        binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
-//        data dummy Select Country
-        val country                                     = resources.getStringArray(R.array.country)
-        val arrayAdapterCountry                         = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
-        binding.aCtCountrySignUp.setAdapter(arrayAdapterCountry)
-    }
-
-
     private fun goToLogin(){
         Navigation.findNavController(requireView()).navigate(R.id.action_signupFragment_to_loginFragment)
     }
