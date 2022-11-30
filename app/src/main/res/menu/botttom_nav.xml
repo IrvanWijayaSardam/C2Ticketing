@@ -3,10 +3,10 @@
 
     <item android:title="Home"
         android:icon="@drawable/ic_outline_home_24"
-        android:id="@+id/iconHomeBN"/>
+        android:id="@+id/homeFragment"/>
     <item android:title="Book"
         android:icon="@drawable/ic_outline_book_24"
-        android:id="@+id/iconBookBN"/>
+        android:id="@+id/signupFragment"/>
     <item android:title="Trip"
         android:icon="@drawable/ic_outline_airline_seat_recline_extra_24"
         android:id="@+id/iconTripBN"/>

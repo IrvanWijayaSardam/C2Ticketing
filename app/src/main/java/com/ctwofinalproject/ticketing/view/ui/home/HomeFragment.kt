@@ -15,12 +15,13 @@ import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding?             = null
     private val binding get()                               = _binding!!
-    lateinit var viewModelProto                              : ProtoViewModel
-    
+    lateinit var viewModelProto                             : ProtoViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +36,8 @@ class HomeFragment : Fragment() {
         viewModelProto                                      = ViewModelProvider(this).get(ProtoViewModel::class.java)
         setImageSlider()
         setProfile()
+        setBottomNav()
+
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
@@ -65,5 +68,10 @@ class HomeFragment : Fragment() {
             .error(R.drawable.ic_logo_ticketing)
             .circleCrop()
             .into(binding.ivProfile)
+    }
+
+    private fun setBottomNav(){
+        val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        navBar?.visibility = View.VISIBLE
     }
 }
