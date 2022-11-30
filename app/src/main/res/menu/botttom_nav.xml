@@ -6,7 +6,7 @@
         android:id="@+id/homeFragment"/>
     <item android:title="Book"
         android:icon="@drawable/ic_outline_book_24"
-        android:id="@+id/signupFragment"/>
+        android:id="@+id/profileFragment"/>
     <item android:title="Trip"
         android:icon="@drawable/ic_outline_airline_seat_recline_extra_24"
         android:id="@+id/iconTripBN"/>
