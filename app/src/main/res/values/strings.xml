@@ -43,6 +43,10 @@
     <string name="roisul">ROISUL</string>
     <string name="hope_you_enjoy_and_have_the_best_trip">Hope you enjoy and have the best trip</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="search">Search</string>
+    <string name="airport_name">airport name</string>
+    <string name="airport_code">YIA</string>
+    <string name="select">Select</string>
 
     <!--  dummy country  -->
     <string-array name="country">
