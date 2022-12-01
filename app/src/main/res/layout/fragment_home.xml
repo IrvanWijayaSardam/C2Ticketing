@@ -184,7 +184,6 @@
                     android:textSize="10sp"
                     android:fontFamily="@font/poppins"
                     />
-
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

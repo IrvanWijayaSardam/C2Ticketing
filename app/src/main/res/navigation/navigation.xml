@@ -66,4 +66,9 @@
             android:id="@+id/action_airportFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/bookingFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.booking.BookingFragment"
+        android:label="fragment_booking"
+        tools:layout="@layout/fragment_booking" />
 </navigation>

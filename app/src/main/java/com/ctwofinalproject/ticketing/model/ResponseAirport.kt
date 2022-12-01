@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponseAirport(
 
 	@field:SerializedName("data")
-	val data: List<DataItem?>? = null,
+	val data: List<DataItem>? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,

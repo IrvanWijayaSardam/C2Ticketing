@@ -1,19 +1,16 @@
 package com.ctwofinalproject.ticketing.view.ui.home
 
 import android.content.ContentValues.TAG
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
@@ -21,11 +18,14 @@ import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding?                         = null
     private val binding get()                                           = _binding!!
     lateinit var viewModelProto                                         : ProtoViewModel
+    lateinit var sharedPref                                             : SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,10 +39,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModelProto                                      = ViewModelProvider(this).get(ProtoViewModel::class.java)
+        sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
+
         setImageSlider()
         setProfile()
         setBottomNav()
         initListener()
+
+
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
@@ -52,12 +56,7 @@ class HomeFragment : Fragment() {
                 else -> binding.tvUsernameOrLogin.text = "Login"
             }
         })
-        
-    }
-    override fun onResume() {
-        super.onResume()
-        getArgsFrom()
-        getArgsTo()
+
     }
 
     private fun setImageSlider(){
@@ -69,7 +68,6 @@ class HomeFragment : Fragment() {
         imageList.add(SlideModel("https://i0.wp.com/handluggageonly.co.uk/wp-content/uploads/2017/07/HandLuggageOnly-12-4.jpg?resize=1024%2C1536&ssl=1","Visit Akrotiri Lighthouse"))
 
         binding.imageSlider.setImageList(imageList,ScaleTypes.FIT)
-
     }
 
     private fun setProfile(){
@@ -99,26 +97,11 @@ class HomeFragment : Fragment() {
             tvToAirportCodeFragmentHome.setOnClickListener {
                 gotoSelectAirport("to")
             }
-        }
-    }
+            tvFromAirportCodeFragmentHome.text = sharedPref.getString("airportCodeFrom","YIA")
+            tvFromAirportNameFragmentHome.text = sharedPref.getString("airportNameFrom","AirportName")
 
-    fun getArgsFrom() {
-        if(arguments?.getString("requestCode").equals("from")){
-            var requestCode = arguments?.getString("requestCode")
-            var code = arguments?.getString("code")
-            var airport = arguments?.getString("airport_name")
-            binding.tvFromAirportCodeFragmentHome.text = code
-            binding.tvFromAirportNameFragmentHome.text = airport
-
-        }
-    }
-    fun getArgsTo(){
-        if (arguments?.getString("requestCode").equals("to")){
-            var requestCode = arguments?.getString("requestCode")
-            var code = arguments?.getString("code")
-            var airport = arguments?.getString("airport_name")
-            binding.tvToAirportCodeFragmentHome.text = code
-            binding.tvToAirportNameFragmentHome.text = airport
+            tvToAirportCodeFragmentHome.text   = sharedPref.getString("airportCodeTo","Select")
+            tvToAirportNameFragmentHome.text   = sharedPref.getString("airportNameTo","Airport Name")
         }
     }
 }
