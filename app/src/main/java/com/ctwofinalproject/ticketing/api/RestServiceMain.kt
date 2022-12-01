@@ -26,4 +26,10 @@ interface RestServiceMain {
     fun getAirport(
         @Header("Authorization") authorization : String
     ) : Call<ResponseAirport>
+
+    @GET("api/airports/{query}")
+    fun searchAirport(
+        @Header("Authorization") authorization : String,
+        @Path("query") query : String
+    ) : Call<ResponseAirport>
 }

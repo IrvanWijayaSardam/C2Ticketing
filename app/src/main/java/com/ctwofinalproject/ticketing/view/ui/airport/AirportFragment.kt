@@ -4,12 +4,15 @@ import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -33,6 +36,7 @@ class AirportFragment : Fragment() {
     lateinit var adapter                                                   : AirportAdapter
     lateinit var sharedPref                                                : SharedPreferences
     lateinit var editPref                                                  : SharedPreferences.Editor
+    lateinit var token                                                     : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,10 +53,12 @@ class AirportFragment : Fragment() {
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         editPref                                            = sharedPref.edit()
         adapter                                             = AirportAdapter()
+        token                                               = ""
         getArgs()
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             getAllAirport(it.token)
+            token = it.token
         })
 
         viewModelAirport.getDataAirport().observe(viewLifecycleOwner, {
@@ -64,6 +70,17 @@ class AirportFragment : Fragment() {
                 binding.rvAirport.adapter = adapter
             }
         })
+
+        viewModelAirport.getDataAirportSearch().observe(viewLifecycleOwner, {
+            Log.d(TAG, "getAllAirport: $it")
+            if(it != null){
+                adapter.submitList(it.data)
+                binding.shimmerBar.visibility = View.GONE
+                binding.rvAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                binding.rvAirport.adapter = adapter
+            }
+        })
+
         
         adapter.setOnItemClickListener(object : AirportAdapter.onItemClickListener{
             override fun onItemClick(airportData: DataItem) {
@@ -86,6 +103,31 @@ class AirportFragment : Fragment() {
             }
         })
     }
+
+    private fun initListener(){
+        binding?.run {
+            tIetSearchAirportFragmentAirport.addTextChangedListener(object : TextWatcher{
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    TODO("Not yet implemented")
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    viewModelAirport.searchAirport(token, s.toString())
+                }
+
+            })
+        }
+    }
+
 
     private fun getAllAirport(token: String){
         viewModelAirport.fetchAirport("bearer "+token)
