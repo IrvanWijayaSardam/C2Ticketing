@@ -92,7 +92,7 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:id="@+id/llBookFromFragmentBooking"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="0dp"
                 android:orientation="vertical"
                 android:gravity="center"
@@ -107,11 +107,12 @@
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/from"
                     android:textSize="10sp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
                     android:textAlignment="center"/>
                 <TextView
                     android:id="@+id/tvFromAirportCodeFragmentBooking"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/airport_code"
                     android:fontFamily="@font/poppins_semibold"
@@ -120,8 +121,8 @@
                     android:textAlignment="center"/>
                 <TextView
                     android:id="@+id/tvFromAirportNameFragmentBooking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="@string/airport_name"
                     android:textSize="10sp"
                     android:textAlignment="center"
@@ -140,7 +141,7 @@
 
             <LinearLayout
                 android:id="@+id/llBookToFragmentBooking"
-                android:layout_width="100dp"
+                android:layout_width="120dp"
                 android:layout_height="0dp"
                 android:orientation="vertical"
                 android:gravity="center"
@@ -154,11 +155,12 @@
                     android:fontFamily="@font/poppins_light"
                     android:text="@string/to"
                     android:textSize="10sp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
                     android:textAlignment="center"/>
                 <TextView
                     android:id="@+id/tvToAirportCodeFragmentBooking"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/select"
                     android:fontFamily="@font/poppins_semibold"
@@ -167,8 +169,8 @@
                     android:textAlignment="center"/>
                 <TextView
                     android:id="@+id/tvToAirportNameFragmentBooking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="@string/airport_name"
                     android:textSize="10sp"
                     android:textAlignment="center"
