@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/primary_font_color"
+    >
+    <LinearLayout
+        android:id="@+id/llLocationChooseAllAirportShimmer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/ivIconAirplaneItemChooseFragmentShimmer"
+        >
+        <TextView
+            android:id="@+id/tvCityCountryItemChooseAllAirportShimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jakarta (JKT), Indonesia"
+            android:textColor="#515671"
+            android:fontFamily="@font/poppins_semibold"
+            android:paddingTop="10dp"
+            android:background="#515671"
+            android:paddingStart="10dp" />
+        <TextView
+            android:id="@+id/tvAirportItemChooseAllAirportShimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soekarno Hatta International Airport"
+            android:background="#515671"
+            android:textColor="#515671"
+            android:paddingStart="10dp"
+            android:fontFamily="@font/poppins" />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/ivIconAirplaneItemChooseFragmentShimmer"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/icon_airplane"
+        app:layout_constraintLeft_toRightOf="@+id/llLocationChooseAllAirportShimmer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintRight_toLeftOf="@+id/llAirportCodeItemChooseAirportShimmer"
+        />
+    <LinearLayout
+        android:id="@+id/llAirportCodeItemChooseAirportShimmer"
+        android:layout_width="60dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#696A6E"
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/tvAirportCodeItemChooseAirportShimmer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="YIA"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="#696A6E"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

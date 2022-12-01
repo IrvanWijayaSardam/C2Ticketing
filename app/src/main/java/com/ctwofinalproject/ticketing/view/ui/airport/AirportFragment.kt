@@ -39,20 +39,21 @@ class AirportFragment : Fragment() {
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             getAllAirport(it.token)
         })
-
-    }
-
-    private fun getAllAirport(token: String){
-        viewModelAirport.fetchAirport("bearer "+token)
         viewModelAirport.getDataAirport().observe(viewLifecycleOwner, {
             Log.d(TAG, "getAllAirport: $it")
             if(it != null){
+                binding.shimmerBar.visibility = View.GONE
                 binding.rvAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvAirport.adapter = AirportAdapter(it)
                 val adapter = AirportAdapter(it)
                 adapter.notifyDataSetChanged()
             }
         })
+    }
+
+    private fun getAllAirport(token: String){
+        viewModelAirport.fetchAirport("bearer "+token)
+
 
     }
 

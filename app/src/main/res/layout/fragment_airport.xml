@@ -82,7 +82,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvRecentSearchFragmentAirport"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/llTvRecentSearchFragmentAirport"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -94,7 +94,7 @@
         >
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="20dp"
             tools:listitem="@layout/item_choose_recent_airport"/>
     </androidx.cardview.widget.CardView>
 
@@ -124,7 +124,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAllFragmentAirport"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="300dp"
         app:layout_constraintTop_toBottomOf="@+id/llTvAllAirportFragmentAirport"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -137,7 +137,30 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAirport"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:listitem="@layout/item_choose_all_airport"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/item_choose_all_airport_shimmer"/>
+                    <include layout="@layout/item_choose_all_airport_shimmer"/>
+                    <include layout="@layout/item_choose_all_airport_shimmer"/>
+                    <include layout="@layout/item_choose_all_airport_shimmer"/>
+                    <include layout="@layout/item_choose_all_airport_shimmer"/>
+
+                </LinearLayout>
+            </ScrollView>
+        </com.facebook.shimmer.ShimmerFrameLayout>
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
