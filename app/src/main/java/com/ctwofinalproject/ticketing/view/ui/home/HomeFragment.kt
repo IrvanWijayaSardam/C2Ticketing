@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
@@ -40,6 +41,7 @@ class HomeFragment : Fragment() {
         setImageSlider()
         setProfile()
         setBottomNav()
+        initListener()
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
@@ -75,5 +77,17 @@ class HomeFragment : Fragment() {
     private fun setBottomNav(){
         val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         navBar?.visibility = View.VISIBLE
+    }
+
+    fun gotoSelectAirport(){
+        Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_airportFragment)
+    }
+
+    private fun initListener() {
+        binding?.run {
+            tvFromAirportCodeFragmentHome.setOnClickListener {
+                gotoSelectAirport()
+            }
+        }
     }
 }

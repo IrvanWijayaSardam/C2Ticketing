@@ -135,6 +135,7 @@
         app:cardElevation="7dp"
         >
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAirport"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/item_choose_all_airport"/>

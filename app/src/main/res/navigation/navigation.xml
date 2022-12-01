@@ -45,10 +45,19 @@
         android:id="@+id/homeFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_airportFragment"
+            app:destination="@id/airportFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/airportFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.airport.AirportFragment"
+        android:label="fragment_airport"
+        tools:layout="@layout/fragment_airport" />
 </navigation>
