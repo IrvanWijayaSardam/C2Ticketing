@@ -7,16 +7,6 @@
     android:background="@color/background_color_white"
     tools:context=".view.ui.booking.BookingFragment">
 
-    <ImageView
-        android:id="@+id/ivBackFromBookingFragmentBooking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:src="@drawable/ic_baseline_arrow_back"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0" />
     <TextView
         android:id="@+id/tvBookingFragmentBooking"
         android:layout_width="wrap_content"
@@ -37,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvBookingFragmentBooking"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:orientation="horizontal"
         android:gravity="center"
         >
