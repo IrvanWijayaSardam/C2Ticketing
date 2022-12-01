@@ -48,6 +48,10 @@
     <string name="airport_code">YIA</string>
     <string name="select">Select</string>
     <string name="choose_airport">choose airport</string>
+    <string name="search_flight">search flight</string>
+    <string name="one_way">One-Way</string>
+    <string name="departure_date">Departure Date</string>
+    <string name="status_person_booking">1 Adult in Economy</string>
 
     <!--  dummy country  -->
     <string-array name="country">
