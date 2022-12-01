@@ -104,16 +104,13 @@ class SignupFragment : Fragment() {
                     binding.aCtProvinceSignUp.setAdapter(arrayAdapterProvince)
                 }
             }
+             */
             btnApplySignUp.setOnClickListener(){
-                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(),
-                "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), aCtCitySignUp.text.toString(), tIetAddressSignUp.text.toString(), tIetPasswordSignUp.text.toString(),
-                tIetPasswordSignUp.text.toString(), aCtCountrySignUp.text.toString(), aCtProvinceSignUp.text.toString()))
-                var user : User = User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(),
-                    "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), aCtCitySignUp.text.toString(), tIetAddressSignUp.text.toString(), tIetPasswordSignUp.text.toString(),
-                    tIetPasswordSignUp.text.toString(), aCtCountrySignUp.text.toString(), aCtProvinceSignUp.text.toString())
+                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
+                var user : User = User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString())
                 Log.d(TAG, "initListener: ${user.toString()}")
             }
-             */
+
         }
     }
     private fun goToLogin(){

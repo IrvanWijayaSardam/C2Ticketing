@@ -20,16 +20,8 @@ class User(
     val phone: String?,
     @SerializedName("birthdate")
     val birthdate: String?,
-    @SerializedName("city")
-    val city: String?,
-    @SerializedName("homeAddress")
-    val homeAddress: String?,
     @SerializedName("password")
     val password: String?,
     @SerializedName("confPassword")
-    val confPassword: String?,
-    @SerializedName("country")
-    val country: String?,
-    @SerializedName("province")
-    val province: String?
+    val confPassword: String?
 )
