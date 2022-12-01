@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentAirportBinding
-import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
+import com.ctwofinalproject.ticketing.model.DataItem
 import com.ctwofinalproject.ticketing.view.adapter.AirportAdapter
 import com.ctwofinalproject.ticketing.viewmodel.AirportViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
@@ -23,6 +22,7 @@ class AirportFragment : Fragment() {
     private val binding get()                                              = _binding!!
     lateinit var viewModelProto                                            : ProtoViewModel
     lateinit var viewModelAirport                                          : AirportViewModel
+    lateinit var fromto                                                    : String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,18 +34,21 @@ class AirportFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        fromto                                              = ""
         viewModelProto                                      = ViewModelProvider(this).get(ProtoViewModel::class.java)
         viewModelAirport                                    = ViewModelProvider(this).get(AirportViewModel::class.java)
+        getArgs()
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             getAllAirport(it.token)
         })
+
         viewModelAirport.getDataAirport().observe(viewLifecycleOwner, {
             Log.d(TAG, "getAllAirport: $it")
             if(it != null){
                 binding.shimmerBar.visibility = View.GONE
                 binding.rvAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                binding.rvAirport.adapter = AirportAdapter(it)
-                val adapter = AirportAdapter(it)
+                binding.rvAirport.adapter = AirportAdapter(it,fromto)
+                val adapter = AirportAdapter(it,fromto)
                 adapter.notifyDataSetChanged()
             }
         })
@@ -53,9 +56,9 @@ class AirportFragment : Fragment() {
 
     private fun getAllAirport(token: String){
         viewModelAirport.fetchAirport("bearer "+token)
-
-
     }
 
-
+    private fun getArgs() {
+        fromto = arguments?.getString("fromto").toString()
+    }
 }

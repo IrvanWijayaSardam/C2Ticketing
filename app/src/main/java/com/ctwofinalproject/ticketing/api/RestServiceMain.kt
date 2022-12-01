@@ -1,8 +1,10 @@
 package com.ctwofinalproject.ticketing.api
 
+import android.provider.ContactsContract.Data
 import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.data.User
-import com.ctwofinalproject.ticketing.model.ResponseAirportItem
+import com.ctwofinalproject.ticketing.model.DataItem
+import com.ctwofinalproject.ticketing.model.ResponseAirport
 import com.ctwofinalproject.ticketing.model.ResponseLogin
 import com.ctwofinalproject.ticketing.model.ResponseMessage
 import retrofit2.Call
@@ -23,5 +25,5 @@ interface RestServiceMain {
     @GET("api/airports")
     fun getAirport(
         @Header("Authorization") authorization : String
-    ) : Call<List<ResponseAirportItem>>
+    ) : Call<ResponseAirport>
 }

@@ -26,6 +26,7 @@ class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding?                         = null
     private val binding get()                                           = _binding!!
     lateinit var viewModelProto                                         : ProtoViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +54,11 @@ class HomeFragment : Fragment() {
         })
         
     }
+    override fun onResume() {
+        super.onResume()
+        getArgsFrom()
+        getArgsTo()
+    }
 
     private fun setImageSlider(){
         val imageList = ArrayList<SlideModel>()
@@ -79,15 +85,42 @@ class HomeFragment : Fragment() {
         navBar?.visibility = View.VISIBLE
     }
 
-    fun gotoSelectAirport(){
-        Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_airportFragment)
+    fun gotoSelectAirport(fromto : String){
+        var bund = Bundle()
+        bund.putString("fromto",fromto)
+        Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_airportFragment,bund)
     }
 
     private fun initListener() {
         binding?.run {
             tvFromAirportCodeFragmentHome.setOnClickListener {
-                gotoSelectAirport()
+                gotoSelectAirport("from")
+            }
+            tvToAirportCodeFragmentHome.setOnClickListener {
+                gotoSelectAirport("to")
             }
         }
     }
+
+    fun getArgsFrom() {
+        if(arguments?.getString("requestCode").equals("from")){
+            var requestCode = arguments?.getString("requestCode")
+            var code = arguments?.getString("code")
+            var airport = arguments?.getString("airport_name")
+            binding.tvFromAirportCodeFragmentHome.text = code
+            binding.tvFromAirportNameFragmentHome.text = airport
+
+        }
+    }
+    fun getArgsTo(){
+        if (arguments?.getString("requestCode").equals("to")){
+            var requestCode = arguments?.getString("requestCode")
+            var code = arguments?.getString("code")
+            var airport = arguments?.getString("airport_name")
+            binding.tvToAirportCodeFragmentHome.text = code
+            binding.tvToAirportNameFragmentHome.text = airport
+        }
+    }
 }
+
+
