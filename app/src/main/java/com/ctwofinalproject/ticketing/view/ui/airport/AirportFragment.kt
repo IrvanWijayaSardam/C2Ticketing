@@ -53,8 +53,8 @@ class AirportFragment : Fragment() {
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         editPref                                            = sharedPref.edit()
         adapter                                             = AirportAdapter()
-        token                                               = ""
         getArgs()
+        initListener()
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             getAllAirport(it.token)
@@ -113,15 +113,16 @@ class AirportFragment : Fragment() {
                     count: Int,
                     after: Int
                 ) {
-                    TODO("Not yet implemented")
+                    viewModelAirport.searchAirport("bearer "+token, s.toString())
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    TODO("Not yet implemented")
+                    Log.d(TAG, "onTextChanged: ${s}")
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    viewModelAirport.searchAirport(token, s.toString())
+                    Log.d(TAG, "afterTextChanged: Token ${token}")
+                    viewModelAirport.searchAirport("bearer "+token, s.toString())
                 }
 
             })

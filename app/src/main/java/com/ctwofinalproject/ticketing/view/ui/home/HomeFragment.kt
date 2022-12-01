@@ -46,8 +46,6 @@ class HomeFragment : Fragment() {
         setBottomNav()
         initListener()
 
-
-
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
             when{
@@ -103,6 +101,11 @@ class HomeFragment : Fragment() {
             tvToAirportCodeFragmentHome.text   = sharedPref.getString("airportCodeTo","Select")
             tvToAirportNameFragmentHome.text   = sharedPref.getString("airportNameTo","Airport Name")
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
     }
 }
 
