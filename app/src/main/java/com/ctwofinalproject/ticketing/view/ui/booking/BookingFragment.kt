@@ -34,6 +34,26 @@ class BookingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
 
+//        select onewat or roundtrip
+        binding.cvOneWaySearchFlightFragmentBooking.setOnClickListener {
+//            switch to framgent SelectOneWayFragment
+            val selectOneWayFragment = SelectOneWayFragment()
+            val manager = activity?.supportFragmentManager
+            val transaction = manager?.beginTransaction()
+            transaction?.replace(R.id.fragmentContainerViewDepartureAndREturnDateFragmentBooking, selectOneWayFragment)
+            transaction?.addToBackStack(null)
+            transaction?.commit()
+        }
+        binding.cvRoundTripSearchFlightFragmentBooking.setOnClickListener {
+            //            switch to framgent SelectRoundTripFragment
+            val selectRoundTripFragment = SelectRoundTripFragment()
+            val manager = activity?.supportFragmentManager
+            val transaction = manager?.beginTransaction()
+            transaction?.replace(R.id.fragmentContainerViewDepartureAndREturnDateFragmentBooking, selectRoundTripFragment)
+            transaction?.addToBackStack(null)
+            transaction?.commit()
+        }
+
         initListener()
     }
 

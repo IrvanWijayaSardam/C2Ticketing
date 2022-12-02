@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:text="Day, xx Mont xxxx"
                 android:textAlignment="center"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/primary_blue_1"/>
 
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="Day, xx Mont xxxx"
                 android:textAlignment="center"
-                android:textSize="15sp"
+                android:textSize="12sp"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/primary_blue_1"/>
 
