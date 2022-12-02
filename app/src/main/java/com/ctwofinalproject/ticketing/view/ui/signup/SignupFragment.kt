@@ -21,6 +21,7 @@ import com.ctwofinalproject.ticketing.databinding.FragmentSignupBinding
 import com.ctwofinalproject.ticketing.viewmodel.ProvinceViewModel
 import com.ctwofinalproject.ticketing.viewmodel.RegisterViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,6 +72,15 @@ class SignupFragment : Fragment() {
             }
         })
 
+        viewModelRegist.getStatusRegist().observe(viewLifecycleOwner, {
+            if(it != null){
+                showSnack("Registrasi Berhasil")
+                goToLogin()
+            } else {
+                showSnack("Registrasi Gagal")
+            }
+        })
+
     }
 
     private fun initListener(){
@@ -106,14 +116,31 @@ class SignupFragment : Fragment() {
             }
              */
             btnApplySignUp.setOnClickListener(){
-                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
-                var user : User = User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString())
-                Log.d(TAG, "initListener: ${user.toString()}")
+                when{
+                    tIetEmailSignUp.text.isNullOrEmpty() -> tIetEmailSignUp.error = "email tidak boleh kosong"
+                    tIetFirstnameSignUp.text.isNullOrEmpty() -> tIetFirstnameSignUp.error = "firstname tidak boleh kosong"
+                    tIetLastnameSignUp.text.isNullOrEmpty() -> tIetLastnameSignUp.error = "lastname tidak boleh kosong"
+                    tIetPhoneNumberSignUp.text.isNullOrEmpty() -> tIetPhoneNumberSignUp.error = "nomor telpon tidak boleh kosong"
+                    tIetBirthdaySignUp.text.isNullOrEmpty() -> tIetBirthdaySignUp.error = "tanggal lahir tidak boleh kosong"
+                    tIetPasswordSignUp.text.isNullOrEmpty() -> tIetPasswordSignUp.error = "password tidak boleh kosong"
+                    tIetConfPasswordSignUp.text.isNullOrEmpty() -> tIetConfPasswordSignUp.error = "konfirmasi password tidak boleh kosong"
+                    else -> {
+                        if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
+                            viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
+                            var user : User = User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString())
+                            Log.d(TAG, "initListener: ${user.toString()}")
+                        } else {
+                            tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
+                        }
+                    }
+                }
             }
-
         }
     }
     private fun goToLogin(){
         Navigation.findNavController(requireView()).navigate(R.id.action_signupFragment_to_loginFragment)
+    }
+    fun showSnack(message: String){
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }

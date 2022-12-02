@@ -2,6 +2,8 @@ package com.ctwofinalproject.ticketing.viewmodel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctwofinalproject.ticketing.api.RestServiceMain
 import com.ctwofinalproject.ticketing.data.User
@@ -14,6 +16,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(var api : RestServiceMain):ViewModel() {
+    var statusRegist = MutableLiveData<ResponseMessage?>()
+
+    init {
+        statusRegist = MutableLiveData()
+    }
+
+    fun getStatusRegist() : LiveData<ResponseMessage?>{
+        return statusRegist
+    }
 
     fun registUser(user: User){
         val client = api.createUser(user)
@@ -22,7 +33,11 @@ class RegisterViewModel @Inject constructor(var api : RestServiceMain):ViewModel
                 call: Call<ResponseMessage>,
                 response: Response<ResponseMessage>
             ) {
-                Log.d(TAG, "onResponse: Response Success")
+                if(response.isSuccessful){
+                    statusRegist.postValue(response.body())
+                } else {
+                    statusRegist.value = null
+                }
             }
 
             override fun onFailure(call: Call<ResponseMessage>, t: Throwable) {
