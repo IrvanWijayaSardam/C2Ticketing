@@ -52,6 +52,9 @@
     <string name="one_way">One-Way</string>
     <string name="departure_date">Departure Date</string>
     <string name="status_person_booking">1 Adult in Economy</string>
+    <string name="departure_flight">Departure Flight</string>
+    <string name="location_name">Location Name</string>
+    <string name="day_date">Day, Date</string>
 
     <!--  dummy country  -->
     <string-array name="country">
