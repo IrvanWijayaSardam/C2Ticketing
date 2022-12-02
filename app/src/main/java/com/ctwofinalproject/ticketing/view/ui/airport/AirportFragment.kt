@@ -106,26 +106,10 @@ class AirportFragment : Fragment() {
 
     private fun initListener(){
         binding?.run {
-            tIetSearchAirportFragmentAirport.addTextChangedListener(object : TextWatcher{
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                    viewModelAirport.searchAirport("bearer "+token, s.toString())
-                }
+            ivSearch.setOnClickListener {
+                viewModelAirport.searchAirport("bearer "+token, tIetSearchAirportFragmentAirport.text.toString())
 
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    Log.d(TAG, "onTextChanged: ${s}")
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    Log.d(TAG, "afterTextChanged: Token ${token}")
-                    viewModelAirport.searchAirport("bearer "+token, s.toString())
-                }
-
-            })
+            }
         }
     }
 

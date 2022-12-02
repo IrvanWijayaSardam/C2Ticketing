@@ -36,7 +36,7 @@ class SplashFragment : Fragment() {
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             if (it.isLogin){
-                goToSignUp()
+                goToHome()
             } else {
                 goToLogin()
             }
