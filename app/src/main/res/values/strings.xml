@@ -59,6 +59,11 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="return_date">Return Date</string>
+    <string name="name_class">name class</string>
+    <string name="countShowTicket">1</string>
+    <string name="adult">Adult</string>
+    <string name="more_info">more info</string>
+    <string name="flight_no">Flight No</string>
 
     <!--  dummy country  -->
     <string-array name="country">
