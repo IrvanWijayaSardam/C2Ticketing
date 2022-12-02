@@ -213,6 +213,35 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="6dp"/>
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/gender"
+                android:textSize="15sp"
+                android:textColor="@color/primary_blue_1"
+                android:fontFamily="@font/poppins_medium"
+                />
+            <RadioGroup
+                android:id="@+id/rgGenderFragmentSignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/rbGenderMaleFragmentSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/male"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/primary_blue_1"
+                    />
+                <RadioButton
+                    android:id="@+id/rbGenderFemaleFragmentSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/primary_blue_1"
+                    />
+            </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"
@@ -221,6 +250,7 @@
                 android:textSize="15sp"
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
+                android:layout_marginTop="10dp"
                 />
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tIlPasswordSignUp"

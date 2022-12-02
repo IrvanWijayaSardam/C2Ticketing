@@ -55,6 +55,9 @@
     <string name="departure_flight">Departure Flight</string>
     <string name="location_name">Location Name</string>
     <string name="day_date">Day, Date</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
 
     <!--  dummy country  -->
     <string-array name="country">
