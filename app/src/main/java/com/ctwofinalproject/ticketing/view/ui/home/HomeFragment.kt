@@ -81,19 +81,20 @@ class HomeFragment : Fragment() {
         navBar?.visibility = View.VISIBLE
     }
 
-    fun gotoSelectAirport(fromto : String){
+    fun gotoSelectAirport(fromto : String, fFragment : String){
         var bund = Bundle()
         bund.putString("fromto",fromto)
+        bund.putString("fromFragment",fFragment)
         Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_airportFragment,bund)
     }
 
     private fun initListener() {
         binding?.run {
             tvFromAirportCodeFragmentHome.setOnClickListener {
-                gotoSelectAirport("from")
+                gotoSelectAirport("from","home")
             }
             tvToAirportCodeFragmentHome.setOnClickListener {
-                gotoSelectAirport("to")
+                gotoSelectAirport("to","home")
             }
             tvFromAirportCodeFragmentHome.text = sharedPref.getString("airportCodeFrom","YIA")
             tvFromAirportNameFragmentHome.text = sharedPref.getString("airportNameFrom","AirportName")

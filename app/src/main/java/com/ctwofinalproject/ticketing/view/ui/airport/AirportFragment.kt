@@ -16,6 +16,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentAirportBinding
@@ -33,6 +34,7 @@ class AirportFragment : Fragment() {
     val viewModelProto                                                     : ProtoViewModel by viewModels()
     val viewModelAirport                                                   : AirportViewModel by viewModels()
     lateinit var fromto                                                    : String
+    lateinit var fFragment                                                 : String
     lateinit var adapter                                                   : AirportAdapter
     lateinit var sharedPref                                                : SharedPreferences
     lateinit var editPref                                                  : SharedPreferences.Editor
@@ -50,6 +52,7 @@ class AirportFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fromto                                              = ""
+        fFragment                                           = ""
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         editPref                                            = sharedPref.edit()
         adapter                                             = AirportAdapter()
@@ -99,7 +102,10 @@ class AirportFragment : Fragment() {
                     }
                 }
                 editPref.apply()
-                Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_homeFragment)
+                when(fFragment){
+                    "home" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_homeFragment)
+                    "booking" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_bookingFragment)
+                }
             }
         })
     }
@@ -108,7 +114,6 @@ class AirportFragment : Fragment() {
         binding?.run {
             ivSearch.setOnClickListener {
                 viewModelAirport.searchAirport("bearer "+token, tIetSearchAirportFragmentAirport.text.toString())
-
             }
         }
     }
@@ -120,5 +125,7 @@ class AirportFragment : Fragment() {
 
     private fun getArgs() {
         fromto = arguments?.getString("fromto").toString()
+        fFragment = arguments?.getString("fromFragment").toString()
     }
+
 }

@@ -10,6 +10,7 @@
     tools:context=".view.ui.booking.SelectOneWayFragment">
 
     <LinearLayout
+        android:id="@+id/llDepatrtureDateFragmentOneWay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

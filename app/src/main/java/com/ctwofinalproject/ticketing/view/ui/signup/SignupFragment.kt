@@ -125,12 +125,21 @@ class SignupFragment : Fragment() {
                     tIetPasswordSignUp.text.isNullOrEmpty() -> tIetPasswordSignUp.error = "password tidak boleh kosong"
                     tIetConfPasswordSignUp.text.isNullOrEmpty() -> tIetConfPasswordSignUp.error = "konfirmasi password tidak boleh kosong"
                     else -> {
-                        if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
-                            viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
-                            var user : User = User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L", tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString())
-                            Log.d(TAG, "initListener: ${user.toString()}")
+                        if(rbGenderMaleFragmentSignUp.isChecked) {
+                            if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
+                                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L","62"+tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
+                            } else {
+                                tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
+                            }
+                        } else if (rbGenderFemaleFragmentSignUp.isChecked){
+                            if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
+                                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "P", "62"+tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
+                            } else {
+                                tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
+                            }
                         } else {
-                            tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
+                            rbGenderMaleFragmentSignUp.error = "gender belum dipilih"
+                            rbGenderFemaleFragmentSignUp.error = "gender belum dipilih"
                         }
                     }
                 }
@@ -143,4 +152,5 @@ class SignupFragment : Fragment() {
     fun showSnack(message: String){
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
+
 }

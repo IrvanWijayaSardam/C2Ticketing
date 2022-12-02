@@ -38,7 +38,7 @@
             android:layout_weight="1"
             android:layout_marginStart="27dp"
             android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/secondary_font_color"
+            app:cardBackgroundColor="@color/secondary_font_color"
             android:layout_height="60dp"
             android:paddingTop="10dp"
             app:cardCornerRadius="10dp">
@@ -62,7 +62,8 @@
             android:layout_height="60dp"
             android:paddingTop="10dp"
             app:cardCornerRadius="10dp"
-            android:backgroundTint="@color/primary_blue_1">
+            app:cardBackgroundColor="@color/secondary_font_color"
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
