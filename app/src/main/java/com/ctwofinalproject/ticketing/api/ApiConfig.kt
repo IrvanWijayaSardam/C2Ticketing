@@ -1,5 +1,8 @@
 package com.ctwofinalproject.ticketing.api
 
+import android.app.Application
+import com.ctwofinalproject.ticketing.daos.AirportDAO
+import com.ctwofinalproject.ticketing.db.TicketingDB
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,5 +50,15 @@ object ApiConfig {
             .client(client)
             .build()
             .create(RestServiceMain::class.java)
+
+    @Singleton
+    @Provides
+    fun createDB(context: Application): TicketingDB =
+        TicketingDB.getDatabase(context)
+
+    @Singleton
+    @Provides
+    fun getSourceDao(ticketingDB: TicketingDB): AirportDAO =
+        ticketingDB.airportDao()
 
 }

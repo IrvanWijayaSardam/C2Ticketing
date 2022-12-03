@@ -49,7 +49,7 @@ class LoginFragment : Fragment() {
                 val jwt = JWT(token)
                 viewModelProto.editData(jwt.getClaim("firstname").asString().toString(),jwt.getClaim("lastname").asString().toString()
                     ,jwt.getClaim("gender").asString().toString(),jwt.getClaim("email").asString().toString(),jwt.getClaim("phone").asString().toString(),
-                jwt.getClaim("pictures").asString().toString(),"",token,true)
+                    jwt.getClaim("birthdate").asString().toString(),jwt.getClaim("pictures").asString().toString(),token,true)
                 showSnack("Login Berhasil")
                 goToHome()
             } else {

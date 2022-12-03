@@ -13,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -20,8 +21,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentAirportBinding
+import com.ctwofinalproject.ticketing.entity.Airport
 import com.ctwofinalproject.ticketing.model.DataItem
 import com.ctwofinalproject.ticketing.view.adapter.AirportAdapter
+import com.ctwofinalproject.ticketing.view.adapter.RecentAirportAdapter
+import com.ctwofinalproject.ticketing.viewmodel.AirportRoomViewModel
 import com.ctwofinalproject.ticketing.viewmodel.AirportViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,9 +37,11 @@ class AirportFragment : Fragment() {
     private val binding get()                                              = _binding!!
     val viewModelProto                                                     : ProtoViewModel by viewModels()
     val viewModelAirport                                                   : AirportViewModel by viewModels()
+    val viewModelRoomAirport                                               : AirportRoomViewModel by viewModels()
     lateinit var fromto                                                    : String
     lateinit var fFragment                                                 : String
-    lateinit var adapter                                                   : AirportAdapter
+    lateinit var adapterAirport                                            : AirportAdapter
+    lateinit var adapterRecentAirport                                      : RecentAirportAdapter
     lateinit var sharedPref                                                : SharedPreferences
     lateinit var editPref                                                  : SharedPreferences.Editor
     lateinit var token                                                     : String
@@ -55,7 +61,9 @@ class AirportFragment : Fragment() {
         fFragment                                           = ""
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         editPref                                            = sharedPref.edit()
-        adapter                                             = AirportAdapter()
+        adapterAirport                                      = AirportAdapter()
+        adapterRecentAirport                                = RecentAirportAdapter()
+
         getArgs()
         initListener()
 
@@ -63,29 +71,37 @@ class AirportFragment : Fragment() {
             getAllAirport(it.token)
             token = it.token
         })
+        
+        viewModelRoomAirport.getAllAirport().observe(viewLifecycleOwner, {
+            if(it != null){
+                adapterRecentAirport.submitList(it)
+                binding.rvRecentAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                binding.rvRecentAirport.adapter = adapterRecentAirport
+            }
+        })
 
         viewModelAirport.getDataAirport().observe(viewLifecycleOwner, {
             Log.d(TAG, "getAllAirport: $it")
             if(it != null){
-                adapter.submitList(it.data)
+                adapterAirport.submitList(it.data)
                 binding.shimmerBar.visibility = View.GONE
                 binding.rvAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                binding.rvAirport.adapter = adapter
+                binding.rvAirport.adapter = adapterAirport
             }
         })
 
         viewModelAirport.getDataAirportSearch().observe(viewLifecycleOwner, {
             Log.d(TAG, "getAllAirport: $it")
             if(it != null){
-                adapter.submitList(it.data)
+                adapterAirport.submitList(it.data)
                 binding.shimmerBar.visibility = View.GONE
                 binding.rvAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                binding.rvAirport.adapter = adapter
+                binding.rvAirport.adapter = adapterAirport
             }
         })
 
-        
-        adapter.setOnItemClickListener(object : AirportAdapter.onItemClickListener{
+
+        adapterAirport.setOnItemClickListener(object : AirportAdapter.onItemClickListener{
             override fun onItemClick(airportData: DataItem) {
                 when(fromto) {
                     "from" -> {
@@ -101,6 +117,7 @@ class AirportFragment : Fragment() {
                         editPref.putString("airportCodeTo",airportData.code)
                     }
                 }
+                viewModelRoomAirport.insert(Airport(airportData.id!!.toInt(),airportData.name.toString(),airportData.code.toString(),airportData.city.toString(),airportData.country.toString()))
                 editPref.apply()
                 when(fFragment){
                     "home" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_homeFragment)
@@ -108,6 +125,31 @@ class AirportFragment : Fragment() {
                 }
             }
         })
+
+        adapterRecentAirport.setOnItemClickListener(object : RecentAirportAdapter.OnItemClickListener{
+            override fun onItemClick(airport: Airport) {
+                when(fromto) {
+                    "from" -> {
+                        Log.d(TAG, "onItemClick: ${airport.city}")
+                        editPref.putInt("airportIdFrom", airport.id!!)
+                        editPref.putString("airportNameFrom",airport.airportName)
+                        editPref.putString("airportCodeFrom",airport.airportCode)
+                    }
+                    "to" -> {
+                        Log.d(TAG, "onItemClick: ${airport.city}")
+                        editPref.putInt("airportIdTo", airport.id!!)
+                        editPref.putString("airportNameTo",airport.airportName)
+                        editPref.putString("airportCodeTo",airport.airportCode)
+                    }
+                }
+                editPref.apply()
+                when(fFragment){
+                    "home" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_homeFragment)
+                    "booking" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_bookingFragment)
+                }
+            }
+        })
+
     }
 
     private fun initListener(){
@@ -127,5 +169,4 @@ class AirportFragment : Fragment() {
         fromto = arguments?.getString("fromto").toString()
         fFragment = arguments?.getString("fromFragment").toString()
     }
-
 }

@@ -11,8 +11,8 @@ message UserDataProto {
   string gender = 3;
   string email = 4;
   string phone = 5;
-  string pictures = 6;
-  string address = 7;
+  string birthdate = 6;
+  string pictures = 7;
   string token = 8;
   bool isLogin = 9;
 

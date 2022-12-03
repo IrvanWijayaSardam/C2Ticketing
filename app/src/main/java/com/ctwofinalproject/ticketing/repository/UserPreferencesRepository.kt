@@ -17,7 +17,7 @@ private val Context.userPreferencesStore: DataStore<UserDataProto> by dataStore(
 
 class UserPreferencesRepository (private val context: Context) {
 
-    suspend fun saveData(firstname: String,lastname : String,gender : String,email : String,phone : String,pictures : String, address : String,token : String, isLogin: Boolean) {
+    suspend fun saveData(firstname: String,lastname : String,gender : String,email : String,phone : String,birthdate : String,pictures : String,token : String, isLogin: Boolean) {
         context.userPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setFirstname(firstname).build()
         }
@@ -37,7 +37,7 @@ class UserPreferencesRepository (private val context: Context) {
             preferences.toBuilder().setPictures(pictures).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setAddress(address).build()
+            preferences.toBuilder().setBirthdate(birthdate).build()
         }
         context.userPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setToken(token).build()
@@ -67,7 +67,7 @@ class UserPreferencesRepository (private val context: Context) {
             preferences.toBuilder().clearPictures().build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().clearAddress().build()
+            preferences.toBuilder().clearBirthdate().build()
         }
         context.userPreferencesStore.updateData { preferences ->
             preferences.toBuilder().clearToken().build()

@@ -104,8 +104,9 @@
         app:cardElevation="7dp"
         >
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvRecentAirport"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             tools:listitem="@layout/item_choose_recent_airport"/>
     </androidx.cardview.widget.CardView>
 
