@@ -43,7 +43,7 @@
         <LinearLayout
             android:id="@+id/llEditTextAddPassenger"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
@@ -53,9 +53,132 @@
                 android:textColor="@color/primary_blue_1"
                 android:fontFamily="@font/poppins_medium"
                 />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tIlCountrySignUp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                >
+                <AutoCompleteTextView
+                    android:id="@+id/aCtCountrySignUp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/Mr" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="First Name"
+                    android:textSize="15sp"
+                    android:textColor="@color/primary_blue_1"
+                    android:fontFamily="@font/poppins_medium"
+                    />
+                <TextView
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Last Name"
+                    android:textSize="15sp"
+                    android:textColor="@color/primary_blue_1"
+                    android:fontFamily="@font/poppins_medium"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tIlFirstNameAddPassenger"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    android:layout_marginBottom="25dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tIetFirstnamePassenger"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="ex: john"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tIlLastNameAddPassenger"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:boxCornerRadiusBottomEnd="10dp"
+                    app:boxCornerRadiusBottomStart="10dp"
+                    app:boxCornerRadiusTopEnd="10dp"
+                    app:boxCornerRadiusTopStart="10dp"
+                    android:layout_marginBottom="25dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    >
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tIetLastnamePassenger"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="ex : doe"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nik"
+                android:textSize="15sp"
+                android:textColor="@color/primary_blue_1"
+                android:fontFamily="@font/poppins_medium"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tIlNikAddPassenger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxCornerRadiusBottomEnd="10dp"
+                app:boxCornerRadiusBottomStart="10dp"
+                app:boxCornerRadiusTopEnd="10dp"
+                app:boxCornerRadiusTopStart="10dp"
+                android:layout_marginBottom="25dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="16"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tIetNikPassenger"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="200182937238293"
+                    android:inputType="number"
+                    android:maxLength="13"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/btnSavePassenger"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:text="SAVE"
+                android:textAllCaps="false"
+                android:background="@drawable/custom_button"
+                />
         </LinearLayout>
-
-
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

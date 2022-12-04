@@ -66,6 +66,8 @@
     <string name="flight_no">Flight No</string>
     <string name="add_passengger">Add Passengger</string>
     <string name="title">Title</string>
+    <string name="Mr">Mr</string>
+    <string name="nik">NIK</string>
 
     <!--  dummy country  -->
     <string-array name="country">

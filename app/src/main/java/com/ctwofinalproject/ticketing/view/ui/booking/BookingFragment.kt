@@ -42,6 +42,10 @@ class BookingFragment : Fragment() {
             cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.secondary_font_color))
             cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
 
+            btnSearchTicketFragmentBooking.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_bookingFragment_to_addPassengerFragment)
+            }
+
             cvOneWaySearchFlightFragmentBooking.setOnClickListener {
 //            switch to framgent SelectOneWayFragment
                 cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
