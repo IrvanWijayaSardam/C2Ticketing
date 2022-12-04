@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.auth0.android.jwt.JWT
@@ -14,6 +15,7 @@ import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
 import com.ctwofinalproject.ticketing.model.ResponseLogin
+import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.viewmodel.LoginViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.snackbar.Snackbar
@@ -23,9 +25,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding?                 = null
     private val binding get()                                   = _binding!!
-    lateinit var viewModelProto                                 : ProtoViewModel
-    lateinit var viewModelLogin                                 : LoginViewModel
+    val viewModelProto                                          : ProtoViewModel by viewModels()
+    val viewModelLogin                                          : LoginViewModel by viewModels()
     lateinit var token                                          : String
+    private lateinit var  loadingDialog                         : LoadingDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,10 +41,10 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelProto                                          = ViewModelProvider(this).get(ProtoViewModel::class.java)
-        viewModelLogin                                          = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loadingDialog                                               = LoadingDialog(requireActivity())
+        token                                                       = ""
         initListener()
-        token                                                   = ""
+        
         viewModelLogin.getToken().observe(viewLifecycleOwner, {
             if(it != null) {
                 Log.d(TAG, "onViewCreated: ${it.accessToken}")
@@ -50,9 +53,11 @@ class LoginFragment : Fragment() {
                 viewModelProto.editData(jwt.getClaim("firstname").asString().toString(),jwt.getClaim("lastname").asString().toString()
                     ,jwt.getClaim("gender").asString().toString(),jwt.getClaim("email").asString().toString(),jwt.getClaim("phone").asString().toString(),
                     jwt.getClaim("birthdate").asString().toString(),jwt.getClaim("pictures").asString().toString(),token,true)
+                loadingDialog.isDismiss()
                 showSnack("Login Berhasil")
                 goToHome()
             } else {
+                loadingDialog.isDismiss()
                 showSnack("Username / Password Salah")
             }
         })
@@ -67,7 +72,10 @@ class LoginFragment : Fragment() {
                 when {
                     tIetEmailLogin.text.isNullOrEmpty() -> tIetEmailLogin.error = "Email tidak boleh kosong"
                     tIetPasswordLogin.text.isNullOrEmpty() -> tIetPasswordLogin.error = "Password tidak boleh kosong"
-                    else -> viewModelLogin.auth(Login(tIetEmailLogin.text.toString(),tIetPasswordLogin.text.toString()))
+                    else -> {
+                        loadingDialog.startLoading()
+                        viewModelLogin.auth(Login(tIetEmailLogin.text.toString(),tIetPasswordLogin.text.toString()))
+                    }
                 }
             }
         }

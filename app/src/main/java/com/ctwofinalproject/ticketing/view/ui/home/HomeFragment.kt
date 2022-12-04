@@ -103,11 +103,6 @@ class HomeFragment : Fragment() {
             tvToAirportNameFragmentHome.text   = sharedPref.getString("airportNameTo","Airport Name")
         }
     }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-    }
 }
 
 

@@ -64,6 +64,8 @@
     <string name="adult">Adult</string>
     <string name="more_info">more info</string>
     <string name="flight_no">Flight No</string>
+    <string name="add_passengger">Add Passengger</string>
+    <string name="title">Title</string>
 
     <!--  dummy country  -->
     <string-array name="country">

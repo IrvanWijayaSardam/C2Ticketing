@@ -1,7 +1,9 @@
 package com.ctwofinalproject.ticketing.view.ui.signup
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
 import android.transition.TransitionManager
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,6 +20,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.data.User
 import com.ctwofinalproject.ticketing.databinding.FragmentSignupBinding
+import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.viewmodel.ProvinceViewModel
 import com.ctwofinalproject.ticketing.viewmodel.RegisterViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -38,7 +41,7 @@ class SignupFragment : Fragment() {
     private var itemsProvince                                   = ArrayList<String>()
     private var itemsCity                                       = ArrayList<String>()
     private var itemNumber                                      = ArrayList<Number>()
-
+    private lateinit var  loadingDialog                         : LoadingDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,8 +54,11 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelProvinces                          = ViewModelProvider(this).get(ProvinceViewModel::class.java)
-        viewModelRegist                             = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        viewModelProvinces                                          = ViewModelProvider(this).get(ProvinceViewModel::class.java)
+        viewModelRegist                                             = ViewModelProvider(this).get(RegisterViewModel::class.java)
+        loadingDialog                                               = LoadingDialog(requireActivity())
+
+
         viewModelProvinces.retrieveProvince()
         initListener()
 
@@ -74,9 +80,11 @@ class SignupFragment : Fragment() {
 
         viewModelRegist.getStatusRegist().observe(viewLifecycleOwner, {
             if(it != null){
+                loadingDialog.isDismiss()
                 showSnack("Registrasi Berhasil")
                 goToLogin()
             } else {
+                loadingDialog.isDismiss()
                 showSnack("Registrasi Gagal")
             }
         })
@@ -125,22 +133,29 @@ class SignupFragment : Fragment() {
                     tIetPasswordSignUp.text.isNullOrEmpty() -> tIetPasswordSignUp.error = "password tidak boleh kosong"
                     tIetConfPasswordSignUp.text.isNullOrEmpty() -> tIetConfPasswordSignUp.error = "konfirmasi password tidak boleh kosong"
                     else -> {
-                        if(rbGenderMaleFragmentSignUp.isChecked) {
-                            if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
-                                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L","62"+tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
+                        if(tIetEmailSignUp.text.toString().isValidEmail()) {
+                            if(rbGenderMaleFragmentSignUp.isChecked) {
+                                if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
+                                    loadingDialog.startLoading()
+                                    viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "L","62"+tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
+                                } else {
+                                    tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
+                                }
+                            } else if (rbGenderFemaleFragmentSignUp.isChecked){
+                                loadingDialog.startLoading()
+                                if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
+                                    viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "P", "62"+tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
+                                } else {
+                                    tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
+                                }
                             } else {
-                                tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
-                            }
-                        } else if (rbGenderFemaleFragmentSignUp.isChecked){
-                            if(tIetPasswordSignUp.text.toString().equals(tIetConfPasswordSignUp.text.toString())){
-                                viewModelRegist.registUser(User(tIetEmailSignUp.text.toString(), tIetFirstnameSignUp.text.toString(), tIetLastnameSignUp.text.toString(), "P", "62"+tIetPhoneNumberSignUp.text.toString(), tIetBirthdaySignUp.text.toString(), tIetPasswordSignUp.text.toString(), tIetConfPasswordSignUp.text.toString()))
-                            } else {
-                                tIetConfPasswordSignUp.error = "konfirmasi password tidak sama"
+                                rbGenderMaleFragmentSignUp.error = "gender belum dipilih"
+                                rbGenderFemaleFragmentSignUp.error = "gender belum dipilih"
                             }
                         } else {
-                            rbGenderMaleFragmentSignUp.error = "gender belum dipilih"
-                            rbGenderFemaleFragmentSignUp.error = "gender belum dipilih"
+                            tIetEmailSignUp.error = "email tidak valid "
                         }
+
                     }
                 }
             }
@@ -149,6 +164,8 @@ class SignupFragment : Fragment() {
     private fun goToLogin(){
         Navigation.findNavController(requireView()).navigate(R.id.action_signupFragment_to_loginFragment)
     }
+    fun String.isValidEmail() = isNotEmpty() && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
     fun showSnack(message: String){
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
