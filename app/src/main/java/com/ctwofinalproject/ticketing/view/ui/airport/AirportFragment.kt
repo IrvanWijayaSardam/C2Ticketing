@@ -37,7 +37,6 @@ class AirportFragment : Fragment() {
     private val binding get()                                              = _binding!!
     val viewModelProto                                                     : ProtoViewModel by viewModels()
     val viewModelAirport                                                   : AirportViewModel by viewModels()
-    val viewModelRoomAirport                                               : AirportRoomViewModel by viewModels()
     lateinit var fromto                                                    : String
     lateinit var fFragment                                                 : String
     lateinit var adapterAirport                                            : AirportAdapter
@@ -71,8 +70,8 @@ class AirportFragment : Fragment() {
             getAllAirport(it.token)
             token = it.token
         })
-        
-        viewModelRoomAirport.getAllAirport().observe(viewLifecycleOwner, {
+
+        viewModelAirport.getAllAirport().observe(viewLifecycleOwner, {
             if(it != null){
                 adapterRecentAirport.submitList(it)
                 binding.rvRecentAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -117,7 +116,7 @@ class AirportFragment : Fragment() {
                         editPref.putString("airportCodeTo",airportData.code)
                     }
                 }
-                viewModelRoomAirport.insert(Airport(airportData.id!!.toInt(),airportData.name.toString(),airportData.code.toString(),airportData.city.toString(),airportData.country.toString()))
+                viewModelAirport.insert(Airport(airportData.id!!.toInt(),airportData.name.toString(),airportData.code.toString(),airportData.city.toString(),airportData.country.toString()))
                 editPref.apply()
                 when(fFragment){
                     "home" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_homeFragment)

@@ -9,11 +9,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
+import com.ctwofinalproject.ticketing.databinding.ItemRecentSearchBinding
+import com.ctwofinalproject.ticketing.view.adapter.RecentSearchAdapter
+import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -26,7 +31,8 @@ class HomeFragment : Fragment() {
     private val binding get()                                           = _binding!!
     lateinit var viewModelProto                                         : ProtoViewModel
     lateinit var sharedPref                                             : SharedPreferences
-
+    lateinit var adapterRecentSearch                                    : RecentSearchAdapter
+    val homeViewModel                                                   : HomeViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,6 +46,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModelProto                                      = ViewModelProvider(this).get(ProtoViewModel::class.java)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
+        adapterRecentSearch                                 = RecentSearchAdapter()
 
         setImageSlider()
         setProfile()
@@ -52,6 +59,18 @@ class HomeFragment : Fragment() {
                 it == null -> binding.tvUsernameOrLogin.text = "Login"
                 it.firstname != null -> binding.tvUsernameOrLogin.text = it.firstname
                 else -> binding.tvUsernameOrLogin.text = "Login"
+            }
+        })
+
+        homeViewModel.getAllRecentSearch().observe(viewLifecycleOwner, {
+            if(it != null){
+                adapterRecentSearch.submitList(it)
+                binding.rvRecentSearchHomeFragment.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+                binding.rvRecentSearchHomeFragment.adapter = adapterRecentSearch
+            } else {
+                binding.tvRecentSearch.visibility = View.GONE
+                binding.tvClearAllRecent.visibility = View.GONE
+                binding.rvRecentSearchHomeFragment.visibility = View.GONE
             }
         })
 
@@ -96,6 +115,13 @@ class HomeFragment : Fragment() {
             tvToAirportCodeFragmentHome.setOnClickListener {
                 gotoSelectAirport("to","home")
             }
+            tvClearAllRecent.setOnClickListener {
+                homeViewModel.deleteAllRecentSearch()
+                tvRecentSearch.visibility = View.GONE
+                tvClearAllRecent.visibility = View.GONE
+                rvRecentSearchHomeFragment.visibility = View.GONE
+            }
+
             tvFromAirportCodeFragmentHome.text = sharedPref.getString("airportCodeFrom","YIA")
             tvFromAirportNameFragmentHome.text = sharedPref.getString("airportNameFrom","AirportName")
 

@@ -68,6 +68,8 @@
     <string name="title">Title</string>
     <string name="Mr">Mr</string>
     <string name="nik">NIK</string>
+    <string name="clear_all">clear all</string>
+    <string name="recent_search">Recent Search</string>
 
     <!--  dummy country  -->
     <string-array name="country">

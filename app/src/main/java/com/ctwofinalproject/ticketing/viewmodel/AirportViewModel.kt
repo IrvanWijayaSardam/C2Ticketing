@@ -2,19 +2,24 @@ package com.ctwofinalproject.ticketing.viewmodel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ctwofinalproject.ticketing.api.RestServiceMain
+import com.ctwofinalproject.ticketing.entity.Airport
 import com.ctwofinalproject.ticketing.model.DataItem
 import com.ctwofinalproject.ticketing.model.ResponseAirport
+import com.ctwofinalproject.ticketing.repository.RoomRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class AirportViewModel @Inject constructor(var api : RestServiceMain): ViewModel() {
+class AirportViewModel @Inject constructor(var api : RestServiceMain, var roomRepository: RoomRepository): ViewModel() {
     var liveDataAirport : MutableLiveData<ResponseAirport?> = MutableLiveData()
     var liveDataAirportSearch : MutableLiveData<ResponseAirport?> = MutableLiveData()
 
@@ -65,5 +70,13 @@ class AirportViewModel @Inject constructor(var api : RestServiceMain): ViewModel
         })
 
     }
+
+    fun insert(airport: Airport){
+        viewModelScope.launch {
+            roomRepository.insertAirport(airport)
+        }
+    }
+
+    fun getAllAirport() : LiveData<List<Airport>> = roomRepository.getAllAirport()
 
 }

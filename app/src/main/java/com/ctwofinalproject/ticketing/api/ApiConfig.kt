@@ -2,6 +2,7 @@ package com.ctwofinalproject.ticketing.api
 
 import android.app.Application
 import com.ctwofinalproject.ticketing.daos.AirportDAO
+import com.ctwofinalproject.ticketing.daos.RecentSearchDAO
 import com.ctwofinalproject.ticketing.db.TicketingDB
 import dagger.Module
 import dagger.Provides
@@ -60,5 +61,10 @@ object ApiConfig {
     @Provides
     fun getSourceDao(ticketingDB: TicketingDB): AirportDAO =
         ticketingDB.airportDao()
+
+    @Singleton
+    @Provides
+    fun getRecentSearchDao(ticketingDB: TicketingDB): RecentSearchDAO =
+        ticketingDB.recentSearchDao()
 
 }

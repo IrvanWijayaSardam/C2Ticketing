@@ -6,13 +6,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ctwofinalproject.ticketing.daos.AirportDAO
+import com.ctwofinalproject.ticketing.daos.RecentSearchDAO
 import com.ctwofinalproject.ticketing.entity.Airport
+import com.ctwofinalproject.ticketing.entity.RecentSearch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-@Database(entities = [Airport::class], version = 1)
+@Database(entities = [Airport::class,RecentSearch::class], version = 1)
 abstract  class TicketingDB : RoomDatabase() {
     abstract fun airportDao(): AirportDAO
+    abstract fun recentSearchDao(): RecentSearchDAO
 
     companion object {
         private const val NUMBER_OF_THREADS = 4

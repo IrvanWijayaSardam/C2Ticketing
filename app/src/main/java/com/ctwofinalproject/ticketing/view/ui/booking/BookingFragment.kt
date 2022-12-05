@@ -7,10 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentBookingBinding
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
+import com.ctwofinalproject.ticketing.entity.RecentSearch
+import com.ctwofinalproject.ticketing.viewmodel.BookingViewModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -21,7 +24,7 @@ class BookingFragment : Fragment() {
     private var _binding: FragmentBookingBinding?                 = null
     private val binding get()                                     = _binding!!
     lateinit var sharedPref                                       : SharedPreferences
-
+    val bookingViewModel                                          : BookingViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +46,8 @@ class BookingFragment : Fragment() {
             cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
 
             btnSearchTicketFragmentBooking.setOnClickListener {
+                bookingViewModel.insertRecentSearch(RecentSearch(0,tvFromAirportCodeFragmentBooking.text.toString(),tvToAirportCodeFragmentBooking.text.toString(),"Economy",sharedPref.getString("departureDate","Day,xx Month xxxx")
+                    ,sharedPref.getString("returnDate","Day, xx Mont xxxx")))
                 Navigation.findNavController(requireView()).navigate(R.id.action_bookingFragment_to_addPassengerFragment)
             }
 
