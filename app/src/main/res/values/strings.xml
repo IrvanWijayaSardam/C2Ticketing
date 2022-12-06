@@ -76,6 +76,8 @@
     <string name="flight_not_found">Flight Not Found</string>
     <string name="back">Back</string>
     <string name="close">Close</string>
+    <string name="trip_summary">trip summary</string>
+    <string name="contact_detail">Contact Detail</string>
 
     <!--  dummy country  -->
     <string-array name="country">
