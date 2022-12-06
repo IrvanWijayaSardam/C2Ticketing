@@ -70,6 +70,9 @@
     <string name="nik">NIK</string>
     <string name="clear_all">clear all</string>
     <string name="recent_search">Recent Search</string>
+    <string name="dummy_clock">09:10</string>
+    <string name="dummy_month_date">08 Dec</string>
+    <string name="thus">Thus</string>
 
     <!--  dummy country  -->
     <string-array name="country">
