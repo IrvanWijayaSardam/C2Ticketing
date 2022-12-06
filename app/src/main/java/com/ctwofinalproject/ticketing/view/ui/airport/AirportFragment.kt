@@ -1,5 +1,6 @@
 package com.ctwofinalproject.ticketing.view.ui.airport
 
+import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentActivity
@@ -78,6 +80,7 @@ class AirportFragment : Fragment() {
                 adapterRecentAirport.submitList(it)
                 binding.rvRecentAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvRecentAirport.adapter = adapterRecentAirport
+            } else {
             }
         })
 
@@ -178,4 +181,6 @@ class AirportFragment : Fragment() {
         val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         navBar?.visibility                             = View.GONE
     }
+
+
 }

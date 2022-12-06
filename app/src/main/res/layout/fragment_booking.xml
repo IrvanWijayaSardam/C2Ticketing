@@ -208,7 +208,7 @@
                 android:name="com.ctwofinalproject.ticketing.view.ui.booking.SelectRoundTripFragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:layout="@layout/fragment_select_round_trip" />
+                tools:layout="@layout/fragment_select_one_way" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
     <Button

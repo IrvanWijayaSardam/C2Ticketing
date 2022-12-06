@@ -51,6 +51,9 @@
             app:destination="@id/airportFragment" />
         <argument android:name="code" />
         <argument android:name="city" />
+        <action
+            android:id="@+id/action_homeFragment_to_showTicketFragment"
+            app:destination="@id/showTicketFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

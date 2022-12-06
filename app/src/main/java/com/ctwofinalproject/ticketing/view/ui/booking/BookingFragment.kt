@@ -49,7 +49,7 @@ class BookingFragment : Fragment() {
 
             btnSearchTicketFragmentBooking.setOnClickListener {
                 bookingViewModel.insertRecentSearch(RecentSearch(0,tvFromAirportCodeFragmentBooking.text.toString(),tvToAirportCodeFragmentBooking.text.toString(),"Economy",sharedPref.getString("departureDate","Day,xx Month xxxx")
-                    ,sharedPref.getString("returnDate","Day, xx Mont xxxx")))
+                    ,sharedPref.getString("departureDateForApi","2022-09-30")))
 
                 Navigation.findNavController(requireView()).navigate(R.id.action_bookingFragment_to_showTicketFragment)
             }

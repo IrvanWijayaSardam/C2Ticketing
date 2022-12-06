@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
 import com.ctwofinalproject.ticketing.databinding.ItemRecentSearchBinding
+import com.ctwofinalproject.ticketing.entity.RecentSearch
 import com.ctwofinalproject.ticketing.view.adapter.RecentSearchAdapter
 import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
@@ -32,6 +33,7 @@ class HomeFragment : Fragment() {
     lateinit var viewModelProto                                         : ProtoViewModel
     lateinit var sharedPref                                             : SharedPreferences
     lateinit var adapterRecentSearch                                    : RecentSearchAdapter
+    lateinit var editPref                                               : SharedPreferences.Editor
     val homeViewModel                                                   : HomeViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,11 +49,14 @@ class HomeFragment : Fragment() {
         viewModelProto                                      = ViewModelProvider(this).get(ProtoViewModel::class.java)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         adapterRecentSearch                                 = RecentSearchAdapter()
+        editPref                                            = sharedPref.edit()
+
 
         setImageSlider()
         setProfile()
         setBottomNav()
         initListener()
+
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
@@ -73,6 +78,18 @@ class HomeFragment : Fragment() {
                 binding.rvRecentSearchHomeFragment.visibility = View.GONE
             }
         })
+
+        adapterRecentSearch.setOnItemClickListener(object :RecentSearchAdapter.OnItemClickListener{
+            override fun onItemClick(recentSearch: RecentSearch) {
+                editPref.putString("airportCodeFrom",recentSearch.airportCodeFrom)
+                editPref.putString("airportCodeTo",recentSearch.airportCodeTo)
+                editPref.putString("departureDateForApi",recentSearch.depatureDate)
+                editPref.apply()
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_showTicketFragment)
+            }
+
+        })
+
 
     }
 

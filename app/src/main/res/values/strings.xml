@@ -73,6 +73,9 @@
     <string name="dummy_clock">09:10</string>
     <string name="dummy_month_date">08 Dec</string>
     <string name="thus">Thus</string>
+    <string name="flight_not_found">Flight Not Found</string>
+    <string name="back">Back</string>
+    <string name="close">Close</string>
 
     <!--  dummy country  -->
     <string-array name="country">

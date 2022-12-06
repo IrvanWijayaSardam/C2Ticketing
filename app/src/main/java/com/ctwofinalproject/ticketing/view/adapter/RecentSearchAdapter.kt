@@ -48,6 +48,10 @@ class RecentSearchAdapter() : RecyclerView.Adapter<RecentSearchAdapter.ViewHolde
         fun onItemClick(recentSearch: RecentSearch)
     }
 
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemRecentSearchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
