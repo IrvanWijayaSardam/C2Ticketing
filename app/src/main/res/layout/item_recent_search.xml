@@ -5,7 +5,7 @@
     android:layout_height="70dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
-    android:layout_marginLeft="5dp"
+    android:layout_marginStart="5dp"
     android:layout_marginBottom="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_color_white"
@@ -69,6 +69,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
+                    android:paddingStart="5dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Economy"/>
                 <TextView
@@ -77,6 +78,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:textSize="10sp"
+                    android:paddingStart="5dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="08 Dec 2022"/>
             </LinearLayout>
