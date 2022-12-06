@@ -152,7 +152,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/secondary_font_color"
+                android:background="#F4F4F4"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"/>
             <Button
