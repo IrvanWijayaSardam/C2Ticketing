@@ -14,6 +14,7 @@ import com.ctwofinalproject.ticketing.databinding.FragmentBookingBinding
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
 import com.ctwofinalproject.ticketing.entity.RecentSearch
 import com.ctwofinalproject.ticketing.viewmodel.BookingViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -38,6 +39,7 @@ class BookingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         initListener()
+        setBottomNav()
     }
 
     private fun initListener() {
@@ -48,7 +50,8 @@ class BookingFragment : Fragment() {
             btnSearchTicketFragmentBooking.setOnClickListener {
                 bookingViewModel.insertRecentSearch(RecentSearch(0,tvFromAirportCodeFragmentBooking.text.toString(),tvToAirportCodeFragmentBooking.text.toString(),"Economy",sharedPref.getString("departureDate","Day,xx Month xxxx")
                     ,sharedPref.getString("returnDate","Day, xx Mont xxxx")))
-                Navigation.findNavController(requireView()).navigate(R.id.action_bookingFragment_to_addPassengerFragment)
+
+                Navigation.findNavController(requireView()).navigate(R.id.action_bookingFragment_to_showTicketFragment)
             }
 
             cvOneWaySearchFlightFragmentBooking.setOnClickListener {
@@ -88,6 +91,11 @@ class BookingFragment : Fragment() {
             tvToAirportNameFragmentBooking.text   = sharedPref.getString("airportNameTo","Airport Name")
 
         }
+    }
+
+    private fun setBottomNav(){
+        val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        navBar?.visibility                             = View.VISIBLE
     }
 
     fun gotoSelectAirport(fromto : String, fFragment : String){

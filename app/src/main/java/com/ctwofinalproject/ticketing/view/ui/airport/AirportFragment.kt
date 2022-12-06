@@ -28,6 +28,7 @@ import com.ctwofinalproject.ticketing.view.adapter.RecentAirportAdapter
 import com.ctwofinalproject.ticketing.viewmodel.AirportRoomViewModel
 import com.ctwofinalproject.ticketing.viewmodel.AirportViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.log
 
@@ -65,6 +66,7 @@ class AirportFragment : Fragment() {
 
         getArgs()
         initListener()
+        setBottomNav()
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             getAllAirport(it.token)
@@ -156,6 +158,9 @@ class AirportFragment : Fragment() {
             ivSearch.setOnClickListener {
                 viewModelAirport.searchAirport("bearer "+token, tIetSearchAirportFragmentAirport.text.toString())
             }
+            ivBackFromChooseAirportFragmentAirport.setOnClickListener {
+                Navigation.findNavController(binding.root).popBackStack()
+            }
         }
     }
 
@@ -167,5 +172,10 @@ class AirportFragment : Fragment() {
     private fun getArgs() {
         fromto = arguments?.getString("fromto").toString()
         fFragment = arguments?.getString("fromFragment").toString()
+    }
+
+    private fun setBottomNav(){
+        val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        navBar?.visibility                             = View.GONE
     }
 }

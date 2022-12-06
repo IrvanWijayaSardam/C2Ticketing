@@ -3,10 +3,7 @@ package com.ctwofinalproject.ticketing.api
 import android.provider.ContactsContract.Data
 import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.data.User
-import com.ctwofinalproject.ticketing.model.DataItem
-import com.ctwofinalproject.ticketing.model.ResponseAirport
-import com.ctwofinalproject.ticketing.model.ResponseLogin
-import com.ctwofinalproject.ticketing.model.ResponseMessage
+import com.ctwofinalproject.ticketing.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -32,4 +29,11 @@ interface RestServiceMain {
         @Header("Authorization") authorization : String,
         @Path("query") query : String
     ) : Call<ResponseAirport>
+
+    @GET("api/tickets/search")
+    fun searchTicket(
+        @Query("departure") departure: String,
+        @Query("arrival") arrival: String,
+        @Query("datedeparture") dateDeparture: String
+        ) : Call<ResponseSearchFlight>
 }

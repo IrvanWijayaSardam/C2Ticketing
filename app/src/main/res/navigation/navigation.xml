@@ -80,10 +80,18 @@
         <action
             android:id="@+id/action_bookingFragment_to_addPassengerFragment"
             app:destination="@id/addPassengerFragment" />
+        <action
+            android:id="@+id/action_bookingFragment_to_showTicketFragment"
+            app:destination="@id/showTicketFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPassengerFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.booking.AddPassengerFragment"
         android:label="fragment_add_passenger"
         tools:layout="@layout/fragment_add_passenger" />
+    <fragment
+        android:id="@+id/showTicketFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.booking.ShowTicketFragment"
+        android:label="fragment_show_ticket"
+        tools:layout="@layout/fragment_show_ticket" />
 </navigation>

@@ -60,17 +60,6 @@ class AirportAdapter():RecyclerView.Adapter<AirportAdapter.ViewHolder>() {
         holder.binding.tvCityCountryItemChooseAllAirport.setText(differ.currentList[position].city + "," + differ.currentList[position].country)
         holder.binding.tvAirportItemChooseAllAirport.text = differ.currentList[position].name
         holder.binding.tvAirportCodeItemChooseAirport.text = differ.currentList[position].code
-        /*
-        holder.binding.llLocationChooseAllAirport.setOnClickListener {
-            var bund = Bundle()
-            bund.putString("code",holder.binding.tvAirportCodeItemChooseAirport.text.toString())
-            bund.putString("city",holder.binding.tvCityCountryItemChooseAllAirport.text.toString())
-            bund.putString("airport_name",holder.binding.tvAirportItemChooseAllAirport.text.toString())
-            bund.putString("requestCode",fromto)
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_airportFragment_to_homeFragment,bund)
-            Log.d(TAG, "onClick: code ${holder.binding.tvAirportCodeItemChooseAirport.text}")
-        }
-         */
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

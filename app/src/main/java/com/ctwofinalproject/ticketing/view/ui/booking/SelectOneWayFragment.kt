@@ -51,8 +51,12 @@ class SelectOneWayFragment : Fragment() {
                 )
                 datePicker.addOnPositiveButtonClickListener {
                     val depatureFormat = SimpleDateFormat("EEE, MMM d, ''yyyy", Locale.getDefault())
+                    val depatureFormatForApi = SimpleDateFormat("YYYY-MM-dd")
+
                     val depatureDate = depatureFormat.format(Date(it).time)
+                    val depatureDateForApi = depatureFormatForApi.format(Date(it).time)
                     editPref.putString("departureDate",depatureDate)
+                    editPref.putString("departureDateForApi",depatureDateForApi)
                     editPref.apply()
                     tvDateDepartureDateFragmentSelectOneWay.setText(depatureDate)
                 }

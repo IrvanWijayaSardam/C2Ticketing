@@ -50,8 +50,12 @@ class SelectRoundTripFragment : Fragment() {
                 )
                 datePicker.addOnPositiveButtonClickListener {
                     val returnFormat = SimpleDateFormat("EEE, MMM d, ''yyyy", Locale.getDefault())
+                    val returnFormatForApi = SimpleDateFormat("YYYY, MM, DD", Locale.getDefault())
+
                     val returnDate = returnFormat.format(Date(it).time)
+                    val returnDateForApi = returnFormatForApi.format(Date(it).time)
                     editPref.putString("returnDate",returnDate)
+                    editPref.putString("returnDateForApi",returnDateForApi)
                     editPref.apply()
                     tvDateReturnDateFragmentRoundTrip.setText(returnDate)
                 }

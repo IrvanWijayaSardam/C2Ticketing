@@ -8,10 +8,14 @@
     android:layout_marginEnd="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="7dp"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    android:background="@color/primary_font_color"
+    >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/primary_font_color"
+        >
         <LinearLayout
                 android:id="@+id/llMoreInfoFragmentShowTicket"
                 android:layout_width="match_parent"
@@ -19,7 +23,7 @@
                 android:orientation="horizontal"
                 android:padding="10dp"
                 android:gravity="end"
-                android:background="@color/primary_blue_1"
+                android:background="@color/primary_font_color"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -31,8 +35,9 @@
                     android:text="Save up to IDR 3,800 for Roundtrip"
                     android:textAlignment="textEnd"
                     android:textSize="12sp"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins_light"
-                    android:textColor="@color/background_color_white"
+                    android:textColor="#696A6E"
                     />
             </LinearLayout>
         <ImageView
@@ -43,16 +48,16 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintHorizontal_bias="1"
-                android:src="@drawable/ic_logo_4_blue"
+                android:background="#696A6E"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="20dp"
                 />
         <TextView
                 android:id="@+id/tvNameClassFixTicketFragmentShowTicket"
-                android:layout_width="wrap_content"
+                android:layout_width="130dp"
+                android:background="#696A6E"
                 android:layout_height="wrap_content"
-                android:text="@string/name_class"
                 app:layout_constraintTop_toBottomOf="@+id/llMoreInfoFragmentShowTicket"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +66,6 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/primary_blue_1"
                 android:textSize="15sp"
                 />
         <TableLayout
@@ -83,15 +87,18 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/flight_no"
+                        android:textColor="#696A6E"
+                        android:background="#696A6E"
                         android:fontFamily="@font/poppins"
-                        android:textColor="@color/primary_blue_1"/>
+                        />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Dep Time"
+                        android:textColor="#696A6E"
+                        android:background="#696A6E"
                         android:fontFamily="@font/poppins"
-                        android:textColor="@color/primary_blue_1"
                         />
                     <TextView
                         android:layout_width="wrap_content"
@@ -99,7 +106,8 @@
                         android:layout_weight="1"
                         android:text="Arr Time"
                         android:fontFamily="@font/poppins"
-                        android:textColor="@color/primary_blue_1"
+                        android:textColor="#696A6E"
+                        android:background="#696A6E"
                         />
                 </TableRow>
                 <TableRow
@@ -152,7 +160,8 @@
                     android:text="Information Long Time Flight"
                     android:fontFamily="@font/poppins_medium"
                     android:textSize="12sp"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     />
                 <TextView
                     android:id="@+id/tvCountSeatsFragmentShowTicket"
@@ -160,7 +169,8 @@
                     android:layout_height="wrap_content"
                     android:text="Count Seats"
                     android:fontFamily="@font/poppins"
-                    android:textColor="@color/primary_blue_1"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     />
             </LinearLayout>
 
@@ -173,31 +183,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/llInformationFlightTwoFramgmentShowTicket">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/ic_baseline_food_bank_24" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/ic_baseline_backpack_24" />
-
-                    <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:text="xx KG"
-                        android:textAlignment="center"
-                        android:textColor="@color/primary_font_color" />
-                </TableRow>
             </TableLayout>
 
         <View
@@ -226,7 +212,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price/Pax"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins"
                     android:textSize="12sp"
                     />
@@ -235,7 +222,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="IDR x,xxx.xxx"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins_semibold"
                     android:textSize="12sp"
                     android:layout_marginBottom="5dp"
@@ -244,7 +232,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Earn Miles"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins"
                     android:textSize="12sp"
                     />
@@ -252,7 +241,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="XXX Miles"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins_semibold"
                     android:textSize="12sp"
                     android:layout_marginBottom="5dp"
@@ -261,7 +251,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Excess Baggage"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins"
                     android:textSize="12sp"
                     />
@@ -269,7 +260,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Price per KG"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins_light"
                     android:textSize="12sp"
                     />
@@ -277,7 +269,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="IDR x,xxx.xxx"
-                    android:textColor="@color/primary_font_color"
+                    android:textColor="#696A6E"
+                    android:background="#696A6E"
                     android:fontFamily="@font/poppins_semibold"
                     android:textSize="12sp"
                     android:layout_marginBottom="5dp"
@@ -287,10 +280,10 @@
                 android:id="@+id/ivAddBackPackCvShowTicket"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@drawable/ic_baseline_add_box_24"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                android:background="#696A6E"
+            />
         <View
                 android:layout_width="0dp"
                 android:layout_height="3dp"
@@ -309,7 +302,8 @@
                 android:layout_margin="7dp"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="12sp"
-                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                android:textColor="#696A6E"
+                android:background="#696A6E"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 />
