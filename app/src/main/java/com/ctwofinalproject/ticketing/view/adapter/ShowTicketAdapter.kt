@@ -56,4 +56,9 @@ class ShowTicketAdapter(): RecyclerView.Adapter<ShowTicketAdapter.ViewHolder>() 
     interface onItemClickListener {
         fun onItemClick(dataItemFlight: DataItemFlight)
     }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        this.listener = listener
+    }
+
 }

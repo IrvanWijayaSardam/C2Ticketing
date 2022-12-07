@@ -3,18 +3,16 @@ package com.ctwofinalproject.ticketing.view.ui.login
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.auth0.android.jwt.JWT
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
-import com.ctwofinalproject.ticketing.model.ResponseLogin
 import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.viewmodel.LoginViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
@@ -29,7 +27,6 @@ class LoginFragment : Fragment() {
     val viewModelLogin                                          : LoginViewModel by viewModels()
     lateinit var token                                          : String
     private lateinit var  loadingDialog                         : LoadingDialog
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,7 +41,7 @@ class LoginFragment : Fragment() {
         loadingDialog                                               = LoadingDialog(requireActivity())
         token                                                       = ""
         initListener()
-        
+
         viewModelLogin.getToken().observe(viewLifecycleOwner, {
             if(it != null) {
                 Log.d(TAG, "onViewCreated: ${it.accessToken}")

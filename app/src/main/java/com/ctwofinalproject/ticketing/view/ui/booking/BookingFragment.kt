@@ -25,7 +25,10 @@ class BookingFragment : Fragment() {
     private var _binding: FragmentBookingBinding?                 = null
     private val binding get()                                     = _binding!!
     lateinit var sharedPref                                       : SharedPreferences
+    lateinit var editPref                                         : SharedPreferences.Editor
     val bookingViewModel                                          : BookingViewModel by viewModels()
+    private val passengerNumberPicker                             = PassengerNumberPicker()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,14 +41,30 @@ class BookingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
+        editPref                                            = sharedPref.edit()
         initListener()
         setBottomNav()
+
+        passengerNumberPicker.setOnItemClickListener(object : PassengerNumberPicker.onItemClickListener{
+            override fun onItemClick(totalPassenger: Int) {
+                binding.tvSelectTotalPassenger.text = totalPassenger.toString()
+                editPref.putInt("totalPassenger",totalPassenger)
+                editPref.apply()
+            }
+
+        })
+
     }
 
     private fun initListener() {
         binding?.run {
             cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.secondary_font_color))
             cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
+
+            cvTotalPassenger.setOnClickListener {
+                passengerNumberPicker.show(requireActivity().supportFragmentManager,passengerNumberPicker.tag)
+            }
+
 
             btnSearchTicketFragmentBooking.setOnClickListener {
                 bookingViewModel.insertRecentSearch(RecentSearch(0,tvFromAirportCodeFragmentBooking.text.toString(),tvToAirportCodeFragmentBooking.text.toString(),"Economy",sharedPref.getString("departureDate","Day,xx Month xxxx")

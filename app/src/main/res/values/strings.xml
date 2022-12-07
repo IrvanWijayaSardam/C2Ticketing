@@ -79,6 +79,8 @@
     <string name="trip_summary">trip summary</string>
     <string name="contact_detail">Contact Detail</string>
     <string name="passenger_list">Passenger List</string>
+    <string name="total_passenger">Total Passenger</string>
+    <string name="save">save</string>
 
     <!--  dummy country  -->
     <string-array name="country">

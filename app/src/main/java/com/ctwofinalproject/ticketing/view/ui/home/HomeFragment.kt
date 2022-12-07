@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.auth0.android.jwt.JWT
 import com.bumptech.glide.Glide
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
@@ -35,6 +36,8 @@ class HomeFragment : Fragment() {
     lateinit var adapterRecentSearch                                    : RecentSearchAdapter
     lateinit var editPref                                               : SharedPreferences.Editor
     val homeViewModel                                                   : HomeViewModel by viewModels()
+    lateinit var token                                                  : String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,9 +60,14 @@ class HomeFragment : Fragment() {
         setBottomNav()
         initListener()
 
+        var jwt = JWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImZpcnN0bmFtZSI6IklydmFuIiwibGFzdG5hbWUiOiJXaWpheWEiLCJnZW5kZXIiOiJMIiwiZW1haWwiOiJhbWluaXZhbkBnbWFpbC5jb20iLCJwaG9uZSI6IjYyODEzMDQ5MjgzOTIzOCIsImJpcnRoZGF0ZSI6IjIwMDEtMTItMTVUMDA6MDA6MDAuMDAwWiIsInBpY3R1cmVzIjpudWxsLCJpYXQiOjE2NzAzNDcxNzksImV4cCI6MTY3MDQzMzU3OX0.Q7bTJkcV7sqlB8KHv2VOpP_CdnIwHTAPW5faNF8zwuE")
+        val isExpired = jwt.isExpired(10)
+        Log.d(TAG, "onViewCreated: ${isExpired}")
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
+            token = it.token
+
             when{
                 it == null -> binding.tvUsernameOrLogin.text = "Login"
                 it.firstname != null -> binding.tvUsernameOrLogin.text = it.firstname

@@ -41,7 +41,6 @@ class SplashFragment : Fragment() {
                 goToLogin()
             }
         })
-
     }
 
     private fun initListener(){

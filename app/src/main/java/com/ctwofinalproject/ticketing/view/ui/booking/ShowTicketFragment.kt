@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentAirportBinding
 import com.ctwofinalproject.ticketing.databinding.FragmentShowTicketBinding
+import com.ctwofinalproject.ticketing.model.DataItemFlight
 import com.ctwofinalproject.ticketing.view.adapter.ShowTicketAdapter
 import com.ctwofinalproject.ticketing.viewmodel.ShowTicketViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,6 +30,7 @@ class ShowTicketFragment : Fragment() {
     val viewModelShowticket                                                   : ShowTicketViewModel by viewModels()
     lateinit var sharedPref                                                   : SharedPreferences
     lateinit var adapterShowTicket                                            : ShowTicketAdapter
+    lateinit var editPref                                                     : SharedPreferences.Editor
     lateinit var dialog                                                       : Dialog
 
     override fun onCreateView(
@@ -42,6 +44,7 @@ class ShowTicketFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
+        editPref                                            = sharedPref.edit()
         adapterShowTicket                                   = ShowTicketAdapter()
         initListener()
         setBottomNav()
@@ -63,12 +66,19 @@ class ShowTicketFragment : Fragment() {
             }
         })
 
+        adapterShowTicket.setOnItemClickListener(object : ShowTicketAdapter.onItemClickListener{
+            override fun onItemClick(dataItemFlight: DataItemFlight) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_showTicketFragment_to_tripSummaryPassengerFragment)
+            }
+        })
     }
 
     private fun initListener() {
         binding?.run {
             tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
             tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
+            tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("departureDate","2022-09-30").toString()
+            tvCountTicketFragmentShowTicket.text = sharedPref.getInt("totalPassenger",1).toString()
 
             ivGotoBackFromFragmentShowTicket.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
