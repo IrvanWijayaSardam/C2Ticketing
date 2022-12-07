@@ -29,8 +29,8 @@ class ShowTicketFragment : Fragment() {
     private val binding get()                                                 = _binding!!
     val viewModelShowticket                                                   : ShowTicketViewModel by viewModels()
     lateinit var sharedPref                                                   : SharedPreferences
-    lateinit var adapterShowTicket                                            : ShowTicketAdapter
     lateinit var editPref                                                     : SharedPreferences.Editor
+    lateinit var adapterShowTicket                                            : ShowTicketAdapter
     lateinit var dialog                                                       : Dialog
 
     override fun onCreateView(

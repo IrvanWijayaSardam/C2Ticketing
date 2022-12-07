@@ -1,8 +1,10 @@
 package com.ctwofinalproject.ticketing.view.ui.booking
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -51,9 +53,14 @@ class SelectRoundTripFragment : Fragment() {
                 datePicker.addOnPositiveButtonClickListener {
                     val returnFormat = SimpleDateFormat("EEE, MMM d, ''yyyy", Locale.getDefault())
                     val returnFormatForApi = SimpleDateFormat("YYYY, MM, DD", Locale.getDefault())
+                    val returnTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
 
                     val returnDate = returnFormat.format(Date(it).time)
                     val returnDateForApi = returnFormatForApi.format(Date(it).time)
+                    val returnTimeFormat = returnTime.format(Date(it).time)
+
+                    Log.d(TAG, "initListener: ${returnTimeFormat}")
+
                     editPref.putString("returnDate",returnDate)
                     editPref.putString("returnDateForApi",returnDateForApi)
                     editPref.apply()

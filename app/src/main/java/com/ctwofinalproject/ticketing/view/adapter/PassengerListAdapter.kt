@@ -5,17 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ctwofinalproject.ticketing.data.Passenger
+import com.ctwofinalproject.ticketing.data.Passanger
 import com.ctwofinalproject.ticketing.databinding.ItemPassengerBinding
 
 class PassengerListAdapter(val passengerAmmount: Int): RecyclerView.Adapter<PassengerListAdapter.ViewHolder>() {
     private lateinit var listener: OnItemClickListener
 
-    fun submitList(list : List<Passenger?>){
+    fun submitList(list : List<Passanger?>){
         differ.submitList(list)
     }
 
-    fun modifyItemList(list: List<Passenger?>,position: Int){
+    fun modifyItemList(list: List<Passanger?>,position: Int){
         differ.submitList(list)
         notifyItemChanged(position)
     }
@@ -32,17 +32,17 @@ class PassengerListAdapter(val passengerAmmount: Int): RecyclerView.Adapter<Pass
         }
     }
 
-    private var diffCallback = object : DiffUtil.ItemCallback<Passenger>(){
+    private var diffCallback = object : DiffUtil.ItemCallback<Passanger>(){
         override fun areItemsTheSame(
-            oldItem: Passenger,
-            newItem: Passenger
+            oldItem: Passanger,
+            newItem: Passanger
         ): Boolean {
-            return oldItem.nik == newItem.nik
+            return oldItem.identityNumber == newItem.identityNumber
         }
 
         override fun areContentsTheSame(
-            oldItem: Passenger,
-            newItem: Passenger
+            oldItem: Passanger,
+            newItem: Passanger
         ): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
@@ -61,11 +61,11 @@ class PassengerListAdapter(val passengerAmmount: Int): RecyclerView.Adapter<Pass
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (differ.currentList.isNotEmpty() && differ.currentList.size != holder.adapterPosition){
-            holder.binding.tvNameItemPassenger.setText(differ.currentList[position].firstname+" "+differ.currentList[position].lastname)
-            holder.binding.tvNikItemPassenger.text = differ.currentList[position].nik.toString()
+            holder.binding.tvNameItemPassenger.setText("Name \t \t : "+differ.currentList[position].firstname+" "+differ.currentList[position].lastname)
+            holder.binding.tvNikItemPassenger.setText("NIK \t \t \t \t : "+differ.currentList[position].identityNumber.toString())
         } else {
-            holder.binding.tvNameItemPassenger.setText("Passenger ${position+1}")
-            holder.binding.tvNikItemPassenger.text = "NIK"
+            holder.binding.tvNameItemPassenger.setText("Passenger : ${position+1}")
+            holder.binding.tvNikItemPassenger.text = "NIK : "
         }
     }
 
@@ -74,6 +74,6 @@ class PassengerListAdapter(val passengerAmmount: Int): RecyclerView.Adapter<Pass
     }
 
     interface OnItemClickListener{
-        fun onItemClick(passenger: Passenger?,position: Int)
+        fun onItemClick(passenger: Passanger?,position: Int)
     }
 }

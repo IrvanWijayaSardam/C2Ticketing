@@ -9,15 +9,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ctwofinalproject.ticketing.R
-import com.ctwofinalproject.ticketing.data.Passenger
-import com.ctwofinalproject.ticketing.databinding.FragmentAirportBinding
+import com.ctwofinalproject.ticketing.data.Passanger
+import com.ctwofinalproject.ticketing.data.Ticket
+import com.ctwofinalproject.ticketing.data.TicketData
 import com.ctwofinalproject.ticketing.databinding.FragmentTripSummaryPassengerBinding
-import com.ctwofinalproject.ticketing.view.adapter.AirportAdapter
 import com.ctwofinalproject.ticketing.view.adapter.PassengerListAdapter
 import com.ctwofinalproject.ticketing.view.ui.booking.AddPassengerFragment
+import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
+import com.ctwofinalproject.ticketing.viewmodel.TripSummaryPassengerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,11 +27,14 @@ class TripSummaryPassengerFragment : Fragment() {
     private var _binding : FragmentTripSummaryPassengerBinding?            = null
     private val binding get()                                              = _binding!!
     lateinit var adapterPassenger                                          : PassengerListAdapter
-    private val passengerList                                              = arrayListOf<Passenger>()
+    private val passengerList                                              = arrayListOf<Passanger>()
     private var positionItem : Int                                         = 0
     private val fragmentAddPassenger                                       = AddPassengerFragment()
     private var isEdit: Boolean                                            = false
     lateinit var sharedPref                                                : SharedPreferences
+    private val viewModelProto                                             : ProtoViewModel by viewModels()
+    private val viewModelTripSummaryPassenger                              : TripSummaryPassengerViewModel by viewModels()
+    private var token : String                                             = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,10 +54,19 @@ class TripSummaryPassengerFragment : Fragment() {
         binding.rvPassengerList.adapter = adapterPassenger
         adapterPassenger.submitList(passengerList)
 
-
+        viewModelProto.dataUser.observe(viewLifecycleOwner,{
+            if(it != null){
+                binding.tvNameContactDetail.setText(it.firstname+" "+it.lastname)
+                binding.tvEmailContactDetail.setText(it.email)
+                binding.tvPhoneNumberContactDetail.setText(it.phone)
+                token = it.token.toString()
+            } else {
+                //Suruh insert data contact
+            }
+        })
 
         adapterPassenger.setOnItemClickListener(object : PassengerListAdapter.OnItemClickListener{
-            override fun onItemClick(passenger: Passenger?, position: Int) {
+            override fun onItemClick(passenger: Passanger?, position: Int) {
                 isEdit = false
                 positionItem = position
                 if(passenger != null){
@@ -67,7 +81,7 @@ class TripSummaryPassengerFragment : Fragment() {
 
 
         fragmentAddPassenger.setOnItemClickListener(object : AddPassengerFragment.onItemClickListener{
-            override fun onItemClick(passenger: Passenger) {
+            override fun onItemClick(passenger: Passanger) {
                 if(!isEdit){
                     passengerList.add(passenger)
                 } else {
@@ -84,6 +98,14 @@ class TripSummaryPassengerFragment : Fragment() {
             ivGotoBackFromFragmentTripSummaryPassenger.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
             }
+            btnSavePassengerFragmentATripSummary.setOnClickListener {
+                Log.d(TAG, "initListener: passengerList ${passengerList.size}")
+                viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(690000,1,1)))
+                for(i in 0 until passengerList.size){
+                    Log.d(TAG, "initListener: ${passengerList[i].firstname}")
+                }
+            }
+
         }
     }
 }

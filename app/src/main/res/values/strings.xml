@@ -81,6 +81,10 @@
     <string name="passenger_list">Passenger List</string>
     <string name="total_passenger">Total Passenger</string>
     <string name="save">save</string>
+    <string name="document_type">Document Type</string>
+    <string name="identity_number">Identity Number</string>
+    <string name="age">Age</string>
+
 
     <!--  dummy country  -->
     <string-array name="country">
@@ -106,5 +110,15 @@
         <item>Jakarta Selatan</item>
         <item>Surabaya</item>
         <item>Samarinda</item>
+    </string-array>
+
+    <string-array name="title">
+        <item>Mr</item>
+        <item>Mrs</item>
+    </string-array>
+
+    <string-array name="documentTypePassenger">
+        <item>KTP</item>
+        <item>Passport</item>
     </string-array>
 </resources>

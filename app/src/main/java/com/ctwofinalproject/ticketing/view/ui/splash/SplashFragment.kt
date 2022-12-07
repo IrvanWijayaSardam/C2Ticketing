@@ -46,7 +46,7 @@ class SplashFragment : Fragment() {
     private fun initListener(){
         binding?.run {
             cvGetStarted?.setOnClickListener{
-                goToLogin()
+                goToHome()
             }
         }
     }

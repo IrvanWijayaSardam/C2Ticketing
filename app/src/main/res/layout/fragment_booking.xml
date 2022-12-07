@@ -220,7 +220,7 @@
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/fragmentContainerViewDepartureAndREturnDateFragmentBooking"
-                        android:name="com.ctwofinalproject.ticketing.view.ui.booking.SelectRoundTripFragment"
+                        android:name="com.ctwofinalproject.ticketing.view.ui.booking.SelectOneWayFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:layout="@layout/fragment_select_one_way" />

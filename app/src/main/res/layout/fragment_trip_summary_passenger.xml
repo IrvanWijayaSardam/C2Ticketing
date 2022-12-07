@@ -112,6 +112,7 @@
                             />
                     </LinearLayout>
                     <TextView
+                        android:id="@+id/tvNameContactDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="name"
@@ -119,6 +120,7 @@
                         android:textColor="@color/primary_font_color"
                         />
                     <TextView
+                        android:id="@+id/tvEmailContactDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="example@gmail.com"
@@ -126,6 +128,7 @@
                         android:textColor="@color/primary_font_color"
                         />
                     <TextView
+                        android:id="@+id/tvPhoneNumberContactDetail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="082143338473"
@@ -184,9 +187,10 @@
 
             </androidx.cardview.widget.CardView>
             <Button
+                android:id="@+id/btnSavePassengerFragmentATripSummary"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="submit"
+                android:text="SAVE PASSENGER"
                 android:layout_gravity="center_horizontal"/>
         </LinearLayout>
     </ScrollView>

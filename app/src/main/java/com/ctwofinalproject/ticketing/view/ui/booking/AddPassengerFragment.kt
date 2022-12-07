@@ -3,16 +3,13 @@ package com.ctwofinalproject.ticketing.view.ui.booking
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.ctwofinalproject.ticketing.R
-import com.ctwofinalproject.ticketing.data.Passenger
+import com.ctwofinalproject.ticketing.data.Passanger
 import com.ctwofinalproject.ticketing.databinding.FragmentAddPassengerBinding
-import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
-import com.ctwofinalproject.ticketing.model.DataItem
-import com.ctwofinalproject.ticketing.view.adapter.AirportAdapter
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
@@ -21,7 +18,7 @@ class AddPassengerFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentAddPassengerBinding?                 = null
     private val binding get()                                          = _binding!!
     private lateinit var listener                                      : onItemClickListener
-    private var passengerData                                          : Passenger? = null
+    private var passengerData                                          : Passanger? = null
     lateinit var sharedPref                                            : SharedPreferences
 
 
@@ -38,25 +35,35 @@ class AddPassengerFragment : BottomSheetDialogFragment() {
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
 
         initListener()
+        setAdapter()
     }
 
     private fun initListener() {
         binding?.run {
             btnSavePassenger.setOnClickListener {
-                listener.onItemClick(Passenger(aCtCountrySignUp.text.toString(),tIetFirstnamePassenger.text.toString(),tIetLastnamePassenger.text.toString(),tIetNikPassenger.text.toString()))
+                listener.onItemClick(Passanger(tIetAgePassenger.text.toString().toInt(),tIetEmailPassenger.text.toString(),tIetFirstnamePassenger.text.toString(),tIetNikPassenger.text.toString(),aCtDocumentTypeAddPassenger.text.toString(),tIetLastnamePassenger.text.toString()))
                 dismiss()
             }
         }
     }
 
+    private fun setAdapter(){
+        val title                                           = resources.getStringArray(R.array.title)
+        val documentType                                    = resources.getStringArray(R.array.documentTypePassenger)
+        val arrayAdapterTitle                               = ArrayAdapter(requireContext(),R.layout.drop_down_item,title)
+        val arrayAdapterDocumentType                        = ArrayAdapter(requireContext(),R.layout.drop_down_item,documentType)
+        binding.aCtTitleAddPassenger.setAdapter(arrayAdapterTitle)
+        binding.aCtDocumentTypeAddPassenger.setAdapter(arrayAdapterDocumentType)
+    }
+
     interface onItemClickListener {
-        fun onItemClick(passenger: Passenger)
+        fun onItemClick(passenger: Passanger)
     }
     fun setOnItemClickListener(listener: onItemClickListener){
         this.listener = listener
     }
 
-    fun getPassenger(passenger: Passenger){
+    fun getPassenger(passenger: Passanger){
         passengerData = passenger
     }
 
@@ -73,9 +80,8 @@ class AddPassengerFragment : BottomSheetDialogFragment() {
     }
 
     fun setData(){
-        binding.aCtCountrySignUp.setText(passengerData!!.title.toString())
         binding.tIetFirstnamePassenger.setText(passengerData!!.firstname.toString())
-        binding.tIetLastnamePassenger.setText(passengerData!!.lastname.toString())
-        binding.tIetNikPassenger.setText(passengerData!!.nik.toString())
+        binding.tIetLastnamePassenger.setText(passengerData!!.firstname.toString())
+        binding.tIetNikPassenger.setText(passengerData!!.identityNumber.toString())
     }
 }

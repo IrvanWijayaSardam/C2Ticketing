@@ -2,6 +2,7 @@ package com.ctwofinalproject.ticketing.api
 
 import android.provider.ContactsContract.Data
 import com.ctwofinalproject.ticketing.data.Login
+import com.ctwofinalproject.ticketing.data.TicketData
 import com.ctwofinalproject.ticketing.data.User
 import com.ctwofinalproject.ticketing.model.*
 import retrofit2.Call
@@ -18,6 +19,13 @@ interface RestServiceMain {
     fun auth(
         @Body body: Login
     ) : Call<ResponseLogin>
+
+
+    @POST("api/booking")
+    fun submitBooking(
+        @Header("Authorization") authorization : String,
+        @Body body: TicketData
+    ) : Call<ResponseBooking>
 
     @GET("api/airports")
     fun getAirport(

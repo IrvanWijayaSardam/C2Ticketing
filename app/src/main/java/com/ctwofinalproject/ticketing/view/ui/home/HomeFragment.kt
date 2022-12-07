@@ -31,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
     private var _binding : FragmentHomeBinding?                         = null
     private val binding get()                                           = _binding!!
-    lateinit var viewModelProto                                         : ProtoViewModel
+    private val viewModelProto                                          : ProtoViewModel by viewModels()
     lateinit var sharedPref                                             : SharedPreferences
     lateinit var adapterRecentSearch                                    : RecentSearchAdapter
     lateinit var editPref                                               : SharedPreferences.Editor
@@ -49,7 +49,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModelProto                                      = ViewModelProvider(this).get(ProtoViewModel::class.java)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         adapterRecentSearch                                 = RecentSearchAdapter()
         editPref                                            = sharedPref.edit()
@@ -145,6 +144,10 @@ class HomeFragment : Fragment() {
                 tvRecentSearch.visibility = View.GONE
                 tvClearAllRecent.visibility = View.GONE
                 rvRecentSearchHomeFragment.visibility = View.GONE
+            }
+
+            btnSearchFragmentHome.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_bookingFragment)
             }
 
             tvFromAirportCodeFragmentHome.text = sharedPref.getString("airportCodeFrom","YIA")

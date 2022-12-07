@@ -51,15 +51,14 @@ class BookingFragment : Fragment() {
                 editPref.putInt("totalPassenger",totalPassenger)
                 editPref.apply()
             }
-
         })
 
     }
 
     private fun initListener() {
         binding?.run {
-            cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.secondary_font_color))
-            cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
+            cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
+            cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.secondary_font_color))
 
             cvTotalPassenger.setOnClickListener {
                 passengerNumberPicker.show(requireActivity().supportFragmentManager,passengerNumberPicker.tag)
