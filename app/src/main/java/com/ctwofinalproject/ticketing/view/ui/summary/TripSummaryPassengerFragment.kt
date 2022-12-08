@@ -15,16 +15,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
-import com.ctwofinalproject.ticketing.data.Passanger
-import com.ctwofinalproject.ticketing.data.Ticket
-import com.ctwofinalproject.ticketing.data.TicketData
+import com.ctwofinalproject.ticketing.data.*
 import com.ctwofinalproject.ticketing.databinding.FragmentTripSummaryPassengerBinding
 import com.ctwofinalproject.ticketing.model.DataTicketGetById
+import com.ctwofinalproject.ticketing.util.DecimalSeparator
 import com.ctwofinalproject.ticketing.view.adapter.PassengerListAdapter
 import com.ctwofinalproject.ticketing.view.adapter.TicketByIdAdapter
 import com.ctwofinalproject.ticketing.view.ui.booking.AddPassengerFragment
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.TripSummaryPassengerViewModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,11 +35,14 @@ class TripSummaryPassengerFragment : Fragment() {
     lateinit var adapterPassenger                                          : PassengerListAdapter
     private val passengerList                                              = arrayListOf<Passanger>()
     private val ticketList                                                 = arrayListOf<DataTicketGetById>()
+    private val contactDetailsList                                         = arrayListOf<ContactDetails>()
     private var positionItem : Int                                         = 0
     private val fragmentAddPassenger                                       = AddPassengerFragment()
     private val fragmentContactDetails                                     = ContactDetailsFragmentDialog()
     private var isEdit: Boolean                                            = false
     lateinit var sharedPref                                                : SharedPreferences
+    lateinit var sharedPrefDataBooking                                     : SharedPreferences
+    lateinit var editPrefBooking                                           : SharedPreferences.Editor
     private val viewModelProto                                             : ProtoViewModel by viewModels()
     private val viewModelTripSummaryPassenger                              : TripSummaryPassengerViewModel by viewModels()
     private var token : String                                             = ""
@@ -48,6 +52,7 @@ class TripSummaryPassengerFragment : Fragment() {
     lateinit var adapterTicketById                                         : TicketByIdAdapter
     private var totalPassenger: Int                                        = 0
     private var totalPrice: Int                                            = 0
+    private lateinit var gson                                              : Gson
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,12 +65,18 @@ class TripSummaryPassengerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                            = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
+        sharedPrefDataBooking                                 = requireContext().getSharedPreferences("sharedBookingData",Context.MODE_PRIVATE)
+        editPrefBooking                                       = sharedPrefDataBooking.edit()
         adapterPassenger                                      = PassengerListAdapter(sharedPref.getInt("totalPassenger",1))
         adapterTicketById                                     = TicketByIdAdapter()
+        gson                                                  = Gson()
         totalPassenger                                        = sharedPref.getInt("totalPassenger",1)
         initListener()
         setDialog()
         getArgs()
+        getDataBooking()
+
+
 
         binding.rvPassengerList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPassengerList.adapter = adapterPassenger
@@ -84,22 +95,23 @@ class TripSummaryPassengerFragment : Fragment() {
             }
         })
         
-        
-        viewModelTripSummaryPassenger.getTicketById(ticketId)
         viewModelTripSummaryPassenger.dataTicketById.observe(viewLifecycleOwner,{
             Log.d(TAG, "onViewCreated: ${it}")
-            if(it != null){
-                ticketList.add(it.data!!)
+            if(it!!.data != null){
+                ticketList.add(it!!.data!!)
                 adapterTicketById.submitList(ticketList)
                 binding.rvTicketTripSummaryPassenger.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                 binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
-                binding.tvTotalFareFragmentTripSummaryPassenger.setText("IDR "+(it.data.price.toString().toInt() * totalPassenger).toString())
+                binding.tvTotalFareFragmentTripSummaryPassenger.setText("IDR "+(DecimalSeparator.formatDecimalSeperators((it.data!!.price.toString().toInt() * totalPassenger).toString())))
                 binding.shimmerBar.visibility = View.GONE
                 binding.shimmerBarTotalFare.visibility = View.GONE
-                totalPrice = it.data.price.toString().toInt() * totalPassenger
+                totalPrice = it.data!!.price.toString().toInt() * totalPassenger
+            } else {
+
             }
         })
-        
+
+        viewModelTripSummaryPassenger.getTicketById(ticketId)
 
         adapterPassenger.setOnItemClickListener(object : PassengerListAdapter.OnItemClickListener{
             override fun onItemClick(passenger: Passanger?, position: Int) {
@@ -132,6 +144,7 @@ class TripSummaryPassengerFragment : Fragment() {
                 email: String,
                 phoneNumber: String
             ) {
+                contactDetailsList.add(ContactDetails(firstname, lastname, email, phoneNumber))
                 binding.tvNameContactDetail.setText(firstname+" "+lastname)
                 binding.tvEmailContactDetail.text = email
                 binding.tvPhoneNumberContactDetail.text = phoneNumber
@@ -139,6 +152,30 @@ class TripSummaryPassengerFragment : Fragment() {
 
         })
 
+    }
+
+    private fun getDataBooking() {
+        if(!sharedPrefDataBooking.getString("ticketId","").toString().equals("")){
+            val typeTokenPassenger = object : TypeToken<List<Passanger>>() {}.type
+            val typeTokenContactDetails = object : TypeToken<List<ContactDetails>>() {}.type
+            var passenger = Gson().fromJson<List<Passanger>>(sharedPrefDataBooking.getString("passengerList",""), typeTokenPassenger)
+            var contactDetails = Gson().fromJson<List<ContactDetails>>(sharedPrefDataBooking.getString("contactDetails",""), typeTokenContactDetails)
+
+            totalPrice = sharedPrefDataBooking.getInt("totalPrice",0)
+            ticketId = sharedPrefDataBooking.getString("ticketId","").toString()
+            passengerList.addAll(passenger)
+            contactDetailsList.addAll(contactDetails)
+            adapterPassenger.submitList(passenger)
+
+            binding.tvNameContactDetail.setText(contactDetailsList[0].firstname+" "+contactDetailsList[0].lastname)
+            binding.tvEmailContactDetail.text = contactDetails[0].email
+            binding.tvPhoneNumberContactDetail.text = contactDetails[0].phoneNumber
+            binding.rvTicketTripSummaryPassenger.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+            binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
+            binding.shimmerBar.visibility = View.GONE
+            binding.shimmerBarTotalFare.visibility = View.GONE
+            Log.d(TAG, "getDataBooking: ${ticketId}")
+        }
     }
 
     private fun setDialog() {
@@ -172,6 +209,15 @@ class TripSummaryPassengerFragment : Fragment() {
                         Log.d(TAG, "initListener: ${passengerList[i].firstname}")
                     }
                 } else {
+                    var jsonPassengerListToJson : String = gson.toJson(passengerList)
+                    var jsonContactDetailListToJson : String = gson.toJson(contactDetailsList)
+                    editPrefBooking.putString("passengerList",jsonPassengerListToJson)
+                    editPrefBooking.putString("ticketId",ticketId)
+                    editPrefBooking.putString("contactDetails",jsonContactDetailListToJson)
+                    editPrefBooking.putInt("totalPrice",totalPrice)
+                    editPrefBooking.apply()
+                    Log.d(TAG, "initListener: passengerList ${sharedPrefDataBooking.getString("passengerList","")}")
+                    Log.d(TAG, "initListener: passengerList ${sharedPrefDataBooking.getString("contactDetails","")}")
                     dialog.show()
                 }
             }

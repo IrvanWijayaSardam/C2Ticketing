@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.datastore.core.DataStore
 import androidx.datastore.dataStore
 import com.ctwofinalproject.ticketing.UserDataProto
+import com.ctwofinalproject.ticketing.data.UserProto
 import com.ctwofinalproject.ticketing.proto.UserPreferencesSerializer
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -17,33 +18,33 @@ private val Context.userPreferencesStore: DataStore<UserDataProto> by dataStore(
 
 class UserPreferencesRepository (private val context: Context) {
 
-    suspend fun saveData(firstname: String,lastname : String,gender : String,email : String,phone : String,birthdate : String,pictures : String,token : String, isLogin: Boolean) {
+    suspend fun saveData(userProto: UserProto) {
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setFirstname(firstname).build()
+            preferences.toBuilder().setFirstname(userProto.firstname).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setLastname(lastname).build()
+            preferences.toBuilder().setLastname(userProto.lastname).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setGender(gender).build()
+            preferences.toBuilder().setGender(userProto.gender).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setEmail(email).build()
+            preferences.toBuilder().setEmail(userProto.email).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setPhone(phone).build()
+            preferences.toBuilder().setPhone(userProto.phone).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setPictures(pictures).build()
+            preferences.toBuilder().setPictures(userProto.pictures).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setBirthdate(birthdate).build()
+            preferences.toBuilder().setBirthdate(userProto.birthdate).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setToken(token).build()
+            preferences.toBuilder().setToken(userProto.token).build()
         }
         context.userPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setIsLogin(isLogin).build()
+            preferences.toBuilder().setIsLogin(userProto.isLogin).build()
         }
     }
 

@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_homeFragment_to_bookingFragment"
             app:destination="@id/bookingFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_tripSummaryPassengerFragment"
+            app:destination="@id/tripSummaryPassengerFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

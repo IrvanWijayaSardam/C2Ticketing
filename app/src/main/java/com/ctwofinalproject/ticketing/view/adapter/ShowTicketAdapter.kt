@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ctwofinalproject.ticketing.databinding.ItemShowTicketBinding
 import com.ctwofinalproject.ticketing.model.DataItem
 import com.ctwofinalproject.ticketing.model.DataItemFlight
+import com.ctwofinalproject.ticketing.util.DecimalSeparator
 
 class ShowTicketAdapter(): RecyclerView.Adapter<ShowTicketAdapter.ViewHolder>() {
     private lateinit var context: Context
@@ -46,7 +47,7 @@ class ShowTicketAdapter(): RecyclerView.Adapter<ShowTicketAdapter.ViewHolder>() 
         holder.binding.tvDepTimeItemShowTicket.text = differ.currentList[position].flight!!.departureTime
         holder.binding.tvArrTimeItemShowTicket.text = differ.currentList[position].flight!!.arrivalTime
         holder.binding.tvFlightNumberItemShowTicket.text = differ.currentList[position].flightId.toString()
-        holder.binding.tvPriceItemShowTicket.setText("IDR "+differ.currentList[position].price.toString())
+        holder.binding.tvPriceItemShowTicket.setText("IDR "+DecimalSeparator.formatDecimalSeperators(differ.currentList[position].price.toString()))
     }
 
     override fun getItemCount(): Int {

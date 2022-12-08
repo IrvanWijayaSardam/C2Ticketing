@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import com.auth0.android.jwt.JWT
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.data.Login
+import com.ctwofinalproject.ticketing.data.UserProto
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
 import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.viewmodel.LoginViewModel
@@ -27,6 +28,7 @@ class LoginFragment : Fragment() {
     val viewModelLogin                                          : LoginViewModel by viewModels()
     lateinit var token                                          : String
     private lateinit var  loadingDialog                         : LoadingDialog
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,9 +49,10 @@ class LoginFragment : Fragment() {
                 Log.d(TAG, "onViewCreated: ${it.accessToken}")
                 token = it.accessToken.toString()
                 val jwt = JWT(token)
-                viewModelProto.editData(jwt.getClaim("firstname").asString().toString(),jwt.getClaim("lastname").asString().toString()
-                    ,jwt.getClaim("gender").asString().toString(),jwt.getClaim("email").asString().toString(),jwt.getClaim("phone").asString().toString(),
-                    jwt.getClaim("birthdate").asString().toString(),jwt.getClaim("pictures").asString().toString(),token,true)
+                viewModelProto.editData(
+                    UserProto(jwt.getClaim("firstname").asString().toString(),jwt.getClaim("lastname").asString().toString()
+                        ,jwt.getClaim("gender").asString().toString(),jwt.getClaim("email").asString().toString(),jwt.getClaim("phone").asString().toString(),
+                        jwt.getClaim("birthdate").asString().toString(),jwt.getClaim("pictures").asString().toString(),token,true))
                 loadingDialog.isDismiss()
                 showSnack("Login Berhasil")
                 goToHome()
@@ -76,7 +79,7 @@ class LoginFragment : Fragment() {
                 }
             }
             cvWithtoutLogin.setOnClickListener {
-                viewModelProto.editData("","","","","","","","",false)
+                viewModelProto.editData(UserProto("","","","","","","","",false))
                 goToHome()
             }
         }
