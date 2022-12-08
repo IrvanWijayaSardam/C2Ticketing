@@ -30,8 +30,8 @@ class AirportViewModel @Inject constructor(var api : RestServiceMain, var roomRe
         return liveDataAirportSearch
     }
 
-    fun fetchAirport(token : String){
-        val client = api.getAirport(token)
+    fun fetchAirport(){
+        val client = api.getAirport()
         client.enqueue(object : Callback<ResponseAirport> {
             override fun onResponse(
                 call: Call<ResponseAirport>,

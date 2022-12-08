@@ -1,25 +1,16 @@
 package com.ctwofinalproject.ticketing.view.ui.airport
 
-import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentAirportBinding
@@ -27,12 +18,10 @@ import com.ctwofinalproject.ticketing.entity.Airport
 import com.ctwofinalproject.ticketing.model.DataItem
 import com.ctwofinalproject.ticketing.view.adapter.AirportAdapter
 import com.ctwofinalproject.ticketing.view.adapter.RecentAirportAdapter
-import com.ctwofinalproject.ticketing.viewmodel.AirportRoomViewModel
 import com.ctwofinalproject.ticketing.viewmodel.AirportViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class AirportFragment : Fragment() {
@@ -71,8 +60,10 @@ class AirportFragment : Fragment() {
         setBottomNav()
 
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
-            getAllAirport(it.token)
-            token = it.token
+            getAllAirport()
+            if(it.isLogin){
+                token = it.token
+            }
         })
 
         viewModelAirport.getAllAirport().observe(viewLifecycleOwner, {
@@ -168,8 +159,8 @@ class AirportFragment : Fragment() {
     }
 
 
-    private fun getAllAirport(token: String){
-        viewModelAirport.fetchAirport("bearer "+token)
+    private fun getAllAirport(){
+        viewModelAirport.fetchAirport()
     }
 
     private fun getArgs() {

@@ -21,9 +21,9 @@
             android:layout_height="wrap_content"
             android:text="Jakarta (JKT), Indonesia"
             android:textColor="#515671"
+            android:background="#515671"
             android:fontFamily="@font/poppins_semibold"
             android:paddingTop="10dp"
-            android:background="#515671"
             android:paddingStart="10dp" />
         <TextView
             android:id="@+id/tvAirportItemChooseAllAirportShimmer"

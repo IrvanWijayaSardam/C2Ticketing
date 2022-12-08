@@ -109,5 +109,8 @@
         <action
             android:id="@+id/action_tripSummaryPassengerFragment_to_addPassengerFragment"
             app:destination="@id/addPassengerFragment" />
+        <action
+            android:id="@+id/action_tripSummaryPassengerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

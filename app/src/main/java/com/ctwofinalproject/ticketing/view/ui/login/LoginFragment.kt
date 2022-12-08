@@ -75,6 +75,10 @@ class LoginFragment : Fragment() {
                     }
                 }
             }
+            cvWithtoutLogin.setOnClickListener {
+                viewModelProto.editData("","","","","","","","",false)
+                goToHome()
+            }
         }
     }
     fun showSnack(message: String){

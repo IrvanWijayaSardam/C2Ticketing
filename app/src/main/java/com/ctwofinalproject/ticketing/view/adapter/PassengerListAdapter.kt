@@ -1,5 +1,6 @@
 package com.ctwofinalproject.ticketing.view.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -62,7 +63,7 @@ class PassengerListAdapter(val passengerAmmount: Int): RecyclerView.Adapter<Pass
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (differ.currentList.isNotEmpty() && differ.currentList.size != holder.adapterPosition){
             holder.binding.tvNameItemPassenger.setText("Name \t \t : "+differ.currentList[position].firstname+" "+differ.currentList[position].lastname)
-            holder.binding.tvNikItemPassenger.setText("NIK \t \t \t \t : "+differ.currentList[position].identityNumber.toString())
+            holder.binding.tvNikItemPassenger.setText("NIK \t \t \t \t \t : "+differ.currentList[position].identityNumber.toString())
         } else {
             holder.binding.tvNameItemPassenger.setText("Passenger : ${position+1}")
             holder.binding.tvNikItemPassenger.text = "NIK : "

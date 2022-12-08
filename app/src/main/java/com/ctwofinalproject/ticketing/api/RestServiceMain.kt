@@ -29,7 +29,6 @@ interface RestServiceMain {
 
     @GET("api/airports")
     fun getAirport(
-        @Header("Authorization") authorization : String
     ) : Call<ResponseAirport>
 
     @GET("api/airports/{query}")
@@ -44,4 +43,9 @@ interface RestServiceMain {
         @Query("arrival") arrival: String,
         @Query("datedeparture") dateDeparture: String
         ) : Call<ResponseSearchFlight>
+
+    @GET("api/tickets/{ticketNumber}")
+    fun getTicketById(
+        @Path("ticketNumber") ticketNumber: String
+    ) : Call<ResponseGetTicketById>
 }

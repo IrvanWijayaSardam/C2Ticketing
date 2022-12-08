@@ -46,72 +46,78 @@
             />
 
     </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="120dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llLogoHeaderLogin"
-        >
+        app:layout_constraintVertical_bias="1.0">
+
         <LinearLayout
             android:id="@+id/llEditTextLogin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/email"
-                android:textSize="15sp"
                 android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_medium"/>
+                android:textSize="15sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tIlEmailLogin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="25dp"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
-                app:boxCornerRadiusTopStart="10dp"
-                android:layout_marginBottom="25dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                app:boxCornerRadiusTopStart="10dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tIetEmailLogin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:hint="example1001@gmail.com"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
                 android:text="@string/password"
-                android:textSize="15sp"
                 android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_medium"/>
+                android:textSize="15sp" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tIlPasswordLogin"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:counterEnabled="true"
-                app:counterMaxLength="30"
-                app:endIconMode="password_toggle"
                 app:boxCornerRadiusBottomEnd="10dp"
                 app:boxCornerRadiusBottomStart="10dp"
                 app:boxCornerRadiusTopEnd="10dp"
                 app:boxCornerRadiusTopStart="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                >
+                app:counterEnabled="true"
+                app:counterMaxLength="30"
+                app:endIconMode="password_toggle">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/tIetPasswordLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="30"
-                    android:inputType="textPassword"
                     android:hint="xxxx"
-                    />
+                    android:inputType="textPassword"
+                    android:maxLength="30" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -119,30 +125,29 @@
                 android:layout_width="172dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="50dp"
-                android:text="Let's Go"
-                android:textAllCaps="false"
-                android:elevation="@dimen/cardview_default_elevation"
                 android:background="@drawable/custom_button"
-                />
+                android:elevation="@dimen/cardview_default_elevation"
+                android:text="Let's Go"
+                android:textAllCaps="false" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/or"
-                android:textSize="15sp"
+                android:layout_gravity="center"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:layout_gravity="center"
                 android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/secondary_font_color"/>
+                android:text="@string/or"
+                android:textColor="@color/secondary_font_color"
+                android:textSize="15sp" />
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvAuthWithGoogleLogin"
                 android:layout_width="184dp"
                 android:layout_height="48dp"
-                app:cardCornerRadius="30dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="7dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="@dimen/cardview_default_elevation">
 
                 <LinearLayout
@@ -151,18 +156,19 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="21dp"
                         android:layout_height="21dp"
                         android:layout_marginEnd="3.5dp"
-                        android:src="@drawable/ic_logo_google"/>
+                        android:src="@drawable/ic_logo_google" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3.5dp"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/login_with_google"/>
+                        android:text="@string/login_with_google" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -171,9 +177,9 @@
                 android:id="@+id/cvAuthWithAppleLogin"
                 android:layout_width="184dp"
                 android:layout_height="48dp"
-                app:cardCornerRadius="30dp"
                 android:layout_gravity="center"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="7dp"
+                app:cardCornerRadius="30dp"
                 app:cardElevation="@dimen/cardview_default_elevation">
 
                 <LinearLayout
@@ -182,31 +188,64 @@
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="21dp"
                         android:layout_height="21dp"
                         android:layout_marginEnd="3.5dp"
-                        android:src="@drawable/ic_logo_apple"/>
+                        android:src="@drawable/ic_logo_apple" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="3.5dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:text="@string/login_with_apple" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvWithtoutLogin"
+                android:layout_width="184dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="7dp"
+                app:cardCornerRadius="30dp"
+                app:cardElevation="@dimen/cardview_default_elevation">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="21dp"
+                        android:layout_height="21dp"
+                        android:layout_marginEnd="3.5dp"
+                        android:src="@drawable/img_guest" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="3.5dp"
-                        android:layout_gravity="center_vertical"
                         android:fontFamily="@font/poppins_semibold"
-                        android:text="@string/login_with_apple"/>
+                        android:text="@string/continue_as_a_guest" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
             <TextView
                 android:id="@+id/tvDontHaveAnAccountLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/don_t_have_an_account"
                 android:layout_gravity="center"
-                android:textColor="@color/primary_blue_1"
-                android:fontFamily="@font/poppins_semibold"/>
+                android:fontFamily="@font/poppins_semibold"
+                android:text="@string/don_t_have_an_account"
+                android:textColor="@color/primary_blue_1" />
         </LinearLayout>
 
     </ScrollView>

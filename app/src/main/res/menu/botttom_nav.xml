@@ -12,7 +12,7 @@
         android:id="@+id/iconTripBN"/>
     <item android:title="Profile"
         android:icon="@drawable/ic_outline_account_circle_24"
-        android:id="@+id/iconProfileBN"/>
+        android:id="@+id/profileFragment"/>
     <item android:title="More"
         android:icon="@drawable/ic_outline_more_horiz_24"
         android:id="@+id/iconMoreBN"/>

@@ -68,7 +68,9 @@ class ShowTicketFragment : Fragment() {
 
         adapterShowTicket.setOnItemClickListener(object : ShowTicketAdapter.onItemClickListener{
             override fun onItemClick(dataItemFlight: DataItemFlight) {
-                Navigation.findNavController(requireView()).navigate(R.id.action_showTicketFragment_to_tripSummaryPassengerFragment)
+                val bund = Bundle()
+                bund.putString("ticketId",dataItemFlight.id.toString())
+                Navigation.findNavController(requireView()).navigate(R.id.action_showTicketFragment_to_tripSummaryPassengerFragment,bund)
             }
         })
     }
@@ -113,6 +115,8 @@ class ShowTicketFragment : Fragment() {
             Navigation.findNavController(binding.root).popBackStack()
         }
     }
+
+
 
 
 }

@@ -11,7 +11,7 @@ data class ResponseBooking(
 	val code: Int? = null,
 
 	@field:SerializedName("data")
-	val data: Data? = null,
+	val data: DataBooking? = null,
 
 	@field:SerializedName("status")
 	val status: Boolean? = null
@@ -56,7 +56,7 @@ data class Userbooking(
 	val updatedAt: String? = null
 )
 
-data class Data(
+data class DataBooking(
 
 	@field:SerializedName("booking")
 	val booking: Booking? = null,

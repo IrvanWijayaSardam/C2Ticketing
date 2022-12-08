@@ -59,18 +59,13 @@ class HomeFragment : Fragment() {
         setBottomNav()
         initListener()
 
-        var jwt = JWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImZpcnN0bmFtZSI6IklydmFuIiwibGFzdG5hbWUiOiJXaWpheWEiLCJnZW5kZXIiOiJMIiwiZW1haWwiOiJhbWluaXZhbkBnbWFpbC5jb20iLCJwaG9uZSI6IjYyODEzMDQ5MjgzOTIzOCIsImJpcnRoZGF0ZSI6IjIwMDEtMTItMTVUMDA6MDA6MDAuMDAwWiIsInBpY3R1cmVzIjpudWxsLCJpYXQiOjE2NzAzNDcxNzksImV4cCI6MTY3MDQzMzU3OX0.Q7bTJkcV7sqlB8KHv2VOpP_CdnIwHTAPW5faNF8zwuE")
-        val isExpired = jwt.isExpired(10)
-        Log.d(TAG, "onViewCreated: ${isExpired}")
-
         viewModelProto.dataUser.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
             token = it.token
-
-            when{
-                it == null -> binding.tvUsernameOrLogin.text = "Login"
-                it.firstname != null -> binding.tvUsernameOrLogin.text = it.firstname
-                else -> binding.tvUsernameOrLogin.text = "Login"
+            if(it.isLogin){
+                binding.tvUsernameOrLogin.text = it.firstname
+            } else {
+                binding.tvUsernameOrLogin.text = ""
             }
         })
 
@@ -147,7 +142,9 @@ class HomeFragment : Fragment() {
             }
 
             btnSearchFragmentHome.setOnClickListener {
-                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_bookingFragment)
+                //Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_bookingFragment)
+                val bottomnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+                bottomnav.selectedItemId = R.id.bookingFragment
             }
 
             tvFromAirportCodeFragmentHome.text = sharedPref.getString("airportCodeFrom","YIA")

@@ -84,6 +84,16 @@
     <string name="document_type">Document Type</string>
     <string name="identity_number">Identity Number</string>
     <string name="age">Age</string>
+    <string name="ktp">KTP</string>
+    <string name="continue_as_a_guest">Continue As A Guest</string>
+    <string name="identity_type">Identity Type</string>
+    <string name="go_to_login">Go To Login</string>
+    <string name="proceed_login">Proceed Login</string>
+
+
+    <string name="default_time_format" translatable="false">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
+    <string name="date_format" translatable="false">EEEE</string>
+    <string name="time_format" translatable="false">HH:mm a</string>
 
 
     <!--  dummy country  -->

@@ -35,29 +35,22 @@ class AddPassengerFragment : BottomSheetDialogFragment() {
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
 
         initListener()
-        setAdapter()
     }
 
     private fun initListener() {
         binding?.run {
-            btnSavePassenger.setOnClickListener {
-                listener.onItemClick(Passanger(tIetAgePassenger.text.toString().toInt(),tIetEmailPassenger.text.toString(),tIetFirstnamePassenger.text.toString(),tIetNikPassenger.text.toString(),aCtDocumentTypeAddPassenger.text.toString(),tIetLastnamePassenger.text.toString()))
+            btnSaveAddPassenger.setOnClickListener {
+                listener.onItemClick(Passanger(edtAgeAddPassenger.text.toString().toInt(),edtEmailAddPassenger.text.toString(),edtFirstNameAddPassenger.text.toString(),edtIdentityNumberAddPassenger.text.toString(),spIdentityType.selectedItem.toString(),edtLastNameAddPassenger.text.toString()))
+                clearAll()
                 dismiss()
             }
         }
     }
 
-    private fun setAdapter(){
-        val title                                           = resources.getStringArray(R.array.title)
-        val documentType                                    = resources.getStringArray(R.array.documentTypePassenger)
-        val arrayAdapterTitle                               = ArrayAdapter(requireContext(),R.layout.drop_down_item,title)
-        val arrayAdapterDocumentType                        = ArrayAdapter(requireContext(),R.layout.drop_down_item,documentType)
-        binding.aCtTitleAddPassenger.setAdapter(arrayAdapterTitle)
-        binding.aCtDocumentTypeAddPassenger.setAdapter(arrayAdapterDocumentType)
-    }
 
     interface onItemClickListener {
-        fun onItemClick(passenger: Passanger)
+        fun onItemClick(passenger: Passanger){
+        }
     }
     fun setOnItemClickListener(listener: onItemClickListener){
         this.listener = listener
@@ -80,8 +73,19 @@ class AddPassengerFragment : BottomSheetDialogFragment() {
     }
 
     fun setData(){
-        binding.tIetFirstnamePassenger.setText(passengerData!!.firstname.toString())
-        binding.tIetLastnamePassenger.setText(passengerData!!.firstname.toString())
-        binding.tIetNikPassenger.setText(passengerData!!.identityNumber.toString())
+        binding.edtFirstNameAddPassenger.setText(passengerData!!.firstname.toString())
+        binding.edtLastNameAddPassenger.setText(passengerData!!.lastname.toString())
+        binding.edtEmailAddPassenger.setText(passengerData!!.email.toString())
+        binding.edtAgeAddPassenger.setText(passengerData!!.age.toString())
+        binding.edtIdentityNumberAddPassenger.setText(passengerData!!.identityNumber.toString())
+    }
+
+    fun clearAll(){
+        binding.edtFirstNameAddPassenger.setText("")
+        binding.edtLastNameAddPassenger.setText("")
+        binding.edtEmailAddPassenger.setText("")
+        binding.edtAgeAddPassenger.setText("")
+        binding.edtIdentityNumberAddPassenger.setText("")
+
     }
 }
