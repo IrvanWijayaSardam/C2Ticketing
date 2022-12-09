@@ -30,150 +30,159 @@
         android:textSize="18sp"
         />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tIlSearchAirportFragmentAirport"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="332dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="15dp"
-        android:orientation="vertical"
-        app:boxCornerRadiusBottomEnd="10dp"
-        app:boxCornerRadiusBottomStart="10dp"
-        app:boxCornerRadiusTopEnd="10dp"
-        app:boxCornerRadiusTopStart="5dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChooseAirportFragmentAirport">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tIetSearchAirportFragmentAirport"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
-            android:hint="Search by city, country or airport code"
-            android:textColor="@color/primary_font_color"
-            android:textColorHint="@color/secondary_font_color"
-            android:textSize="12sp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <ImageView
-        android:id="@+id/ivSearch"
-        android:layout_width="35dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_baseline_search_24"
-        app:layout_constraintLeft_toRightOf="@+id/tIlSearchAirportFragmentAirport"
-        app:layout_constraintTop_toBottomOf="@+id/tvChooseAirportFragmentAirport" />
-
     <LinearLayout
-        android:id="@+id/llTvRecentSearchFragmentAirport"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_one"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tIlSearchAirportFragmentAirport">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recent Airport"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/background_color_white"
-            android:textSize="12sp"
-            android:layout_marginStart="15dp"
-            android:textAlignment="center"/>
-    </LinearLayout>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvRecentSearchFragmentAirport"
+        android:id="@+id/llSearchAirportFragmentAirport"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/llTvRecentSearchFragmentAirport"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="7dp"
-        >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvRecentAirport"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/llTvAllAirportFragmentAirport"
-        android:layout_width="match_parent"
-        android:layout_height="43dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_two"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvRecentSearchFragmentAirport">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All Airport"
-            android:fontFamily="@font/poppins_semibold"
-            android:textColor="@color/background_color_white"
-            android:textSize="12sp"
-            android:layout_marginStart="15dp"
-            android:textAlignment="center"/>
-    </LinearLayout>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvAllFragmentAirport"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintTop_toBottomOf="@+id/llTvAllAirportFragmentAirport"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="15dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="7dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvChooseAirportFragmentAirport"
         >
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAirport"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tIlSearchAirportFragmentAirport"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_choose_all_airport"/>
+            android:layout_weight="1"
+            android:orientation="vertical"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp">
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmerBar"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tIetSearchAirportFragmentAirport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:hint="Search by city, country or airport code"
+                android:textColor="@color/primary_font_color"
+                android:textColorHint="@color/secondary_font_color"
+                android:textSize="12sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <ImageView
+            android:id="@+id/ivSearch"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_baseline_search_24"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llSearchAirportFragmentAirport"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <ScrollView
+            <LinearLayout
+                android:id="@+id/llTvRecentSearchFragmentAirport"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
+                android:layout_height="43dp"
+                android:background="@drawable/bg_one"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_margin="10dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Airport"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/background_color_white"
+                    android:textSize="12sp"
+                    android:layout_marginStart="15dp"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvRecentSearchFragmentAirport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/llTvRecentSearchFragmentAirport"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="7dp"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvRecentAirport"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    />
+            </androidx.cardview.widget.CardView>
 
-                    <include layout="@layout/item_choose_all_airport_shimmer"/>
-                    <include layout="@layout/item_choose_all_airport_shimmer"/>
-                    <include layout="@layout/item_choose_all_airport_shimmer"/>
-                    <include layout="@layout/item_choose_all_airport_shimmer"/>
-                    <include layout="@layout/item_choose_all_airport_shimmer"/>
+            <LinearLayout
+                android:id="@+id/llTvAllAirportFragmentAirport"
+                android:layout_width="match_parent"
+                android:layout_height="43dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/bg_two"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvRecentSearchFragmentAirport">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="All Airport"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:textColor="@color/background_color_white"
+                    android:textSize="12sp"
+                    android:layout_marginStart="15dp"
+                    android:textAlignment="center"/>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvAllFragmentAirport"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                app:layout_constraintTop_toBottomOf="@+id/llTvAllAirportFragmentAirport"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="7dp"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvAirport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_choose_all_airport"/>
 
-                </LinearLayout>
-            </ScrollView>
-        </com.facebook.shimmer.ShimmerFrameLayout>
-    </androidx.cardview.widget.CardView>
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <include layout="@layout/item_choose_all_airport_shimmer"/>
+                            <include layout="@layout/item_choose_all_airport_shimmer"/>
+                            <include layout="@layout/item_choose_all_airport_shimmer"/>
+                            <include layout="@layout/item_choose_all_airport_shimmer"/>
+                            <include layout="@layout/item_choose_all_airport_shimmer"/>
+
+                        </LinearLayout>
+                    </ScrollView>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
