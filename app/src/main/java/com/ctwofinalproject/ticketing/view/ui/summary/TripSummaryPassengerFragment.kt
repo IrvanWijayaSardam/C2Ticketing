@@ -19,11 +19,13 @@ import com.ctwofinalproject.ticketing.data.*
 import com.ctwofinalproject.ticketing.databinding.FragmentTripSummaryPassengerBinding
 import com.ctwofinalproject.ticketing.model.DataTicketGetById
 import com.ctwofinalproject.ticketing.util.DecimalSeparator
+import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.view.adapter.PassengerListAdapter
 import com.ctwofinalproject.ticketing.view.adapter.TicketByIdAdapter
 import com.ctwofinalproject.ticketing.view.ui.booking.AddPassengerFragment
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.TripSummaryPassengerViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,14 +43,13 @@ class TripSummaryPassengerFragment : Fragment() {
     private val fragmentContactDetails                                     = ContactDetailsFragmentDialog()
     private var isEdit: Boolean                                            = false
     lateinit var sharedPref                                                : SharedPreferences
-    lateinit var sharedPrefDataBooking                                     : SharedPreferences
-    lateinit var editPrefBooking                                           : SharedPreferences.Editor
     private val viewModelProto                                             : ProtoViewModel by viewModels()
     private val viewModelTripSummaryPassenger                              : TripSummaryPassengerViewModel by viewModels()
     private var token : String                                             = ""
     private var ticketId: String                                           = ""
     private var isLogin : Boolean                                          = false
     lateinit var dialog                                                    : Dialog
+    private lateinit var  loadingDialog                                    : LoadingDialog
     lateinit var adapterTicketById                                         : TicketByIdAdapter
     private var totalPassenger: Int                                        = 0
     private var totalPrice: Int                                            = 0
@@ -65,23 +66,48 @@ class TripSummaryPassengerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                            = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
-        sharedPrefDataBooking                                 = requireContext().getSharedPreferences("sharedBookingData",Context.MODE_PRIVATE)
-        editPrefBooking                                       = sharedPrefDataBooking.edit()
         adapterPassenger                                      = PassengerListAdapter(sharedPref.getInt("totalPassenger",1))
+        loadingDialog                                         = LoadingDialog(requireActivity())
         adapterTicketById                                     = TicketByIdAdapter()
         gson                                                  = Gson()
         totalPassenger                                        = sharedPref.getInt("totalPassenger",1)
         initListener()
         setDialog()
         getArgs()
-        getDataBooking()
-
 
 
         binding.rvPassengerList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPassengerList.adapter = adapterPassenger
         adapterPassenger.submitList(passengerList)
 
+        viewModelProto.dataBooking.observe(viewLifecycleOwner, {
+            Log.d(TAG, "onViewCreated: ${it}")
+            if(!it.totalPrice.equals("")){
+                viewModelTripSummaryPassenger.getTicketById(it.ticketIdDeparture)
+                val typeTokenPassenger = object : TypeToken<List<Passanger>>() {}.type
+                val typeTokenContactDetails = object : TypeToken<List<ContactDetails>>() {}.type
+                var passenger = Gson().fromJson<List<Passanger>>(it.passengerList, typeTokenPassenger)
+                var contactDetails = Gson().fromJson<List<ContactDetails>>(it.contactDetails, typeTokenContactDetails)
+
+                totalPrice = it.totalPrice.toInt()
+                ticketId = it.ticketIdDeparture
+                passengerList.addAll(passenger)
+                contactDetailsList.addAll(contactDetails)
+                adapterPassenger.submitList(passenger)
+
+                binding.tvNameContactDetail.setText(contactDetailsList[0].firstname+" "+contactDetailsList[0].lastname)
+                binding.tvEmailContactDetail.text = contactDetails[0].email
+                binding.tvPhoneNumberContactDetail.text = contactDetails[0].phoneNumber
+                binding.rvTicketTripSummaryPassenger.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
+                binding.shimmerBar.visibility = View.GONE
+                binding.shimmerBarTotalFare.visibility = View.GONE
+                Log.d(TAG, "getDataBooking: ${ticketId}")
+            } else {
+                viewModelTripSummaryPassenger.getTicketById(ticketId)
+            }
+        })
+        
         viewModelProto.dataUser.observe(viewLifecycleOwner,{
             if(it.isLogin){
                 binding.btnAddContactDetailsSummaryPassenger.visibility = View.GONE
@@ -94,7 +120,7 @@ class TripSummaryPassengerFragment : Fragment() {
                 binding.btnAddContactDetailsSummaryPassenger.visibility = View.VISIBLE
             }
         })
-        
+
         viewModelTripSummaryPassenger.dataTicketById.observe(viewLifecycleOwner,{
             Log.d(TAG, "onViewCreated: ${it}")
             if(it!!.data != null){
@@ -107,11 +133,26 @@ class TripSummaryPassengerFragment : Fragment() {
                 binding.shimmerBarTotalFare.visibility = View.GONE
                 totalPrice = it.data!!.price.toString().toInt() * totalPassenger
             } else {
-
+                Log.d(TAG, "onViewCreated: ticketIdDataTicketByID ${ticketId}")
             }
         })
 
-        viewModelTripSummaryPassenger.getTicketById(ticketId)
+        viewModelTripSummaryPassenger.getStatusBooking().observe(viewLifecycleOwner, {
+            if(it != null){
+                when(it.code){
+                    200 -> {
+                        viewModelProto.clearDataBooking()
+                        loadingDialog.isDismiss()
+                        showSnack("Booking Succesfull")
+                    }
+                    else -> {
+                        loadingDialog.isDismiss()
+                        showSnack("an error occurred, please try again")
+                    }
+                }
+            }
+        })
+
 
         adapterPassenger.setOnItemClickListener(object : PassengerListAdapter.OnItemClickListener{
             override fun onItemClick(passenger: Passanger?, position: Int) {
@@ -149,34 +190,10 @@ class TripSummaryPassengerFragment : Fragment() {
                 binding.tvEmailContactDetail.text = email
                 binding.tvPhoneNumberContactDetail.text = phoneNumber
             }
-
         })
 
     }
 
-    private fun getDataBooking() {
-        if(!sharedPrefDataBooking.getString("ticketId","").toString().equals("")){
-            val typeTokenPassenger = object : TypeToken<List<Passanger>>() {}.type
-            val typeTokenContactDetails = object : TypeToken<List<ContactDetails>>() {}.type
-            var passenger = Gson().fromJson<List<Passanger>>(sharedPrefDataBooking.getString("passengerList",""), typeTokenPassenger)
-            var contactDetails = Gson().fromJson<List<ContactDetails>>(sharedPrefDataBooking.getString("contactDetails",""), typeTokenContactDetails)
-
-            totalPrice = sharedPrefDataBooking.getInt("totalPrice",0)
-            ticketId = sharedPrefDataBooking.getString("ticketId","").toString()
-            passengerList.addAll(passenger)
-            contactDetailsList.addAll(contactDetails)
-            adapterPassenger.submitList(passenger)
-
-            binding.tvNameContactDetail.setText(contactDetailsList[0].firstname+" "+contactDetailsList[0].lastname)
-            binding.tvEmailContactDetail.text = contactDetails[0].email
-            binding.tvPhoneNumberContactDetail.text = contactDetails[0].phoneNumber
-            binding.rvTicketTripSummaryPassenger.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
-            binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
-            binding.shimmerBar.visibility = View.GONE
-            binding.shimmerBarTotalFare.visibility = View.GONE
-            Log.d(TAG, "getDataBooking: ${ticketId}")
-        }
-    }
 
     private fun setDialog() {
         dialog = Dialog(requireContext())
@@ -204,27 +221,32 @@ class TripSummaryPassengerFragment : Fragment() {
             btnSavePassengerFragmentATripSummary.setOnClickListener {
                 Log.d(TAG, "initListener: passengerList ${passengerList.size}")
                 if (isLogin){
+                    loadingDialog.startLoading()
                     viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(ticketId.toInt(),null,totalPrice)))
                     for(i in 0 until passengerList.size){
                         Log.d(TAG, "initListener: ${passengerList[i].firstname}")
                     }
                 } else {
-                    var jsonPassengerListToJson : String = gson.toJson(passengerList)
-                    var jsonContactDetailListToJson : String = gson.toJson(contactDetailsList)
-                    editPrefBooking.putString("passengerList",jsonPassengerListToJson)
-                    editPrefBooking.putString("ticketId",ticketId)
-                    editPrefBooking.putString("contactDetails",jsonContactDetailListToJson)
-                    editPrefBooking.putInt("totalPrice",totalPrice)
-                    editPrefBooking.apply()
-                    Log.d(TAG, "initListener: passengerList ${sharedPrefDataBooking.getString("passengerList","")}")
-                    Log.d(TAG, "initListener: passengerList ${sharedPrefDataBooking.getString("contactDetails","")}")
-                    dialog.show()
+                    when{
+                        contactDetailsList.isNullOrEmpty() ->  showSnack("Please Insert Contact Details")
+                        passengerList.isNullOrEmpty() -> showSnack("Please Insert Data Passenger")
+                        else -> {
+                            var jsonPassengerListToJson : String = gson.toJson(passengerList)
+                            var jsonContactDetailListToJson : String = gson.toJson(contactDetailsList)
+                            viewModelProto.submitDataOneWay(ticketId,jsonPassengerListToJson,jsonContactDetailListToJson,totalPrice.toString())
+                            dialog.show()
+                        }
+                    }
                 }
             }
             btnAddContactDetailsSummaryPassenger.setOnClickListener {
                 fragmentContactDetails.show(requireActivity().supportFragmentManager,fragmentContactDetails.tag)
             }
         }
+    }
+
+    fun showSnack(message: String){
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
     private fun getArgs(){

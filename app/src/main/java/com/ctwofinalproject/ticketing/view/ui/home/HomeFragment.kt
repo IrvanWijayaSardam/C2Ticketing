@@ -37,8 +37,6 @@ class HomeFragment : Fragment() {
     lateinit var editPref                                               : SharedPreferences.Editor
     val homeViewModel                                                   : HomeViewModel by viewModels()
     lateinit var token                                                  : String
-    lateinit var sharedPrefDataBooking                                  : SharedPreferences
-    lateinit var editPrefBooking                                         : SharedPreferences.Editor
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,12 +52,7 @@ class HomeFragment : Fragment() {
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         adapterRecentSearch                                 = RecentSearchAdapter()
         editPref                                            = sharedPref.edit()
-        sharedPrefDataBooking                               = requireContext().getSharedPreferences("sharedBookingData",Context.MODE_PRIVATE)
-        editPrefBooking                                     = sharedPrefDataBooking.edit()
 
-        if(!sharedPrefDataBooking.getString("ticketId","").isNullOrEmpty()){
-            Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
-        }
 
         setImageSlider()
         setProfile()
@@ -73,6 +66,13 @@ class HomeFragment : Fragment() {
                 binding.tvUsernameOrLogin.text = it.firstname
             } else {
                 binding.tvUsernameOrLogin.text = ""
+            }
+        })
+
+        viewModelProto.dataBooking.observe(viewLifecycleOwner, {
+            Log.d(TAG, "onViewCreated: ${it}")
+            if(!it.totalPrice.equals("")){
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
             }
         })
 

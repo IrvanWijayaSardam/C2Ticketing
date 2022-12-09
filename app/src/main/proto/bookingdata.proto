@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option java_package = "com.ctwofinalproject.ticketing";
+option java_multiple_files = true;
+
+message BookingDataProto {
+
+  // filter for showing / hiding completed tasks
+  string ticketIdDeparture = 1;
+  string ticketIdReturn = 2;
+  string passengerList = 3;
+  string contactDetails = 4;
+  string totalPrice = 5;
+
+}

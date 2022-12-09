@@ -2,6 +2,7 @@ package com.ctwofinalproject.ticketing.viewmodel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctwofinalproject.ticketing.api.RestServiceMain
@@ -22,6 +23,10 @@ class TripSummaryPassengerViewModel @Inject constructor(var api: RestServiceMain
     init {
         statusSubmitBooking = MutableLiveData()
         dataTicketById      = MutableLiveData()
+    }
+
+    fun getStatusBooking(): LiveData<ResponseBooking?> {
+        return statusSubmitBooking
     }
 
 
