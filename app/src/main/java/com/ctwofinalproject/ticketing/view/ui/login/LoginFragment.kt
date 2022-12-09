@@ -54,8 +54,8 @@ class LoginFragment : Fragment() {
                         ,jwt.getClaim("gender").asString().toString(),jwt.getClaim("email").asString().toString(),jwt.getClaim("phone").asString().toString(),
                         jwt.getClaim("birthdate").asString().toString(),jwt.getClaim("pictures").asString().toString(),token,true))
                 loadingDialog.isDismiss()
-                showSnack("Login Berhasil")
                 goToHome()
+                showSnack("Login Berhasil")
             } else {
                 loadingDialog.isDismiss()
                 showSnack("Username / Password Salah")

@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_tripSummaryPassengerFragment"
+            app:destination="@id/tripSummaryPassengerFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -115,5 +118,11 @@
         <action
             android:id="@+id/action_tripSummaryPassengerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_tripSummaryPassengerFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_tripSummaryPassengerFragment_to_bookingFragment"
+            app:destination="@id/bookingFragment" />
     </fragment>
 </navigation>

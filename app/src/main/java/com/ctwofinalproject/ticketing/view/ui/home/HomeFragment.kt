@@ -69,13 +69,6 @@ class HomeFragment : Fragment() {
             }
         })
 
-        viewModelProto.dataBooking.observe(viewLifecycleOwner, {
-            Log.d(TAG, "onViewCreated: ${it}")
-            if(!it.totalPrice.equals("")){
-                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
-            }
-        })
-
         homeViewModel.getAllRecentSearch().observe(viewLifecycleOwner, {
             if(it != null){
                 adapterRecentSearch.submitList(it)
@@ -99,6 +92,11 @@ class HomeFragment : Fragment() {
 
         })
 
+        viewModelProto.dataBooking.observe(viewLifecycleOwner, {
+            if(!it.totalPrice.equals("")){
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
+            }
+        })
 
     }
 

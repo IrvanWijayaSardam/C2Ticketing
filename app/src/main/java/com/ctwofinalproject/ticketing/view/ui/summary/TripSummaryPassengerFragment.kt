@@ -25,6 +25,7 @@ import com.ctwofinalproject.ticketing.view.adapter.TicketByIdAdapter
 import com.ctwofinalproject.ticketing.view.ui.booking.AddPassengerFragment
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.TripSummaryPassengerViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -74,7 +75,7 @@ class TripSummaryPassengerFragment : Fragment() {
         initListener()
         setDialog()
         getArgs()
-
+        setBottomNav()
 
         binding.rvPassengerList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPassengerList.adapter = adapterPassenger
@@ -82,7 +83,7 @@ class TripSummaryPassengerFragment : Fragment() {
 
         viewModelProto.dataBooking.observe(viewLifecycleOwner, {
             Log.d(TAG, "onViewCreated: ${it}")
-            if(!it.totalPrice.equals("")){
+            if(!it.totalPrice.equals("") && !it.passengerList.isNullOrEmpty()){
                 viewModelTripSummaryPassenger.getTicketById(it.ticketIdDeparture)
                 val typeTokenPassenger = object : TypeToken<List<Passanger>>() {}.type
                 val typeTokenContactDetails = object : TypeToken<List<ContactDetails>>() {}.type
@@ -110,6 +111,7 @@ class TripSummaryPassengerFragment : Fragment() {
         
         viewModelProto.dataUser.observe(viewLifecycleOwner,{
             if(it.isLogin){
+                contactDetailsList.add(ContactDetails(it.firstname.toString(),it.lastname.toString(),it.email.toString(),it.phone.toString()))
                 binding.btnAddContactDetailsSummaryPassenger.visibility = View.GONE
                 binding.tvNameContactDetail.setText(it.firstname+" "+it.lastname)
                 binding.tvEmailContactDetail.setText(it.email)
@@ -141,8 +143,14 @@ class TripSummaryPassengerFragment : Fragment() {
             if(it != null){
                 when(it.code){
                     200 -> {
-                        viewModelProto.clearDataBooking()
                         loadingDialog.isDismiss()
+                        viewModelProto.clearDataBooking()
+                        //Navigation.findNavController(binding.root).popBackStack()
+                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_bookingFragment)
+                        /*
+                        val bottomnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+                        bottomnav.selectedItemId = R.id.bookingFragment
+                         */
                         showSnack("Booking Succesfull")
                     }
                     else -> {
@@ -208,8 +216,29 @@ class TripSummaryPassengerFragment : Fragment() {
         }
 
         btnGoToLogin.setOnClickListener {
-            dialog.dismiss()
-            Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_loginFragment)
+            Log.d(TAG, "initListener: passengerList ${passengerList.size}")
+            if (isLogin){
+                loadingDialog.startLoading()
+                viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(ticketId.toInt(),null,totalPrice)))
+                for(i in 0 until passengerList.size){
+                    Log.d(TAG, "initListener: ${passengerList[i].firstname}")
+                }
+            } else {
+                when{
+                    contactDetailsList.isNullOrEmpty() ->  showSnack("Please Insert Contact Details")
+                    passengerList.isNullOrEmpty() -> showSnack("Please Insert Data Passenger")
+                    else -> {
+                        var jsonPassengerListToJson : String = gson.toJson(passengerList)
+                        var jsonContactDetailListToJson : String = gson.toJson(contactDetailsList)
+                        Log.d(TAG, "setDialog: jsonPassengerListToJson ${jsonPassengerListToJson}")
+                        Log.d(TAG, "setDialog: jsonPassengerListToJson ${jsonContactDetailListToJson}")
+
+                        viewModelProto.submitDataOneWay(ticketId,jsonPassengerListToJson,jsonContactDetailListToJson,totalPrice.toString())
+                        dialog.dismiss()
+                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_loginFragment)
+                    }
+                }
+            }
         }
     }
 
@@ -219,25 +248,24 @@ class TripSummaryPassengerFragment : Fragment() {
                 Navigation.findNavController(binding.root).popBackStack()
             }
             btnSavePassengerFragmentATripSummary.setOnClickListener {
-                Log.d(TAG, "initListener: passengerList ${passengerList.size}")
-                if (isLogin){
-                    loadingDialog.startLoading()
-                    viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(ticketId.toInt(),null,totalPrice)))
-                    for(i in 0 until passengerList.size){
-                        Log.d(TAG, "initListener: ${passengerList[i].firstname}")
-                    }
-                } else {
-                    when{
-                        contactDetailsList.isNullOrEmpty() ->  showSnack("Please Insert Contact Details")
-                        passengerList.isNullOrEmpty() -> showSnack("Please Insert Data Passenger")
-                        else -> {
-                            var jsonPassengerListToJson : String = gson.toJson(passengerList)
-                            var jsonContactDetailListToJson : String = gson.toJson(contactDetailsList)
-                            viewModelProto.submitDataOneWay(ticketId,jsonPassengerListToJson,jsonContactDetailListToJson,totalPrice.toString())
+                when {
+                    contactDetailsList.isNullOrEmpty() ->  showSnack("Please Insert Contact Details")
+                    passengerList.isNullOrEmpty() -> showSnack("Please Insert Data Passenger")
+                    else -> {
+                        if(isLogin){
+                            when{
+                                passengerList.isNullOrEmpty() -> showSnack("Please Insert Data Passenger")
+                                else -> {
+                                    loadingDialog.startLoading()
+                                    viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(ticketId.toInt(),null,totalPrice)))
+                                }
+                            }
+                        } else {
                             dialog.show()
                         }
                     }
                 }
+
             }
             btnAddContactDetailsSummaryPassenger.setOnClickListener {
                 fragmentContactDetails.show(requireActivity().supportFragmentManager,fragmentContactDetails.tag)
@@ -251,5 +279,10 @@ class TripSummaryPassengerFragment : Fragment() {
 
     private fun getArgs(){
         ticketId = arguments?.getString("ticketId","").toString()
+    }
+
+    private fun setBottomNav(){
+        val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        navBar?.visibility                             = View.GONE
     }
 }

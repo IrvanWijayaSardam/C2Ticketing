@@ -2,13 +2,16 @@ package com.ctwofinalproject.ticketing.viewmodel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.api.RestServiceMain
 import com.ctwofinalproject.ticketing.data.TicketData
 import com.ctwofinalproject.ticketing.model.ResponseBooking
 import com.ctwofinalproject.ticketing.model.ResponseGetTicketById
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
