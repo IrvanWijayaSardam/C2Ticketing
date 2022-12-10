@@ -23,8 +23,8 @@ class ProtoViewModel(application: Application) :AndroidViewModel(application) {
         repo.deleteData()
     }
 
-    fun submitDataOneWay(ticketIdDeparture: String, passengerList: String, contactDetails: String, totalPrice: String) = viewModelScope.launch {
-        repoBooking.saveOneWay(ticketIdDeparture, passengerList, contactDetails, totalPrice)
+    fun submitDataOneWay(ticketIdDeparture: String, passengerList: String,  totalPrice: String) = viewModelScope.launch {
+        repoBooking.saveOneWay(ticketIdDeparture, passengerList, totalPrice)
     }
 
     fun submitTicketIdDeparture(ticketIdDeparture: String) = viewModelScope.launch {
@@ -35,8 +35,8 @@ class ProtoViewModel(application: Application) :AndroidViewModel(application) {
         repoBooking.setTicketIdReturn(ticketIdReturn)
     }
 
-    fun submitDataTwoWay(ticketIdDeparture: String,ticketIdReturn: String, passengerList: String, contactDetails: String, totalPrice: String) = viewModelScope.launch {
-        repoBooking.saveTwoWay(ticketIdDeparture, ticketIdReturn, passengerList, contactDetails, totalPrice)
+    fun submitDataTwoWay(ticketIdDeparture: String,ticketIdReturn: String, passengerList: String, totalPrice: String) = viewModelScope.launch {
+        repoBooking.saveTwoWay(ticketIdDeparture, ticketIdReturn, passengerList, totalPrice)
     }
 
     fun clearDataBooking() = viewModelScope.launch {

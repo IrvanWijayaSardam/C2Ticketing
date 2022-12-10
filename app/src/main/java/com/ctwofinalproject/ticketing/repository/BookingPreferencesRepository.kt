@@ -18,7 +18,7 @@ private val Context.bookingPreferencesStore: DataStore<BookingDataProto> by data
 
 class BookingPreferencesRepository(private val context: Context){
 
-    suspend fun saveOneWay(ticketIdDeparture: String, passengerList: String, contactDetails: String, totalPrice: String){
+    suspend fun saveOneWay(ticketIdDeparture: String, passengerList: String, totalPrice: String){
         context.bookingPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setTicketIdDeparture(ticketIdDeparture).build()
         }
@@ -26,14 +26,11 @@ class BookingPreferencesRepository(private val context: Context){
             preferences.toBuilder().setPassengerList(passengerList).build()
         }
         context.bookingPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setContactDetails(contactDetails).build()
-        }
-        context.bookingPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setTotalPrice(totalPrice).build()
         }
     }
 
-    suspend fun saveTwoWay(ticketIdDeparture: String,ticketIdReturn: String, passengerList: String, contactDetails: String, totalPrice: String){
+    suspend fun saveTwoWay(ticketIdDeparture: String,ticketIdReturn: String, passengerList: String, totalPrice: String){
         context.bookingPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setTicketIdDeparture(ticketIdDeparture).build()
         }
@@ -42,9 +39,6 @@ class BookingPreferencesRepository(private val context: Context){
         }
         context.bookingPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setPassengerList(passengerList).build()
-        }
-        context.bookingPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setContactDetails(contactDetails).build()
         }
         context.bookingPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setTotalPrice(totalPrice).build()
@@ -72,9 +66,6 @@ class BookingPreferencesRepository(private val context: Context){
         }
         context.bookingPreferencesStore.updateData { preferences ->
             preferences.toBuilder().clearPassengerList().build()
-        }
-        context.bookingPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().clearContactDetails().build()
         }
         context.bookingPreferencesStore.updateData { preferences ->
             preferences.toBuilder().clearTotalPrice().build()

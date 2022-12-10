@@ -205,12 +205,14 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cvContactDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 app:cardCornerRadius="10dp"
                 app:cardElevation="7dp"
+                android:visibility="gone"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -260,13 +262,6 @@
                         />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-            <Button
-                android:id="@+id/btnAddContactDetailsSummaryPassenger"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Add Contact Details"
-                android:textAllCaps="false"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
