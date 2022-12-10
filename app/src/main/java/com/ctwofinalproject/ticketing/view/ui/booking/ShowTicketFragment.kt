@@ -19,6 +19,7 @@ import com.ctwofinalproject.ticketing.databinding.FragmentAirportBinding
 import com.ctwofinalproject.ticketing.databinding.FragmentShowTicketBinding
 import com.ctwofinalproject.ticketing.model.DataItemFlight
 import com.ctwofinalproject.ticketing.view.adapter.ShowTicketAdapter
+import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ShowTicketViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,12 @@ class ShowTicketFragment : Fragment() {
     lateinit var editPref                                                     : SharedPreferences.Editor
     lateinit var adapterShowTicket                                            : ShowTicketAdapter
     lateinit var dialog                                                       : Dialog
+    private val viewModelProto                                                : ProtoViewModel by viewModels()
+    private var ticketIdDeparture                                             = ""
+    private var ticketIdReturn                                                = ""
+    private var airportDeparture                                              = ""
+    private var airportReturn                                                 = ""
+    private var dateDeparture                                                 = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,36 +57,82 @@ class ShowTicketFragment : Fragment() {
         setBottomNav()
         setDialog()
 
-        Log.d(TAG, "onViewCreated: dateForAPI${sharedPref.getString("departureDateForApi","2022-09-30")}")
-        
-        searchFlight(sharedPref.getString("airportCodeFrom","YIA").toString(),sharedPref.getString("airportCodeTo","YIA").toString(),sharedPref.getString("departureDateForApi","2022-09-30").toString())
 
-        viewModelShowticket.liveDataFlight.observe(viewLifecycleOwner, {
-            if(it != null){
+        viewModelProto.dataBooking.observe(viewLifecycleOwner){
+            if(!sharedPref.getBoolean("isRoundTrip",false)){
+                if(it.ticketIdDeparture.toString().isNullOrEmpty()) {
+                    Log.d(TAG, "onViewCreated: roundtrip False , ticketIdDepartureIsNullOrEmpty")
+                    airportDeparture = sharedPref.getString("airportCodeFrom","YIA").toString()
+                    airportReturn    = sharedPref.getString("airportCodeTo","YIA").toString()
+                    dateDeparture    = sharedPref.getString("departureDate","2022-09-30").toString()
+
+                    binding.tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
+                    binding.tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
+                    binding.tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("departureDate","2022-09-30").toString()
+                    binding.tvCountTicketFragmentShowTicket.text = sharedPref.getInt("totalPassenger",1).toString()
+                    searchFlight(sharedPref.getString("airportCodeFrom","YIA").toString(),sharedPref.getString("airportCodeTo","YIA").toString(),sharedPref.getString("departureDateForApi","2022-09-30").toString())
+                }
+            } else {
+                if(it.ticketIdDeparture.toString().isNullOrEmpty()){
+                    Log.d(TAG, "onViewCreated: roundtrip true , ticketIdDepartureIsNullOrEmpty")
+                    binding.tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
+                    binding.tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
+                    binding.tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("departureDate","2022-09-30").toString()
+                    binding.tvCountTicketFragmentShowTicket.text = sharedPref.getInt("totalPassenger",1).toString()
+                    searchFlight(sharedPref.getString("airportCodeFrom","YIA").toString(),sharedPref.getString("airportCodeTo","YIA").toString(),sharedPref.getString("departureDateForApi","2022-09-30").toString())
+                } else {
+                    Log.d(TAG, "onViewCreated: roundtrip true , else")
+                    binding.tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
+                    binding.tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
+                    binding.tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("returnDate","2022-09-30").toString()
+                    binding.tvCountTicketFragmentShowTicket.text = sharedPref.getInt("totalPassenger",1).toString()
+                    binding.tvDepartureFlightFragmentShowTicket.text = "Return Flight"
+                    searchFlight(sharedPref.getString("airportCodeTo","YIA").toString(),sharedPref.getString("airportCodeFrom","YIA").toString(),sharedPref.getString("returnDateForApi","2022-09-30").toString())
+                }
+            }
+        }
+
+        viewModelShowticket.liveDataFlight.observe(viewLifecycleOwner) {
+            if (it != null) {
                 adapterShowTicket.submitList(it.data!!)
                 binding.shimmerBar.visibility = View.GONE
-                binding.rvShowTicketFragmentShowTicket.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                binding.rvShowTicketFragmentShowTicket.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvShowTicketFragmentShowTicket.adapter = adapterShowTicket
             } else {
+                binding.rvShowTicketFragmentShowTicket.adapter = null
                 binding.shimmerBar.visibility = View.GONE
                 dialog.show()
             }
-        })
+        }
 
         adapterShowTicket.setOnItemClickListener(object : ShowTicketAdapter.onItemClickListener{
             override fun onItemClick(dataItemFlight: DataItemFlight) {
-                val bund = Bundle()
-                bund.putString("ticketId",dataItemFlight.id.toString())
-                Navigation.findNavController(requireView()).navigate(R.id.action_showTicketFragment_to_tripSummaryPassengerFragment,bund)
+                if(!sharedPref.getBoolean("isRoundTrip",false)){
+                    viewModelProto.submitTicketIdDeparture(dataItemFlight.id.toString())
+                    ticketIdDeparture = dataItemFlight.id.toString()
+                    /*
+                    editPref.putString("ticketIdDeparture",dataItemFlight.id.toString())
+                    */
+                    Navigation.findNavController(requireView()).navigate(R.id.action_showTicketFragment_to_tripSummaryPassengerFragment)
+                } else {
+                    if (ticketIdDeparture.isNullOrEmpty()){
+                        viewModelProto.submitTicketIdDeparture(dataItemFlight.id.toString())
+                        ticketIdDeparture = dataItemFlight.id.toString()
+                    } else {
+                        viewModelProto.submitTicketIdReturn(dataItemFlight.id.toString())
+                        ticketIdReturn = dataItemFlight.id.toString()
+                    }
+                }
             }
         })
     }
 
     private fun initListener() {
         binding?.run {
-            tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
-            tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
-            tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("departureDate","2022-09-30").toString()
+            tvFromAirportCodeFragmentShowTicket.text = airportDeparture
+            tvToAirportCodeFragmentShowTicket.text = airportReturn
+            tvDayAndDateTicketFragmentShowTicket.text = dateDeparture
             tvCountTicketFragmentShowTicket.text = sharedPref.getInt("totalPassenger",1).toString()
 
             ivGotoBackFromFragmentShowTicket.setOnClickListener {
@@ -115,8 +168,4 @@ class ShowTicketFragment : Fragment() {
             Navigation.findNavController(binding.root).popBackStack()
         }
     }
-
-
-
-
 }

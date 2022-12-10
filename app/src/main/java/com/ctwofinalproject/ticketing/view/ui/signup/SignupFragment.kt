@@ -63,23 +63,23 @@ class SignupFragment : Fragment() {
         initListener()
 
 
-        viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner,{
+        viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: Observer Provinces : ${it}")
-            for(i in 0 until it!!.size){
+            for (i in 0 until it!!.size) {
                 itemNumber.add(it.get(i).id!!.toInt())
                 itemsProvince.add(it.get(i).name.toString())
             }
-        })
+        }
 
-        viewModelProvinces.getLiveDataCity().observe(viewLifecycleOwner,{
+        viewModelProvinces.getLiveDataCity().observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: Observer City : ${it}")
-            for(i in 0 until it!!.size){
+            for (i in 0 until it!!.size) {
                 itemsCity.add(it.get(i).name.toString())
             }
-        })
+        }
 
-        viewModelRegist.getStatusRegist().observe(viewLifecycleOwner, {
-            if(it != null){
+        viewModelRegist.getStatusRegist().observe(viewLifecycleOwner) {
+            if (it != null) {
                 loadingDialog.isDismiss()
                 showSnack("Registrasi Berhasil")
                 goToLogin()
@@ -87,7 +87,7 @@ class SignupFragment : Fragment() {
                 loadingDialog.isDismiss()
                 showSnack("Registrasi Gagal")
             }
-        })
+        }
 
     }
 

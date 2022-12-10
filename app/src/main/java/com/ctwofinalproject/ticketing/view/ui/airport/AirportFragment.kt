@@ -59,41 +59,44 @@ class AirportFragment : Fragment() {
         initListener()
         setBottomNav()
 
-        viewModelProto.dataUser.observe(viewLifecycleOwner, {
+        viewModelProto.dataUser.observe(viewLifecycleOwner) {
             getAllAirport()
-            if(it.isLogin){
+            if (it.isLogin) {
                 token = it.token
             }
-        })
+        }
 
-        viewModelAirport.getAllAirport().observe(viewLifecycleOwner, {
-            if(it != null){
+        viewModelAirport.getAllAirport().observe(viewLifecycleOwner) {
+            if (it != null) {
                 adapterRecentAirport.submitList(it)
-                binding.rvRecentAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                binding.rvRecentAirport.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvRecentAirport.adapter = adapterRecentAirport
             } else {
             }
-        })
+        }
 
-        viewModelAirport.getDataAirport().observe(viewLifecycleOwner, {
+        viewModelAirport.getDataAirport().observe(viewLifecycleOwner) {
             Log.d(TAG, "getAllAirport: $it")
-            if(it != null){
+            if (it != null) {
                 adapterAirport.submitList(it.data)
                 binding.shimmerBar.visibility = View.GONE
-                binding.rvAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                binding.rvAirport.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvAirport.adapter = adapterAirport
             }
-        })
+        }
 
-        viewModelAirport.getDataAirportSearch().observe(viewLifecycleOwner, {
+        viewModelAirport.getDataAirportSearch().observe(viewLifecycleOwner) {
             Log.d(TAG, "getAllAirport: $it")
-            if(it != null){
+            if (it != null) {
                 adapterAirport.submitList(it.data)
                 binding.shimmerBar.visibility = View.GONE
-                binding.rvAirport.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                binding.rvAirport.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvAirport.adapter = adapterAirport
             }
-        })
+        }
 
 
         adapterAirport.setOnItemClickListener(object : AirportAdapter.onItemClickListener{

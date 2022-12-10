@@ -74,6 +74,8 @@ class BookingFragment : Fragment() {
 
             cvOneWaySearchFlightFragmentBooking.setOnClickListener {
 //            switch to framgent SelectOneWayFragment
+                editPref.putBoolean("isRoundTrip",false)
+                editPref.apply()
                 cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
                 cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.secondary_font_color))
                 val selectOneWayFragment = SelectOneWayFragment()
@@ -84,6 +86,8 @@ class BookingFragment : Fragment() {
                 transaction?.commit()
             }
             cvRoundTripSearchFlightFragmentBooking.setOnClickListener {
+                editPref.putBoolean("isRoundTrip",true)
+                editPref.apply()
                 cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
                 cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.secondary_font_color))
                 //            switch to framgent SelectRoundTripFragment

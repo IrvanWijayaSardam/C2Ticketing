@@ -26,6 +26,15 @@ class ProtoViewModel(application: Application) :AndroidViewModel(application) {
     fun submitDataOneWay(ticketIdDeparture: String, passengerList: String, contactDetails: String, totalPrice: String) = viewModelScope.launch {
         repoBooking.saveOneWay(ticketIdDeparture, passengerList, contactDetails, totalPrice)
     }
+
+    fun submitTicketIdDeparture(ticketIdDeparture: String) = viewModelScope.launch {
+        repoBooking.setTicketIdDeparture(ticketIdDeparture)
+    }
+
+    fun submitTicketIdReturn(ticketIdReturn: String) = viewModelScope.launch {
+        repoBooking.setTicketIdDeparture(ticketIdReturn)
+    }
+
     fun submitDataTwoWay(ticketIdDeparture: String,ticketIdReturn: String, passengerList: String, contactDetails: String, totalPrice: String) = viewModelScope.launch {
         repoBooking.saveTwoWay(ticketIdDeparture, ticketIdReturn, passengerList, contactDetails, totalPrice)
     }

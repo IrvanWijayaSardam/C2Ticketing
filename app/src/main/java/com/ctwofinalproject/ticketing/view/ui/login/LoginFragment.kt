@@ -44,15 +44,24 @@ class LoginFragment : Fragment() {
         token                                                       = ""
         initListener()
 
-        viewModelLogin.getToken().observe(viewLifecycleOwner, {
-            if(it != null) {
+        viewModelLogin.getToken().observe(viewLifecycleOwner) {
+            if (it != null) {
                 Log.d(TAG, "onViewCreated: ${it.accessToken}")
                 token = it.accessToken.toString()
                 val jwt = JWT(token)
                 viewModelProto.editData(
-                    UserProto(jwt.getClaim("firstname").asString().toString(),jwt.getClaim("lastname").asString().toString()
-                        ,jwt.getClaim("gender").asString().toString(),jwt.getClaim("email").asString().toString(),jwt.getClaim("phone").asString().toString(),
-                        jwt.getClaim("birthdate").asString().toString(),jwt.getClaim("pictures").asString().toString(),token,true))
+                    UserProto(
+                        jwt.getClaim("firstname").asString().toString(),
+                        jwt.getClaim("lastname").asString().toString(),
+                        jwt.getClaim("gender").asString().toString(),
+                        jwt.getClaim("email").asString().toString(),
+                        jwt.getClaim("phone").asString().toString(),
+                        jwt.getClaim("birthdate").asString().toString(),
+                        jwt.getClaim("pictures").asString().toString(),
+                        token,
+                        true
+                    )
+                )
                 loadingDialog.isDismiss()
                 goToHome()
                 showSnack("Login Berhasil")
@@ -60,7 +69,7 @@ class LoginFragment : Fragment() {
                 loadingDialog.isDismiss()
                 showSnack("Username / Password Salah")
             }
-        })
+        }
 
     }
     private fun initListener(){

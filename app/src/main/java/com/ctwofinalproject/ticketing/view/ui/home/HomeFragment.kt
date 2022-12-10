@@ -59,27 +59,28 @@ class HomeFragment : Fragment() {
         setBottomNav()
         initListener()
 
-        viewModelProto.dataUser.observe(viewLifecycleOwner, {
+        viewModelProto.dataUser.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: ${it}")
             token = it.token
-            if(it.isLogin){
+            if (it.isLogin) {
                 binding.tvUsernameOrLogin.text = it.firstname
             } else {
                 binding.tvUsernameOrLogin.text = ""
             }
-        })
+        }
 
-        homeViewModel.getAllRecentSearch().observe(viewLifecycleOwner, {
-            if(it != null){
+        homeViewModel.getAllRecentSearch().observe(viewLifecycleOwner) {
+            if (it != null) {
                 adapterRecentSearch.submitList(it)
-                binding.rvRecentSearchHomeFragment.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+                binding.rvRecentSearchHomeFragment.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 binding.rvRecentSearchHomeFragment.adapter = adapterRecentSearch
             } else {
                 binding.tvRecentSearch.visibility = View.GONE
                 binding.tvClearAllRecent.visibility = View.GONE
                 binding.rvRecentSearchHomeFragment.visibility = View.GONE
             }
-        })
+        }
 
         adapterRecentSearch.setOnItemClickListener(object :RecentSearchAdapter.OnItemClickListener{
             override fun onItemClick(recentSearch: RecentSearch) {
@@ -92,11 +93,12 @@ class HomeFragment : Fragment() {
 
         })
 
-        viewModelProto.dataBooking.observe(viewLifecycleOwner, {
-            if(!it.totalPrice.equals("")){
-                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
+        viewModelProto.dataBooking.observe(viewLifecycleOwner) {
+            if (!it.totalPrice.equals("")) {
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
             }
-        })
+        }
 
     }
 

@@ -34,13 +34,13 @@ class SplashFragment : Fragment() {
         viewModelProto                                          = ViewModelProvider(this).get(ProtoViewModel::class.java)
         setBottomNav()
 
-        viewModelProto.dataUser.observe(viewLifecycleOwner, {
-            if (it.isLogin){
+        viewModelProto.dataUser.observe(viewLifecycleOwner) {
+            if (it.isLogin) {
                 goToLogin()
             } else {
                 goToLogin()
             }
-        })
+        }
     }
 
     private fun initListener(){

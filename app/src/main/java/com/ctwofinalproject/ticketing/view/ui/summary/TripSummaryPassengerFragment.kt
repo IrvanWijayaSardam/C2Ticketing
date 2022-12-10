@@ -48,6 +48,7 @@ class TripSummaryPassengerFragment : Fragment() {
     private val viewModelTripSummaryPassenger                              : TripSummaryPassengerViewModel by viewModels()
     private var token : String                                             = ""
     private var ticketId: String                                           = ""
+    private var ticketIdRetur: String                                      = ""
     private var isLogin : Boolean                                          = false
     lateinit var dialog                                                    : Dialog
     private lateinit var  loadingDialog                                    : LoadingDialog
@@ -74,21 +75,25 @@ class TripSummaryPassengerFragment : Fragment() {
         totalPassenger                                        = sharedPref.getInt("totalPassenger",1)
         initListener()
         setDialog()
-        getArgs()
         setBottomNav()
 
         binding.rvPassengerList.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         binding.rvPassengerList.adapter = adapterPassenger
         adapterPassenger.submitList(passengerList)
 
-        viewModelProto.dataBooking.observe(viewLifecycleOwner, {
+
+        viewModelProto.dataBooking.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: ${it}")
-            if(!it.totalPrice.equals("") && !it.passengerList.isNullOrEmpty()){
+            if (!it.totalPrice.equals("") && !it.passengerList.isNullOrEmpty()) {
                 viewModelTripSummaryPassenger.getTicketById(it.ticketIdDeparture)
                 val typeTokenPassenger = object : TypeToken<List<Passanger>>() {}.type
                 val typeTokenContactDetails = object : TypeToken<List<ContactDetails>>() {}.type
-                var passenger = Gson().fromJson<List<Passanger>>(it.passengerList, typeTokenPassenger)
-                var contactDetails = Gson().fromJson<List<ContactDetails>>(it.contactDetails, typeTokenContactDetails)
+                var passenger =
+                    Gson().fromJson<List<Passanger>>(it.passengerList, typeTokenPassenger)
+                var contactDetails = Gson().fromJson<List<ContactDetails>>(
+                    it.contactDetails,
+                    typeTokenContactDetails
+                )
 
                 totalPrice = it.totalPrice.toInt()
                 ticketId = it.ticketIdDeparture
@@ -96,24 +101,33 @@ class TripSummaryPassengerFragment : Fragment() {
                 contactDetailsList.addAll(contactDetails)
                 adapterPassenger.submitList(passenger)
 
-                binding.tvNameContactDetail.setText(contactDetailsList[0].firstname+" "+contactDetailsList[0].lastname)
+                binding.tvNameContactDetail.setText(contactDetailsList[0].firstname + " " + contactDetailsList[0].lastname)
                 binding.tvEmailContactDetail.text = contactDetails[0].email
                 binding.tvPhoneNumberContactDetail.text = contactDetails[0].phoneNumber
-                binding.rvTicketTripSummaryPassenger.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                binding.rvTicketTripSummaryPassenger.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
                 binding.shimmerBar.visibility = View.GONE
                 binding.shimmerBarTotalFare.visibility = View.GONE
                 Log.d(TAG, "getDataBooking: ${ticketId}")
             } else {
+                ticketId = it.ticketIdDeparture
                 viewModelTripSummaryPassenger.getTicketById(ticketId)
             }
-        })
-        
-        viewModelProto.dataUser.observe(viewLifecycleOwner,{
-            if(it.isLogin){
-                contactDetailsList.add(ContactDetails(it.firstname.toString(),it.lastname.toString(),it.email.toString(),it.phone.toString()))
+        }
+
+        viewModelProto.dataUser.observe(viewLifecycleOwner) {
+            if (it.isLogin) {
+                contactDetailsList.add(
+                    ContactDetails(
+                        it.firstname.toString(),
+                        it.lastname.toString(),
+                        it.email.toString(),
+                        it.phone.toString()
+                    )
+                )
                 binding.btnAddContactDetailsSummaryPassenger.visibility = View.GONE
-                binding.tvNameContactDetail.setText(it.firstname+" "+it.lastname)
+                binding.tvNameContactDetail.setText(it.firstname + " " + it.lastname)
                 binding.tvEmailContactDetail.setText(it.email)
                 binding.tvPhoneNumberContactDetail.setText(it.phone)
                 token = it.token.toString()
@@ -121,36 +135,37 @@ class TripSummaryPassengerFragment : Fragment() {
             } else {
                 binding.btnAddContactDetailsSummaryPassenger.visibility = View.VISIBLE
             }
-        })
+        }
 
-        viewModelTripSummaryPassenger.dataTicketById.observe(viewLifecycleOwner,{
+        viewModelTripSummaryPassenger.dataTicketById.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: ${it}")
-            if(it!!.data != null){
+            if (it!!.data != null) {
                 ticketList.add(it!!.data!!)
                 adapterTicketById.submitList(ticketList)
-                binding.rvTicketTripSummaryPassenger.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+                binding.rvTicketTripSummaryPassenger.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
-                binding.tvTotalFareFragmentTripSummaryPassenger.setText("IDR "+(DecimalSeparator.formatDecimalSeperators((it.data!!.price.toString().toInt() * totalPassenger).toString())))
+                binding.tvTotalFareFragmentTripSummaryPassenger.setText(
+                    "IDR " + (DecimalSeparator.formatDecimalSeperators(
+                        (it.data!!.price.toString().toInt() * totalPassenger).toString()
+                    ))
+                )
                 binding.shimmerBar.visibility = View.GONE
                 binding.shimmerBarTotalFare.visibility = View.GONE
                 totalPrice = it.data!!.price.toString().toInt() * totalPassenger
             } else {
                 Log.d(TAG, "onViewCreated: ticketIdDataTicketByID ${ticketId}")
             }
-        })
+        }
 
-        viewModelTripSummaryPassenger.getStatusBooking().observe(viewLifecycleOwner, {
-            if(it != null){
-                when(it.code){
+        viewModelTripSummaryPassenger.getStatusBooking().observe(viewLifecycleOwner) {
+            if (it != null) {
+                when (it.code) {
                     200 -> {
                         loadingDialog.isDismiss()
                         viewModelProto.clearDataBooking()
-                        //Navigation.findNavController(binding.root).popBackStack()
-                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_bookingFragment)
-                        /*
-                        val bottomnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-                        bottomnav.selectedItemId = R.id.bookingFragment
-                         */
+                        Navigation.findNavController(requireView())
+                            .navigate(R.id.action_tripSummaryPassengerFragment_to_bookingFragment)
                         showSnack("Booking Succesfull")
                     }
                     else -> {
@@ -159,7 +174,7 @@ class TripSummaryPassengerFragment : Fragment() {
                     }
                 }
             }
-        })
+        }
 
 
         adapterPassenger.setOnItemClickListener(object : PassengerListAdapter.OnItemClickListener{
@@ -275,10 +290,6 @@ class TripSummaryPassengerFragment : Fragment() {
 
     fun showSnack(message: String){
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
-    }
-
-    private fun getArgs(){
-        ticketId = arguments?.getString("ticketId","").toString()
     }
 
     private fun setBottomNav(){
