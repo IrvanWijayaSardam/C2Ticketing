@@ -95,6 +95,28 @@
                     </ScrollView>
                 </com.facebook.shimmer.ShimmerFrameLayout>
             </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvTicketDeparture"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ticket Departure"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/primary_blue_1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -112,6 +134,61 @@
                     />
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmerBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                            <include layout="@layout/item_ticket_trip_summary_shimmer"/>
+                        </LinearLayout>
+                    </ScrollView>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvTicketReturn"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ticket Return"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/primary_blue_1"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvTicketReturnTripSummaryPassenger"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="20dp"
+                app:cardElevation="7dp"
+                app:cardCornerRadius="10dp"
+                >
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvTicketReturnTripSummaryPassenger"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerBarReturn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <ScrollView
@@ -183,17 +260,6 @@
                         />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-
-<!--            <androidx.recyclerview.widget.RecyclerView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginStart="20dp"-->
-<!--                android:layout_marginEnd="20dp"-->
-<!--                tools:itemCount="2"-->
-<!--                tools:listitem="@layout/item_list_passenger"/>-->
-<!--            -->
             <Button
                 android:id="@+id/btnAddContactDetailsSummaryPassenger"
                 android:layout_width="wrap_content"

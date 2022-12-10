@@ -20,12 +20,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TripSummaryPassengerViewModel @Inject constructor(var api: RestServiceMain): ViewModel() {
-    var statusSubmitBooking = MutableLiveData<ResponseBooking?>()
-    var dataTicketById      = MutableLiveData<ResponseGetTicketById?>()
+    var statusSubmitBooking       = MutableLiveData<ResponseBooking?>()
+    var dataTicketById            = MutableLiveData<ResponseGetTicketById?>()
+    var dataTicketReturnById      = MutableLiveData<ResponseGetTicketById?>()
+
 
     init {
-        statusSubmitBooking = MutableLiveData()
-        dataTicketById      = MutableLiveData()
+        statusSubmitBooking     = MutableLiveData()
+        dataTicketById          = MutableLiveData()
+        dataTicketReturnById    = MutableLiveData()
     }
 
     fun getStatusBooking(): LiveData<ResponseBooking?> {
@@ -69,6 +72,28 @@ class TripSummaryPassengerViewModel @Inject constructor(var api: RestServiceMain
             }
 
             override fun onFailure(call: Call<ResponseGetTicketById>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+
+        })
+    }
+
+    fun getTicketReturnById(ticketNumber: String){
+        val client = api.getTicketById(ticketNumber)
+        client.enqueue(object : Callback<ResponseGetTicketById>{
+            override fun onResponse(
+                call: Call<ResponseGetTicketById>,
+                response: Response<ResponseGetTicketById>
+            ) {
+                if(response.isSuccessful){
+                    dataTicketReturnById.postValue(response.body())
+                } else {
+                    dataTicketReturnById.value = null
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseGetTicketById>, t: Throwable) {
+                dataTicketReturnById.value = null
                 Log.d(TAG, "onFailure: ${t.message}")
             }
 

@@ -57,15 +57,23 @@ class ShowTicketFragment : Fragment() {
         setBottomNav()
         setDialog()
 
+        Log.d(TAG, "onViewCreated: masuk show ticket fragment")
+        airportDeparture = sharedPref.getString("airportCodeFrom","YIA").toString()
+        airportReturn    = sharedPref.getString("airportCodeTo","YIA").toString()
+        dateDeparture    = sharedPref.getString("departureDate","2022-09-30").toString()
 
         viewModelProto.dataBooking.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: dataBooking ${it}")
             if(!sharedPref.getBoolean("isRoundTrip",false)){
                 if(it.ticketIdDeparture.toString().isNullOrEmpty()) {
                     Log.d(TAG, "onViewCreated: roundtrip False , ticketIdDepartureIsNullOrEmpty")
-                    airportDeparture = sharedPref.getString("airportCodeFrom","YIA").toString()
-                    airportReturn    = sharedPref.getString("airportCodeTo","YIA").toString()
-                    dateDeparture    = sharedPref.getString("departureDate","2022-09-30").toString()
-
+                    binding.tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
+                    binding.tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
+                    binding.tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("departureDate","2022-09-30").toString()
+                    binding.tvCountTicketFragmentShowTicket.text = sharedPref.getInt("totalPassenger",1).toString()
+                    searchFlight(sharedPref.getString("airportCodeFrom","YIA").toString(),sharedPref.getString("airportCodeTo","YIA").toString(),sharedPref.getString("departureDateForApi","2022-09-30").toString())
+                } else {
+                    Log.d(TAG, "onViewCreated: masukElse isnullorempty")
                     binding.tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
                     binding.tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
                     binding.tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("departureDate","2022-09-30").toString()
@@ -84,7 +92,7 @@ class ShowTicketFragment : Fragment() {
                     Log.d(TAG, "onViewCreated: roundtrip true , else")
                     binding.tvFromAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeTo","YIA").toString()
                     binding.tvToAirportCodeFragmentShowTicket.text = sharedPref.getString("airportCodeFrom","YIA").toString()
-                    binding.tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("returnDate","2022-09-30").toString()
+                    binding.tvDayAndDateTicketFragmentShowTicket.text = sharedPref.getString("returnDateForApi","2022-09-30").toString()
                     binding.tvCountTicketFragmentShowTicket.text = sharedPref.getInt("totalPassenger",1).toString()
                     binding.tvDepartureFlightFragmentShowTicket.text = "Return Flight"
                     searchFlight(sharedPref.getString("airportCodeTo","YIA").toString(),sharedPref.getString("airportCodeFrom","YIA").toString(),sharedPref.getString("returnDateForApi","2022-09-30").toString())
@@ -111,17 +119,16 @@ class ShowTicketFragment : Fragment() {
                 if(!sharedPref.getBoolean("isRoundTrip",false)){
                     viewModelProto.submitTicketIdDeparture(dataItemFlight.id.toString())
                     ticketIdDeparture = dataItemFlight.id.toString()
-                    /*
-                    editPref.putString("ticketIdDeparture",dataItemFlight.id.toString())
-                    */
-                    Navigation.findNavController(requireView()).navigate(R.id.action_showTicketFragment_to_tripSummaryPassengerFragment)
+                    gotoTripSummaryPasssenger()
                 } else {
                     if (ticketIdDeparture.isNullOrEmpty()){
                         viewModelProto.submitTicketIdDeparture(dataItemFlight.id.toString())
                         ticketIdDeparture = dataItemFlight.id.toString()
+
                     } else {
                         viewModelProto.submitTicketIdReturn(dataItemFlight.id.toString())
                         ticketIdReturn = dataItemFlight.id.toString()
+                        gotoTripSummaryPasssenger()
                     }
                 }
             }
@@ -167,5 +174,9 @@ class ShowTicketFragment : Fragment() {
             dialog.dismiss()
             Navigation.findNavController(binding.root).popBackStack()
         }
+    }
+
+    private fun gotoTripSummaryPasssenger(){
+        Navigation.findNavController(requireView()).navigate(R.id.action_showTicketFragment_to_tripSummaryPassengerFragment)
     }
 }

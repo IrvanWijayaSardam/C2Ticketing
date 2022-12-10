@@ -59,7 +59,7 @@ class BookingPreferencesRepository(private val context: Context){
 
     suspend fun setTicketIdReturn(ticketIdReturn: String){
         context.bookingPreferencesStore.updateData { preferences ->
-            preferences.toBuilder().setTicketIdDeparture(ticketIdReturn).build()
+            preferences.toBuilder().setTicketIdReturn(ticketIdReturn).build()
         }
     }
 

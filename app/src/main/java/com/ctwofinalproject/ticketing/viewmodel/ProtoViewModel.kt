@@ -32,7 +32,7 @@ class ProtoViewModel(application: Application) :AndroidViewModel(application) {
     }
 
     fun submitTicketIdReturn(ticketIdReturn: String) = viewModelScope.launch {
-        repoBooking.setTicketIdDeparture(ticketIdReturn)
+        repoBooking.setTicketIdReturn(ticketIdReturn)
     }
 
     fun submitDataTwoWay(ticketIdDeparture: String,ticketIdReturn: String, passengerList: String, contactDetails: String, totalPrice: String) = viewModelScope.launch {

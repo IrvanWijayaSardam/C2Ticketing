@@ -41,9 +41,31 @@ class SelectRoundTripFragment : Fragment() {
 
     private fun initListener() {
         binding?.run {
+            llDepartureDateFragmentRoundTrip.setOnClickListener {
+                val datePicker = MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("CHOOSE DEPARTURE DATE")
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+                datePicker.show(
+                    this@SelectRoundTripFragment.requireActivity().supportFragmentManager,
+                    "datePicker"
+                )
+                datePicker.addOnPositiveButtonClickListener {
+                    val depatureFormat = SimpleDateFormat("EEE, MMM d, ''yyyy", Locale.getDefault())
+                    val depatureFormatForApi = SimpleDateFormat("YYYY-MM-dd")
+
+                    val depatureDate = depatureFormat.format(Date(it).time)
+                    val depatureDateForApi = depatureFormatForApi.format(Date(it).time)
+                    editPref.putString("departureDate",depatureDate)
+                    editPref.putString("departureDateForApi",depatureDateForApi)
+                    editPref.apply()
+                    tvDateDepartureDateFragmentRoundTrip.setText(depatureDate)
+                }
+            }
+
             llReturnDateFragmentRoundTrip.setOnClickListener {
                 val datePicker = MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("CHOOSE BIRTHDAY DATE")
+                    .setTitleText("CHOOSE RETURN DATE")
                     .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                     .build()
                 datePicker.show(
@@ -52,7 +74,7 @@ class SelectRoundTripFragment : Fragment() {
                 )
                 datePicker.addOnPositiveButtonClickListener {
                     val returnFormat = SimpleDateFormat("EEE, MMM d, ''yyyy", Locale.getDefault())
-                    val returnFormatForApi = SimpleDateFormat("YYYY, MM, DD", Locale.getDefault())
+                    val returnFormatForApi = SimpleDateFormat("YYYY-MM-dd", Locale.getDefault())
                     val returnTime = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
 
                     val returnDate = returnFormat.format(Date(it).time)

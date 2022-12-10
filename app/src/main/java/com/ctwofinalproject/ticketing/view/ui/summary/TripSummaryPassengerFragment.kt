@@ -22,6 +22,7 @@ import com.ctwofinalproject.ticketing.util.DecimalSeparator
 import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.view.adapter.PassengerListAdapter
 import com.ctwofinalproject.ticketing.view.adapter.TicketByIdAdapter
+import com.ctwofinalproject.ticketing.view.adapter.TicketByIdReturnAdapter
 import com.ctwofinalproject.ticketing.view.ui.booking.AddPassengerFragment
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.TripSummaryPassengerViewModel
@@ -37,23 +38,28 @@ class TripSummaryPassengerFragment : Fragment() {
     private val binding get()                                              = _binding!!
     lateinit var adapterPassenger                                          : PassengerListAdapter
     private val passengerList                                              = arrayListOf<Passanger>()
-    private val ticketList                                                 = arrayListOf<DataTicketGetById>()
+    private val ticketListDeparture                                        = arrayListOf<DataTicketGetById>()
+    private val ticketListReturn                                           = arrayListOf<DataTicketGetById>()
     private val contactDetailsList                                         = arrayListOf<ContactDetails>()
     private var positionItem : Int                                         = 0
     private val fragmentAddPassenger                                       = AddPassengerFragment()
     private val fragmentContactDetails                                     = ContactDetailsFragmentDialog()
     private var isEdit: Boolean                                            = false
     lateinit var sharedPref                                                : SharedPreferences
+    lateinit var editPref                                                  : SharedPreferences.Editor
     private val viewModelProto                                             : ProtoViewModel by viewModels()
     private val viewModelTripSummaryPassenger                              : TripSummaryPassengerViewModel by viewModels()
     private var token : String                                             = ""
     private var ticketId: String                                           = ""
-    private var ticketIdRetur: String                                      = ""
+    private var ticketIdReturn: String                                     = ""
     private var isLogin : Boolean                                          = false
     lateinit var dialog                                                    : Dialog
     private lateinit var  loadingDialog                                    : LoadingDialog
     lateinit var adapterTicketById                                         : TicketByIdAdapter
+    lateinit var adapterTicketByIdReturn                                   : TicketByIdReturnAdapter
     private var totalPassenger: Int                                        = 0
+    private var priceTicketDeparture: Int                                  = 0
+    private var priceTicketReturn: Int                                     = 0
     private var totalPrice: Int                                            = 0
     private lateinit var gson                                              : Gson
 
@@ -68,9 +74,11 @@ class TripSummaryPassengerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                            = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
+        editPref                                              = sharedPref.edit()
         adapterPassenger                                      = PassengerListAdapter(sharedPref.getInt("totalPassenger",1))
         loadingDialog                                         = LoadingDialog(requireActivity())
         adapterTicketById                                     = TicketByIdAdapter()
+        adapterTicketByIdReturn                               = TicketByIdReturnAdapter()
         gson                                                  = Gson()
         totalPassenger                                        = sharedPref.getInt("totalPassenger",1)
         initListener()
@@ -112,7 +120,9 @@ class TripSummaryPassengerFragment : Fragment() {
                 Log.d(TAG, "getDataBooking: ${ticketId}")
             } else {
                 ticketId = it.ticketIdDeparture
+                ticketIdReturn = it.ticketIdReturn
                 viewModelTripSummaryPassenger.getTicketById(ticketId)
+                viewModelTripSummaryPassenger.getTicketReturnById(ticketIdReturn)
             }
         }
 
@@ -140,21 +150,54 @@ class TripSummaryPassengerFragment : Fragment() {
         viewModelTripSummaryPassenger.dataTicketById.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: ${it}")
             if (it!!.data != null) {
-                ticketList.add(it!!.data!!)
-                adapterTicketById.submitList(ticketList)
+                ticketListDeparture.add(it!!.data!!)
+                adapterTicketById.submitList(ticketListDeparture)
                 binding.rvTicketTripSummaryPassenger.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
+
+                priceTicketDeparture = it.data!!.price.toString().toInt() * totalPassenger
+                totalPrice = totalPrice + priceTicketDeparture
+
                 binding.tvTotalFareFragmentTripSummaryPassenger.setText(
                     "IDR " + (DecimalSeparator.formatDecimalSeperators(
-                        (it.data!!.price.toString().toInt() * totalPassenger).toString()
+                        totalPrice.toString()
                     ))
                 )
+
                 binding.shimmerBar.visibility = View.GONE
                 binding.shimmerBarTotalFare.visibility = View.GONE
-                totalPrice = it.data!!.price.toString().toInt() * totalPassenger
+                //totalPrice = it.data!!.price.toString().toInt() * totalPassenger
             } else {
                 Log.d(TAG, "onViewCreated: ticketIdDataTicketByID ${ticketId}")
+            }
+        }
+
+        viewModelTripSummaryPassenger.dataTicketReturnById.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: dataTicket returnById ${it}")
+            if (it != null) {
+                ticketListReturn.add(it!!.data!!)
+                adapterTicketByIdReturn.submitList(ticketListReturn)
+                binding.rvTicketReturnTripSummaryPassenger.layoutManager =
+                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                binding.rvTicketReturnTripSummaryPassenger.adapter = adapterTicketByIdReturn
+
+                priceTicketReturn = it.data!!.price.toString().toInt() * totalPassenger
+                totalPrice = totalPrice + priceTicketReturn
+
+                binding.tvTotalFareFragmentTripSummaryPassenger.setText(
+                    "IDR " + (DecimalSeparator.formatDecimalSeperators(
+                        totalPrice.toString()
+                    ))
+                )
+                binding.shimmerBarReturn.visibility = View.GONE
+                binding.shimmerBarTotalFare.visibility = View.GONE
+                //totalPrice = it.data!!.price.toString().toInt() * totalPassenger
+            } else {
+                binding.cvTicketReturnTripSummaryPassenger.visibility = View.GONE
+                binding.cvTicketReturn.visibility = View.GONE
+                binding.shimmerBarReturn.visibility = View.GONE
+                Log.d(TAG, "onViewCreated: ticketIdDataTicketByID ${ticketIdReturn}")
             }
         }
 
@@ -163,6 +206,7 @@ class TripSummaryPassengerFragment : Fragment() {
                 when (it.code) {
                     200 -> {
                         loadingDialog.isDismiss()
+                        editPref.clear().commit()
                         viewModelProto.clearDataBooking()
                         Navigation.findNavController(requireView())
                             .navigate(R.id.action_tripSummaryPassengerFragment_to_bookingFragment)
@@ -272,7 +316,13 @@ class TripSummaryPassengerFragment : Fragment() {
                                 passengerList.isNullOrEmpty() -> showSnack("Please Insert Data Passenger")
                                 else -> {
                                     loadingDialog.startLoading()
-                                    viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(ticketId.toInt(),null,totalPrice)))
+                                    if(ticketIdReturn.isNullOrEmpty()){
+                                        Log.d(TAG, "initListener: oneWay")
+                                        viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(ticketId.toInt(),null,totalPrice)))
+                                    } else {
+                                        Log.d(TAG, "initListener: roundTrip")
+                                        viewModelTripSummaryPassenger.submitBooking("bearer "+token,TicketData(passengerList, Ticket(ticketId.toInt(),ticketIdReturn.toInt(),totalPrice)))
+                                    }
                                 }
                             }
                         } else {

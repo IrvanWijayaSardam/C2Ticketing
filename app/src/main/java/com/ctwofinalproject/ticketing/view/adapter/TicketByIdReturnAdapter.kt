@@ -8,17 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ctwofinalproject.ticketing.databinding.ItemTicketTripSummaryBinding
 import com.ctwofinalproject.ticketing.model.DataTicketGetById
-import com.ctwofinalproject.ticketing.model.ResponseGetTicketById
 import com.ctwofinalproject.ticketing.util.DateConverter
 import com.ctwofinalproject.ticketing.util.DecimalSeparator
-import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
-class TicketByIdAdapter():RecyclerView.Adapter<TicketByIdAdapter.ViewHolder>() {
-    private lateinit var context : Context
+class TicketByIdReturnAdapter():RecyclerView.Adapter<TicketByIdReturnAdapter.ViewHolder>() {
+    private lateinit var context: Context
 
     private val diffCallback = object : DiffUtil.ItemCallback<DataTicketGetById>(){
         override fun areItemsTheSame(
@@ -34,14 +28,14 @@ class TicketByIdAdapter():RecyclerView.Adapter<TicketByIdAdapter.ViewHolder>() {
         ): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
-
     }
-    private val differ = AsyncListDiffer(this,diffCallback)
 
+    private val differ = AsyncListDiffer(this,diffCallback)
 
     fun submitList(dataTicketGetById: List<DataTicketGetById>?) = differ.submitList(dataTicketGetById)
 
-    inner class ViewHolder (val binding : ItemTicketTripSummaryBinding ):RecyclerView.ViewHolder(binding.root) {
+
+    inner class ViewHolder (val binding : ItemTicketTripSummaryBinding) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
 
@@ -67,6 +61,7 @@ class TicketByIdAdapter():RecyclerView.Adapter<TicketByIdAdapter.ViewHolder>() {
         holder.binding.tvArrivalDayItemTripSummary.text = DateConverter.convertISOTime(context,differ.currentList[position].flight!!.arrivalDate.toString())
         holder.binding.tvAirplaneNameAndSeriFragmentTripSummaryTicket.text = differ.currentList[position].flight!!.planename!!.namePlane.toString()
         holder.binding.tvPriceTicketItemTicketTripSummary.text = DecimalSeparator.formatDecimalSeperators(differ.currentList[position].price.toString())
+
     }
 
     override fun getItemCount(): Int {
