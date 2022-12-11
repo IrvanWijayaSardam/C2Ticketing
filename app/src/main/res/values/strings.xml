@@ -94,6 +94,9 @@
     <string name="default_time_format" translatable="false">yyyy-MM-dd\'T\'HH:mm:ss.SSS\'Z\'</string>
     <string name="date_format" translatable="false">EEEE</string>
     <string name="time_format" translatable="false">HH:mm a</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="past">Past</string>
+    <string name="booking">Booking</string>
 
 
     <!--  dummy country  -->
