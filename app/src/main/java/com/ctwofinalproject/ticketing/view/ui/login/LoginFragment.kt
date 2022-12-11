@@ -15,8 +15,10 @@ import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.data.UserProto
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
 import com.ctwofinalproject.ticketing.util.LoadingDialog
+import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.viewmodel.LoginViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -43,6 +45,7 @@ class LoginFragment : Fragment() {
         loadingDialog                                               = LoadingDialog(requireActivity())
         token                                                       = ""
         initListener()
+        setBottomNav()
 
         viewModelLogin.getToken().observe(viewLifecycleOwner) {
             if (it != null) {
@@ -63,11 +66,12 @@ class LoginFragment : Fragment() {
                     )
                 )
                 loadingDialog.isDismiss()
+                ShowSnack.show(binding.root,"Login Berhasil")
                 goToHome()
-                showSnack("Login Berhasil")
             } else {
                 loadingDialog.isDismiss()
-                showSnack("Username / Password Salah")
+                ShowSnack.show(binding.root,"Username / Password Salah")
+
             }
         }
 
@@ -93,9 +97,6 @@ class LoginFragment : Fragment() {
             }
         }
     }
-    fun showSnack(message: String){
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
-    }
 
     private fun goToSignUp(){
         Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_signupFragment)
@@ -103,5 +104,10 @@ class LoginFragment : Fragment() {
 
     private fun goToHome(){
         Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
+    }
+
+    private fun setBottomNav(){
+        val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        navBar?.visibility = View.GONE
     }
 }

@@ -1,8 +1,10 @@
 package com.ctwofinalproject.ticketing.view.ui.booking
 
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,9 +13,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentBookingBinding
-import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
 import com.ctwofinalproject.ticketing.entity.RecentSearch
 import com.ctwofinalproject.ticketing.viewmodel.BookingViewModel
+import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +29,7 @@ class BookingFragment : Fragment() {
     lateinit var sharedPref                                       : SharedPreferences
     lateinit var editPref                                         : SharedPreferences.Editor
     val bookingViewModel                                          : BookingViewModel by viewModels()
+    val viewModelProto                                            : ProtoViewModel by viewModels()
     private val passengerNumberPicker                             = PassengerNumberPicker()
 
     override fun onCreateView(
@@ -56,6 +59,12 @@ class BookingFragment : Fragment() {
     }
 
     private fun initListener() {
+        Log.d(TAG, "initListener: init listener executed")
+        viewModelProto.deleteTicketIdDeparture()
+        viewModelProto.deleteTicketIdReturn()
+        editPref.putBoolean("isRoundTrip",false)
+        editPref.apply()
+
         binding?.run {
             cvOneWaySearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
             cvRoundTripSearchFlightFragmentBooking.setCardBackgroundColor(resources.getColor(R.color.secondary_font_color))

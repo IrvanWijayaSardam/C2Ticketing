@@ -47,8 +47,8 @@
     <string name="airport_name">airport name</string>
     <string name="airport_code">YIA</string>
     <string name="select">Select</string>
-    <string name="choose_airport">choose airport</string>
-    <string name="search_flight">search flight</string>
+    <string name="choose_airport">Choose Airport</string>
+    <string name="search_flight">Search Flight</string>
     <string name="one_way">One-Way</string>
     <string name="departure_date">Departure Date</string>
     <string name="status_person_booking">1 Adult in Economy</string>
@@ -97,6 +97,10 @@
     <string name="upcoming">Upcoming</string>
     <string name="past">Past</string>
     <string name="booking">Booking</string>
+    <string name="list_passenger">List Passenger</string>
+    <string name="my_payment">My Payment</string>
+    <string name="language">Language</string>
+    <string name="help_center">Help Center</string>
 
 
     <!--  dummy country  -->

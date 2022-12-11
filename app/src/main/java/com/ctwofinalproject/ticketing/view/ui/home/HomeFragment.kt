@@ -50,8 +50,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
-        adapterRecentSearch                                 = RecentSearchAdapter()
         editPref                                            = sharedPref.edit()
+        adapterRecentSearch                                 = RecentSearchAdapter()
 
 
         setImageSlider()
@@ -117,7 +117,7 @@ class HomeFragment : Fragment() {
 
     private fun setProfile(){
         Glide.with(this)
-            .load("https://res.cloudinary.com/dmydy4ui3/image/upload/v1665072963/qaydexmcqchcemgwdbps.png")
+            .load("https://firebasestorage.googleapis.com/v0/b/mynotes-f6709.appspot.com/o/profile%2F8?alt=media&token=5d176d41-03bf-4c56-8f39-1c7fb4e653ea")
             .error(R.drawable.ic_logo_ticketing)
             .circleCrop()
             .into(binding.ivProfile)

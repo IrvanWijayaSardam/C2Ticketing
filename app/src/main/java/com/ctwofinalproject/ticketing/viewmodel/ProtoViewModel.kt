@@ -39,6 +39,14 @@ class ProtoViewModel(application: Application) :AndroidViewModel(application) {
         repoBooking.saveTwoWay(ticketIdDeparture, ticketIdReturn, passengerList, totalPrice)
     }
 
+    fun deleteTicketIdDeparture() = viewModelScope.launch {
+        repoBooking.deleteTicketIdDeparture()
+    }
+
+    fun deleteTicketIdReturn() = viewModelScope.launch {
+        repoBooking.deleteTicketIdReturn()
+    }
+
     fun clearDataBooking() = viewModelScope.launch {
         repoBooking.clearData()
     }
