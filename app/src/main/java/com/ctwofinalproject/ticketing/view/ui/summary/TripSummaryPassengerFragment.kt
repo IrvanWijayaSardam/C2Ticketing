@@ -170,14 +170,17 @@ class TripSummaryPassengerFragment : Fragment() {
         }
 
         viewModelProto.dataUser.observe(viewLifecycleOwner) {
-            if (it.isLogin) {
-                binding.tvNameContactDetail.setText(it.firstname + " " + it.lastname)
-                binding.tvEmailContactDetail.setText(it.email)
-                binding.tvPhoneNumberContactDetail.setText(it.phone)
+            if (it != null){
                 token = it.token.toString()
                 isLogin = it.isLogin
-            } else {
+                if (it.isLogin) {
+                    binding.cvContactDetail.visibility = View.VISIBLE
+                    binding.tvNameContactDetail.setText(it.firstname + " " + it.lastname)
+                    binding.tvEmailContactDetail.setText(it.email)
+                    binding.tvPhoneNumberContactDetail.setText(it.phone)
+                } else {
 
+                }
             }
         }
 
@@ -201,6 +204,8 @@ class TripSummaryPassengerFragment : Fragment() {
 
                 binding.shimmerBar.visibility = View.GONE
                 binding.shimmerBarTotalFare.visibility = View.GONE
+                binding.cvContactDetail.visibility = View.VISIBLE
+
                 //totalPrice = it.data!!.price.toString().toInt() * totalPassenger
             } else {
                 Log.d(TAG, "onViewCreated: ticketIdDataTicketByID ${ticketId}")
@@ -224,6 +229,7 @@ class TripSummaryPassengerFragment : Fragment() {
                         totalPrice.toString()
                     ))
                 )
+                binding.cvContactDetail.visibility = View.VISIBLE
                 binding.shimmerBarReturn.visibility = View.GONE
                 binding.shimmerBarTotalFare.visibility = View.GONE
                 //totalPrice = it.data!!.price.toString().toInt() * totalPassenger

@@ -95,6 +95,8 @@ class HomeFragment : Fragment() {
 
         viewModelProto.dataBooking.observe(viewLifecycleOwner) {
             if (!it.totalPrice.equals("")) {
+                viewModelProto.dataBooking
+                editPref.clear().commit()
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
             }
