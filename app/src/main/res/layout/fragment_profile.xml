@@ -96,6 +96,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvNameFragmentProfile" />
 
                     <TextView
+                        android:id="@+id/tvOpenMyProfileFMyProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/poppins_medium"

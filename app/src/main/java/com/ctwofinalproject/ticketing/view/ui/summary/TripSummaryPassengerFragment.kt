@@ -162,6 +162,8 @@ class TripSummaryPassengerFragment : Fragment() {
                     Log.d(TAG, "getDataBooking: ${ticketIdReturn}")
                 }
             } else {
+                Log.d(TAG, "onViewCreated: lewatsini")
+                binding.cvContactDetail.visibility = View.GONE
                 ticketId = it.ticketIdDeparture
                 ticketIdReturn = it.ticketIdReturn
                 viewModelTripSummaryPassenger.getTicketById(ticketId)
@@ -174,12 +176,13 @@ class TripSummaryPassengerFragment : Fragment() {
                 token = it.token.toString()
                 isLogin = it.isLogin
                 if (it.isLogin) {
+                    Log.d(TAG, "onViewCreated: cuy lewat sini")
                     binding.cvContactDetail.visibility = View.VISIBLE
                     binding.tvNameContactDetail.setText(it.firstname + " " + it.lastname)
                     binding.tvEmailContactDetail.setText(it.email)
                     binding.tvPhoneNumberContactDetail.setText(it.phone)
                 } else {
-
+                    isLogin = false
                 }
             }
         }
@@ -187,27 +190,50 @@ class TripSummaryPassengerFragment : Fragment() {
         viewModelTripSummaryPassenger.dataTicketById.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: ${it}")
             if (it!!.data != null) {
-                ticketListDeparture.add(it!!.data!!)
-                adapterTicketById.submitList(ticketListDeparture)
-                binding.rvTicketTripSummaryPassenger.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
+                if(isLogin){
+                    Log.d(TAG, "onViewCreated: kok lewat sini")
+                    ticketListDeparture.add(it!!.data!!)
+                    adapterTicketById.submitList(ticketListDeparture)
+                    binding.rvTicketTripSummaryPassenger.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
 
-                priceTicketDeparture = it.data!!.price.toString().toInt() * totalPassenger
-                totalPrice = totalPrice + priceTicketDeparture
+                    priceTicketDeparture = it.data!!.price.toString().toInt() * totalPassenger
+                    totalPrice = totalPrice + priceTicketDeparture
 
-                binding.tvTotalFareFragmentTripSummaryPassenger.setText(
-                    "IDR " + (DecimalSeparator.formatDecimalSeperators(
-                        totalPrice.toString()
-                    ))
-                )
+                    binding.tvTotalFareFragmentTripSummaryPassenger.setText(
+                        "IDR " + (DecimalSeparator.formatDecimalSeperators(
+                            totalPrice.toString()
+                        ))
+                    )
 
-                binding.shimmerBar.visibility = View.GONE
-                binding.shimmerBarTotalFare.visibility = View.GONE
-                binding.cvContactDetail.visibility = View.VISIBLE
+                    binding.shimmerBar.visibility = View.GONE
+                    binding.shimmerBarTotalFare.visibility = View.GONE
+                    binding.cvContactDetail.visibility = View.VISIBLE
+                } else {
+                    Log.d(TAG, "onViewCreated: kok lewat sini 2")
+                    ticketListDeparture.add(it!!.data!!)
+                    adapterTicketById.submitList(ticketListDeparture)
+                    binding.rvTicketTripSummaryPassenger.layoutManager =
+                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
 
+                    priceTicketDeparture = it.data!!.price.toString().toInt() * totalPassenger
+                    totalPrice = totalPrice + priceTicketDeparture
+
+                    binding.tvTotalFareFragmentTripSummaryPassenger.setText(
+                        "IDR " + (DecimalSeparator.formatDecimalSeperators(
+                            totalPrice.toString()
+                        ))
+                    )
+
+                    binding.shimmerBar.visibility = View.GONE
+                    binding.shimmerBarTotalFare.visibility = View.GONE
+                    binding.cvContactDetail.visibility = View.GONE
+                }
                 //totalPrice = it.data!!.price.toString().toInt() * totalPassenger
             } else {
+                binding.cvContactDetail.visibility = View.GONE
                 Log.d(TAG, "onViewCreated: ticketIdDataTicketByID ${ticketId}")
             }
         }
@@ -215,6 +241,7 @@ class TripSummaryPassengerFragment : Fragment() {
         viewModelTripSummaryPassenger.dataTicketReturnById.observe(viewLifecycleOwner){
             Log.d(TAG, "onViewCreated: dataTicket returnById ${it}")
             if (it != null) {
+                Log.d(TAG, "onViewCreated: bang lewat sini bang")
                 ticketListReturn.add(it!!.data!!)
                 adapterTicketByIdReturn.submitList(ticketListReturn)
                 binding.rvTicketReturnTripSummaryPassenger.layoutManager =

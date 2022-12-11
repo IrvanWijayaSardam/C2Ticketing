@@ -101,6 +101,9 @@
     <string name="my_payment">My Payment</string>
     <string name="language">Language</string>
     <string name="help_center">Help Center</string>
+    <string name="my_profile">My Profile</string>
+    <string name="detail_profile">Detail Profile</string>
+    <string name="full_name">Full Name</string>
 
 
     <!--  dummy country  -->

@@ -72,6 +72,9 @@
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_detailProfileFragment"
+            app:destination="@id/detailProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/airportFragment"
@@ -134,4 +137,9 @@
         android:name="com.ctwofinalproject.ticketing.view.ui.mytrip.MyTripFragment"
         android:label="fragment_my_trip"
         tools:layout="@layout/fragment_my_trip" />
+    <fragment
+        android:id="@+id/detailProfileFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.profile.DetailProfileFragment"
+        android:label="fragment_detail_profile"
+        tools:layout="@layout/fragment_detail_profile" />
 </navigation>

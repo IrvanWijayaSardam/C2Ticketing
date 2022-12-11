@@ -22,6 +22,7 @@ import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,7 +51,7 @@ class ProfileFragment : Fragment() {
         initListener()
         setImageSlider()
         setProfile()
-
+        setBottomNav()
 
 
         viewModelProto.dataUser.observe(viewLifecycleOwner){
@@ -79,7 +80,10 @@ class ProfileFragment : Fragment() {
                             dialogInterface.dismiss()
                         })
                         .show()
+            }
 
+            tvOpenMyProfileFMyProfile.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_detailProfileFragment)
             }
         }
     }
@@ -105,5 +109,10 @@ class ProfileFragment : Fragment() {
         viewModelProto.clearDataBooking()
         homeViewModel.deleteAllRecentSearch()
         editPref.clear().commit()
+    }
+
+    private fun setBottomNav(){
+        val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        navBar?.visibility = View.VISIBLE
     }
 }
