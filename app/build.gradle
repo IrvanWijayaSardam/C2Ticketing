@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
     id "com.google.protobuf" version "0.8.17"
 }
 
@@ -71,6 +72,7 @@ dependencies {
     //implementation firebase messaging for push notification
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.0'
     //implementation firebase analytic and crashlytic for firebase crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
     //datastore preferences
