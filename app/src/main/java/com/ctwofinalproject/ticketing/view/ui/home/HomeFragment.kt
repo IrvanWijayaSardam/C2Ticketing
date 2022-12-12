@@ -37,6 +37,7 @@ class HomeFragment : Fragment() {
     lateinit var editPref                                               : SharedPreferences.Editor
     val homeViewModel                                                   : HomeViewModel by viewModels()
     lateinit var token                                                  : String
+    var isLogin : Boolean                                               = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,8 +64,10 @@ class HomeFragment : Fragment() {
             Log.d(TAG, "onViewCreated: ${it}")
             token = it.token
             if (it.isLogin) {
+                isLogin = it.isLogin
                 binding.tvUsernameOrLogin.text = it.firstname
             } else {
+                isLogin = false
                 binding.tvUsernameOrLogin.text = ""
             }
         }
@@ -90,17 +93,16 @@ class HomeFragment : Fragment() {
                 editPref.apply()
                 Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_showTicketFragment)
             }
-
         })
 
         viewModelProto.dataBooking.observe(viewLifecycleOwner) {
             if (!it.totalPrice.equals("")) {
-                editPref.clear().commit()
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
+            } else {
+                Log.d(TAG, "onViewCreated: home fragment else")
             }
         }
-
     }
 
     private fun setImageSlider(){

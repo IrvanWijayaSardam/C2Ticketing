@@ -141,6 +141,7 @@ class AirportFragment : Fragment() {
                     }
                 }
                 editPref.apply()
+
                 when(fFragment){
                     "home" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_homeFragment)
                     "booking" -> Navigation.findNavController(requireView()).navigate(R.id.action_airportFragment_to_bookingFragment)

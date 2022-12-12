@@ -31,6 +31,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONArray
 
 @AndroidEntryPoint
 class TripSummaryPassengerFragment : Fragment() {
@@ -125,18 +126,23 @@ class TripSummaryPassengerFragment : Fragment() {
                 } else {
                     Log.d(TAG, "onViewCreated: masuk else dari ticketIdReturn observer databooking")
                     Log.d(TAG, "onViewCreated: tandanya dia Roundtrip")
+                    Log.d(TAG, "onViewCreated: passengerListIt ${it.passengerList}")
+                    Log.d(TAG, "onViewCreated: passengerList before submit${passengerList}")
+
                     viewModelTripSummaryPassenger.getTicketById(it.ticketIdDeparture)
                     viewModelTripSummaryPassenger.getTicketReturnById(it.ticketIdReturn)
 
                     val typeTokenPassenger = object : TypeToken<List<Passanger>>() {}.type
-                    var passenger =
-                        Gson().fromJson<List<Passanger>>(it.passengerList, typeTokenPassenger)
+                    var passenger = Gson().fromJson<List<Passanger>>(it.passengerList, typeTokenPassenger)
+                    Log.d(TAG, "onViewCreated: passengerList passenger${passenger}")
 
                     totalPriceFinal = it.totalPrice.toInt()
                     ticketId = it.ticketIdDeparture
                     ticketIdReturn = it.ticketIdReturn
                     passengerList.addAll(passenger)
                     adapterPassenger.submitList(passenger)
+                    Log.d(TAG, "onViewCreated: passenger to mutableist${passenger.toMutableList()}")
+                    Log.d(TAG, "onViewCreated: passengerList aftersubmit${passengerList}")
 
                     binding.tvTotalFareFragmentTripSummaryPassenger.setText(
                         "IDR " + (DecimalSeparator.formatDecimalSeperators(
@@ -157,7 +163,7 @@ class TripSummaryPassengerFragment : Fragment() {
                     binding.rvTicketReturnTripSummaryPassenger.visibility
                     binding.shimmerBar.visibility = View.GONE
                     binding.shimmerBarTotalFare.visibility = View.GONE
-                    binding.cvContactDetail.visibility = View.VISIBLE
+                    binding.cvContactDetail.visibility = View.GONE
                     Log.d(TAG, "getDataBooking: ${ticketId}")
                     Log.d(TAG, "getDataBooking: ${ticketIdReturn}")
                 }
@@ -191,7 +197,7 @@ class TripSummaryPassengerFragment : Fragment() {
             Log.d(TAG, "onViewCreated: ${it}")
             if (it!!.data != null) {
                 if(isLogin){
-                    Log.d(TAG, "onViewCreated: kok lewat sini")
+                    //Log.d(TAG, "onViewCreated: kok lewat sini")
                     ticketListDeparture.add(it!!.data!!)
                     adapterTicketById.submitList(ticketListDeparture)
                     binding.rvTicketTripSummaryPassenger.layoutManager =
@@ -241,7 +247,7 @@ class TripSummaryPassengerFragment : Fragment() {
         viewModelTripSummaryPassenger.dataTicketReturnById.observe(viewLifecycleOwner){
             Log.d(TAG, "onViewCreated: dataTicket returnById ${it}")
             if (it != null) {
-                Log.d(TAG, "onViewCreated: bang lewat sini bang")
+                //Log.d(TAG, "onViewCreated: bang lewat sini bang")
                 ticketListReturn.add(it!!.data!!)
                 adapterTicketByIdReturn.submitList(ticketListReturn)
                 binding.rvTicketReturnTripSummaryPassenger.layoutManager =
@@ -256,7 +262,7 @@ class TripSummaryPassengerFragment : Fragment() {
                         totalPrice.toString()
                     ))
                 )
-                binding.cvContactDetail.visibility = View.VISIBLE
+                //binding.cvContactDetail.visibility = View.VISIBLE
                 binding.shimmerBarReturn.visibility = View.GONE
                 binding.shimmerBarTotalFare.visibility = View.GONE
                 //totalPrice = it.data!!.price.toString().toInt() * totalPassenger
