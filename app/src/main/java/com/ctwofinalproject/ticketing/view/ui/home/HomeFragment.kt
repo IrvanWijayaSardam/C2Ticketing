@@ -56,7 +56,7 @@ class HomeFragment : Fragment() {
 
 
         setImageSlider()
-        setProfile()
+        //setProfile()
         setBottomNav()
         initListener()
 
@@ -73,7 +73,11 @@ class HomeFragment : Fragment() {
         }
 
         homeViewModel.getAllRecentSearch().observe(viewLifecycleOwner) {
-            if (it != null) {
+            if (!it.isNullOrEmpty()) {
+                Log.d(TAG, "onViewCreated: masuk dia ga null")
+                binding.tvRecentSearch.visibility = View.VISIBLE
+                binding.tvClearAllRecent.visibility = View.VISIBLE
+                binding.rvRecentSearchHomeFragment.visibility = View.VISIBLE
                 adapterRecentSearch.submitList(it)
                 binding.rvRecentSearchHomeFragment.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -145,10 +149,10 @@ class HomeFragment : Fragment() {
                 gotoSelectAirport("to","home")
             }
             tvClearAllRecent.setOnClickListener {
-                homeViewModel.deleteAllRecentSearch()
                 tvRecentSearch.visibility = View.GONE
                 tvClearAllRecent.visibility = View.GONE
                 rvRecentSearchHomeFragment.visibility = View.GONE
+                homeViewModel.deleteAllRecentSearch()
             }
 
             btnSearchFragmentHome.setOnClickListener {

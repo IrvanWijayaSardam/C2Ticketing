@@ -95,7 +95,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvSelectAirportFragmentBooking"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="140dp"
                 app:layout_constraintTop_toBottomOf="@+id/llModeTripFragmentBooking"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -231,7 +231,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cvTotalPassenger"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
+                android:layout_height="100dp"
                 app:layout_constraintTop_toBottomOf="@+id/cvFragmentContainer"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"

@@ -41,6 +41,7 @@
                 android:textSize="15sp"/>
         </LinearLayout>
         <TextView
+            android:id="@+id/tvHopeYouEnjoy"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
@@ -53,23 +54,22 @@
 
         <ImageView
             android:id="@+id/iv_profile"
-            android:layout_width="50dp"
+            android:layout_width="30dp"
             android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="30dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintHorizontal_bias="0.791"
             app:layout_constraintLeft_toRightOf="@+id/llinGreetings"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="1"/>
+            android:src="@drawable/ic_baseline_notifications_24"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvImageSlider"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iv_profile"
+            app:layout_constraintTop_toBottomOf="@+id/tvHopeYouEnjoy"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="20dp"
             android:layout_margin="15dp"
             app:cardCornerRadius="5dp"
             app:cardElevation="7dp"
@@ -222,6 +222,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvSearchAirportFragmentHome"
             app:layout_constraintStart_toStartOf="@+id/cvSearchAirportFragmentHome"
+            android:visibility="gone"
             />
 
         <TextView
@@ -237,6 +238,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cvSearchAirportFragmentHome"
             app:layout_constraintEnd_toEndOf="@+id/cvSearchAirportFragmentHome"
+            android:visibility="gone"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -249,18 +251,143 @@
             app:layout_constraintTop_toBottomOf="@+id/tvClearAllRecent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            android:visibility="gone"
             />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCardMyTripHomeFragment"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvFeatureHome"
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:layout_marginTop="15dp"
-            tools:listitem="@layout/item_card_trip"
-            app:layout_constraintTop_toBottomOf="@+id/rvRecentSearchHomeFragment"
+            android:layout_height="120dp"
+            android:layout_margin="15dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="7dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/rvRecentSearchHomeFragment">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="40dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_coupon"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Coupon"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="15sp"
+                        android:textAlignment="center"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="30dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_flight_status"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Flight    Status"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="15sp"
+                        android:textAlignment="center"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="30dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_wishlist"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Wishlist"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="15sp"
+                        android:textAlignment="center"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    >
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        app:cardCornerRadius="50dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <ImageView
+                            android:layout_gravity="center"
+                            android:layout_width="30dp"
+                            android:layout_height="50dp"
+                            android:src="@drawable/img_flight_schedule"/>
+                    </androidx.cardview.widget.CardView>
+                    <TextView
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Flight Schedule"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textSize="15sp"
+                        android:textAlignment="center"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
