@@ -15,6 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ShowTicketViewModel @Inject constructor(var api: RestServiceMain): ViewModel() {
     var liveDataFlight : MutableLiveData<ResponseSearchFlight?> = MutableLiveData()
+    var liveDataFlightReturn : MutableLiveData<ResponseSearchFlight?> = MutableLiveData()
+
 
     fun getDataFlight(): MutableLiveData<ResponseSearchFlight?> {
         return  liveDataFlight
@@ -30,7 +32,7 @@ class ShowTicketViewModel @Inject constructor(var api: RestServiceMain): ViewMod
                 if(response.isSuccessful){
                     liveDataFlight.postValue(response.body())
                 } else {
-                    liveDataFlight.postValue(null)
+                    liveDataFlight.value = null
                 }
             }
 
@@ -39,7 +41,26 @@ class ShowTicketViewModel @Inject constructor(var api: RestServiceMain): ViewMod
             }
 
         })
+    }
+    fun searchTicketReturn(departure : String, arrival : String, dateDeparture: String){
+        val client = api.searchTicket(departure, arrival, dateDeparture)
+        client.enqueue(object : Callback<ResponseSearchFlight>{
+            override fun onResponse(
+                call: Call<ResponseSearchFlight>,
+                response: Response<ResponseSearchFlight>
+            ) {
+                if(response.isSuccessful){
+                    liveDataFlightReturn.postValue(response.body())
+                } else {
+                    liveDataFlightReturn.value = null
+                }
+            }
 
+            override fun onFailure(call: Call<ResponseSearchFlight>, t: Throwable) {
+                Log.d(ContentValues.TAG, "onFailure: ${t.message}")
+            }
+
+        })
     }
 
 }

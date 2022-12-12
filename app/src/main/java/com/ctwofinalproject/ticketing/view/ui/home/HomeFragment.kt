@@ -94,6 +94,7 @@ class HomeFragment : Fragment() {
                 editPref.putString("airportCodeFrom",recentSearch.airportCodeFrom)
                 editPref.putString("airportCodeTo",recentSearch.airportCodeTo)
                 editPref.putString("departureDateForApi",recentSearch.depatureDate)
+                editPref.putString("returnDateForApi",recentSearch.returnDate)
                 editPref.apply()
                 Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_showTicketFragment)
             }
