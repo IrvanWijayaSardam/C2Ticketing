@@ -162,6 +162,10 @@ class HomeFragment : Fragment() {
                 bottomnav.selectedItemId = R.id.bookingFragment
             }
 
+            llWishlistFragmentHome.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_wishlistFragment)
+            }
+
             tvFromAirportCodeFragmentHome.text = sharedPref.getString("airportCodeFrom","YIA")
             tvFromAirportNameFragmentHome.text = sharedPref.getString("airportNameFrom","AirportName")
 

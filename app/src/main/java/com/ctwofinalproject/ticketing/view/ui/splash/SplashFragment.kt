@@ -42,7 +42,7 @@ class SplashFragment : Fragment() {
 
         viewModelProto.dataUser.observe(viewLifecycleOwner) {
             if (it.isLogin) {
-                val jwt = JWT("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjUsImZpcnN0bmFtZSI6IklydmFuIiwibGFzdG5hbWUiOiJXaWpheWEiLCJnZW5kZXIiOiJMIiwiZW1haWwiOiJhbWluaXZhbkBnbWFpbC5jb20iLCJwaG9uZSI6IjYyODEyODkzMjkzODI5OCIsImJpcnRoZGF0ZSI6IjIwMDEtMTItMTVUMDA6MDA6MDAuMDAwWiIsInBpY3R1cmVzIjpudWxsLCJpYXQiOjE2NzA4MTA4MzgsImV4cCI6MTY3MDg5NzIzOH0.SLcSJ03R00YiFMUb7iVQJzMcwsk0r_ROLoShnVMpUJk")
+                val jwt = JWT(it.token)
                 if(!jwt.isExpired(1)){
                     android.util.Log.d(TAG, "onViewCreated: ${jwt.isExpired(1)}")
                     goToHome()

@@ -49,5 +49,10 @@ interface RestServiceMain {
         @Path("ticketNumber") ticketNumber: String
     ) : Call<ResponseGetTicketById>
 
+    @GET("api/wishlists")
+    fun getWishlist(
+        @Header("Authorization") authorization: String
+    )  : Call<ResponseGetWishlist>
+
 
 }

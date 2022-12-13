@@ -6,6 +6,6 @@ import com.google.android.material.snackbar.Snackbar
 
 object ShowSnack {
     fun show(view: View, message: String){
-        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
     }
 }

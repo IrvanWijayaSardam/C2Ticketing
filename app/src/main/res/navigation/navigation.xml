@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_homeFragment_to_tripSummaryPassengerFragment"
             app:destination="@id/tripSummaryPassengerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -142,4 +145,9 @@
         android:name="com.ctwofinalproject.ticketing.view.ui.profile.DetailProfileFragment"
         android:label="fragment_detail_profile"
         tools:layout="@layout/fragment_detail_profile" />
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.wishlist.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
 </navigation>

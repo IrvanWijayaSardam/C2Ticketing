@@ -298,10 +298,21 @@
             </androidx.cardview.widget.CardView>
             <Button
                 android:id="@+id/btnSavePassengerFragmentATripSummary"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:text="CONTINUE BOOKING"
+                android:layout_gravity="center_horizontal"
+                />
+            <Button
+                android:id="@+id/btnCancelBookingFragmentATripSummary"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="CANCEL BOOKING"
+                android:backgroundTint="@color/red"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
                 />

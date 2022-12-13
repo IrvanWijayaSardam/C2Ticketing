@@ -176,6 +176,4 @@ class AirportFragment : Fragment() {
         val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
         navBar?.visibility                             = View.GONE
     }
-
-
 }
