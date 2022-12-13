@@ -104,6 +104,8 @@
     <string name="my_profile">My Profile</string>
     <string name="detail_profile">Detail Profile</string>
     <string name="full_name">Full Name</string>
+    <string name="username">username</string>
+    <string name="roundtrip">Roundtrip</string>
 
 
     <!--  dummy country  -->

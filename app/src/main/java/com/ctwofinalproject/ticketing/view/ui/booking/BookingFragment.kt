@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentBookingBinding
 import com.ctwofinalproject.ticketing.entity.RecentSearch
+import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.viewmodel.BookingViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -75,10 +76,14 @@ class BookingFragment : Fragment() {
 
 
             btnSearchTicketFragmentBooking.setOnClickListener {
-                bookingViewModel.insertRecentSearch(RecentSearch(0,tvFromAirportCodeFragmentBooking.text.toString(),tvToAirportCodeFragmentBooking.text.toString(),"Economy",sharedPref.getString("departureDate","Day,xx Month xxxx")
-                    ,sharedPref.getString("departureDateForApi","2022-09-30")))
+                if(sharedPref.getString("airportNameFrom","AirportName").equals("AirportName") || sharedPref.getString("airportNameTo","Airport Name").equals("Airport Name")){
+                    ShowSnack.show(binding.root,"Please Choose The Airport")
+                } else {
+                    bookingViewModel.insertRecentSearch(RecentSearch(0,tvFromAirportCodeFragmentBooking.text.toString(),tvToAirportCodeFragmentBooking.text.toString(),"Economy",sharedPref.getString("departureDate","Day,xx Month xxxx")
+                        ,sharedPref.getString("departureDateForApi","2022-09-30")))
 
-                Navigation.findNavController(requireView()).navigate(R.id.action_bookingFragment_to_showTicketFragment)
+                    Navigation.findNavController(requireView()).navigate(R.id.action_bookingFragment_to_showTicketFragment)
+                }
             }
 
             cvOneWaySearchFlightFragmentBooking.setOnClickListener {

@@ -1,8 +1,10 @@
 package com.ctwofinalproject.ticketing.view.ui.summary
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.DialogInterface
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +22,7 @@ import com.ctwofinalproject.ticketing.databinding.FragmentTripSummaryPassengerBi
 import com.ctwofinalproject.ticketing.model.DataTicketGetById
 import com.ctwofinalproject.ticketing.util.DecimalSeparator
 import com.ctwofinalproject.ticketing.util.LoadingDialog
+import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.view.adapter.PassengerListAdapter
 import com.ctwofinalproject.ticketing.view.adapter.TicketByIdAdapter
 import com.ctwofinalproject.ticketing.view.adapter.TicketByIdReturnAdapter
@@ -64,6 +67,8 @@ class TripSummaryPassengerFragment : Fragment() {
     private var totalPrice: Int                                            = 0
     private var totalPriceFinal: Int                                       = 0
     private lateinit var gson                                              : Gson
+    private lateinit var builder                                           : AlertDialog.Builder
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,6 +88,8 @@ class TripSummaryPassengerFragment : Fragment() {
         adapterTicketByIdReturn                               = TicketByIdReturnAdapter()
         gson                                                  = Gson()
         totalPassenger                                        = sharedPref.getInt("totalPassenger",1)
+        builder                                               = AlertDialog.Builder(requireActivity())
+
         initListener()
         setDialog()
         setBottomNav()
@@ -184,6 +191,7 @@ class TripSummaryPassengerFragment : Fragment() {
                 if (it.isLogin) {
                     Log.d(TAG, "onViewCreated: cuy lewat sini")
                     binding.cvContactDetail.visibility = View.VISIBLE
+                    binding.btnCancelBookingFragmentATripSummary.visibility = View.VISIBLE
                     binding.tvNameContactDetail.setText(it.firstname + " " + it.lastname)
                     binding.tvEmailContactDetail.setText(it.email)
                     binding.tvPhoneNumberContactDetail.setText(it.phone)
@@ -381,6 +389,31 @@ class TripSummaryPassengerFragment : Fragment() {
 
     private fun initListener() {
         binding?.run {
+
+            btnCancelBookingFragmentATripSummary.setOnClickListener {
+                builder.setTitle("Cancel Booking")
+                    .setMessage("Are you sure want to cancel this booking process ?")
+                    .setCancelable(true)
+                    .setPositiveButton("Yes", DialogInterface.OnClickListener { dialogInterface, i ->
+                        editPref.clear().commit()
+                        viewModelProto.clearDataBooking()
+                        dialogInterface.dismiss()
+                        ShowSnack.show(binding.root,"Booking process cancelled")
+                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_bookingFragment)
+                    })
+                    .setNegativeButton("No", DialogInterface.OnClickListener { dialogInterface, i ->
+                        dialogInterface.dismiss()
+                    })
+                    .setNeutralButton("Add To Wishlist", DialogInterface.OnClickListener { dialogInterface, i ->
+                        editPref.clear().commit()
+                        viewModelProto.clearDataBooking()
+                        ShowSnack.show(binding.root,"Added to wishlist")
+                        dialogInterface.dismiss()
+                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_bookingFragment)
+                    })
+                    .show()
+            }
+
             ivGotoBackFromFragmentTripSummaryPassenger.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
             }

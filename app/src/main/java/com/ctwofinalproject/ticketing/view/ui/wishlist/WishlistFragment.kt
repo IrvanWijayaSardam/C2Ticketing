@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
@@ -63,12 +64,13 @@ class WishlistFragment : Fragment() {
                 binding.shimmerBarWishlist.visibility = View.GONE
             }
         }
-
     }
 
     private fun initListener() {
         binding?.run {
-
+            ivBackFromWishlistFragmentAirport.setOnClickListener {
+                Navigation.findNavController(binding.root).popBackStack()
+            }
         }
     }
 
