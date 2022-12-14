@@ -19,6 +19,7 @@ import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
 import com.ctwofinalproject.ticketing.databinding.FragmentProfileBinding
 import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
+import com.ctwofinalproject.ticketing.viewmodel.ProfileViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
@@ -32,9 +33,11 @@ class ProfileFragment : Fragment() {
     private val binding get()                                              = _binding!!
     private val viewModelProto                                             : ProtoViewModel by viewModels()
     private val homeViewModel                                              : HomeViewModel by viewModels()
+    private val profileViewModel                                           : ProfileViewModel by viewModels()
     private lateinit var builder                                           : AlertDialog.Builder
     lateinit var sharedPref                                                : SharedPreferences
     lateinit var editPref                                                  : SharedPreferences.Editor
+    private var token                                                      = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,6 +59,7 @@ class ProfileFragment : Fragment() {
 
         viewModelProto.dataUser.observe(viewLifecycleOwner){
             if(it != null){
+                token = it.token
                 binding.tvNameFragmentProfile.setText(it.firstname.toString()+" "+it.lastname.toString())
             } else {
                 Log.d(TAG, "onViewCreated: need to be logged in")
@@ -74,6 +78,7 @@ class ProfileFragment : Fragment() {
                             clearAllLocal()
                             dialogInterface.dismiss()
                             ShowSnack.show(binding.root,"Logout Successful")
+                            profileViewModel.logout("bearer "+token)
                             Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment)
                         })
                         .setNegativeButton("No",DialogInterface.OnClickListener { dialogInterface, i ->

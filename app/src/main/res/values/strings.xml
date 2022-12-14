@@ -106,6 +106,8 @@
     <string name="full_name">Full Name</string>
     <string name="username">username</string>
     <string name="roundtrip">Roundtrip</string>
+    <string name="payment">Payment</string>
+    <string name="price">Price</string>
 
 
     <!--  dummy country  -->
@@ -142,5 +144,9 @@
     <string-array name="documentTypePassenger">
         <item>KTP</item>
         <item>Passport</item>
+    </string-array>
+    <string-array name="paymentMethod">
+        <item>FlitPay Wallet</item>
+        <item>Credit Card</item>
     </string-array>
 </resources>

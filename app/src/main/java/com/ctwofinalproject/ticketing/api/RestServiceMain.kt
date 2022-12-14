@@ -54,5 +54,9 @@ interface RestServiceMain {
         @Header("Authorization") authorization: String
     )  : Call<ResponseGetWishlist>
 
+    @DELETE("api/logout")
+    fun logout(
+        @Header("Authorization") authorization: String
+    ) : Call<String>
 
 }
