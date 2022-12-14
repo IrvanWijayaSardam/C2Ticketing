@@ -12,6 +12,7 @@
         android:id="@+id/clHeaderFragmentFlitPay"
         android:layout_width="match_parent"
         android:layout_height="90dp"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,343 +41,287 @@
             android:textSize="18sp"
             android:textColor="@color/background_color_white"
             />
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintHorizontal_bias="1"
+            android:layout_margin="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:src="@drawable/ic_baseline_notifications_24"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <ImageView
-        android:id="@+id/iv_profile"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintHorizontal_bias="1"
-        android:layout_margin="30dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_baseline_notifications_24"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/llSaldoRekening"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:layout_margin="20dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/clHeaderFragmentFlitPay"
-        tools:layout_editor_absoluteX="20dp">
-
-        <TextView
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/clHeaderFragmentFlitPay"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Saldo Rekening Utama"
-            android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Rp 144.000,00"
-            android:textAlignment="center"
-            android:textSize="17sp" />
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_margin="20dp"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/llSaldoRekening"
-        tools:layout_editor_absoluteX="20dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/img_top_up" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="TopUp"
-                        android:textAlignment="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/img_top_up" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="TopUp"
-                        android:textAlignment="center" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:src="@drawable/img_top_up" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/poppins_semibold"
-                        android:text="TopUp"
-                        android:textAlignment="center" />
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/llDompetDigital"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:layout_editor_absoluteX="15dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Dompet Digital"
-            android:textColor="@color/primary_blue_1" />
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView3"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llDompetDigital">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            >
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/img_gopay_logo" />
-
-            <LinearLayout
+                android:id="@+id/ivBackgroundFragmentFlitPay"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:orientation="vertical">
+                android:layout_height="200dp"
+                android:background="@drawable/background_flit_pay"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="GoPay"
-                    android:textColor="@color/primary_font_color"
-                    android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/ivProfileFragmentFlitPay"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="20dp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                android:background="@color/background_color_white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+            <TextView
+                android:id="@+id/tvProfileNameFragmentFlitPay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ivProfileFragmentFlitPay"
+                android:layout_margin="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Hamka Hamza"
+                android:textColor="@color/background_color_white"
+                android:fontFamily="@font/poppins_semibold"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/tvProfilePhoneNumberFragmentFlitPay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ivProfileFragmentFlitPay"
+                app:layout_constraintTop_toBottomOf="@+id/tvProfileNameFragmentFlitPay"
+                android:text="082143338476"
+                android:textColor="@color/background_color_white"
+                android:fontFamily="@font/poppins"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="Hubungkan"
-                    android:textColor="@color/primary_blue_1" />
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/llCatatanKeuangan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/cardView3"
-        tools:layout_editor_absoluteX="15dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="Catatan Keuangan"
-            android:textColor="@color/primary_blue_1" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Lihat Detail"
-            android:textAlignment="textEnd" />
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        app:layout_constraintTop_toBottomOf="@+id/llCatatanKeuangan"
-        android:layout_margin="20dp"
-        app:cardElevation="10dp"
-        app:cardCornerRadius="20dp"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_weight="1"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvWalletFragmentFlitPay"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                >
-                <LinearLayout
-                    android:layout_weight="1"
+                android:layout_height="300dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="7dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivProfileFragmentFlitPay">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    >
+                    android:layout_height="match_parent">
                     <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
+                        android:id="@+id/llWalletOneFragmentFlitPay"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:gravity="center"
+                        >
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_arrow_downward_24"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Pemasukan"
-                            android:textColor="@color/grey_font"
+                            android:id="@+id/ivCashInFragmentFlitPay"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/arrow_cash_in"/>
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cash Out"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/secondary_font_color"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rp 1.000.000"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/primary_font_color"
+                                />
+                        </LinearLayout>
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/secondary_font_color"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginEnd="10dp"
                             />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Rp 10000"
-                            android:fontFamily="@font/poppins_semibold"
-                            />
-                    </LinearLayout>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    >
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center">
                         <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_baseline_arrow_upward_24"/>
+                            android:id="@+id/ivCashOutFragmentFlitPAy"
+                            android:layout_width="25dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/arrow_cash_out"/>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Pengeluaran"
-                            android:textColor="@color/grey_font"
-                            />
+                        <LinearLayout
+                            android:layout_width="120dp"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:gravity="center_vertical"
+                            android:layout_marginStart="10dp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cash Out"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/secondary_font_color"
+                                />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Rp 1.000.000"
+                                android:fontFamily="@font/poppins_medium"
+                                android:textColor="@color/primary_font_color"
+                                />
+                        </LinearLayout>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
+                    <View
+                        android:id="@+id/vHorizontalBottomOfLlWalletOneFragmentFlitPay"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/secondary_font_color"
+                        app:layout_constraintTop_toBottomOf="@+id/llWalletOneFragmentFlitPay"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        />
+                    <TextView
+                        android:id="@+id/tvTitleSaldoFragmentFlitPay"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center">
-                        <TextView
+                        android:text="Saldo"
+                        android:layout_margin="20dp"
+                        android:fontFamily="@font/poppins_semibold"
+                        android:textColor="@color/primary_font_color"
+                        android:textSize="18sp"
+                        android:textAlignment="center"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/vHorizontalBottomOfLlWalletOneFragmentFlitPay"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0"
+                        />
+                    <TextView
+                        android:id="@+id/tvCountSaldoFragmentFlitPay"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitleSaldoFragmentFlitPay"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:text="Rp 900.000"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/primary_font_color"
+                        android:textSize="20sp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@+id/tvCountSaldoFragmentFlitPay"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        >
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Rp 10000"
-                            android:fontFamily="@font/poppins_semibold"
-                            />
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_baseline_wallet_24"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Isi Saldo"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/poppins"
+                                android:textColor="@color/primary_font_color"
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            >
+                            <ImageView
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/ic_baseline_qr_code_scanner_24"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Bayar"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/poppins"
+                                android:textColor="@color/primary_font_color"
+                                />
+                        </LinearLayout>
                     </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
 
-                </LinearLayout>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_weight="1"
+            <TextView
+                android:id="@+id/tvTitleTransaksiTerakhir"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:gravity="center"
-                >
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Selisih "
-                    android:textAlignment="textEnd"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="@color/grey_font"
-                    />
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Rp 10000"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textColor="#14D104"/>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
+                android:layout_height="wrap_content"
+                android:text="Transaksi Terakhir"
+                app:layout_constraintTop_toBottomOf="@+id/cvWalletFragmentFlitPay"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_margin="20dp"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="15sp"
+                android:textColor="@color/primary_font_color"
+                />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvTransaksiTerakhirFragmentFLitPay"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitleTransaksiTerakhir"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_transaksi_terakhir"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
