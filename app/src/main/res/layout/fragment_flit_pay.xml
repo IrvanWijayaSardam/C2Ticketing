@@ -4,41 +4,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D4E0FF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ui.flitpay.FlitPayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:id="@+id/ivBackFromFFlitPay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:src="@drawable/ic_baseline_arrow_back"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHeaderFragmentFlitPay"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0" />
-    <TextView
-        android:id="@+id/tvFlitPay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Flit Pay"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="30dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="18sp"
-        />
+        android:background="@color/primary_blue_1"
+        >
+        <ImageView
+            android:id="@+id/ivBackFromFFlitPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:src="@drawable/ic_baseline_arrow_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0" />
+        <TextView
+            android:id="@+id/tvFlitPay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Flit Pay"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="30dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="18sp"
+            android:textColor="@color/background_color_white"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ImageView
         android:id="@+id/iv_profile"
         android:layout_width="30dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintHorizontal_bias="0.791"
-        app:layout_constraintLeft_toRightOf="@+id/tvFlitPay"
+        android:layout_height="30dp"
+        app:layout_constraintHorizontal_bias="1"
+        android:layout_margin="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/ic_baseline_notifications_24"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,7 +60,7 @@
         android:layout_height="90dp"
         android:layout_margin="20dp"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/tvFlitPay"
+        app:layout_constraintTop_toBottomOf="@+id/clHeaderFragmentFlitPay"
         tools:layout_editor_absoluteX="20dp">
 
         <TextView
