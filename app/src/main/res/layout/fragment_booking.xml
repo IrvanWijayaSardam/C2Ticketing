@@ -8,28 +8,39 @@
     android:background="#D4E0FF"
     tools:context=".view.ui.booking.BookingFragment">
 
-    <TextView
-        android:id="@+id/tvBookingFragmentBooking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_flight"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHeaderFragmentBooking"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="30dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="18sp"
-        android:textAlignment="center"
-        />
+        android:background="@color/primary_blue_1"
+        >
+        <TextView
+            android:id="@+id/tvBookingFragmentBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search_flight"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="30dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="18sp"
+            android:textColor="@color/background_color_white"
+            android:textAlignment="center"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <ScrollView
         android:id="@+id/svBooking"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvBookingFragmentBooking"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clHeaderFragmentBooking"
         app:layout_constraintVertical_bias="0"
         >
         <androidx.constraintlayout.widget.ConstraintLayout

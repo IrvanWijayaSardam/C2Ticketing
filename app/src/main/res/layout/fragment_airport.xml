@@ -8,28 +8,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ui.airport.AirportFragment">
 
-    <ImageView
-        android:id="@+id/ivBackFromChooseAirportFragmentAirport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30dp"
-        android:src="@drawable/ic_baseline_arrow_back"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clHeaderFragmentAirport"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0" />
-    <TextView
-        android:id="@+id/tvChooseAirportFragmentAirport"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/choose_airport"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="30dp"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="18sp"
-        />
+        android:background="@color/primary_blue_1"
+        >
+        <ImageView
+            android:id="@+id/ivBackFromChooseAirportFragmentAirport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:src="@drawable/ic_baseline_arrow_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0" />
+        <TextView
+            android:id="@+id/tvChooseAirportFragmentAirport"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_airport"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="30dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="18sp"
+            android:textColor="@color/background_color_white"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/llSearchAirportFragmentAirport"
@@ -40,7 +51,7 @@
         android:layout_margin="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvChooseAirportFragmentAirport"
+        app:layout_constraintTop_toBottomOf="@+id/clHeaderFragmentAirport"
         >
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tIlSearchAirportFragmentAirport"
