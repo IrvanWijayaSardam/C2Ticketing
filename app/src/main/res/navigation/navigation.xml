@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_homeFragment_to_wishlistFragment"
             app:destination="@id/wishlistFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_flitPayFragment"
+            app:destination="@id/flitPayFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -150,4 +153,9 @@
         android:name="com.ctwofinalproject.ticketing.view.ui.wishlist.WishlistFragment"
         android:label="fragment_wishlist"
         tools:layout="@layout/fragment_wishlist" />
+    <fragment
+        android:id="@+id/flitPayFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.flitpay.FlitPayFragment"
+        android:label="fragment_flit_pay"
+        tools:layout="@layout/fragment_flit_pay" />
 </navigation>

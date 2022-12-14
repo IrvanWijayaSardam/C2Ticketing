@@ -166,6 +166,10 @@ class HomeFragment : Fragment() {
                 Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_wishlistFragment)
             }
 
+            binding.llFlitPay.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_flitPayFragment)
+            }
+
             tvFromAirportCodeFragmentHome.text = sharedPref.getString("airportCodeFrom","YIA")
             tvFromAirportNameFragmentHome.text = sharedPref.getString("airportNameFrom","AirportName")
 
