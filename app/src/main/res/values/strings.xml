@@ -70,9 +70,9 @@
     <string name="nik">NIK</string>
     <string name="clear_all">clear all</string>
     <string name="recent_search">Recent Search</string>
-    <string name="dummy_clock">09:10</string>
-    <string name="dummy_month_date">08 Dec</string>
-    <string name="thus">Thus</string>
+    <string name="dummy_clock" translatable="false">09:10</string>
+    <string name="dummy_month_date" translatable="false">08 Dec</string>
+    <string name="thus" translatable="false">Thus</string>
     <string name="flight_not_found">Flight Not Found</string>
     <string name="back">Back</string>
     <string name="close">Close</string>
@@ -108,6 +108,11 @@
     <string name="roundtrip">Roundtrip</string>
     <string name="payment">Payment</string>
     <string name="price">Price</string>
+    <string name="round_trip">Round-Trip</string>
+    <string name="open_my_profile">Open My Profile</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="change_data">Change Data</string>
+    <string name="logout">Logout</string>
 
 
     <!--  dummy country  -->

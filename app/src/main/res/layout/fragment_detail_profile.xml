@@ -81,7 +81,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Personal Information"
+                    android:text="@string/personal_information"
                     android:fontFamily="@font/poppins_semibold"
                     android:textColor="@color/primary_blue_1"
                     />
@@ -90,7 +90,7 @@
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Change Data"/>
+                    android:text="@string/change_data"/>
             </LinearLayout>
 
             <androidx.cardview.widget.CardView

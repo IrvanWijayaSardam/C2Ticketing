@@ -121,13 +121,7 @@ class HomeFragment : Fragment() {
         binding.imageSlider.setImageList(imageList,ScaleTypes.FIT)
     }
 
-    private fun setProfile(){
-        Glide.with(this)
-            .load("https://firebasestorage.googleapis.com/v0/b/mynotes-f6709.appspot.com/o/profile%2F8?alt=media&token=5d176d41-03bf-4c56-8f39-1c7fb4e653ea")
-            .error(R.drawable.ic_logo_ticketing)
-            .circleCrop()
-            .into(binding.ivProfile)
-    }
+
 
     private fun setBottomNav(){
         val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
