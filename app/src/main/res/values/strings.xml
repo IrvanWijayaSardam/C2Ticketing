@@ -113,6 +113,7 @@
     <string name="personal_information">Personal Information</string>
     <string name="change_data">Change Data</string>
     <string name="logout">Logout</string>
+    <string name="edit_profile">Edit Profile</string>
 
 
     <!--  dummy country  -->

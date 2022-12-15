@@ -19,6 +19,7 @@ import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
 import com.ctwofinalproject.ticketing.databinding.ItemRecentSearchBinding
 import com.ctwofinalproject.ticketing.entity.RecentSearch
+import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.view.adapter.RecentSearchAdapter
 import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel

@@ -150,7 +150,11 @@
         android:id="@+id/detailProfileFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.profile.DetailProfileFragment"
         android:label="fragment_detail_profile"
-        tools:layout="@layout/fragment_detail_profile" />
+        tools:layout="@layout/fragment_detail_profile" >
+        <action
+            android:id="@+id/action_detailProfileFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.wishlist.WishlistFragment"
@@ -161,4 +165,9 @@
         android:name="com.ctwofinalproject.ticketing.view.ui.flitpay.FlitPayFragment"
         android:label="fragment_flit_pay"
         tools:layout="@layout/fragment_flit_pay" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

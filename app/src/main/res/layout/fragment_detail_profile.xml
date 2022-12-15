@@ -86,6 +86,7 @@
                     android:textColor="@color/primary_blue_1"
                     />
                 <TextView
+                    android:id="@+id/tvtChangeDataProfile"
                     android:textAlignment="textEnd"
                     android:layout_weight="1"
                     android:layout_width="0dp"

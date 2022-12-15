@@ -54,6 +54,9 @@ class DetailProfileFragment : Fragment() {
             ivBackFDetailProfile.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
             }
+            tvtChangeDataProfile.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_detailProfileFragment_to_editProfileFragment)
+            }
         }
     }
 

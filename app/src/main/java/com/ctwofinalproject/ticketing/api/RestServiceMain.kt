@@ -5,6 +5,7 @@ import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.data.TicketData
 import com.ctwofinalproject.ticketing.data.User
 import com.ctwofinalproject.ticketing.model.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -59,4 +60,7 @@ interface RestServiceMain {
         @Header("Authorization") authorization: String
     ) : Call<String>
 
+    @POST("api/upload")
+    @Multipart
+    fun postImage (@Part file : MultipartBody.Part) : Call<ResponsePostFile>
 }

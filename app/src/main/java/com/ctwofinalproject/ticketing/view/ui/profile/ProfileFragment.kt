@@ -2,16 +2,23 @@ package com.ctwofinalproject.ticketing.view.ui.profile
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Intent
+import android.content.ContentResolver
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.DialogInterface
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -27,6 +34,13 @@ import com.denzcoskun.imageslider.models.SlideModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.*
+import java.nio.file.Files.createFile
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -42,6 +56,22 @@ class ProfileFragment : Fragment() {
     lateinit var sharedPref                                                : SharedPreferences
     lateinit var editPref                                                  : SharedPreferences.Editor
     private var token                                                      = ""
+    private lateinit var image                                             : MultipartBody.Part
+    private val galleryResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
+            val contentResolver = requireActivity().contentResolver
+            val type = contentResolver.getType(result!!)
+
+            val tempFile = File.createTempFile("image", ".jpg",null)
+            val inputStream = contentResolver.openInputStream(result!!)
+            tempFile.outputStream().use {
+                inputStream?.copyTo(it)
+            }
+            val reqBody : RequestBody = tempFile.asRequestBody(type!!.toMediaType())
+            image = MultipartBody.Part.createFormData("image", tempFile.name, reqBody)
+        }
+    private val REQUEST_CODE_PERMISSION = 100
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +87,6 @@ class ProfileFragment : Fragment() {
         editPref                                                    = sharedPref.edit()
         initListener()
         setImageSlider()
-        setProfile()
         setBottomNav()
 
 
@@ -67,6 +96,13 @@ class ProfileFragment : Fragment() {
                 binding.tvNameFragmentProfile.setText(it.firstname.toString()+" "+it.lastname.toString())
             } else {
                 Log.d(TAG, "onViewCreated: need to be logged in")
+            }
+        }
+
+        profileViewModel.liveDataResponsePostFile.observe(viewLifecycleOwner){
+            if(it != null){
+                ShowSnack.show(binding.root,"Upload Profile Success")
+                setProfile(it.data!!)
             }
         }
 
@@ -92,24 +128,6 @@ class ProfileFragment : Fragment() {
             }
 
             btnLanguageFprofile.setOnClickListener {
-                /*
-                val items = arrayOf("Bahasa", "English")
-                var checkedItem = 1
-                builder.setTitle("Change Language")
-                    .setMessage("Choose Language")
-                    .setCancelable(true)
-                    .setSingleChoiceItems(items,checkedItem,DialogInterface.OnClickListener { dialogInterface, i ->
-                        Log.d(TAG, "initListener: ${items[i]}")
-                    })
-                    .setPositiveButton("Yes",DialogInterface.OnClickListener { dialogInterface, i ->
-
-                    })
-                    .setNegativeButton("No",DialogInterface.OnClickListener { dialogInterface, i ->
-                        dialogInterface.dismiss()
-                    })
-                    .show()
-
-                 */
                 val languageItems = arrayOf("Bahasa", "English")
                 var checkedItem = 1
                 MaterialAlertDialogBuilder(requireContext())
@@ -135,9 +153,33 @@ class ProfileFragment : Fragment() {
             tvOpenMyProfileFMyProfile.setOnClickListener {
                 Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_detailProfileFragment)
             }
+
+            ivProfileFragmentProfile.setOnClickListener {
+                openFile()
+            }
         }
     }
 
+    private fun openFile() {
+        requireActivity().intent.type = "image/*"
+        openFile.launch("image/*")
+    }
+
+    private val openFile = registerForActivityResult(ActivityResultContracts.GetContent()){
+        if(it != null){
+           val contentResolver = activity?.contentResolver
+            val type = contentResolver?.getType(it)
+
+            val tempFile = File.createTempFile("image",".jpg",null)
+            val inputStream = contentResolver?.openInputStream(it)
+            tempFile.outputStream().use {
+                inputStream?.copyTo(it)
+            }
+            val imageBody : RequestBody = tempFile.asRequestBody(type!!.toMediaType())
+            var imageReq : MultipartBody.Part = MultipartBody.Part.createFormData("file",tempFile.name,imageBody)
+            profileViewModel.postFile(imageReq)
+        }
+    }
 
     private fun setImageSlider(){
         val imageList = ArrayList<SlideModel>()
@@ -147,9 +189,10 @@ class ProfileFragment : Fragment() {
         binding.imageSliderProfile.setImageList(imageList, ScaleTypes.FIT)
     }
 
-    private fun setProfile(){
+
+    private fun setProfile(urlImage : String){
         Glide.with(this)
-            .load("https://firebasestorage.googleapis.com/v0/b/mynotes-f6709.appspot.com/o/profile%2F8?alt=media&token=5d176d41-03bf-4c56-8f39-1c7fb4e653ea")
+            .load(urlImage)
             .error(R.drawable.ic_logo_ticketing)
             .circleCrop()
             .into(binding.ivProfileFragmentProfile)
