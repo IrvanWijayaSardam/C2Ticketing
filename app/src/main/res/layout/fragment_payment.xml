@@ -4,56 +4,64 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D4E0FF"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.ui.payment.PaymentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ImageView
-        android:id="@+id/ivGotoBackFromFPayment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_arrow_back"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clOneFragmentPayment"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0"
-        android:layout_margin="30dp"
-        />
-    <TextView
-        android:id="@+id/tvPaymentFPayment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="30dp"
-        android:text="@string/payment"
-        android:fontFamily="@font/poppins_semibold"
-        android:textSize="18sp"
-        android:textColor="@color/primary_font_color"
-        />
+        android:background="@color/primary_blue_1"
+        >
+        <ImageView
+            android:id="@+id/ivGotoBackFromFPayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_arrow_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_margin="30dp"
+            />
+        <TextView
+            android:id="@+id/tvPaymentFPayment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_margin="30dp"
+            android:text="@string/payment"
+            android:fontFamily="@font/poppins_semibold"
+            android:textSize="18sp"
+            android:textColor="@color/background_color_white"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPaymentFPayment">
+        app:layout_constraintTop_toBottomOf="@id/clOneFragmentPayment">
 
         <LinearLayout
             android:id="@+id/llTicketDetailsFPayment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="15dp"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="15dp">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Ticket Details"
@@ -62,7 +70,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="7dp"
                 app:cardElevation="10dp">
 
                 <TableLayout
@@ -199,7 +207,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Passenger List"
@@ -214,7 +222,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:layout_weight="1"
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Booking Summarry"
@@ -292,10 +300,14 @@
                 android:inputType="number"
                 android:maxLength="13" />
             <Button
-                android:id="@+id/btnPayFPayment"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:text="PAY"/>
+                android:id="@+id/btnPayFragmentPayment"
+                android:layout_width="172dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="@drawable/custom_button"
+                android:elevation="@dimen/cardview_default_elevation"
+                android:text="Pay"
+                android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
