@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.auth0.android.jwt.JWT
 import com.ctwofinalproject.ticketing.R
+import com.ctwofinalproject.ticketing.data.UserProto
 import com.ctwofinalproject.ticketing.databinding.FragmentSplashBinding
 import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
@@ -60,6 +61,8 @@ class SplashFragment : Fragment() {
                 } else {
                     android.util.Log.d(TAG, "onViewCreated: else ${jwt.isExpired(1)}")
                     ShowSnack.show(binding.root,"Session Expired , Please Re Login")
+                    viewModelProto.editData(UserProto("","","","","","","","",false))
+                    goToHome()
                 }
             } else {
                 goToLogin()

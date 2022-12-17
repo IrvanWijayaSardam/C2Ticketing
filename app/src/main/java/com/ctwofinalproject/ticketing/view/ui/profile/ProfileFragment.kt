@@ -88,6 +88,7 @@ class ProfileFragment : Fragment() {
         initListener()
         setImageSlider()
         setBottomNav()
+        setProfile("")
 
 
         viewModelProto.dataUser.observe(viewLifecycleOwner){
@@ -99,9 +100,8 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        profileViewModel.liveDataResponsePostFile.observe(viewLifecycleOwner){
+        profileViewModel.getResponse().observe(viewLifecycleOwner){
             if(it != null){
-                ShowSnack.show(binding.root,"Upload Profile Success")
                 setProfile(it.data!!)
             }
         }
@@ -178,6 +178,7 @@ class ProfileFragment : Fragment() {
             val imageBody : RequestBody = tempFile.asRequestBody(type!!.toMediaType())
             var imageReq : MultipartBody.Part = MultipartBody.Part.createFormData("file",tempFile.name,imageBody)
             profileViewModel.postFile(imageReq)
+            ShowSnack.show(binding.root,"Upload Profile Success")
         }
     }
 
@@ -193,7 +194,7 @@ class ProfileFragment : Fragment() {
     private fun setProfile(urlImage : String){
         Glide.with(this)
             .load(urlImage)
-            .error(R.drawable.ic_logo_ticketing)
+            .error(R.drawable.img_guest)
             .circleCrop()
             .into(binding.ivProfileFragmentProfile)
     }

@@ -2,9 +2,11 @@ package com.ctwofinalproject.ticketing.viewmodel
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctwofinalproject.ticketing.api.RestServiceMain
+import com.ctwofinalproject.ticketing.model.ResponseLogin
 import com.ctwofinalproject.ticketing.model.ResponsePostFile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import okhttp3.MultipartBody
@@ -16,6 +18,11 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(var api: RestServiceMain): ViewModel() {
     var liveDataResponsePostFile : MutableLiveData<ResponsePostFile?> = MutableLiveData()
+
+
+    fun getResponse() : LiveData<ResponsePostFile?> {
+        return  liveDataResponsePostFile
+    }
 
     fun logout(token: String){
         val client = api.logout(token)

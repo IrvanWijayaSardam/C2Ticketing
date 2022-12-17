@@ -42,8 +42,8 @@ interface RestServiceMain {
     fun searchTicket(
         @Query("departure") departure: String,
         @Query("arrival") arrival: String,
-        @Query("datedeparture") dateDeparture: String
-        ) : Call<ResponseSearchFlight>
+        @Query("datedeparture") dateDeparture: String,
+    ) : Call<ResponseSearchFlight>
 
     @GET("api/tickets/{ticketNumber}")
     fun getTicketById(
