@@ -4,6 +4,7 @@ import android.provider.ContactsContract.Data
 import com.ctwofinalproject.ticketing.data.Login
 import com.ctwofinalproject.ticketing.data.TicketData
 import com.ctwofinalproject.ticketing.data.User
+import com.ctwofinalproject.ticketing.data.UserUpdate
 import com.ctwofinalproject.ticketing.model.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -63,4 +64,15 @@ interface RestServiceMain {
     @POST("api/upload")
     @Multipart
     fun postImage (@Part file : MultipartBody.Part) : Call<ResponsePostFile>
+
+    @GET("api/whoami")
+    fun whoami (
+        @Header("Authorization") authorization: String
+    ) : Call<ResponseWhoami>
+
+    @PUT("api/users/profile")
+    fun putUser(
+        @Header("Authorization") authorization: String,
+        @Body body : UserUpdate
+    ) : Call<ResponseUpdate>
 }

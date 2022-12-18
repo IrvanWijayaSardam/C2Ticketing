@@ -11,10 +11,14 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavInflater
 import androidx.navigation.Navigation
 import com.ctwofinalproject.ticketing.R
+import com.ctwofinalproject.ticketing.util.ShowSnack
+import com.ctwofinalproject.ticketing.data.UserUpdate
 import com.ctwofinalproject.ticketing.databinding.FragmentDetailProfileBinding
 import com.ctwofinalproject.ticketing.databinding.FragmentEditProfileBinding
+import com.ctwofinalproject.ticketing.viewmodel.ProfileViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProvinceViewModel
 import com.google.android.datatransport.runtime.firebase.transport.LogEventDropped
@@ -26,109 +30,143 @@ import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class EditProfileFragment : Fragment() {
-    private var _binding: FragmentEditProfileBinding?                   = null
-    private val binding get()                                           = _binding!!
-    private val viewModelProto                                          : ProtoViewModel by viewModels()
-    private val viewModelProvinces                                      : ProvinceViewModel by viewModels()
+    private var _binding: FragmentEditProfileBinding? = null
+    private val binding get() = _binding!!
+    private val viewModelProto: ProtoViewModel by viewModels()
+    private val viewModelProvinces: ProvinceViewModel by viewModels()
+    private val viewModelProfile: ProfileViewModel by viewModels()
     private var itemsProvince = ArrayList<String>()
     private var itemsCity = ArrayList<String>()
     private var itemNumber = ArrayList<Number>()
+    private var token: String = ""
+    private var password: String? = null
+    private var address: String? = null
+    private var countryUser: String? = null
+    private var province: String? = null
+    private var city: String? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentEditProfileBinding.inflate(inflater,container,false)
+        _binding = FragmentEditProfileBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
 
     override fun onResume() {
         super.onResume()
-        val country                                         = resources.getStringArray(R.array.country)
-        val arrayAdapterCountry                             = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
+        val country = resources.getStringArray(R.array.country)
+        val arrayAdapterCountry = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
         binding.spCountryFEditProfile.setAdapter(arrayAdapterCountry)
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val country                                         = resources.getStringArray(R.array.country)
+        val country = resources.getStringArray(R.array.country)
         initListener()
 
+        viewModelProto.dataUser.observe(viewLifecycleOwner) {
+            if (it.isLogin) {
+                token = it.token
+            } else {
+
+            }
+        }
+
+        viewModelProfile.liveDataResponseUpdate.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: ${it}")
+            if (it != null){
+                if(it.code!!.equals(200)){
+                    ShowSnack.show(binding.root,"Update Profile Success")
+                    viewModelProfile.liveDataResponseUpdate.postValue(null)
+                    Navigation.findNavController(requireView()).navigate(R.id.action_editProfileFragment_to_detailProfileFragment)
+                }
+            }
+        }
+
         viewModelProvinces.retrieveProvince()
-        viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner){
-            for(i in 0 until it!!.size){
+        viewModelProvinces.getLiveDataProvinces().observe(viewLifecycleOwner) {
+            for (i in 0 until it!!.size) {
                 itemNumber.add(it.get(i).id!!.toInt())
                 itemsProvince.add(it.get(i).name.toString())
             }
         }
 
-        viewModelProvinces.getLiveDataCity().observe(viewLifecycleOwner,{
+        viewModelProvinces.getLiveDataCity().observe(viewLifecycleOwner, {
+            itemsCity.clear()
             Log.d(ContentValues.TAG, "onViewCreated: Observer City : ${it}")
-            for(i in 0 until it!!.size){
+            for (i in 0 until it!!.size) {
                 itemsCity.add(it.get(i).name.toString())
             }
         })
 
 
-        binding.spCountryFEditProfile.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, id: Int, p3: Long) {
-                if(country[id].toString().equals("Indonesia")){
-                    binding.spProvinceFEditProfile.visibility = View.VISIBLE
-                    binding.edtProvinceFEditProfile.visibility = View.GONE
-                    val arrayAdapterProvince = ArrayAdapter(requireContext(),R.layout.drop_down_item,itemsProvince)
-                    binding.spProvinceFEditProfile.setAdapter(arrayAdapterProvince)
-                } else {
-                    binding.spCityFEditProfile.visibility = View.GONE
-                    binding.edtCityFEditProfile.visibility = View.VISIBLE
-                    binding.spProvinceFEditProfile.visibility = View.GONE
-                    binding.edtProvinceFEditProfile.visibility = View.VISIBLE
+        binding.spCountryFEditProfile.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, id: Int, p3: Long) {
+                    if (country[id].toString().equals("Indonesia")) {
+                        countryUser = "Indonesia"
+                        binding.spProvinceFEditProfile.visibility = View.VISIBLE
+                        binding.edtProvinceFEditProfile.visibility = View.GONE
+                        val arrayAdapterProvince =
+                            ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsProvince)
+                        binding.spProvinceFEditProfile.setAdapter(arrayAdapterProvince)
+                    } else {
+                        countryUser = "Else"
+                        binding.spCityFEditProfile.visibility = View.GONE
+                        binding.edtCityFEditProfile.visibility = View.VISIBLE
+                        binding.spProvinceFEditProfile.visibility = View.GONE
+                        binding.edtProvinceFEditProfile.visibility = View.VISIBLE
+                    }
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
+
+            }
+
+        binding.spProvinceFEditProfile.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
+                    binding.spCityFEditProfile.visibility = View.VISIBLE
+                    binding.edtCityFEditProfile.visibility = View.GONE
+                    viewModelProvinces.retrieveCity(itemNumber[i].toInt())
+                    val arrayAdapterCity =
+                        ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsCity)
+                    binding.spCityFEditProfile.setAdapter(arrayAdapterCity)
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    Log.d(TAG, "onNothingSelected: masuk on nothing selected")
                 }
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
+        binding.spCityFEditProfile.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                    //city =
+                }
 
-        }
-
-        binding.spProvinceFEditProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
-                itemsCity.clear()
-                binding.spCityFEditProfile.visibility = View.VISIBLE
-                binding.edtCityFEditProfile.visibility = View.GONE
-                viewModelProvinces.retrieveCity(itemNumber[i].toInt())
-                val arrayAdapterCity                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsCity)
-                binding.spCityFEditProfile.setAdapter(arrayAdapterCity)
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                Log.d(TAG, "onNothingSelected: masuk on nothing selected")
-            }
-        }
-
-        binding.spCityFEditProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
 
             }
 
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-
-        }
-
-        viewModelProto.dataUser.observe(viewLifecycleOwner){
+        viewModelProto.dataUser.observe(viewLifecycleOwner) {
             binding.edtEmailFEditProfile.setText(it.email.toString())
             binding.edtFirstNameFEditProfile.setText(it.firstname.toString())
             binding.edtLastNameFEditProfile.setText(it.lastname.toString())
-            when(it.gender.toString()){
+            when (it.gender.toString()) {
                 "L" -> binding.rbGenderMaleFEditProfile.isChecked = true
                 "P" -> binding.rbGenderFemaleFEditProfile.isChecked = true
             }
-            binding.edtBirthDayDateFEditProfile.setText(it.birthdate.substring(0,10))
+            binding.edtBirthDayDateFEditProfile.setText(it.birthdate.substring(0, 10))
         }
     }
 
@@ -150,6 +188,48 @@ class EditProfileFragment : Fragment() {
                     val dateBirthFormat = SimpleDateFormat("YYYY-MM-dd")
                     val dateBirth = dateBirthFormat.format(Date(it).time)
                     edtBirthDayDateFEditProfile.setText(dateBirth)
+                }
+            }
+            btnSubmitDataFEditProfile.setOnClickListener {
+                var gender = ""
+                if (rbGenderMaleFEditProfile.isChecked) {
+                    gender = "L"
+                } else {
+                    gender = "P"
+                }
+                Log.d(TAG, "initListener: country User ${countryUser}")
+                if (countryUser.equals("Indonesia")) {
+                    viewModelProfile.updateUser(
+                        "bearer " + token, UserUpdate(
+                            edtEmailFEditProfile.text.toString(),
+                            edtFirstNameFEditProfile.text.toString(),
+                            edtLastNameFEditProfile.text.toString(),
+                            gender,
+                            edtPhoneFEdiProfile.text.toString(),
+                            edtBirthDayDateFEditProfile.text.toString(),
+                            edtHomeAddress.text.toString(),
+                            null,
+                            spCountryFEditProfile.selectedItem.toString(),
+                            spProvinceFEditProfile.selectedItem.toString(),
+                            spCityFEditProfile.selectedItem.toString()
+                        )
+                    )
+                } else {
+                    viewModelProfile.updateUser(
+                        "bearer " + token, UserUpdate(
+                            edtEmailFEditProfile.text.toString(),
+                            edtFirstNameFEditProfile.text.toString(),
+                            edtLastNameFEditProfile.text.toString(),
+                            gender,
+                            edtPhoneFEdiProfile.text.toString(),
+                            edtBirthDayDateFEditProfile.text.toString(),
+                            edtPasswordFEditProfile.text.toString(),
+                            null,
+                            spCountryFEditProfile.selectedItem.toString(),
+                            edtProvinceFEditProfile.text.toString(),
+                            edtCityFEditProfile.text.toString()
+                        )
+                    )
                 }
             }
         }

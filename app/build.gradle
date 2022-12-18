@@ -7,6 +7,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id "com.google.protobuf" version "0.8.17"
+//    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -104,6 +105,10 @@ dependencies {
 
     //GSON Converter
     implementation 'com.google.code.gson:gson:2.8.8'
+
+    //Safe args
+    //implementation "androidx.navigation.navigation-ui-ktx:2.5.3"
+    //implementation "androidx.navigation.navigation-fragment-ktx:2.5.3"
 
 
 }

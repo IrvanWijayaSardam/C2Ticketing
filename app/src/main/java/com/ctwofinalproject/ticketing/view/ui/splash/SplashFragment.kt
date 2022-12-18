@@ -65,7 +65,7 @@ class SplashFragment : Fragment() {
                     goToHome()
                 }
             } else {
-                goToLogin()
+                //goToLogin()
             }
         }
     }

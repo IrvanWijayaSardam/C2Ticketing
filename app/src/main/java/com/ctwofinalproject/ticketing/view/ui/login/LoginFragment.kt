@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.ActivityNavigatorDestinationBuilder
 import androidx.navigation.Navigation
 import com.auth0.android.jwt.JWT
 import com.ctwofinalproject.ticketing.R
@@ -16,6 +17,9 @@ import com.ctwofinalproject.ticketing.data.UserProto
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
 import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.util.ShowSnack
+import com.ctwofinalproject.ticketing.util.TokenNav
+import com.ctwofinalproject.ticketing.view.ui.booking.SelectOneWayFragment
+import com.ctwofinalproject.ticketing.view.ui.home.HomeFragment
 import com.ctwofinalproject.ticketing.viewmodel.LoginViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -30,6 +34,7 @@ class LoginFragment : Fragment() {
     val viewModelLogin                                          : LoginViewModel by viewModels()
     lateinit var token                                          : String
     private lateinit var  loadingDialog                         : LoadingDialog
+    private lateinit var fromDestination                        : TokenNav
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,7 +108,19 @@ class LoginFragment : Fragment() {
     }
 
     private fun goToHome(){
-        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
+
+        /*
+        Navigation.findNavController(binding.root).popBackStack()
+        val bottomnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
+        bottomnav.selectedItemId = R.id.homeFragment
+         */
+
+       Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
+    }
+
+    private fun getArgs(){
+        val bundle = arguments ?: return
+//        val args =
     }
 
     private fun setBottomNav(){

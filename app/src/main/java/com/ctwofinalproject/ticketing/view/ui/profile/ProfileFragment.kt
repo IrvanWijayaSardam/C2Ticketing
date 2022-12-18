@@ -96,7 +96,7 @@ class ProfileFragment : Fragment() {
             if(it.isLogin){
                 isLogin = true
                 token = it.token
-                binding.tvNameFragmentProfile.setText(it.firstname.toString()+" "+it.lastname.toString())
+                profileViewModel.whoami("bearer "+token)
             } else {
                 isLogin = false
                 binding.tvNameFragmentProfile.text = "Guest"
@@ -105,9 +105,13 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        profileViewModel.getResponse().observe(viewLifecycleOwner){
+        profileViewModel.liveDataResponseWhoami.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: ${it}")
             if(it != null){
-                setProfile(it.data!!)
+                setProfile(it.currentUser!!.pictures.toString())
+                binding.tvNameFragmentProfile.setText(it.currentUser.firstname.toString()+" "+it.currentUser.lastname.toString())
+            } else {
+                
             }
         }
 

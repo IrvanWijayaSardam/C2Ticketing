@@ -15,12 +15,10 @@ class UserUpdate (
         val phone: String?,
         @SerializedName("birthdate")
         val birthdate: String?,
-        @SerializedName("password")
-        val password: String?,
-        @SerializedName("confPassword")
-        val confPassword: String?,
         @SerializedName("homeAddress")
         val homeAddress: String?,
+        @SerializedName("pictures")
+        val pictures: String?,
         @SerializedName("country")
         val country: String?,
         @SerializedName("province")
