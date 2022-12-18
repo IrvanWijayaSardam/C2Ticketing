@@ -57,6 +57,7 @@ class ProfileFragment : Fragment() {
     lateinit var editPref                                                  : SharedPreferences.Editor
     private var token                                                      = ""
     private lateinit var image                                             : MultipartBody.Part
+    private var isLogin                                                    = false
     private val galleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
             val contentResolver = requireActivity().contentResolver
@@ -92,10 +93,14 @@ class ProfileFragment : Fragment() {
 
 
         viewModelProto.dataUser.observe(viewLifecycleOwner){
-            if(it != null){
+            if(it.isLogin){
+                isLogin = true
                 token = it.token
                 binding.tvNameFragmentProfile.setText(it.firstname.toString()+" "+it.lastname.toString())
             } else {
+                isLogin = false
+                binding.tvNameFragmentProfile.text = "Guest"
+                binding.btnLogoutFprofile.text = "Login"
                 Log.d(TAG, "onViewCreated: need to be logged in")
             }
         }
@@ -111,6 +116,7 @@ class ProfileFragment : Fragment() {
     private fun initListener() {
         binding?.run {
             btnLogoutFprofile.setOnClickListener {
+                if(isLogin){
                     builder.setTitle("Logout")
                         .setMessage("Are you sure want to logout ?")
                         .setCancelable(true)
@@ -125,6 +131,9 @@ class ProfileFragment : Fragment() {
                             dialogInterface.dismiss()
                         })
                         .show()
+                } else {
+                    Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment)
+                }
             }
 
             btnLanguageFprofile.setOnClickListener {
@@ -151,7 +160,21 @@ class ProfileFragment : Fragment() {
             }
 
             tvOpenMyProfileFMyProfile.setOnClickListener {
-                Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_detailProfileFragment)
+                if(isLogin){
+                    Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_detailProfileFragment)
+                } else {
+                    builder.setTitle("Notification")
+                        .setMessage("To access these feature , you need to be loggedin first")
+                        .setCancelable(true)
+                        .setPositiveButton("Goto Login",DialogInterface.OnClickListener { dialogInterface, i ->
+                            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment)
+                            dialogInterface.dismiss()
+                        })
+                        .setNegativeButton("No",DialogInterface.OnClickListener { dialogInterface, i ->
+                            dialogInterface.dismiss()
+                        })
+                        .show()
+                }
             }
 
             ivProfileFragmentProfile.setOnClickListener {

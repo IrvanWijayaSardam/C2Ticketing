@@ -42,7 +42,7 @@ class SelectOneWayFragment : Fragment() {
         binding?.run {
             llDepatrtureDateFragmentOneWay.setOnClickListener {
                 val datePicker = MaterialDatePicker.Builder.datePicker()
-                    .setTitleText("CHOOSE BIRTHDAY DATE")
+                    .setTitleText("CHOOSE DEPARTURE DATE")
                     .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                     .build()
                 datePicker.show(

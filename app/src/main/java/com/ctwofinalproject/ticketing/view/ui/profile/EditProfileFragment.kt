@@ -18,7 +18,11 @@ import com.ctwofinalproject.ticketing.databinding.FragmentEditProfileBinding
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProvinceViewModel
 import com.google.android.datatransport.runtime.firebase.transport.LogEventDropped
+import com.google.android.material.datepicker.MaterialDatePicker
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
 class EditProfileFragment : Fragment() {
@@ -42,18 +46,8 @@ class EditProfileFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-//        data dummy Select City
-//        val city                                    = resources.getStringArray(R.array.city)
-//        val arrayAdapterCity                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, city)
-//        binding.spCityFEditProfile.setAdapter(arrayAdapterCity)
-//
-////        data dummy Select Province
-//        val province = resources.getStringArray(R.array.province)
-//        val arrayAdapterProvince                    = ArrayAdapter(requireContext(), R.layout.drop_down_item, province)
-//        binding.spProvinceFEditProfile.setAdapter(arrayAdapterProvince)
-////        data dummy Select Country
         val country                                         = resources.getStringArray(R.array.country)
-        val arrayAdapterCountry                     = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
+        val arrayAdapterCountry                             = ArrayAdapter(requireContext(), R.layout.drop_down_item, country)
         binding.spCountryFEditProfile.setAdapter(arrayAdapterCountry)
 
     }
@@ -82,8 +76,15 @@ class EditProfileFragment : Fragment() {
         binding.spCountryFEditProfile.onItemSelectedListener = object :AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, id: Int, p3: Long) {
                 if(country[id].toString().equals("Indonesia")){
+                    binding.spProvinceFEditProfile.visibility = View.VISIBLE
+                    binding.edtProvinceFEditProfile.visibility = View.GONE
                     val arrayAdapterProvince = ArrayAdapter(requireContext(),R.layout.drop_down_item,itemsProvince)
                     binding.spProvinceFEditProfile.setAdapter(arrayAdapterProvince)
+                } else {
+                    binding.spCityFEditProfile.visibility = View.GONE
+                    binding.edtCityFEditProfile.visibility = View.VISIBLE
+                    binding.spProvinceFEditProfile.visibility = View.GONE
+                    binding.edtProvinceFEditProfile.visibility = View.VISIBLE
                 }
             }
 
@@ -96,6 +97,8 @@ class EditProfileFragment : Fragment() {
         binding.spProvinceFEditProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, i: Int, p3: Long) {
                 itemsCity.clear()
+                binding.spCityFEditProfile.visibility = View.VISIBLE
+                binding.edtCityFEditProfile.visibility = View.GONE
                 viewModelProvinces.retrieveCity(itemNumber[i].toInt())
                 val arrayAdapterCity                        = ArrayAdapter(requireContext(), R.layout.drop_down_item, itemsCity)
                 binding.spCityFEditProfile.setAdapter(arrayAdapterCity)
@@ -103,6 +106,16 @@ class EditProfileFragment : Fragment() {
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 Log.d(TAG, "onNothingSelected: masuk on nothing selected")
+            }
+        }
+
+        binding.spCityFEditProfile.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
             }
 
         }
@@ -123,6 +136,21 @@ class EditProfileFragment : Fragment() {
         binding?.run {
             ivBackFEditProfile.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
+            }
+            ivBirthdayDateFEditProfile.setOnClickListener {
+                val datePicker = MaterialDatePicker.Builder.datePicker()
+                    .setTitleText("CHOOSE BIRTHDAY DATE")
+                    .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                    .build()
+                datePicker.show(
+                    this@EditProfileFragment.requireActivity().supportFragmentManager,
+                    "datePicker"
+                )
+                datePicker.addOnPositiveButtonClickListener {
+                    val dateBirthFormat = SimpleDateFormat("YYYY-MM-dd")
+                    val dateBirth = dateBirthFormat.format(Date(it).time)
+                    edtBirthDayDateFEditProfile.setText(dateBirth)
+                }
             }
         }
     }
