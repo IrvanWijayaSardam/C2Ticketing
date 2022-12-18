@@ -223,7 +223,7 @@ class EditProfileFragment : Fragment() {
                             gender,
                             edtPhoneFEdiProfile.text.toString(),
                             edtBirthDayDateFEditProfile.text.toString(),
-                            edtPasswordFEditProfile.text.toString(),
+                            edtHomeAddress.text.toString(),
                             null,
                             spCountryFEditProfile.selectedItem.toString(),
                             edtProvinceFEditProfile.text.toString(),

@@ -24,6 +24,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.ctwofinalproject.ticketing.R
+import com.ctwofinalproject.ticketing.data.UserUpdate
 import com.ctwofinalproject.ticketing.databinding.FragmentProfileBinding
 import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
@@ -112,6 +113,17 @@ class ProfileFragment : Fragment() {
                 binding.tvNameFragmentProfile.setText(it.currentUser.firstname.toString()+" "+it.currentUser.lastname.toString())
             } else {
                 
+            }
+        }
+        
+        profileViewModel.liveDataResponsePostFile.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: ${it}")
+            if(it != null){
+                if(it.code!!.equals(200)){
+                    profileViewModel.updateUser("bearer "+token, UserUpdate(null,null,null,null,null,null,
+                    null,it.data.toString(),null,null,null))
+                    setProfile(it.data.toString())
+                }
             }
         }
 
