@@ -78,4 +78,10 @@ interface RestServiceMain {
         @Header("Authorization") authorization: String,
         @Body body: CreateWishlist
     ) : Call<ResponseCreateWishlist>
+
+    @PUT("api/users/profile/password")
+    fun updatePassword(
+        @Header("Authorization") authorization: String,
+        @Body body : UpdatePassword
+    ) : Call<ResponseUpdatePassword>
 }

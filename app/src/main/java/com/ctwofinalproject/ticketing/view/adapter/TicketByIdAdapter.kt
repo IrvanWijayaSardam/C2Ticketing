@@ -65,11 +65,11 @@ class TicketByIdAdapter():RecyclerView.Adapter<TicketByIdAdapter.ViewHolder>() {
         holder.binding.tvAirportCodeToItemTripSummary.text = differ.currentList[position].flight!!.arrivalTerminal!!.code.toString()
         holder.binding.tvDepartureDayItemTripSummary.text = DateConverter.convertISOTime(context,differ.currentList[position].flight!!.departureDate.toString())
         holder.binding.tvArrivalDayItemTripSummary.text = DateConverter.convertISOTime(context,differ.currentList[position].flight!!.arrivalDate.toString())
-        holder.binding.tvAirplaneNameAndSeriFragmentTripSummaryTicket.text = differ.currentList[position].flight!!.planename!!.namePlane.toString()
+        //holder.binding.tvAirplaneNameAndSeriFragmentTripSummaryTicket.text = differ.currentList[position]!!.flight!!.planeName!![1]!!.namePlane
         holder.binding.tvPriceTicketItemTicketTripSummary.text = DecimalSeparator.formatDecimalSeperators(differ.currentList[position].price.toString())
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        return 1
     }
 }

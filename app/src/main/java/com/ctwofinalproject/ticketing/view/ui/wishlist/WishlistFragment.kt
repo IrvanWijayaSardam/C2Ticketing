@@ -64,6 +64,22 @@ class WishlistFragment : Fragment() {
                 binding.shimmerBarWishlist.visibility = View.GONE
             }
         }
+
+        adapterWishlist.setOnItemClickListener(object : WishlistAdapter.onItemClickListener{
+            override fun onItemClick(dataItemWishlist: DataItemWishlist) {
+                if(dataItemWishlist.ticketIdReturn == null){
+                    viewModelProto.deleteTicketIdDeparture()
+                    viewModelProto.submitTicketIdDeparture(dataItemWishlist.ticketIdDeparture.toString())
+                    Navigation.findNavController(requireView()).navigate(R.id.action_wishlistFragment_to_tripSummaryPassengerFragment)
+                } else {
+                    viewModelProto.deleteTicketIdDeparture()
+                    viewModelProto.deleteTicketIdReturn()
+                    viewModelProto.submitTicketIdDeparture(dataItemWishlist.ticketIdDeparture.toString())
+                    viewModelProto.submitTicketIdReturn(dataItemWishlist.ticketIdReturn.toString())
+                    Navigation.findNavController(requireView()).navigate(R.id.action_wishlistFragment_to_tripSummaryPassengerFragment)
+                }
+            }
+        })
     }
 
     private fun initListener() {

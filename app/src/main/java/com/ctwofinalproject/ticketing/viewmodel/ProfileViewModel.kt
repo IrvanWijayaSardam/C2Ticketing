@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctwofinalproject.ticketing.api.RestServiceMain
+import com.ctwofinalproject.ticketing.data.ResponseUpdatePassword
+import com.ctwofinalproject.ticketing.data.UpdatePassword
 import com.ctwofinalproject.ticketing.data.UserUpdate
 import com.ctwofinalproject.ticketing.model.ResponseLogin
 import com.ctwofinalproject.ticketing.model.ResponsePostFile
@@ -17,12 +19,15 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
+import kotlin.math.log
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(var api: RestServiceMain): ViewModel() {
     var liveDataResponsePostFile : MutableLiveData<ResponsePostFile?> = MutableLiveData()
     var liveDataResponseWhoami : MutableLiveData<ResponseWhoami?> = MutableLiveData()
     var liveDataResponseUpdate : MutableLiveData<ResponseUpdate?> = MutableLiveData()
+    var liveDataResponseUpdatePassword : MutableLiveData<ResponseUpdatePassword?> = MutableLiveData()
+
 
     fun getResponse() : LiveData<ResponsePostFile?> {
         return  liveDataResponsePostFile
@@ -99,6 +104,26 @@ class ProfileViewModel @Inject constructor(var api: RestServiceMain): ViewModel(
             }
 
             override fun onFailure(call: Call<ResponseUpdate>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    fun updatePassword(token: String,updatePassword: UpdatePassword){
+        val client = api.updatePassword(token,updatePassword)
+        client.enqueue(object : Callback<ResponseUpdatePassword> {
+            override fun onResponse(
+                call: Call<ResponseUpdatePassword>,
+                response: Response<ResponseUpdatePassword>
+            ) {
+                if(response.isSuccessful){
+                    liveDataResponseUpdatePassword.postValue(response.body())
+                } else {
+                    liveDataResponseUpdatePassword.value = null
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseUpdatePassword>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
             }
         })

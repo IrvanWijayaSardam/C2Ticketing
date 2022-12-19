@@ -17,6 +17,120 @@ data class ResponseGetWishlist(
 	val status: Boolean? = null
 )
 
+data class PlaneNameItem(
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("namePlane")
+	val namePlane: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+)
+
+data class TicketReturn(
+
+	@field:SerializedName("country")
+	val country: String? = null,
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("flight")
+	val flight: FlightWishlist? = null,
+
+	@field:SerializedName("price")
+	val price: Int? = null,
+
+	@field:SerializedName("class_id")
+	val classId: Int? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("flight_id")
+	val flightId: Int? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+)
+
+data class FlightWishlist(
+
+	@field:SerializedName("departureTime")
+	val departureTime: String? = null,
+
+	@field:SerializedName("departureAirport")
+	val departureAirport: Int? = null,
+
+	@field:SerializedName("DepartureTerminal")
+	val departureTerminal: DepartureTerminalWishlist? = null,
+
+	@field:SerializedName("ArrivalTerminal")
+	val arrivalTerminal: ArrivalTerminalWishlist? = null,
+
+	@field:SerializedName("arrivalDate")
+	val arrivalDate: String? = null,
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("planeName")
+	val planeName: List<PlaneNameItem?>? = null,
+
+	@field:SerializedName("arrivalTime")
+	val arrivalTime: String? = null,
+
+	@field:SerializedName("planeId")
+	val planeId: Int? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("departureDate")
+	val departureDate: String? = null,
+
+	@field:SerializedName("arrivalAirport")
+	val arrivalAirport: Int? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+)
+
+data class DepartureTerminalWishlist(
+
+	@field:SerializedName("country")
+	val country: String? = null,
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("code")
+	val code: String? = null,
+
+	@field:SerializedName("city")
+	val city: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("terminal")
+	val terminal: String? = null,
+
+	@field:SerializedName("status")
+	val status: Boolean? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+)
+
 data class DataItemWishlist(
 
 	@field:SerializedName("createdAt")
@@ -43,9 +157,6 @@ data class DataItemWishlist(
 	@field:SerializedName("ticket_id_return")
 	val ticketIdReturn: Int? = null,
 
-	@field:SerializedName("users")
-	val users: Users? = null,
-
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
 )
@@ -58,6 +169,9 @@ data class TicketDeparture(
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
+	@field:SerializedName("flight")
+	val flight: Flight? = null,
+
 	@field:SerializedName("price")
 	val price: Int? = null,
 
@@ -74,58 +188,7 @@ data class TicketDeparture(
 	val updatedAt: String? = null
 )
 
-data class Users(
-
-	@field:SerializedName("firstname")
-	val firstname: String? = null,
-
-	@field:SerializedName("birthdate")
-	val birthdate: String? = null,
-
-	@field:SerializedName("gender")
-	val gender: String? = null,
-
-	@field:SerializedName("pictures")
-	val pictures: String? = null,
-
-	@field:SerializedName("lastname")
-	val lastname: String? = null,
-
-	@field:SerializedName("access_token")
-	val accessToken: String? = null,
-
-	@field:SerializedName("refresh_token")
-	val refreshToken: String? = null,
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
-
-	@field:SerializedName("password")
-	val password: String? = null,
-
-	@field:SerializedName("isfacebookauth")
-	val isfacebookauth: Any? = null,
-
-	@field:SerializedName("phone")
-	val phone: String? = null,
-
-	@field:SerializedName("role_id")
-	val roleId: Int? = null,
-
-	@field:SerializedName("isgoogleauth")
-	val isgoogleauth: Any? = null,
-
-	@field:SerializedName("id")
-	val id: Int? = null,
-
-	@field:SerializedName("email")
-	val email: String? = null,
-
-	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
-)
-
-data class TicketReturn(
+data class ArrivalTerminalWishlist(
 
 	@field:SerializedName("country")
 	val country: String? = null,
@@ -133,17 +196,23 @@ data class TicketReturn(
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("price")
-	val price: Int? = null,
+	@field:SerializedName("code")
+	val code: String? = null,
 
-	@field:SerializedName("class_id")
-	val classId: Int? = null,
+	@field:SerializedName("city")
+	val city: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("flight_id")
-	val flightId: Int? = null,
+	@field:SerializedName("terminal")
+	val terminal: String? = null,
+
+	@field:SerializedName("status")
+	val status: Boolean? = null,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null

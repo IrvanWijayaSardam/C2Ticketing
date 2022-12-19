@@ -17,28 +17,37 @@ data class ResponseGetTicketById(
 	val status: Boolean? = null
 )
 
-data class Flighttype(
+data class ArrivalTerminalGetTicketByID(
+
+	@field:SerializedName("country")
+	val country: String? = null,
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
+	@field:SerializedName("code")
+	val code: String? = null,
+
+	@field:SerializedName("city")
+	val city: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("type")
-	val type: String? = null,
+	@field:SerializedName("terminal")
+	val terminal: String? = null,
+
+	@field:SerializedName("status")
+	val status: Boolean? = null,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
 )
 
-data class JsonMemberClassGetById(
-
-	@field:SerializedName("type")
-	val type: String? = null
-)
-
-data class Planename(
+data class PlaneNameItemResponseGetTicketById(
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
@@ -53,7 +62,13 @@ data class Planename(
 	val updatedAt: String? = null
 )
 
-data class FlightGetById(
+data class JsonMemberClassResponseGetTicketByID(
+
+	@field:SerializedName("type")
+	val type: String? = null
+)
+
+data class FlightResponseGetTicketById(
 
 	@field:SerializedName("departureTime")
 	val departureTime: String? = null,
@@ -61,17 +76,11 @@ data class FlightGetById(
 	@field:SerializedName("departureAirport")
 	val departureAirport: Int? = null,
 
-	@field:SerializedName("planename")
-	val planename: Planename? = null,
-
 	@field:SerializedName("DepartureTerminal")
-	val departureTerminal: DepartureTerminalGetById? = null,
-
-	@field:SerializedName("flightType")
-	val flightType: Int? = null,
+	val departureTerminal: DepartureTerminalResponseGetTicketById? = null,
 
 	@field:SerializedName("ArrivalTerminal")
-	val arrivalTerminal: ArrivalTerminalGetById? = null,
+	val arrivalTerminal: ArrivalTerminalGetTicketByID? = null,
 
 	@field:SerializedName("arrivalDate")
 	val arrivalDate: String? = null,
@@ -79,14 +88,14 @@ data class FlightGetById(
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
+	@field:SerializedName("planeName")
+	val planeName: List<PlaneNameItemResponseGetTicketById?>? = null,
+
 	@field:SerializedName("arrivalTime")
 	val arrivalTime: String? = null,
 
 	@field:SerializedName("planeId")
 	val planeId: Int? = null,
-
-	@field:SerializedName("flighttype")
-	val flighttype: Flighttype? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
@@ -101,7 +110,7 @@ data class FlightGetById(
 	val updatedAt: String? = null
 )
 
-data class DepartureTerminalGetById(
+data class DepartureTerminalResponseGetTicketById(
 
 	@field:SerializedName("country")
 	val country: String? = null,
@@ -140,7 +149,7 @@ data class DataTicketGetById(
 	val createdAt: String? = null,
 
 	@field:SerializedName("flight")
-	val flight: FlightGetById? = null,
+	val flight: FlightResponseGetTicketById? = null,
 
 	@field:SerializedName("price")
 	val price: Int? = null,
@@ -148,47 +157,14 @@ data class DataTicketGetById(
 	@field:SerializedName("class_id")
 	val classId: Int? = null,
 
-	@field:SerializedName("isRoundTrip")
-	val isRoundTrip: Boolean? = null,
-
 	@field:SerializedName("id")
 	val id: Int? = null,
 
 	@field:SerializedName("class")
-	val jsonMemberClass: JsonMemberClassGetById? = null,
+	val jsonMemberClass: JsonMemberClassResponseGetTicketByID? = null,
 
 	@field:SerializedName("flight_id")
 	val flightId: Int? = null,
-
-	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
-)
-
-data class ArrivalTerminalGetById(
-
-	@field:SerializedName("country")
-	val country: String? = null,
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
-
-	@field:SerializedName("code")
-	val code: String? = null,
-
-	@field:SerializedName("city")
-	val city: String? = null,
-
-	@field:SerializedName("name")
-	val name: String? = null,
-
-	@field:SerializedName("id")
-	val id: Int? = null,
-
-	@field:SerializedName("terminal")
-	val terminal: String? = null,
-
-	@field:SerializedName("status")
-	val status: Boolean? = null,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null

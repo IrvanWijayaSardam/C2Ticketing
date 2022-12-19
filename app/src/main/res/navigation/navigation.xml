@@ -166,7 +166,11 @@
         android:id="@+id/wishlistFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.wishlist.WishlistFragment"
         android:label="fragment_wishlist"
-        tools:layout="@layout/fragment_wishlist" />
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_wishlistFragment_to_tripSummaryPassengerFragment"
+            app:destination="@id/tripSummaryPassengerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/flitPayFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.flitpay.FlitPayFragment"

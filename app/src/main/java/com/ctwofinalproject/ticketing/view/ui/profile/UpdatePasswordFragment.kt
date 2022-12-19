@@ -1,0 +1,54 @@
+package com.ctwofinalproject.ticketing.view.ui.profile
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.ctwofinalproject.ticketing.R
+import com.ctwofinalproject.ticketing.databinding.FragmentProfileBinding
+import com.ctwofinalproject.ticketing.databinding.FragmentUpdatePasswordBinding
+import com.ctwofinalproject.ticketing.view.ui.booking.AddPassengerFragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class UpdatePasswordFragment : BottomSheetDialogFragment() {
+
+    private var _binding : FragmentUpdatePasswordBinding?                         = null
+    private val binding get()                                                     = _binding!!
+    private lateinit var listener                                                 : onItemClickListener
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentUpdatePasswordBinding.inflate(inflater,container,false)
+        return binding?.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initListener()
+    }
+
+    private fun initListener() {
+        binding?.run {
+            btnUpdatePasswordFUpdatePassword.setOnClickListener {
+                listener.onItemClick(edtOldPassowordFUpdatePassword.text.toString(),edtNewPasswordFUpdatePassword.text.toString(),edtConfPasswordFUpdatePassword.text.toString())
+                dismiss()
+            }
+        }
+    }
+
+    interface onItemClickListener {
+        fun onItemClick(oldPassword: String, newPassword: String, confPassword: String)
+    }
+
+    fun setOnItemClickListener(listener: onItemClickListener){
+        this.listener = listener
+    }
+}
