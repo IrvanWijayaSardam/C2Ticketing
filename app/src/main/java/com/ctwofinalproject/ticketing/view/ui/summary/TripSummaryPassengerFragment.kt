@@ -201,6 +201,15 @@ class TripSummaryPassengerFragment : Fragment() {
             }
         }
 
+        viewModelTripSummaryPassenger.dataResponseWishlist.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: ${it}")
+            if(it!= null){
+                if(it.code!!.equals(200)){
+                    ShowSnack.show(binding.root,"Wishlist Created")
+                }
+            }
+        }
+
         viewModelTripSummaryPassenger.dataTicketById.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: ${it}")
             if (it!!.data != null) {
@@ -405,11 +414,15 @@ class TripSummaryPassengerFragment : Fragment() {
                         dialogInterface.dismiss()
                     })
                     .setNeutralButton("Add To Wishlist", DialogInterface.OnClickListener { dialogInterface, i ->
+                        if(ticketIdReturn.isNullOrEmpty()){
+                           viewModelTripSummaryPassenger.postWishlist("bearer "+token,CreateWishlist(ticketId.toInt(),null))
+                        } else {
+                            viewModelTripSummaryPassenger.postWishlist("bearer "+token,CreateWishlist(ticketId.toInt(),ticketIdReturn.toInt()))
+                        }
                         editPref.clear().commit()
                         viewModelProto.clearDataBooking()
-                        ShowSnack.show(binding.root,"Added to wishlist")
                         dialogInterface.dismiss()
-                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_bookingFragment)
+                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_wishlistFragment)
                     })
                     .show()
             }

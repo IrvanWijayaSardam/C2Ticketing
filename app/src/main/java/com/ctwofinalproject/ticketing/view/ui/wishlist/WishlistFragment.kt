@@ -55,7 +55,7 @@ class WishlistFragment : Fragment() {
 
         viewModelWishlist.liveDataWishlist.observe(viewLifecycleOwner){
             if(it != null){
-                adapterWishlist.submitList(it.data!!)
+                adapterWishlist.submitList(it.data)
                 binding.rvWishlistFWishlist.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                 binding.rvWishlistFWishlist.adapter = adapterWishlist
                 binding.shimmerBarWishlist.visibility = View.GONE

@@ -22,7 +22,7 @@ class WishlistAdapter(): RecyclerView.Adapter<WishlistAdapter.ViewHolder>() {
         }
     }
 
-    fun submitList(dataItemWishlist: List<DataItemWishlist?>) = differ.submitList(dataItemWishlist)
+    fun submitList(dataItemWishlist: List<DataItemWishlist?>?) = differ.submitList(dataItemWishlist)
 
     private val differ = AsyncListDiffer(this,diffCallback)
 
@@ -36,8 +36,13 @@ class WishlistAdapter(): RecyclerView.Adapter<WishlistAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvAirportFromToItemTicketTripSummary.setText("FLIGHT FROM "+"${differ.currentList[position].ticketDeparture!!.flight!!.departureTerminal!!.code}"+
-        " TO " + differ.currentList[position].ticketDeparture!!.flight!!.arrivalTerminal!!.code)
+        if(differ.currentList[position].ticketReturn == null){
+            holder.binding.tvTripType.text = "One Way"
+        } else {
+            holder.binding.tvTripType.text = "Round Trip"
+        }
+        holder.binding.tvAirportFromToItemTicketTripSummary.setText("FLIGHT FROM "+"${differ.currentList[position].ticketDeparture!!.flightId}"+
+        " TO " + differ.currentList[position].ticketDeparture!!.country)
     }
 
     override fun getItemCount(): Int {

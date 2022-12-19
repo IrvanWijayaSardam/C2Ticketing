@@ -1,10 +1,7 @@
 package com.ctwofinalproject.ticketing.api
 
 import android.provider.ContactsContract.Data
-import com.ctwofinalproject.ticketing.data.Login
-import com.ctwofinalproject.ticketing.data.TicketData
-import com.ctwofinalproject.ticketing.data.User
-import com.ctwofinalproject.ticketing.data.UserUpdate
+import com.ctwofinalproject.ticketing.data.*
 import com.ctwofinalproject.ticketing.model.*
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -75,4 +72,10 @@ interface RestServiceMain {
         @Header("Authorization") authorization: String,
         @Body body : UserUpdate
     ) : Call<ResponseUpdate>
+
+    @POST("api/wishlists/create")
+    fun createWishlist(
+        @Header("Authorization") authorization: String,
+        @Body body: CreateWishlist
+    ) : Call<ResponseCreateWishlist>
 }

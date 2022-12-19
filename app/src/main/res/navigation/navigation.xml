@@ -141,6 +141,9 @@
         <action
             android:id="@+id/action_tripSummaryPassengerFragment_to_bookingFragment"
             app:destination="@id/bookingFragment" />
+        <action
+            android:id="@+id/action_tripSummaryPassengerFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
     </fragment>
     <fragment
         android:id="@+id/myTripFragment"

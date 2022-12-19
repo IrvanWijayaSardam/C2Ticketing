@@ -8,8 +8,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.api.RestServiceMain
+import com.ctwofinalproject.ticketing.data.CreateWishlist
 import com.ctwofinalproject.ticketing.data.TicketData
 import com.ctwofinalproject.ticketing.model.ResponseBooking
+import com.ctwofinalproject.ticketing.model.ResponseCreateWishlist
 import com.ctwofinalproject.ticketing.model.ResponseGetTicketById
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,12 +25,13 @@ class TripSummaryPassengerViewModel @Inject constructor(var api: RestServiceMain
     var statusSubmitBooking       = MutableLiveData<ResponseBooking?>()
     var dataTicketById            = MutableLiveData<ResponseGetTicketById?>()
     var dataTicketReturnById      = MutableLiveData<ResponseGetTicketById?>()
-
+    var dataResponseWishlist      = MutableLiveData<ResponseCreateWishlist?>()
 
     init {
         statusSubmitBooking     = MutableLiveData()
         dataTicketById          = MutableLiveData()
         dataTicketReturnById    = MutableLiveData()
+        dataResponseWishlist    = MutableLiveData()
     }
 
     fun getStatusBooking(): LiveData<ResponseBooking?> {
@@ -97,6 +100,27 @@ class TripSummaryPassengerViewModel @Inject constructor(var api: RestServiceMain
                 Log.d(TAG, "onFailure: ${t.message}")
             }
 
+        })
+    }
+
+    fun postWishlist(token: String,body: CreateWishlist){
+        val client = api.createWishlist(token,body)
+        client.enqueue(object : Callback<ResponseCreateWishlist>{
+            override fun onResponse(
+                call: Call<ResponseCreateWishlist>,
+                response: Response<ResponseCreateWishlist>
+            ) {
+                if(response.isSuccessful){
+                    Log.d(TAG, "onResponse: ${response.body()}")
+                    dataResponseWishlist.postValue(response.body())
+                } else {
+                    dataResponseWishlist.value = null
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseCreateWishlist>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
         })
     }
 
