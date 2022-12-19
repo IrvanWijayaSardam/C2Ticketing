@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_loginFragment_to_tripSummaryPassengerFragment"
             app:destination="@id/tripSummaryPassengerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"

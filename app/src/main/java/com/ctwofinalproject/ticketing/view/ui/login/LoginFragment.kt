@@ -35,6 +35,7 @@ class LoginFragment : Fragment() {
     lateinit var token                                          : String
     private lateinit var  loadingDialog                         : LoadingDialog
     private lateinit var fromDestination                        : TokenNav
+    private var enumFrom                                            = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,6 +52,7 @@ class LoginFragment : Fragment() {
         token                                                       = ""
         initListener()
         setBottomNav()
+        getArgs()
 
         viewModelLogin.getToken().observe(viewLifecycleOwner) {
             if (it != null) {
@@ -72,7 +74,14 @@ class LoginFragment : Fragment() {
                 )
                 loadingDialog.isDismiss()
                 ShowSnack.show(binding.root,"Login Berhasil")
-                goToHome()
+                if(arguments?.getString("fromWhere").toString() != null){
+                    Log.d(TAG, "onViewCreated: ${enumFrom}")
+                    when(enumFrom){
+                        "profile" -> Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_profileFragment)
+                        else -> goToHome()
+                    }
+                }
+
             } else {
                 loadingDialog.isDismiss()
                 ShowSnack.show(binding.root,"Username / Password Salah")
@@ -118,9 +127,8 @@ class LoginFragment : Fragment() {
        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
     }
 
-    private fun getArgs(){
-        val bundle = arguments ?: return
-//        val args =
+    private fun getArgs() {
+        enumFrom = arguments?.getString("fromWhere").toString()
     }
 
     private fun setBottomNav(){

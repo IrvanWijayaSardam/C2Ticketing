@@ -27,6 +27,7 @@ import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.data.UserUpdate
 import com.ctwofinalproject.ticketing.databinding.FragmentProfileBinding
 import com.ctwofinalproject.ticketing.util.ShowSnack
+import com.ctwofinalproject.ticketing.util.TokenNav
 import com.ctwofinalproject.ticketing.viewmodel.HomeViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProfileViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
@@ -141,14 +142,18 @@ class ProfileFragment : Fragment() {
                             dialogInterface.dismiss()
                             ShowSnack.show(binding.root,"Logout Successful")
                             profileViewModel.logout("bearer "+token)
-                            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment)
+                            var bund = Bundle()
+                            bund.putString("fromWhere", "profile")
+                            Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment,bund)
                         })
                         .setNegativeButton("No",DialogInterface.OnClickListener { dialogInterface, i ->
                             dialogInterface.dismiss()
                         })
                         .show()
                 } else {
-                    Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment)
+                    var bund = Bundle()
+                    bund.putString("fromWhere", "profile")
+                    Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_loginFragment,bund)
                 }
             }
 
