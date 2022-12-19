@@ -7,8 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-import androidx.navigation.ActivityNavigatorDestinationBuilder
 import androidx.navigation.Navigation
 import com.auth0.android.jwt.JWT
 import com.ctwofinalproject.ticketing.R
@@ -18,12 +18,9 @@ import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
 import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.util.TokenNav
-import com.ctwofinalproject.ticketing.view.ui.booking.SelectOneWayFragment
-import com.ctwofinalproject.ticketing.view.ui.home.HomeFragment
 import com.ctwofinalproject.ticketing.viewmodel.LoginViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,6 +50,7 @@ class LoginFragment : Fragment() {
         initListener()
         setBottomNav()
         getArgs()
+        //clearPopBackstack()
 
         viewModelLogin.getToken().observe(viewLifecycleOwner) {
             if (it != null) {
@@ -78,6 +76,7 @@ class LoginFragment : Fragment() {
                     Log.d(TAG, "onViewCreated: ${enumFrom}")
                     when(enumFrom){
                         "profile" -> Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_profileFragment)
+                        //"tripsummary" -> Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_tripSummaryPassengerFragment)
                         else -> goToHome()
                     }
                 }
@@ -90,6 +89,9 @@ class LoginFragment : Fragment() {
         }
 
     }
+
+
+
     private fun initListener(){
         binding?.run {
             tvDontHaveAnAccountLogin.setOnClickListener {
@@ -117,13 +119,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun goToHome(){
-
-        /*
-        Navigation.findNavController(binding.root).popBackStack()
-        val bottomnav = requireActivity().findViewById<BottomNavigationView>(R.id.bottomNav)
-        bottomnav.selectedItemId = R.id.homeFragment
-         */
-
        Navigation.findNavController(requireView()).navigate(R.id.action_loginFragment_to_homeFragment)
     }
 

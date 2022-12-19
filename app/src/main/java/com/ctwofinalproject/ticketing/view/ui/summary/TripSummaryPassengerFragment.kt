@@ -389,7 +389,9 @@ class TripSummaryPassengerFragment : Fragment() {
                             viewModelProto.submitDataTwoWay(ticketId,ticketIdReturn,jsonPassengerListToJson,totalPrice.toString())
                         }
                         dialog.dismiss()
-                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_loginFragment)
+                        var bund = Bundle()
+                        bund.putString("fromWhere", "tripsummary")
+                        Navigation.findNavController(requireView()).navigate(R.id.action_tripSummaryPassengerFragment_to_loginFragment,bund)
                     }
                 }
             }
