@@ -84,4 +84,9 @@ interface RestServiceMain {
         @Header("Authorization") authorization: String,
         @Body body : UpdatePassword
     ) : Call<ResponseUpdatePassword>
+
+    @GET("api/payments")
+    fun getBooking(
+        @Header("Authorization") authorization: String,
+    ) : Call<ResponseGetBooking>
 }

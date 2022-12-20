@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="350dp"
+    android:layout_height="290dp"
     android:layout_marginTop="10dp"
-    android:layout_marginStart="20dp"
-    android:layout_marginEnd="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="7dp"
     app:cardCornerRadius="10dp">
@@ -48,6 +47,7 @@
                     app:cardCornerRadius="50dp"
                     >
                     <TextView
+                        android:id="@+id/tvTripType"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="@string/roundtrip"
@@ -65,6 +65,7 @@
                 app:cardCornerRadius="50dp"
                 >
                 <TextView
+                    android:id="@+id/tvPaymentStatusItemBooking"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="PAID"
@@ -139,22 +140,6 @@
                     android:text="Flight Number"
                     android:fontFamily="@font/poppins"
                     android:textColor="@color/primary_blue_1"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Dep Time"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/primary_blue_1"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Arr Time"
-                    android:fontFamily="@font/poppins"
-                    android:textColor="@color/primary_blue_1"
-                    />
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -169,24 +154,7 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/primary_font_color"
                     />
-                <TextView
-                    android:id="@+id/tvDepTimeItemBooking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="16:59"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textColor="@color/primary_font_color"
-                    />
-                <TextView
-                    android:id="@+id/tvArrTimeItemBooking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="07:30"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textColor="@color/primary_font_color"
-                    />
+
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -201,91 +169,17 @@
                     android:fontFamily="@font/poppins_medium"
                     android:textColor="@color/primary_font_color"
                     />
-                <TextView
-                    android:id="@+id/tvDepTimeReturnItemBooking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="16:59"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textColor="@color/primary_font_color"
-                    />
-                <TextView
-                    android:id="@+id/tvArrTimeReturnItemBooking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="07:30"
-                    android:fontFamily="@font/poppins_medium"
-                    android:textColor="@color/primary_font_color"
-                    />
+
             </TableRow>
 
         </TableLayout>
-        <LinearLayout
-            android:id="@+id/llInformationFlightTwoFramgmentShowTicket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tlInformationFlightOneFragmentShowTicket"
-            >
-            <TextView
-                android:id="@+id/tvInformationLongTimeFlightFragmentShowTicket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Information Long Time Flight"
-                android:fontFamily="@font/poppins_medium"
-                android:textSize="12sp"
-                android:textColor="@color/primary_font_color"
-                />
-            <TextView
-                android:id="@+id/tvCountSeatsFragmentShowTicket"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Count Seats"
-                android:fontFamily="@font/poppins"
-                android:textColor="@color/primary_blue_1"
-                />
-        </LinearLayout>
 
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            app:layout_constraintVertical_bias="0"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llInformationFlightTwoFramgmentShowTicket">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/ic_baseline_food_bank_24" />
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/ic_baseline_backpack_24" />
-
-                <TextView
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:fontFamily="@font/poppins_medium"
-                    android:text="xx KG"
-                    android:textAlignment="center"
-                    android:textColor="@color/primary_font_color" />
-            </TableRow>
-        </TableLayout>
+            app:layout_constraintTop_toBottomOf="@+id/tlInformationFlightOneFragmentShowTicket" />
 
         <View
             android:id="@+id/vVerticalLinedCvShowTicket"
@@ -318,7 +212,7 @@
                 android:textSize="12sp"
                 />
             <TextView
-                android:id="@+id/tvPriceReturnItemBooking"
+                android:id="@+id/tvTotalPriceItemBooking"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="IDR x,xxx.xxx"
@@ -327,48 +221,7 @@
                 android:textSize="12sp"
                 android:layout_marginBottom="5dp"
                 />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Earn Miles"
-                android:textColor="@color/primary_font_color"
-                android:fontFamily="@font/poppins"
-                android:textSize="12sp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="XXX Miles"
-                android:textColor="@color/primary_font_color"
-                android:fontFamily="@font/poppins_semibold"
-                android:textSize="12sp"
-                android:layout_marginBottom="5dp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Excess Baggage"
-                android:textColor="@color/primary_font_color"
-                android:fontFamily="@font/poppins"
-                android:textSize="12sp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Price per KG"
-                android:textColor="@color/primary_font_color"
-                android:fontFamily="@font/poppins_light"
-                android:textSize="12sp"
-                />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="IDR x,xxx.xxx"
-                android:textColor="@color/primary_font_color"
-                android:fontFamily="@font/poppins_semibold"
-                android:textSize="12sp"
-                android:layout_marginBottom="5dp"
-                />
+
         </LinearLayout>
         <ImageView
             android:id="@+id/ivAddBackPackCvShowTicket"
@@ -378,27 +231,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             />
-        <View
-            android:layout_width="0dp"
-            android:layout_height="3dp"
-            android:layout_marginBottom="5dp"
-            android:background="@color/secondary_font_color"
-            app:layout_constraintRight_toLeftOf="@id/vVerticalLinedCvShowTicket"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/tvMoreDetailsCvShowTicket"
-            />
-        <TextView
-            android:id="@+id/tvMoreDetailsCvShowTicket"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="More Details"
-            android:gravity="center_vertical"
-            android:layout_margin="7dp"
-            android:fontFamily="@font/poppins_medium"
-            android:textSize="12sp"
-            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
