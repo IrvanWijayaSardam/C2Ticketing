@@ -140,6 +140,20 @@
                     android:text="Flight Number"
                     android:fontFamily="@font/poppins"
                     android:textColor="@color/primary_blue_1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/departure_date"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/primary_blue_1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/arrival_date"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="@color/primary_blue_1"/>
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -147,6 +161,24 @@
                 >
                 <TextView
                     android:id="@+id/tvFlightNumberDepItemBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GA209"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/primary_font_color"
+                    />
+                <TextView
+                    android:id="@+id/tvDepartureDateItemBookingDeparture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GA209"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/primary_font_color"
+                    />
+                <TextView
+                    android:id="@+id/tvArrivalDateItemBookingDeparture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -162,6 +194,24 @@
                 >
                 <TextView
                     android:id="@+id/tvFlightNumberReturnItemBooking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GA209"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/primary_font_color"
+                    />
+                <TextView
+                    android:id="@+id/tvDepartureDateItemBookingReturn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GA209"
+                    android:fontFamily="@font/poppins_medium"
+                    android:textColor="@color/primary_font_color"
+                    />
+                <TextView
+                    android:id="@+id/tvArrivalDateItemBookingReturn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -199,7 +249,7 @@
             android:orientation="vertical"
             android:paddingStart="5dp"
             android:paddingEnd="5dp"
-            app:layout_constraintBottom_toTopOf="@+id/ivAddBackPackCvShowTicket"
+            app:layout_constraintBottom_toTopOf="@+id/tvTotalPassengerItemBooking"
             app:layout_constraintLeft_toRightOf="@+id/vVerticalLinedCvShowTicket"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tlInformationFlightOneFragmentShowTicket">
@@ -222,15 +272,34 @@
                 android:layout_marginBottom="5dp"
                 />
 
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/ivAddBackPackCvShowTicket"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@drawable/ic_baseline_add_box_24"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
 
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTotalPassengerItemBooking"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semibold"
+            android:text="Total Passenger : "
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/primary_font_color"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/vVerticalLinedCvShowTicket" />
+
+        <TextView
+            android:id="@+id/tvPlaneNameItemBooking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plane Name"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/primary_blue_1"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vVerticalLinedCvShowTicket"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

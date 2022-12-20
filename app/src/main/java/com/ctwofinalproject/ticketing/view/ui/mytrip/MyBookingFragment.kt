@@ -1,6 +1,8 @@
 package com.ctwofinalproject.ticketing.view.ui.mytrip
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -54,6 +56,7 @@ class MyBookingFragment : Fragment() {
         }
         adapterMyBooking.setOnItemClickListener(object : MyBookingAdapter.onItemClickListener{
             override fun onItemClick(dataItemGetBooking: DataItemGetBooking) {
+                Log.d(TAG, "onItemClick: Belum tak Implementasi")
                 TODO("Not yet implemented")
             }
         })

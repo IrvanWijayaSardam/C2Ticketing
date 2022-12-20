@@ -114,6 +114,7 @@
     <string name="change_data">Change Data</string>
     <string name="logout">Logout</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="arrival_date">Arrival Date</string>
 
 
     <!--  dummy country  -->

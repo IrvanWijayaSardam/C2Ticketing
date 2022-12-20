@@ -59,22 +59,36 @@ class MyBookingAdapter(): RecyclerView.Adapter<MyBookingAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(differ.currentList[position].usersPayment!!.booking!!.ticketIdReturn == null){
             holder.binding.tvTripType.text = "One Way"
+            holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,9)
+            holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalDate!!.substring(0,9)
         } else {
             holder.binding.tvTripType.text = "Round Trip"
+            holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,9)
+            holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalDate!!.substring(0,9)
+            holder.binding.tvDepartureDateItemBookingReturn.text = differ.currentList[position].usersPayment!!.booking!!.ticketReturn!!.flight!!.departureDate!!.substring(0,9)
+            holder.binding.tvArrivalDateItemBookingReturn.text = differ.currentList[position].usersPayment!!.booking!!.ticketReturn!!.flight!!.arrivalDate!!.substring(0,9)
         }
         if(differ.currentList[position].isPayed == true){
             holder.binding.tvPaymentStatusItemBooking.text = "PAID"
         } else {
             holder.binding.tvPaymentStatusItemBooking.text = "WAITING PAYMENT"
         }
+        if(differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.classId!!.equals(1)){
+            holder.binding.tvFlightClassItemBooking.text = "Businesss"
+        } else {
+            holder.binding.tvFlightClassItemBooking.text = "Economy"
+        }
         holder.binding.tvBookingId.setText("Booking Code : ${differ.currentList[position].id.toString()}")
-        holder.binding.tvTotalPriceItemBooking.text = DecimalSeparator.formatDecimalSeperators(differ.currentList[position].totalPrice.toString())
+        holder.binding.tvTotalPriceItemBooking.setText("IDR. "+DecimalSeparator.formatDecimalSeperators(differ.currentList[position].totalPrice.toString()))
         holder.binding.tvFlightNumberDepItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketIdDeparture.toString()
         if (differ.currentList[position].usersPayment!!.booking!!.ticketIdReturn != null){
             holder.binding.tvFlightNumberReturnItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketIdReturn.toString()
         } else {
             holder.binding.tvFlightNumberReturnItemBooking.visibility = View.GONE
         }
+        holder.binding.tvTotalPassengerItemBooking.setText("Total Passenger : "+differ.currentList[position].usersPayment!!.booking!!.totalPassanger.toString())
+        holder.binding.tvPlaneNameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.planeName!![0]!!.namePlane.toString()
+        holder.binding.tvUsernameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.passangerBooking!![0]!!.passanger!![0]!!.firstname
     }
 
     override fun getItemCount(): Int {
