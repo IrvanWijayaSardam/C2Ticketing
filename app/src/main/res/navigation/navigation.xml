@@ -152,7 +152,11 @@
         android:id="@+id/myTripFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.mytrip.MyTripFragment"
         android:label="fragment_my_trip"
-        tools:layout="@layout/fragment_my_trip" />
+        tools:layout="@layout/fragment_my_trip" >
+        <action
+            android:id="@+id/action_myTripFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailProfileFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.profile.DetailProfileFragment"
@@ -184,5 +188,19 @@
         <action
             android:id="@+id/action_editProfileFragment_to_detailProfileFragment"
             app:destination="@id/detailProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.payment.PaymentFragment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment" />
+    <fragment
+        android:id="@+id/myBookingFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.mytrip.MyBookingFragment"
+        android:label="fragment_my_booking"
+        tools:layout="@layout/fragment_my_booking" >
+        <action
+            android:id="@+id/action_myBookingFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
 </navigation>

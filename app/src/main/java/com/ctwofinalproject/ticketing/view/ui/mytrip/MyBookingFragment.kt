@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
@@ -16,6 +17,7 @@ import com.ctwofinalproject.ticketing.model.DataItemGetBooking
 import com.ctwofinalproject.ticketing.view.adapter.MyBookingAdapter
 import com.ctwofinalproject.ticketing.viewmodel.MyBookingViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,6 +41,7 @@ class MyBookingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapterMyBooking                                    = MyBookingAdapter()
+        setBottomNav()
 
         viewModelProto.dataUser.observe(viewLifecycleOwner){
             if(it.isLogin){
@@ -57,8 +60,14 @@ class MyBookingFragment : Fragment() {
         adapterMyBooking.setOnItemClickListener(object : MyBookingAdapter.onItemClickListener{
             override fun onItemClick(dataItemGetBooking: DataItemGetBooking) {
                 Log.d(TAG, "onItemClick: Belum tak Implementasi")
-                TODO("Not yet implemented")
+                val bund = Bundle()
+                bund.putParcelable("dataItemGetBooking",dataItemGetBooking)
+                Navigation.findNavController(requireView()).navigate(R.id.action_myTripFragment_to_paymentFragment,bund)
             }
         })
+    }
+    private fun setBottomNav(){
+        val navBar                                     = activity?.findViewById<BottomNavigationView>(R.id.bottomNav)
+        navBar?.visibility                             = View.VISIBLE
     }
 }

@@ -61,6 +61,8 @@ class MyBookingAdapter(): RecyclerView.Adapter<MyBookingAdapter.ViewHolder>() {
             holder.binding.tvTripType.text = "One Way"
             holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,9)
             holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalDate!!.substring(0,9)
+            holder.binding.tvDepartureDateItemBookingReturn.visibility = View.GONE
+            holder.binding.tvArrivalDateItemBookingReturn.visibility = View.GONE
         } else {
             holder.binding.tvTripType.text = "Round Trip"
             holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,9)

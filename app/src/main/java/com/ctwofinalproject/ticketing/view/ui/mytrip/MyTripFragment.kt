@@ -29,7 +29,7 @@ class MyTripFragment : Fragment() {
 
     private fun initListener() {
         binding?.run {
-            cvPastFragmentMyTrip.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
+            cvBookingFragmentMyTrip.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))
 
             cvPastFragmentMyTrip.setOnClickListener {
                 cvPastFragmentMyTrip.setCardBackgroundColor(resources.getColor(R.color.primary_blue_1))

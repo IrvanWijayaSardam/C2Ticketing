@@ -1,7 +1,11 @@
 package com.ctwofinalproject.ticketing.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
+@Parcelize
 data class ResponseGetBooking(
 
 	@field:SerializedName("msg")
@@ -15,8 +19,8 @@ data class ResponseGetBooking(
 
 	@field:SerializedName("status")
 	val status: Boolean? = null
-)
-
+) : Parcelable
+@Parcelize
 data class TicketReturnGetBooking(
 
 	@field:SerializedName("country")
@@ -26,7 +30,7 @@ data class TicketReturnGetBooking(
 	val createdAt: String? = null,
 
 	@field:SerializedName("flight")
-	val flight: Flight? = null,
+	val flight: FlightGetBooking? = null,
 
 	@field:SerializedName("price")
 	val price: Int? = null,
@@ -42,8 +46,9 @@ data class TicketReturnGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class TicketDepartureGetBooking(
 
 	@field:SerializedName("country")
@@ -69,8 +74,9 @@ data class TicketDepartureGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class DataItemGetBooking(
 
 	@field:SerializedName("createdAt")
@@ -96,8 +102,9 @@ data class DataItemGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class PlaneNameItemGetBooking(
 
 	@field:SerializedName("createdAt")
@@ -111,8 +118,9 @@ data class PlaneNameItemGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class ArrivalTerminalGetBooking(
 
 	@field:SerializedName("country")
@@ -141,8 +149,9 @@ data class ArrivalTerminalGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class PassangerBookingItemGetBooking(
 
 	@field:SerializedName("passanger")
@@ -162,8 +171,9 @@ data class PassangerBookingItemGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class UsersPayment(
 
 	@field:SerializedName("booking_id")
@@ -183,8 +193,9 @@ data class UsersPayment(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class PassangerItem(
 
 	@field:SerializedName("createdAt")
@@ -213,8 +224,9 @@ data class PassangerItem(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class FlightGetBooking(
 
 	@field:SerializedName("departureTime")
@@ -255,8 +267,9 @@ data class FlightGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class BookingGetBooking(
 
 	@field:SerializedName("createdAt")
@@ -288,8 +301,9 @@ data class BookingGetBooking(
 
 	@field:SerializedName("passangerBooking")
 	val passangerBooking: List<PassangerBookingItemGetBooking?>? = null
-)
+) : Parcelable
 
+@Parcelize
 data class DepartureTerminalGetBooking(
 
 	@field:SerializedName("country")
@@ -318,4 +332,4 @@ data class DepartureTerminalGetBooking(
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
-)
+) : Parcelable
