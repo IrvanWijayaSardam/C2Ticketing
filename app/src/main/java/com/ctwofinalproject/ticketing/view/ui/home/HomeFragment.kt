@@ -68,11 +68,22 @@ class HomeFragment : Fragment() {
             if (it.isLogin) {
                 isLogin = it.isLogin
                 binding.tvUsernameOrLogin.text = it.firstname
+                homeViewModel.getCounter("bearer "+it.token)
             } else {
                 isLogin = false
                 binding.tvUsernameOrLogin.text = ""
             }
         }
+
+        homeViewModel.liveDataGetNotificationCounter.observe(viewLifecycleOwner){
+            if(it != null){
+                binding.tvNotificationCounter.visibility = View.VISIBLE
+                binding.tvNotificationCounter.text = it.data!!.size.toString()
+            } else {
+                binding.tvNotificationCounter.visibility = View.GONE
+            }
+        }
+
 
         homeViewModel.getAllRecentSearch().observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty()) {
@@ -139,6 +150,11 @@ class HomeFragment : Fragment() {
 
     private fun initListener() {
         binding?.run {
+
+            clNotificationFHome.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_notificationFragment)
+            }
+
             tvFromAirportCodeFragmentHome.setOnClickListener {
                 gotoSelectAirport("from","home")
             }

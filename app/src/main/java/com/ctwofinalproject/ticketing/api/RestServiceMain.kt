@@ -94,4 +94,9 @@ interface RestServiceMain {
     fun getSaldo(
         @Header("Authorization") authorization: String
     ) : Call<ResponseGetSaldo>
+
+    @GET("api/notif/all")
+    fun getNotificationUnread(
+        @Header("Authorization") authorization: String
+    ) : Call<ResponseGetNotificationUnread>
 }

@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_homeFragment_to_flitPayFragment"
             app:destination="@id/flitPayFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -203,4 +206,9 @@
             android:id="@+id/action_myBookingFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>
