@@ -115,6 +115,11 @@
     <string name="logout">Logout</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="arrival_date">Arrival Date</string>
+    <string name="notification">Notification</string>
+    <string name="read">Read</string>
+    <string name="unread">Unread</string>
+    <string name="payment_id">Payment ID :</string>
+    <string name="detail_payment">Detail Payment</string>
 
 
     <!--  dummy country  -->
