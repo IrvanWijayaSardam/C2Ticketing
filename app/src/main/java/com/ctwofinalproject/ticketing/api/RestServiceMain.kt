@@ -89,4 +89,9 @@ interface RestServiceMain {
     fun getBooking(
         @Header("Authorization") authorization: String,
     ) : Call<ResponseGetBooking>
+
+    @GET("api/wallet")
+    fun getSaldo(
+        @Header("Authorization") authorization: String
+    ) : Call<ResponseGetSaldo>
 }

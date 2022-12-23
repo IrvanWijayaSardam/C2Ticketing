@@ -1,6 +1,8 @@
 package com.ctwofinalproject.ticketing.view.ui.flitpay
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,8 @@ import com.bumptech.glide.Glide
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentFlitPayBinding
 import com.ctwofinalproject.ticketing.databinding.FragmentLoginBinding
+import com.ctwofinalproject.ticketing.util.DecimalSeparator
+import com.ctwofinalproject.ticketing.viewmodel.FlitPayViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +24,8 @@ class FlitPayFragment : Fragment() {
     private var _binding: FragmentFlitPayBinding?                 = null
     private val binding get()                                     = _binding!!
     private val viewModelProto                                    : ProtoViewModel by viewModels()
+    private val viewModelFlitPay                                  : FlitPayViewModel by viewModels()
+    var token                                                     = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +44,22 @@ class FlitPayFragment : Fragment() {
         setProfile()
 
         viewModelProto.dataUser.observe(viewLifecycleOwner){
-            binding.tvProfileNameFragmentFlitPay.setText(it.firstname+" "+it.lastname)
-            binding.tvProfilePhoneNumberFragmentFlitPay.text = it.phone
+            if(it.isLogin){
+                token = it.token
+                binding.tvProfileNameFragmentFlitPay.setText(it.firstname+" "+it.lastname)
+                binding.tvProfilePhoneNumberFragmentFlitPay.text = it.phone
+                viewModelFlitPay.getSaldo("bearer "+token)
+            } else {
+                Log.d(TAG, "onViewCreated: need to be loggedin")
+            }
+        }
+
+        viewModelFlitPay.liveDataSaldo.observe(viewLifecycleOwner){
+                if(it != null){
+                    binding.tvCountSaldoFragmentFlitPay.setText("IDR "+DecimalSeparator.formatDecimalSeperators(it.data!!.balance.toString()))
+                } else {
+                    binding.tvCountSaldoFragmentFlitPay.text = "IDR 0"
+                }
         }
     }
 
