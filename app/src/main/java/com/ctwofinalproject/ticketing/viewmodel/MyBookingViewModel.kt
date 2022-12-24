@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.ctwofinalproject.ticketing.api.RestServiceMain
 import com.ctwofinalproject.ticketing.model.ResponseGetBooking
+import com.ctwofinalproject.ticketing.model.ResponseGetHistory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,6 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MyBookingViewModel @Inject constructor(var api : RestServiceMain): ViewModel() {
     var liveDataResponseGetBooking : MutableLiveData<ResponseGetBooking?> = MutableLiveData()
+    var liveDataResponseGetHistory : MutableLiveData<ResponseGetHistory?> = MutableLiveData()
 
     fun getBooking(token: String){
         var client = api.getBooking(token)
@@ -33,6 +35,27 @@ class MyBookingViewModel @Inject constructor(var api : RestServiceMain): ViewMod
             override fun onFailure(call: Call<ResponseGetBooking>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
             }
+        })
+    }
+
+    fun getHistory(query: String, token: String){
+        var client = api.getHistory(token,query)
+        client.enqueue(object : Callback<ResponseGetHistory>{
+            override fun onResponse(
+                call: Call<ResponseGetHistory>,
+                response: Response<ResponseGetHistory>
+            ) {
+                if(response.isSuccessful){
+                    liveDataResponseGetHistory.postValue(response.body())
+                } else {
+                    liveDataResponseGetHistory.value = null
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseGetHistory>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+
         })
     }
 }

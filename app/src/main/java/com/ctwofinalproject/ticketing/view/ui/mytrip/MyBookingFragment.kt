@@ -51,6 +51,7 @@ class MyBookingFragment : Fragment() {
         }
 
         viewModelMyBooking.liveDataResponseGetBooking.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: livedataGetBooking ${it}")
             if(it != null){
                 adapterMyBooking.submitList(it.data)
                 binding.rvMyBooking.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)

@@ -114,4 +114,10 @@ interface RestServiceMain {
         @Path("idBooking") idBooking : Int
     ) : Call<ResponsePayment>
 
+    @GET("api/history/{query}")
+    fun getHistory(
+        @Header("Authorization") authorization: String,
+        @Path("query") query: String
+    ) : Call<ResponseGetHistory>
+
 }

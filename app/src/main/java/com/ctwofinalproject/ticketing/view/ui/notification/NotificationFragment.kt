@@ -44,7 +44,7 @@ class NotificationFragment : Fragment() {
         viewModelProto.dataUser.observe(viewLifecycleOwner){
             if(it.isLogin){
                 token = it.token
-                viewModelNotification.getUnreadNotification("bearer "+it.token,null)
+                viewModelNotification.getUnreadNotification("bearer "+it.token,"")
                 viewModelNotification.readAllNotification("bearer "+it.token)
             } else {
                 Log.d(TAG, "onViewCreated: need to be logged in")

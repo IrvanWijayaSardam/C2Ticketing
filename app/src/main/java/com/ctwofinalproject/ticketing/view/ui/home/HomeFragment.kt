@@ -51,6 +51,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        token                                               = ""
         sharedPref                                          = requireContext().getSharedPreferences("sharedairport", Context.MODE_PRIVATE)
         editPref                                            = sharedPref.edit()
         adapterRecentSearch                                 = RecentSearchAdapter()
