@@ -500,6 +500,15 @@
                     android:textColor="@color/primary_blue_1"/>
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tvSaldoStatus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Saldo Cukup"
+                android:fontFamily="@font/poppins_semibold"
+                android:textColor="@color/green"
+                />
+
             <Button
                 android:id="@+id/btnPayFragmentPayment"
                 android:layout_width="172dp"

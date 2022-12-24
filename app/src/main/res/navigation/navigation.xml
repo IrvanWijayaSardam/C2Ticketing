@@ -196,7 +196,11 @@
         android:id="@+id/paymentFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.payment.PaymentFragment"
         android:label="fragment_payment"
-        tools:layout="@layout/fragment_payment" />
+        tools:layout="@layout/fragment_payment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_confirmPaymentFragment"
+            app:destination="@id/confirmPaymentFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myBookingFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.mytrip.MyBookingFragment"
@@ -211,4 +215,13 @@
         android:name="com.ctwofinalproject.ticketing.view.ui.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/confirmPaymentFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.flitpay.ConfirmPaymentFragment"
+        android:label="fragment_confirm_payment"
+        tools:layout="@layout/fragment_confirm_payment" >
+        <action
+            android:id="@+id/action_confirmPaymentFragment_to_myTripFragment"
+            app:destination="@id/myTripFragment" />
+    </fragment>
 </navigation>

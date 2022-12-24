@@ -107,11 +107,11 @@ interface RestServiceMain {
     ) :  Call<ResponseReadNotification>
 
 
-    /*
+
     @POST("api/booking/payment/{idBooking}")
     fun payBooking(
         @Header("Authorization") authorization: String,
         @Path("idBooking") idBooking : Int
-    ) : Call<>
-     */
+    ) : Call<ResponsePayment>
+
 }

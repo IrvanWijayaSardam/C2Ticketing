@@ -14,8 +14,10 @@ import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentPaymentBinding
 import com.ctwofinalproject.ticketing.model.DataItemGetBooking
 import com.ctwofinalproject.ticketing.util.DecimalSeparator
+import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.view.adapter.PassengerDetailsAdapter
 import com.ctwofinalproject.ticketing.viewmodel.FlitPayViewModel
+import com.ctwofinalproject.ticketing.viewmodel.PaymentViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,12 +29,14 @@ class PaymentFragment : Fragment() {
     private var dataItemGetBooking : DataItemGetBooking?                     = null
     lateinit var adapterPassengerDetails                                     : PassengerDetailsAdapter
     private val viewmodelFlitPay                                             : FlitPayViewModel by viewModels()
+    private val viewmodelPayment                                             : PaymentViewModel by viewModels()
     private val viewModelProto                                               : ProtoViewModel by viewModels()
     var totalPassenger                                                       = 0
     var totalFare                                                            = 0
     var totalFareDeparture                                                   = 0
     var totalFareReturn                                                      = 0
     var token                                                                = ""
+    var idBooking                                                            = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,9 +64,32 @@ class PaymentFragment : Fragment() {
             }
         }
 
+        viewmodelPayment.liveDataPayment.observe(viewLifecycleOwner){
+            if(it != null){
+                if(it.code!!.equals(200)){
+                    viewmodelPayment.liveDataPayment.value = null
+                    ShowSnack.show(binding.root,"Payment Succesfull , Enjoy your flight ")
+                    val bund = Bundle()
+                    bund.putParcelable("dataItemGetBooking",dataItemGetBooking)
+                    bund.putParcelable("dataPayment",it)
+                    Navigation.findNavController(requireView()).navigate(R.id.action_paymentFragment_to_confirmPaymentFragment,bund)
+                } else {
+
+                }
+            }
+        }
+
         viewmodelFlitPay.liveDataSaldo.observe(viewLifecycleOwner){
             if(it != null){
                 binding.tvSaldoAmmount.setText("IDR : "+DecimalSeparator.formatDecimalSeperators(it.data!!.balance.toString()))
+                if(it.data!!.balance!!.toInt() >= totalFare){
+                    binding.tvSaldoStatus.text = "Saldo Mencukupi"
+                    binding.btnPayFragmentPayment.isEnabled = true
+                } else {
+                    binding.tvSaldoStatus.text = "Saldo Tidak Cukup , Silahkan Isi Saldo Terlebih Dahulu"
+                    binding.tvSaldoStatus.setTextColor(resources.getColor(R.color.red))
+                    binding.btnPayFragmentPayment.isEnabled = false
+                }
             } else {
 
             }
@@ -73,6 +100,7 @@ class PaymentFragment : Fragment() {
     private fun getArgs() {
         dataItemGetBooking = requireArguments().getParcelable("dataItemGetBooking")
         Log.d(TAG, "getArgs: ${dataItemGetBooking!!.id.toString()}")
+        idBooking = dataItemGetBooking!!.id!!.toInt()
         binding.tvFlightNumberDepFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.flightId.toString()
         binding.tvDepTimeFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureTime.toString()
         binding.tvArrTimeFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalTime.toString()
@@ -116,6 +144,9 @@ class PaymentFragment : Fragment() {
             shimmerTicketDetails.visibility = View.GONE
             ivGotoBackFromFPayment.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
+            }
+            btnPayFragmentPayment.setOnClickListener {
+                viewmodelPayment.payBooking("bearer "+token,idBooking)
             }
         }
     }

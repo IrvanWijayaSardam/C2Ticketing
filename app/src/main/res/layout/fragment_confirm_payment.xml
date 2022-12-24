@@ -95,6 +95,7 @@
                     android:orientation="horizontal"
                     >
                     <TextView
+                        android:id="@+id/tvDateTransactionPayment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="13/12/2022"
@@ -111,6 +112,7 @@
                         android:textColor="@color/primary_font_color"
                         />
                     <TextView
+                        android:id="@+id/tvWalletId"
                         android:layout_width="450dp"
                         android:layout_height="wrap_content"
                         android:text="FLIT ID 082143338476"
@@ -177,6 +179,7 @@
                         android:textColor="@color/primary_font_color"
                         />
                     <TextView
+                        android:id="@+id/tvTotalFareFCPayment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -261,6 +264,7 @@
                         android:textColor="@color/secondary_font_color"
                         />
                     <TextView
+                        android:id="@+id/tvNameFCPayment"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -292,6 +296,7 @@
                         android:textColor="@color/secondary_font_color"
                         />
                     <TextView
+                        android:id="@+id/idTransactionFcPayment"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

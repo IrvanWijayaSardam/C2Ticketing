@@ -16,4 +16,6 @@
     <color name="secondary_font_color">#BABABA</color>
     <color name="variant_color_orange">#F5BF5D</color>
     <color name="toska_variant">#0A1531</color>
+    <color name="green">#43A047</color>
+
 </resources>
