@@ -31,7 +31,7 @@ class HomeViewModel @Inject constructor(var api : RestServiceMain,var roomReposi
     }
 
     fun getCounter(token : String){
-        val client = api.getNotificationUnread(token)
+        val client = api.getNotificationUnread(token,null)
         client.enqueue(object : Callback<ResponseGetNotificationUnread>{
             override fun onResponse(
                 call: Call<ResponseGetNotificationUnread>,

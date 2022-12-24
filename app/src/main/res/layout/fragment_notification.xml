@@ -61,11 +61,10 @@
             android:layout_height="30dp"
             app:cardCornerRadius="7dp"
             android:layout_margin="2.5dp"
-            android:background="@color/primary_blue_1">
+            >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/primary_blue_1"
                 >
                 <TextView
                     android:layout_width="wrap_content"

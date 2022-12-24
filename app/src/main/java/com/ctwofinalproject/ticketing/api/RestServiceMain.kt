@@ -95,8 +95,23 @@ interface RestServiceMain {
         @Header("Authorization") authorization: String
     ) : Call<ResponseGetSaldo>
 
-    @GET("api/notif/all")
+    @GET("api/notif/all/{status}")
     fun getNotificationUnread(
-        @Header("Authorization") authorization: String
+        @Header("Authorization") authorization: String,
+        @Path("status") status: String?
     ) : Call<ResponseGetNotificationUnread>
+
+    @PUT("api/notif/read")
+    fun readAllNotification(
+        @Header("Authorization") authorization: String
+    ) :  Call<ResponseReadNotification>
+
+
+    /*
+    @POST("api/booking/payment/{idBooking}")
+    fun payBooking(
+        @Header("Authorization") authorization: String,
+        @Path("idBooking") idBooking : Int
+    ) : Call<>
+     */
 }

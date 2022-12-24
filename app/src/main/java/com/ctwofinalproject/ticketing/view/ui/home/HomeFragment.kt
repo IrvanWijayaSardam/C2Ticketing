@@ -18,7 +18,6 @@ import com.auth0.android.jwt.JWT
 import com.bumptech.glide.Glide
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentHomeBinding
-import com.ctwofinalproject.ticketing.databinding.ItemRecentSearchBinding
 import com.ctwofinalproject.ticketing.entity.RecentSearch
 import com.ctwofinalproject.ticketing.util.ShowSnack
 import com.ctwofinalproject.ticketing.view.adapter.RecentSearchAdapter
@@ -64,8 +63,8 @@ class HomeFragment : Fragment() {
 
         viewModelProto.dataUser.observe(viewLifecycleOwner) {
             Log.d(TAG, "onViewCreated: ${it}")
-            token = it.token
             if (it.isLogin) {
+                token = it.token
                 isLogin = it.isLogin
                 binding.tvUsernameOrLogin.text = it.firstname
                 homeViewModel.getCounter("bearer "+it.token)
@@ -78,9 +77,11 @@ class HomeFragment : Fragment() {
         homeViewModel.liveDataGetNotificationCounter.observe(viewLifecycleOwner){
             if(it != null){
                 binding.tvNotificationCounter.visibility = View.VISIBLE
+                binding.cvNotificationBg.visibility = View.VISIBLE
                 binding.tvNotificationCounter.text = it.data!!.size.toString()
             } else {
                 binding.tvNotificationCounter.visibility = View.GONE
+                binding.cvNotificationBg.visibility = View.GONE
             }
         }
 
@@ -146,6 +147,11 @@ class HomeFragment : Fragment() {
         bund.putString("fromto",fromto)
         bund.putString("fromFragment",fFragment)
         Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_airportFragment,bund)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.getCounter("bearer "+token)
     }
 
     private fun initListener() {

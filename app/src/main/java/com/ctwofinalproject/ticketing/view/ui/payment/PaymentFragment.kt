@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
@@ -14,6 +15,8 @@ import com.ctwofinalproject.ticketing.databinding.FragmentPaymentBinding
 import com.ctwofinalproject.ticketing.model.DataItemGetBooking
 import com.ctwofinalproject.ticketing.util.DecimalSeparator
 import com.ctwofinalproject.ticketing.view.adapter.PassengerDetailsAdapter
+import com.ctwofinalproject.ticketing.viewmodel.FlitPayViewModel
+import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,10 +26,13 @@ class PaymentFragment : Fragment() {
     private val binding get()                                                = _binding!!
     private var dataItemGetBooking : DataItemGetBooking?                     = null
     lateinit var adapterPassengerDetails                                     : PassengerDetailsAdapter
+    private val viewmodelFlitPay                                             : FlitPayViewModel by viewModels()
+    private val viewModelProto                                               : ProtoViewModel by viewModels()
     var totalPassenger                                                       = 0
     var totalFare                                                            = 0
     var totalFareDeparture                                                   = 0
     var totalFareReturn                                                      = 0
+    var token                                                                = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +50,24 @@ class PaymentFragment : Fragment() {
         getArgs()
         adapterPassengerDetails                                 = PassengerDetailsAdapter(totalPassenger)
         setBottomNav()
+
+        viewModelProto.dataUser.observe(viewLifecycleOwner){
+            if(it.isLogin){
+                token = it.token
+                viewmodelFlitPay.getSaldo("bearer "+token)
+            } else {
+                Log.d(TAG, "onViewCreated: Requrie Login")
+            }
+        }
+
+        viewmodelFlitPay.liveDataSaldo.observe(viewLifecycleOwner){
+            if(it != null){
+                binding.tvSaldoAmmount.setText("IDR : "+DecimalSeparator.formatDecimalSeperators(it.data!!.balance.toString()))
+            } else {
+
+            }
+        }
+
     }
 
     private fun getArgs() {
@@ -53,19 +77,15 @@ class PaymentFragment : Fragment() {
         binding.tvDepTimeFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureTime.toString()
         binding.tvArrTimeFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalTime.toString()
         binding.tvPriceDepartureFPayment.setText("IDR. "+ DecimalSeparator.formatDecimalSeperators(dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.price.toString()))
-        binding.tvPriceReturnBsummary.setText("IDR. "+ DecimalSeparator.formatDecimalSeperators(dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.price.toString()))
         binding.totalPassengerRowOne.text = dataItemGetBooking!!.usersPayment!!.booking!!.passangerBooking!!.size.toString()
         binding.totalPassengerRowTwo.text = dataItemGetBooking!!.usersPayment!!.booking!!.passangerBooking!!.size.toString()
         binding.tvFlightNumberDepartureBsummary.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.flightId.toString()
-        binding.tvFlightNumberReturnBookingSummary.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.flightId.toString()
-
         binding.tvPriceDepartureBsummary.setText("IDR. "+ DecimalSeparator.formatDecimalSeperators(dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.price.toString()))
 
         totalFareDeparture = (dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.price!!.toString().toInt() * dataItemGetBooking!!.usersPayment!!.booking!!.totalPassanger!!.toString().toInt())
         Log.d(TAG, "getArgs: totalFareDeparture : ${totalFareDeparture}")
         Log.d(TAG, "getArgs: priceDeparture : ${dataItemGetBooking!!.usersPayment!!.booking!!.ticketDeparture!!.price!!.toString()}")
         Log.d(TAG, "getArgs: totalPassenger : ${dataItemGetBooking!!.usersPayment!!.booking!!.totalPassanger!!.toString().toInt()}")
-
 
         totalFare = totalFare + totalFareDeparture
         binding.tvTotalFareDeparture.setText("IDR "+ DecimalSeparator.formatDecimalSeperators(totalFareDeparture.toString()))
@@ -74,9 +94,11 @@ class PaymentFragment : Fragment() {
             totalFareReturn = dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.price!! * dataItemGetBooking!!.usersPayment!!.booking!!.totalPassanger!!
             totalFare = totalFare + totalFareReturn
             binding.tvTotalFareReturn.setText("IDR "+ DecimalSeparator.formatDecimalSeperators(totalFareReturn.toString()))
+            binding.tvPriceReturnBsummary.setText("IDR. "+ DecimalSeparator.formatDecimalSeperators(dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.price.toString()))
             binding.tvFlightNumberReturnFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.flightId.toString()
             binding.tvDepTimeReturnFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.flight!!.departureTime.toString()
             binding.tvArrTimeReturnFPayment.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.flight!!.arrivalTime.toString()
+            binding.tvFlightNumberReturnBookingSummary.text = dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.flightId.toString()
             binding.tvPriceReturnFPayment.setText("IDR. "+ DecimalSeparator.formatDecimalSeperators(dataItemGetBooking!!.usersPayment!!.booking!!.ticketReturn!!.price.toString()))
         } else {
             binding.trReturnTicket.visibility = View.GONE
@@ -91,6 +113,7 @@ class PaymentFragment : Fragment() {
 
     private fun initListener() {
         binding?.run{
+            shimmerTicketDetails.visibility = View.GONE
             ivGotoBackFromFPayment.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
             }
