@@ -121,9 +121,9 @@ class TripSummaryPassengerFragment : Fragment() {
                         ))
                     )
 
-                    binding.rvTicketTripSummaryPassenger.layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                    binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
+//                    binding.rvTicketTripSummaryPassenger.layoutManager =
+//                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+//                    binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
                     binding.cvTicketReturnTripSummaryPassenger.visibility = View.GONE
                     binding.cvTicketReturn.visibility = View.GONE
                     binding.shimmerBar.visibility = View.GONE
