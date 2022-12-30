@@ -36,8 +36,8 @@ class PassengerDetailsAdapter(val passengerAmmount: Int): RecyclerView.Adapter<P
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvNameItemPassenger.setText("Mr / Mrs : "+ differ.currentList[position].passanger!![0]!!.firstname+" "+differ.currentList[position].passanger!![0]!!.lastname)
-        holder.binding.tvNikItemPassenger.setText("No Id : "+differ.currentList[position].passanger!![0]!!.identityNumber)
+        holder.binding.tvNameItemPassenger.setText("Mr / Mrs : "+ differ.currentList[position].passanger!!.firstname+" "+differ.currentList[position].passanger!!.lastname)
+        holder.binding.tvNikItemPassenger.setText("No Id : "+differ.currentList[position].passanger!!.identityNumber)
 
     }
 

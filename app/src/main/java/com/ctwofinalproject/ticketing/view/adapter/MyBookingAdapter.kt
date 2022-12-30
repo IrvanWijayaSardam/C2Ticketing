@@ -89,8 +89,8 @@ class MyBookingAdapter(): RecyclerView.Adapter<MyBookingAdapter.ViewHolder>() {
             holder.binding.tvFlightNumberReturnItemBooking.visibility = View.GONE
         }
         holder.binding.tvTotalPassengerItemBooking.setText("Total Passenger : "+differ.currentList[position].usersPayment!!.booking!!.totalPassanger.toString())
-        holder.binding.tvPlaneNameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.planeName!![0]!!.namePlane.toString()
-        holder.binding.tvUsernameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.passangerBooking!![0]!!.passanger!![0]!!.firstname
+//        holder.binding.tvPlaneNameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.planeName!!.namePlane
+ //       holder.binding.tvUsernameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.passangerBooking!![0]!!.passanger!!.firstname
     }
 
     override fun getItemCount(): Int {
