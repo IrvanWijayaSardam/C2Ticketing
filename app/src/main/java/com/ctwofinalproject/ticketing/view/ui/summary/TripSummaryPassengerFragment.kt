@@ -417,7 +417,7 @@ class TripSummaryPassengerFragment : Fragment() {
                     })
                     .setNeutralButton("Add To Wishlist", DialogInterface.OnClickListener { dialogInterface, i ->
                         if(ticketIdReturn.isNullOrEmpty()){
-                           viewModelTripSummaryPassenger.postWishlist("bearer "+token,CreateWishlist(ticketId.toInt(),null))
+                            viewModelTripSummaryPassenger.postWishlist("bearer "+token,CreateWishlist(ticketId.toInt(),null))
                         } else {
                             viewModelTripSummaryPassenger.postWishlist("bearer "+token,CreateWishlist(ticketId.toInt(),ticketIdReturn.toInt()))
                         }

@@ -32,7 +32,7 @@ class LoginFragment : Fragment() {
     lateinit var token                                          : String
     private lateinit var  loadingDialog                         : LoadingDialog
     private lateinit var fromDestination                        : TokenNav
-    private var enumFrom                                            = ""
+    private var enumFrom                                        = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

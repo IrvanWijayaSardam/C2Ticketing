@@ -73,11 +73,9 @@ class TripSummaryPassengerViewModel @Inject constructor(var api: RestServiceMain
                     dataTicketById.value = null
                 }
             }
-
             override fun onFailure(call: Call<ResponseGetTicketById>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
             }
-
         })
     }
 
@@ -117,7 +115,6 @@ class TripSummaryPassengerViewModel @Inject constructor(var api: RestServiceMain
                     dataResponseWishlist.value = null
                 }
             }
-
             override fun onFailure(call: Call<ResponseCreateWishlist>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
             }

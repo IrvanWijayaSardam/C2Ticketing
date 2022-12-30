@@ -63,16 +63,26 @@ class MyBookingUpcomingAdapter(): RecyclerView.Adapter<MyBookingUpcomingAdapter.
         holder.binding.tvPlaneNameItemBooking.visibility = View.GONE
         holder.binding.tvBookingId.setText("BOOKING CODE : "+differ.currentList[position].id)
         holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.createdAt.toString().substring(0,9)
+        holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.createdAt.toString().substring(0,9)
         totalPriceDeparture = (differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.price!!.toInt() * differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size)
 
         if(differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.classId!!.equals(1)) {
             holder.binding.tvFlightClassItemBooking.text = "Business"
-            totalPriceReturn = (differ.currentList[position].userBooking!!.booking!!.ticketReturn!!.price!!.toInt() * differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size)
         } else {
             holder.binding.tvFlightClassItemBooking.text = "Economy"
         }
+
         if(differ.currentList[position].userBooking!!.booking!!.ticketIdReturn != null){
             holder.binding.tvTripType.text = "Round Trip"
+            holder.binding.tvFlightNumberReturnItemBooking.text = differ.currentList[position].userBooking!!.booking!!.ticketIdReturn.toString()
+            holder.binding.tvDepartureDateItemBookingReturn.text = differ.currentList[position].userBooking!!.booking!!.ticketReturn!!.createdAt.toString().substring(0,9)
+            holder.binding.tvArrivalDateItemBookingReturn.text = differ.currentList[position].userBooking!!.booking!!.ticketReturn!!.createdAt.toString().substring(0,9)
+                totalPriceReturn = (differ.currentList[position].userBooking!!.booking!!.ticketReturn!!.price!!.toInt() * differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size)
+        } else {
+            holder.binding.tvTripType.text = "One Way"
+            holder.binding.tvFlightNumberReturnItemBooking.visibility = View.GONE
+            holder.binding.tvDepartureDateItemBookingReturn.visibility = View.GONE
+            holder.binding.tvArrivalDateItemBookingReturn.visibility = View.GONE
         }
         totalPrice = totalPriceDeparture + totalPriceReturn
         holder.binding.tvTotalPriceItemBooking.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalPrice.toString()))

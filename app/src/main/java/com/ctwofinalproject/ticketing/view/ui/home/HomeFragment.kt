@@ -56,9 +56,7 @@ class HomeFragment : Fragment() {
         editPref                                            = sharedPref.edit()
         adapterRecentSearch                                 = RecentSearchAdapter()
 
-
         setImageSlider()
-        //setProfile()
         setBottomNav()
         initListener()
 
@@ -117,8 +115,8 @@ class HomeFragment : Fragment() {
 
         viewModelProto.dataBooking.observe(viewLifecycleOwner) {
             if (!it.totalPrice.equals("")) {
-                Navigation.findNavController(requireView())
-                    .navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
+                Log.d(TAG, "onViewCreated: masuk data booking")
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_tripSummaryPassengerFragment)
             } else {
                 Log.d(TAG, "onViewCreated: home fragment else")
             }
