@@ -111,7 +111,7 @@ class ProfileFragment : Fragment() {
             Log.d(TAG, "onViewCreated: ${it}")
             if(it != null){
                 setProfile(it.currentUser!!.pictures.toString())
-                binding.tvNameFragmentProfile.setText(it.currentUser.firstname.toString()+" "+it.currentUser.lastname.toString())
+                binding.tvNameFragmentProfile.setText(it.currentUser!!.firstname.toString()+" "+it.currentUser!!.lastname.toString())
             } else {
                 
             }
@@ -121,9 +121,11 @@ class ProfileFragment : Fragment() {
             Log.d(TAG, "onViewCreated: ${it}")
             if(it != null){
                 if(it.code!!.equals(200)){
+                    ShowSnack.show(binding.root,"Success Upload Profile")
+                    setProfile(it.data!!)
                     profileViewModel.updateUser("bearer "+token, UserUpdate(null,null,null,null,null,null,
-                    null,it.data.toString(),null,null,null))
-                    setProfile(it.data.toString())
+                        null,it.data.toString(),null,null,null))
+                    profileViewModel.liveDataResponsePostFile.value = null
                 }
             }
         }
@@ -222,7 +224,7 @@ class ProfileFragment : Fragment() {
             val imageBody : RequestBody = tempFile.asRequestBody(type!!.toMediaType())
             var imageReq : MultipartBody.Part = MultipartBody.Part.createFormData("file",tempFile.name,imageBody)
             profileViewModel.postFile(imageReq)
-            ShowSnack.show(binding.root,"Upload Profile Success")
+            //ShowSnack.show(binding.root,"Upload Profile Success")
         }
     }
 

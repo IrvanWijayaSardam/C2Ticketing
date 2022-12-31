@@ -32,6 +32,7 @@ class DetailProfileFragment : Fragment() {
     private lateinit var builder                                        : AlertDialog.Builder
     val viewmodelProfile                                                : ProfileViewModel by viewModels()
     var token                                                           = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,8 +54,21 @@ class DetailProfileFragment : Fragment() {
                 binding.tvEmailFDetailProfile.text = it.email.toString()
                 binding.tvPhoneNumberFDetailProfile.text = it.phone.toString()
                 token = it.token
+                viewmodelProfile.whoami("bearer "+token)
+
             } else {
                 Log.d(TAG, "onViewCreated: need to loggedin ")
+            }
+        }
+
+        viewmodelProfile.liveDataResponseWhoami.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: ${it}")
+            if(it != null){
+                binding.tvFullNameFDetailProfile.setText(it.currentUser!!.firstname+" "+ it.currentUser!!.lastname)
+                binding.tvEmailFDetailProfile.text = it.currentUser!!.email
+                binding.tvPhoneNumberFDetailProfile.text = it.currentUser!!.phone
+            } else {
+                Log.d(TAG, "onViewCreated: require login")
             }
         }
 

@@ -18,6 +18,12 @@ private val Context.userPreferencesStore: DataStore<UserDataProto> by dataStore(
 
 class UserPreferencesRepository (private val context: Context) {
 
+    suspend fun updateJwt(jwt : String){
+        context.userPreferencesStore.updateData {
+            it.toBuilder().setToken(jwt).build()
+        }
+    }
+
     suspend fun saveData(userProto: UserProto) {
         context.userPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setFirstname(userProto.firstname).build()
@@ -47,6 +53,7 @@ class UserPreferencesRepository (private val context: Context) {
             preferences.toBuilder().setIsLogin(userProto.isLogin).build()
         }
     }
+
 
     suspend fun deleteData() {
         context.userPreferencesStore.updateData { preferences ->

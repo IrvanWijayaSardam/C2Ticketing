@@ -19,6 +19,10 @@ class ProtoViewModel(application: Application) :AndroidViewModel(application) {
         repo.saveData(userProto)
     }
 
+    fun updateJwt(jwt: String) = viewModelScope.launch {
+        repo.updateJwt(jwt)
+    }
+
     fun clearData() = viewModelScope.launch {
         repo.deleteData()
     }

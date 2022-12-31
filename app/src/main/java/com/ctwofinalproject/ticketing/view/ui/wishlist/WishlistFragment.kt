@@ -84,7 +84,7 @@ class WishlistFragment : Fragment() {
 
     private fun initListener() {
         binding?.run {
-            ivBackFromWishlistFragmentAirport.setOnClickListener {
+            ivBackFWishlist.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
             }
         }

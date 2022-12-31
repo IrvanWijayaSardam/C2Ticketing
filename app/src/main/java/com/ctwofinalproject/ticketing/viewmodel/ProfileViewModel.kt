@@ -9,7 +9,6 @@ import com.ctwofinalproject.ticketing.api.RestServiceMain
 import com.ctwofinalproject.ticketing.data.ResponseUpdatePassword
 import com.ctwofinalproject.ticketing.data.UpdatePassword
 import com.ctwofinalproject.ticketing.data.UserUpdate
-import com.ctwofinalproject.ticketing.model.ResponseLogin
 import com.ctwofinalproject.ticketing.model.ResponsePostFile
 import com.ctwofinalproject.ticketing.model.ResponseUpdate
 import com.ctwofinalproject.ticketing.model.ResponseWhoami
@@ -19,7 +18,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
-import kotlin.math.log
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(var api: RestServiceMain): ViewModel() {

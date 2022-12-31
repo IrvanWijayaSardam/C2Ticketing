@@ -10,6 +10,12 @@ data class ResponseUpdate(
 	@field:SerializedName("code")
 	val code: Int? = null,
 
+	@field:SerializedName("accessToken")
+	val accessToken: String? = null,
+
 	@field:SerializedName("status")
-	val status: Boolean? = null
+	val status: Boolean? = null,
+
+	@field:SerializedName("refreshToken")
+	val refreshToken: String? = null
 )

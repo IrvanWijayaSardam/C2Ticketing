@@ -72,8 +72,24 @@ class EditProfileFragment : Fragment() {
         viewModelProto.dataUser.observe(viewLifecycleOwner) {
             if (it.isLogin) {
                 token = it.token
+                viewModelProfile.whoami("binding "+token)
             } else {
 
+            }
+        }
+
+        viewModelProfile.liveDataResponseWhoami.observe(viewLifecycleOwner){
+            if(it != null){
+                binding.edtEmailFEditProfile.setText(it.currentUser!!.email)
+                binding.edtFirstNameFEditProfile.setText(it.currentUser!!.firstname)
+                binding.edtLastNameFEditProfile.setText(it.currentUser!!.lastname)
+                binding.edtBirthDayDateFEditProfile.setText(it.currentUser!!.birthdate!!.substring(0,10))
+                binding.edtPhoneFEdiProfile.setText(it.currentUser!!.phone)
+                if(it.currentUser!!.gender.equals("L")){
+                    binding.rbGenderMaleFEditProfile.isChecked = true
+                } else {
+                    binding.rbGenderFemaleFEditProfile.isChecked = true
+                }
             }
         }
 
@@ -82,6 +98,7 @@ class EditProfileFragment : Fragment() {
             if (it != null){
                 if(it.code!!.equals(200)){
                     ShowSnack.show(binding.root,"Update Profile Success")
+                    viewModelProto.updateJwt(it.accessToken.toString())
                     viewModelProfile.liveDataResponseUpdate.postValue(null)
                     Navigation.findNavController(requireView()).navigate(R.id.action_editProfileFragment_to_detailProfileFragment)
                 }
@@ -191,45 +208,54 @@ class EditProfileFragment : Fragment() {
                 }
             }
             btnSubmitDataFEditProfile.setOnClickListener {
-                var gender = ""
-                if (rbGenderMaleFEditProfile.isChecked) {
-                    gender = "L"
-                } else {
-                    gender = "P"
-                }
-                Log.d(TAG, "initListener: country User ${countryUser}")
-                if (countryUser.equals("Indonesia")) {
-                    viewModelProfile.updateUser(
-                        "bearer " + token, UserUpdate(
-                            edtEmailFEditProfile.text.toString(),
-                            edtFirstNameFEditProfile.text.toString(),
-                            edtLastNameFEditProfile.text.toString(),
-                            gender,
-                            edtPhoneFEdiProfile.text.toString(),
-                            edtBirthDayDateFEditProfile.text.toString(),
-                            edtHomeAddress.text.toString(),
-                            null,
-                            spCountryFEditProfile.selectedItem.toString(),
-                            spProvinceFEditProfile.selectedItem.toString(),
-                            spCityFEditProfile.selectedItem.toString()
-                        )
-                    )
-                } else {
-                    viewModelProfile.updateUser(
-                        "bearer " + token, UserUpdate(
-                            edtEmailFEditProfile.text.toString(),
-                            edtFirstNameFEditProfile.text.toString(),
-                            edtLastNameFEditProfile.text.toString(),
-                            gender,
-                            edtPhoneFEdiProfile.text.toString(),
-                            edtBirthDayDateFEditProfile.text.toString(),
-                            edtHomeAddress.text.toString(),
-                            null,
-                            spCountryFEditProfile.selectedItem.toString(),
-                            edtProvinceFEditProfile.text.toString(),
-                            edtCityFEditProfile.text.toString()
-                        )
-                    )
+                when{
+                    edtEmailFEditProfile.text.isNullOrEmpty() -> edtEmailFEditProfile.error = "You need to fill your email"
+                    edtFirstNameFEditProfile.text.isNullOrEmpty() -> edtFirstNameFEditProfile.error = "You need to fill your Firstname"
+                    edtLastNameFEditProfile.text.isNullOrEmpty() -> edtEmailFEditProfile.error = "You need to fill your Last name"
+                    edtPhoneFEdiProfile.text.isNullOrEmpty() -> edtPhoneFEdiProfile.error = "You need to fill your Phone number"
+                    edtBirthDayDateFEditProfile.text.isNullOrEmpty() -> edtBirthDayDateFEditProfile.error = "You need to fill your Birthdate"
+                    edtAddressFEditProfile.text.isNullOrEmpty() -> edtHomeAddress.error = "You need to fill your home address"
+                    else -> {
+                        var gender = ""
+                        if (rbGenderMaleFEditProfile.isChecked) {
+                            gender = "L"
+                        } else {
+                            gender = "P"
+                        }
+                        if (countryUser.equals("Indonesia")) {
+                            viewModelProfile.updateUser(
+                                "bearer " + token, UserUpdate(
+                                    edtEmailFEditProfile.text.toString(),
+                                    edtFirstNameFEditProfile.text.toString(),
+                                    edtLastNameFEditProfile.text.toString(),
+                                    gender,
+                                    edtPhoneFEdiProfile.text.toString(),
+                                    edtBirthDayDateFEditProfile.text.toString(),
+                                    edtHomeAddress.text.toString(),
+                                    null,
+                                    spCountryFEditProfile.selectedItem.toString(),
+                                    spProvinceFEditProfile.selectedItem.toString(),
+                                    spCityFEditProfile.selectedItem.toString()
+                                )
+                            )
+                        } else {
+                            viewModelProfile.updateUser(
+                                "bearer " + token, UserUpdate(
+                                    edtEmailFEditProfile.text.toString(),
+                                    edtFirstNameFEditProfile.text.toString(),
+                                    edtLastNameFEditProfile.text.toString(),
+                                    gender,
+                                    edtPhoneFEdiProfile.text.toString(),
+                                    edtBirthDayDateFEditProfile.text.toString(),
+                                    edtHomeAddress.text.toString(),
+                                    null,
+                                    spCountryFEditProfile.selectedItem.toString(),
+                                    edtProvinceFEditProfile.text.toString(),
+                                    edtCityFEditProfile.text.toString()
+                                )
+                            )
+                        }
+                    }
                 }
             }
         }
