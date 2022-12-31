@@ -12,6 +12,7 @@
     <!--  ticketting color  -->
     <color name="primary_blue_1">#2663FF</color>
     <color name="background_color_white">#ffffff</color>
+    <color name="background_color_sechondary">#ffffff</color>
     <color name="primary_font_color">#575964</color>
     <color name="secondary_font_color">#BABABA</color>
     <color name="variant_color_orange">#F5BF5D</color>

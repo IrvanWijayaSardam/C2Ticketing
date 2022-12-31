@@ -56,6 +56,8 @@ class MyBookingFragment : Fragment() {
                 adapterMyBooking.submitList(it.data)
                 binding.rvMyBooking.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                 binding.rvMyBooking.adapter = adapterMyBooking
+                binding.ivEmptyListFMyBooking.visibility = View.GONE
+                binding.tvEmptyListFMyBooking.visibility = View.GONE
             }
         }
         adapterMyBooking.setOnItemClickListener(object : MyBookingAdapter.onItemClickListener{
