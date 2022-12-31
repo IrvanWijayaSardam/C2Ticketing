@@ -59,6 +59,8 @@ class WishlistFragment : Fragment() {
                 binding.rvWishlistFWishlist.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                 binding.rvWishlistFWishlist.adapter = adapterWishlist
                 binding.shimmerBarWishlist.visibility = View.GONE
+                binding.ivEmptyListFWishlist.visibility = View.GONE
+                binding.tvEmptyListFWishlist.visibility = View.GONE
             } else {
                 Log.d(TAG, "onViewCreated: Belum ada wishlist")
                 binding.shimmerBarWishlist.visibility = View.GONE

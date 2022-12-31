@@ -144,10 +144,11 @@ class ProfileFragment : Fragment() {
 
     }
 
+
     private fun setupBiometricAuthentication() {
         biometricManager = BiometricManager.from(requireContext())
-        val executor = ContextCompat.getMainExecutor(requireContext())
-        biometricPrompt = BiometricPrompt(this, executor, biometricCallback)
+        val executor = ContextCompat.getMainExecutor(requireActivity())
+        biometricPrompt = BiometricPrompt(requireActivity(), executor, biometricCallback)
     }
 
     private fun checkBiometricFeatureState() {
@@ -175,7 +176,7 @@ class ProfileFragment : Fragment() {
             .setTitle("Verify your identity")
             .setDescription("Confirm your identity so we can verify it's you")
             .setNegativeButtonText("Cancel")
-            .setConfirmationRequired(false) //Allows user to authenticate without performing an action, such as pressing a button, after their biometric credential is accepted.
+            .setConfirmationRequired(true) //Allows user to authenticate without performing an action, such as pressing a button, after their biometric credential is accepted.
             .build()
     }
 
