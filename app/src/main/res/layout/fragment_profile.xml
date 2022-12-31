@@ -129,7 +129,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:layout_margin="15dp"
                 android:backgroundTint="@color/primary_font_color"
                 android:elevation="7dp"
@@ -172,6 +172,18 @@
                         android:background="@android:color/transparent"
                         android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
                         android:text="@string/help_center"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toTopOf="@+id/btnBiometricFprofile" />
+
+                    <Button
+                        android:id="@+id/btnBiometricFprofile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:text="Biometric Authentication"
                         android:textAlignment="textStart"
                         android:textAllCaps="false"
                         android:textSize="12sp"
