@@ -10,13 +10,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llHeaderFragmentShowTicket"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="70dp"
         android:background="@color/primary_blue_1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="horizontal"
-        android:padding="30dp"
         >
 
         <ImageView
@@ -25,6 +24,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_arrow_back"
             app:layout_constraintHorizontal_bias="0"
+            android:layout_marginStart="20dp"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -42,6 +43,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

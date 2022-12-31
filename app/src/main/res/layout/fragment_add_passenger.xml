@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background_color_white"
+    android:padding="20dp"
+    android:background="#D4E0FF"
     tools:context=".view.ui.booking.AddPassengerFragment"
     >
     <ScrollView
@@ -130,12 +131,12 @@
             <Button
                 android:id="@+id/btnSaveAddPassenger"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"
-                android:text="SAVE"
+                android:text="@string/save"
                 android:textColor="@color/light_font"
-                android:backgroundTint="@color/primary_blue_1"
+                android:background="@drawable/bg_btn"
                 android:textAllCaps="false" />
         </LinearLayout>
     </ScrollView>
