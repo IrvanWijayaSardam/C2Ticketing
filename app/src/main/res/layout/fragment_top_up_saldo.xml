@@ -90,9 +90,11 @@
                 android:gravity="center"
                 android:fontFamily="@font/poppins_medium"
                 android:textColor="@color/background_color_white"
+                android:inputType="number"
                 />
         </com.google.android.material.textfield.TextInputLayout>
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvTopupSaldo"
             android:layout_width="80dp"
             android:layout_height="35dp"
             app:cardCornerRadius="30dp"

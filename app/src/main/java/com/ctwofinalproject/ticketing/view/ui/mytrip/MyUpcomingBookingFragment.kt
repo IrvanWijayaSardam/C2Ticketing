@@ -8,10 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.databinding.FragmentMyUpcomingBookingBinding
-import com.ctwofinalproject.ticketing.databinding.FragmentProfileBinding
+import com.ctwofinalproject.ticketing.model.DataItemHistory
 import com.ctwofinalproject.ticketing.view.adapter.MyBookingUpcomingAdapter
 import com.ctwofinalproject.ticketing.viewmodel.MyBookingViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
@@ -53,9 +54,20 @@ class MyUpcomingBookingFragment : Fragment() {
                 adapterMyUpcomingBooking.submitList(it.data)
                 binding.rvMyBookingUpcoming.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                 binding.rvMyBookingUpcoming.adapter = adapterMyUpcomingBooking
+                binding.ivEmptyListFUpcomingBooking.visibility = View.GONE
+                binding.tvEmptyListFUpcomingBooking.visibility = View.GONE
             } else {
 
             }
         }
+
+        adapterMyUpcomingBooking.setOnItemClickListener(object : MyBookingUpcomingAdapter.onItemClickListener{
+            override fun onItemClick(dataItemGetBooking: DataItemHistory) {
+                Log.d(TAG, "onItemClick: ${dataItemGetBooking.id}")
+                val bund = Bundle()
+                bund.putParcelable("dataItemGetBooking",dataItemGetBooking)
+                Navigation.findNavController(requireView()).navigate(R.id.action_myTripFragment_to_upcomingBookingDetailFragment,bund)
+            }
+        })
     }
 }

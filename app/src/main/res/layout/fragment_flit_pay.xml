@@ -274,6 +274,7 @@
                             android:orientation="vertical"
                             android:gravity="center">
                             <ImageView
+                                android:id="@+id/ivIsiSaldoFFlitPay"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
                                 android:src="@drawable/ic_baseline_wallet_24"

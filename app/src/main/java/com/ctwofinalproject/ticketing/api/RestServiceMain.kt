@@ -120,4 +120,11 @@ interface RestServiceMain {
         @Path("query") query: String
     ) : Call<ResponseGetHistory>
 
+    @PUT("api/wallet/edit/{idUser}")
+    fun topupSaldo(
+        @Header("Authorization") authorization: String,
+        @Path("idUser") idUser: Int,
+        @Body body : BalanceBody
+    ): Call<ResponseTopup>
+
 }

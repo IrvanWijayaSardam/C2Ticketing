@@ -68,6 +68,9 @@ class FlitPayFragment : Fragment() {
             ivBackFromFFlitPay.setOnClickListener {
                 Navigation.findNavController(binding.root).popBackStack()
             }
+            ivIsiSaldoFFlitPay.setOnClickListener {
+                Navigation.findNavController(requireView()).navigate(R.id.action_flitPayFragment_to_topUpSaldoFragment)
+            }
         }
     }
 

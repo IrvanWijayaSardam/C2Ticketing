@@ -162,6 +162,9 @@
         <action
             android:id="@+id/action_myTripFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/action_myTripFragment_to_upcomingBookingDetailFragment"
+            app:destination="@id/upcomingBookingDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailProfileFragment"
@@ -171,6 +174,9 @@
         <action
             android:id="@+id/action_detailProfileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_detailProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
@@ -185,7 +191,11 @@
         android:id="@+id/flitPayFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.flitpay.FlitPayFragment"
         android:label="fragment_flit_pay"
-        tools:layout="@layout/fragment_flit_pay" />
+        tools:layout="@layout/fragment_flit_pay" >
+        <action
+            android:id="@+id/action_flitPayFragment_to_topUpSaldoFragment"
+            app:destination="@id/topUpSaldoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.ctwofinalproject.ticketing.view.ui.profile.EditProfileFragment"
@@ -227,4 +237,14 @@
             android:id="@+id/action_confirmPaymentFragment_to_myTripFragment"
             app:destination="@id/myTripFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/topUpSaldoFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.flitpay.TopUpSaldoFragment"
+        android:label="fragment_top_up_saldo"
+        tools:layout="@layout/fragment_top_up_saldo" />
+    <fragment
+        android:id="@+id/upcomingBookingDetailFragment"
+        android:name="com.ctwofinalproject.ticketing.view.ui.mytrip.UpcomingBookingDetailFragment"
+        android:label="fragment_upcoming_booking_detail"
+        tools:layout="@layout/fragment_upcoming_booking_detail" />
 </navigation>
