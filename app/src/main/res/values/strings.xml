@@ -123,6 +123,7 @@
     <string name="my_wishlist" tools:ignore="MissingTranslation">My Wishlist</string>
     <string name="flight_detail" tools:ignore="MissingTranslation">Flight Detail</string>
     <string name="flit_pay" tools:ignore="MissingTranslation">Flit Pay</string>
+    <string name="top_up" tools:ignore="MissingTranslation">Top Up</string>
 
 
     <!--  dummy country  -->
