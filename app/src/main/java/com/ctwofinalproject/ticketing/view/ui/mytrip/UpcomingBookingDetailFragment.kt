@@ -19,6 +19,7 @@ import com.ctwofinalproject.ticketing.model.DataItemGetBooking
 import com.ctwofinalproject.ticketing.model.DataItemHistory
 import com.ctwofinalproject.ticketing.util.DecimalSeparator
 import com.ctwofinalproject.ticketing.view.adapter.PassengerDetailsAdapter
+import com.ctwofinalproject.ticketing.view.adapter.PassengerDetailsUpcomingAdapter
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import com.ctwofinalproject.ticketing.viewmodel.TripSummaryPassengerViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,7 +30,7 @@ class UpcomingBookingDetailFragment : Fragment() {
 
     private var _binding: FragmentUpcomingBookingDetailBinding?                 = null
     private val binding get()                                                   = _binding!!
-    lateinit var adapterPassengerDetails                                        : PassengerDetailsAdapter
+    lateinit var adapterPassengerDetails                                        : PassengerDetailsUpcomingAdapter
     private var dataItemGetBooking : DataItemHistory?                           = null
     private val viewModelProto                                                  : ProtoViewModel by viewModels()
     private val viewmodelTripSummaryPassenger                                   : TripSummaryPassengerViewModel by viewModels()
@@ -52,6 +53,7 @@ class UpcomingBookingDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataItemGetBooking                                      = DataItemHistory()
+        adapterPassengerDetails                                 = PassengerDetailsUpcomingAdapter(totalPassenger)
 
         viewModelProto.dataUser.observe(viewLifecycleOwner){
             if(it.isLogin){
@@ -121,6 +123,12 @@ class UpcomingBookingDetailFragment : Fragment() {
             binding.totalPassengerRowTwoUpcomingBookDetail.text = dataItemGetBooking!!.userBooking!!.booking!!.totalPassanger.toString()
             viewmodelTripSummaryPassenger.getTicketReturnById(dataItemGetBooking!!.userBooking!!.booking!!.ticketIdReturn.toString())
         }
+
+        adapterPassengerDetails                                 = PassengerDetailsUpcomingAdapter(dataItemGetBooking!!.userBooking!!.booking!!.totalPassanger!!.toInt())
+        adapterPassengerDetails.submitList(dataItemGetBooking!!.userBooking!!.booking!!.passangerBooking)
+        binding.rvPassengerListFUpcomingBookDetail.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
+        binding.rvPassengerListFUpcomingBookDetail.adapter = adapterPassengerDetails
+        binding.shimmerBarTotalFare.visibility = View.GONE
     }
 
     private fun setBottomNav(){
