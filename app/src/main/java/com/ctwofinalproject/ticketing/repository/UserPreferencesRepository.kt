@@ -24,6 +24,12 @@ class UserPreferencesRepository (private val context: Context) {
         }
     }
 
+    suspend fun updateProfile(profile : String){
+        context.userPreferencesStore.updateData {
+            it.toBuilder().setPictures(profile).build()
+        }
+    }
+
     suspend fun saveData(userProto: UserProto) {
         context.userPreferencesStore.updateData { preferences ->
             preferences.toBuilder().setFirstname(userProto.firstname).build()

@@ -71,7 +71,7 @@ class UpcomingBookingDetailFragment : Fragment() {
                 binding.tvArrTimeFUpcomingBookDetail.text = it.data!!.flight!!.arrivalTime
                 binding.tvDepatureAirportDeparture.text = it.data!!.flight!!.departureTerminal!!.name
                 binding.tvArrivalTerminalDeparture.text = it.data!!.flight!!.arrivalTerminal!!.name
-                binding.tvPriceDepartureFUpcomingBookDetail.text = it.data!!.price.toString()
+                binding.tvPriceDepartureFUpcomingBookDetail.setText("IDR "+DecimalSeparator.formatDecimalSeperators(it.data!!.price.toString()))
                 totalFareDeparture = totalPassenger * it.data!!.price!!.toInt()
                 binding.tvTotalFareDepartureUpcomingBookDetail.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalFareDeparture.toString()))
                 totalFare = totalFareReturn + totalFareDeparture
@@ -88,7 +88,7 @@ class UpcomingBookingDetailFragment : Fragment() {
                 binding.tvArrTimeFUpcomingBookDetailReturn.text = it.data!!.flight!!.arrivalTime
                 binding.tvDepatureAirportDepartureReturn.text = it.data!!.flight!!.departureTerminal!!.name
                 binding.tvArrivalTerminalDepartureReturn.text = it.data!!.flight!!.arrivalTerminal!!.name
-                binding.tvPriceDepartureFUpcomingBookDetailReturn.text = it.data!!.price.toString()
+                binding.tvPriceDepartureFUpcomingBookDetailReturn.setText("IDR "+DecimalSeparator.formatDecimalSeperators(it.data!!.price.toString()))
                 totalFareReturn = totalPassenger * it.data!!.price!!.toInt()
                 binding.tvTotalFareReturnUpcomingBookDetail.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalFareReturn.toString()))
                 totalFare = totalFareReturn + totalFareDeparture
@@ -115,12 +115,15 @@ class UpcomingBookingDetailFragment : Fragment() {
         totalPassenger = dataItemGetBooking!!.userBooking!!.booking!!.totalPassanger!!.toInt()
         viewmodelTripSummaryPassenger.getTicketById(dataItemGetBooking!!.userBooking!!.booking!!.ticketIdDeparture.toString())
         binding.totalPassengerRowOneUpcomingBookDetail.text = dataItemGetBooking!!.userBooking!!.booking!!.totalPassanger.toString()
+        binding.tvFlightNumberDepartureUpcomingBookDetail.text = dataItemGetBooking!!.userBooking!!.booking!!.ticketDeparture!!.flightId.toString()
 
         if(dataItemGetBooking!!.userBooking!!.booking!!.ticketIdReturn != null){
             binding.tvTicketReturnDetails.visibility = View.VISIBLE
             binding.clTicketReturenDetails.visibility = View.VISIBLE
             binding.trTotalPassengerReturn.visibility = View.VISIBLE
             binding.totalPassengerRowTwoUpcomingBookDetail.text = dataItemGetBooking!!.userBooking!!.booking!!.totalPassanger.toString()
+            binding.tvFlightNumberReturnBookingSummary.text = dataItemGetBooking!!.userBooking!!.booking!!.ticketReturn!!.flightId.toString()
+            binding.tvPriceReturnBsummaryUpcomingBookDetail.setText("IDR  "+DecimalSeparator.formatDecimalSeperators(dataItemGetBooking!!.userBooking!!.booking!!.ticketReturn!!.price.toString()))
             viewmodelTripSummaryPassenger.getTicketReturnById(dataItemGetBooking!!.userBooking!!.booking!!.ticketIdReturn.toString())
         }
 

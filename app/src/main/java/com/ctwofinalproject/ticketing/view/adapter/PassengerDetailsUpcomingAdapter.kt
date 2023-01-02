@@ -36,8 +36,8 @@ class PassengerDetailsUpcomingAdapter(val passengerAmmount: Int): RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvNameItemPassenger.setText("Mr / Mrs : "+ differ.currentList[position].idPassanger+" "+differ.currentList[position].idPassanger)
-        holder.binding.tvNikItemPassenger.setText("No Id : "+differ.currentList[position].idPassanger)
+        holder.binding.tvNameItemPassenger.setText("Mr / Mrs : "+ differ.currentList[position].passanger!!.firstname+" "+differ.currentList[position].passanger!!.lastname)
+        holder.binding.tvNikItemPassenger.setText("No Id : "+differ.currentList[position].passanger!!.identityNumber)
 
     }
 

@@ -22,90 +22,161 @@ data class ResponseGetHistory(
 ) : Parcelable
 
 @Parcelize
-data class WishlistItem(
+data class FlightHistory(
+
+	@field:SerializedName("departureTime")
+	val departureTime: String? = null,
+
+	@field:SerializedName("departureAirport")
+	val departureAirport: Int? = null,
+
+	@field:SerializedName("DepartureTerminal")
+	val departureTerminal: DepartureTerminalHistory? = null,
+
+	@field:SerializedName("ArrivalTerminal")
+	val arrivalTerminal: ArrivalTerminalHistory? = null,
+
+	@field:SerializedName("arrivalDate")
+	val arrivalDate: String? = null,
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("isWishlist")
-	val isWishlist: Boolean? = null,
+	@field:SerializedName("planeName")
+	val planeName: @RawValue Any? = null,
 
-	@field:SerializedName("user_id")
-	val userId: Int? = null,
+	@field:SerializedName("arrivalTime")
+	val arrivalTime: String? = null,
 
-	@field:SerializedName("ticket_id_departure")
-	val ticketIdDeparture: Int? = null,
+	@field:SerializedName("planeId")
+	val planeId: Int? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("ticket_id_return")
-	val ticketIdReturn: @RawValue Any? = null,
+	@field:SerializedName("departureDate")
+	val departureDate: String? = null,
+
+	@field:SerializedName("arrivalAirport")
+	val arrivalAirport: Int? = null,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
 ) : Parcelable
 
 @Parcelize
-data class Address(
+data class TicketReturnHistory(
 
 	@field:SerializedName("country")
-	val country: @RawValue Any? = null,
+	val country: String? = null,
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("province")
-	val province: @RawValue Any? = null,
+	@field:SerializedName("flight")
+	val flight: FlightHistory? = null,
 
-	@field:SerializedName("city")
-	val city: @RawValue Any? = null,
+	@field:SerializedName("price")
+	val price: Int? = null,
 
-	@field:SerializedName("user_id")
-	val userId: Int? = null,
+	@field:SerializedName("class_id")
+	val classId: Int? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("homeAddress")
-	val homeAddress: @RawValue Any? = null,
+	@field:SerializedName("flight_id")
+	val flightId: Int? = null,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
 ) : Parcelable
 
 @Parcelize
-data class BookingHistory(
+data class ArrivalTerminalHistory(
+
+	@field:SerializedName("country")
+	val country: String? = null,
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("isBooking")
-	val isBooking: Boolean? = null,
+	@field:SerializedName("code")
+	val code: String? = null,
 
-	@field:SerializedName("ticketReturn")
-	val ticketReturn: TicketReturnHistory? = null,
+	@field:SerializedName("city")
+	val city: String? = null,
 
-	@field:SerializedName("ticket_id_departure")
-	val ticketIdDeparture: Int? = null,
-
-	@field:SerializedName("totalPassanger")
-	val totalPassanger: Int? = null,
-
-	@field:SerializedName("ticketDeparture")
-	val ticketDeparture: TicketDepartureHistory? = null,
+	@field:SerializedName("name")
+	val name: String? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("ticket_id_return")
-	val ticketIdReturn: Int? = null,
+	@field:SerializedName("terminal")
+	val terminal: String? = null,
+
+	@field:SerializedName("status")
+	val status: Boolean? = null,
 
 	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null,
+	val updatedAt: String? = null
+) : Parcelable
 
-	@field:SerializedName("passangerBooking")
-	val passangerBooking: List<PassangerBookingItemHistory?>? = null
+@Parcelize
+data class TicketDepartureHistory(
+
+	@field:SerializedName("country")
+	val country: String? = null,
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("flight")
+	val flight: FlightHistory? = null,
+
+	@field:SerializedName("price")
+	val price: Int? = null,
+
+	@field:SerializedName("class_id")
+	val classId: Int? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("flight_id")
+	val flightId: Int? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+) : Parcelable
+
+@Parcelize
+data class DataItemHistory(
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("userBooking")
+	val userBooking: UserBookingHistory? = null,
+
+	@field:SerializedName("userBooking_id")
+	val userBookingId: Int? = null,
+
+	@field:SerializedName("payment_id")
+	val paymentId: Int? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("isHistory")
+	val isHistory: Boolean? = null,
+
+	@field:SerializedName("paymentType")
+	val paymentType: String? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
 ) : Parcelable
 
 @Parcelize
@@ -117,17 +188,8 @@ data class UsersHistory(
 	@field:SerializedName("birthdate")
 	val birthdate: String? = null,
 
-	@field:SerializedName("address")
-	val address: Address? = null,
-
 	@field:SerializedName("gender")
 	val gender: String? = null,
-
-	@field:SerializedName("wishlist")
-	val wishlist: List<WishlistItem?>? = null,
-
-	@field:SerializedName("roles")
-	val roles: Roles? = null,
 
 	@field:SerializedName("pictures")
 	val pictures: String? = null,
@@ -170,6 +232,59 @@ data class UsersHistory(
 ) : Parcelable
 
 @Parcelize
+data class PassangerBookingItemHistory(
+
+	@field:SerializedName("passanger")
+	val passanger: PassangerHistory? = null,
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("idBooking")
+	val idBooking: Int? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("idPassanger")
+	val idPassanger: Int? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+) : Parcelable
+
+@Parcelize
+data class DepartureTerminalHistory(
+
+	@field:SerializedName("country")
+	val country: String? = null,
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("code")
+	val code: String? = null,
+
+	@field:SerializedName("city")
+	val city: String? = null,
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("terminal")
+	val terminal: String? = null,
+
+	@field:SerializedName("status")
+	val status: Boolean? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+) : Parcelable
+
+@Parcelize
 data class UserBookingHistory(
 
 	@field:SerializedName("booking_id")
@@ -195,114 +310,66 @@ data class UserBookingHistory(
 ) : Parcelable
 
 @Parcelize
-data class TicketReturnHistory(
-
-	@field:SerializedName("country")
-	val country: String? = null,
+data class PassangerHistory(
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("price")
-	val price: Int? = null,
+	@field:SerializedName("firstname")
+	val firstname: String? = null,
 
-	@field:SerializedName("class_id")
-	val classId: Int? = null,
+	@field:SerializedName("identityType")
+	val identityType: String? = null,
+
+	@field:SerializedName("identityNumber")
+	val identityNumber: String? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("flight_id")
-	val flightId: Int? = null,
+	@field:SerializedName("email")
+	val email: String? = null,
+
+	@field:SerializedName("age")
+	val age: Int? = null,
+
+	@field:SerializedName("lastname")
+	val lastname: String? = null,
 
 	@field:SerializedName("updatedAt")
 	val updatedAt: String? = null
 ) : Parcelable
 
 @Parcelize
-data class DataItemHistory(
+data class BookingHistory(
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
 
-	@field:SerializedName("userBooking")
-	val userBooking: UserBookingHistory? = null,
+	@field:SerializedName("isBooking")
+	val isBooking: Boolean? = null,
 
-	@field:SerializedName("userBooking_id")
-	val userBookingId: Int? = null,
+	@field:SerializedName("ticketReturn")
+	val ticketReturn: TicketReturnHistory? = null,
 
-	@field:SerializedName("payment_id")
-	val paymentId: Int? = null,
+	@field:SerializedName("ticket_id_departure")
+	val ticketIdDeparture: Int? = null,
 
-	@field:SerializedName("id")
-	val id: Int? = null,
+	@field:SerializedName("totalPassanger")
+	val totalPassanger: Int? = null,
 
-	@field:SerializedName("isHistory")
-	val isHistory: Boolean? = null,
-
-	@field:SerializedName("paymentType")
-	val paymentType: @RawValue Any? = null,
-
-	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
-) : Parcelable
-
-@Parcelize
-data class TicketDepartureHistory(
-
-	@field:SerializedName("country")
-	val country: String? = null,
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
-
-	@field:SerializedName("price")
-	val price: Int? = null,
-
-	@field:SerializedName("class_id")
-	val classId: Int? = null,
+	@field:SerializedName("ticketDeparture")
+	val ticketDeparture: TicketDepartureHistory? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("flight_id")
-	val flightId: Int? = null,
+	@field:SerializedName("ticket_id_return")
+	val ticketIdReturn: Int? = null,
 
 	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
-) : Parcelable
+	val updatedAt: String? = null,
 
-@Parcelize
-data class PassangerBookingItemHistory(
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
-
-	@field:SerializedName("idBooking")
-	val idBooking: Int? = null,
-
-	@field:SerializedName("id")
-	val id: Int? = null,
-
-	@field:SerializedName("idPassanger")
-	val idPassanger: Int? = null,
-
-	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
-) : Parcelable
-
-@Parcelize
-data class Roles(
-
-	@field:SerializedName("createdAt")
-	val createdAt: String? = null,
-
-	@field:SerializedName("roleName")
-	val roleName: String? = null,
-
-	@field:SerializedName("id")
-	val id: Int? = null,
-
-	@field:SerializedName("updatedAt")
-	val updatedAt: String? = null
+	@field:SerializedName("passangerBooking")
+	val passangerBooking: List<PassangerBookingItemHistory?>? = null
 ) : Parcelable

@@ -59,7 +59,7 @@ class MyBookingUpcomingAdapter(): RecyclerView.Adapter<MyBookingUpcomingAdapter.
         var totalPriceDeparture = 0
         var totalPriceReturn    = 0
 
-        holder.binding.tvUsernameItemBooking.setText(differ.currentList[position].userBooking!!.users!!.firstname.toString() + differ.currentList[position].userBooking!!.users!!.lastname.toString())
+        holder.binding.tvUsernameItemBooking.setText(differ.currentList[position].userBooking!!.users!!.firstname + differ.currentList[position].userBooking!!.users!!.lastname)
         holder.binding.tvPlaneNameItemBooking.visibility = View.GONE
         holder.binding.tvBookingId.setText("BOOKING CODE : "+differ.currentList[position].id)
         holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.createdAt.toString().substring(0,9)

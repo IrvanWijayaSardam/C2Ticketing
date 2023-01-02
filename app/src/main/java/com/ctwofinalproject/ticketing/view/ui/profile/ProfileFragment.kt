@@ -123,6 +123,7 @@ class ProfileFragment : Fragment() {
             Log.d(TAG, "onViewCreated: ${it}")
             if(it != null){
                 setProfile(it.currentUser!!.pictures.toString())
+                Log.d(TAG, "onViewCreated: data response whoami ${it.currentUser!!.pictures.toString()}")
                 binding.tvNameFragmentProfile.setText(it.currentUser!!.firstname.toString()+" "+it.currentUser!!.lastname.toString())
             } else {
                 
@@ -135,6 +136,8 @@ class ProfileFragment : Fragment() {
                 if(it.code!!.equals(200)){
                     ShowSnack.show(binding.root,"Success Upload Profile")
                     setProfile(it.data!!)
+                    viewModelProto.updateProfile(it.data!!.toString())
+                    Log.d(TAG, "onViewCreated: data response postfile ${it.data!!.toString()}")
                     profileViewModel.updateUser("bearer "+token, UserUpdate(null,null,null,null,null,null,
                         null,it.data.toString(),null,null,null))
                     profileViewModel.liveDataResponsePostFile.value = null
