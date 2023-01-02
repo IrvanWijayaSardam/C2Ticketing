@@ -87,7 +87,7 @@ class MyBookingUpcomingAdapter(): RecyclerView.Adapter<MyBookingUpcomingAdapter.
         totalPrice = totalPriceDeparture + totalPriceReturn
         holder.binding.tvTotalPriceItemBooking.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalPrice.toString()))
         holder.binding.tvFlightNumberDepItemBooking.text = differ.currentList[position].userBooking!!.booking!!.ticketIdDeparture.toString()
-        holder.binding.tvTotalPassengerItemBooking.text = differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size.toString()
+        holder.binding.tvTotalPassengerItemBooking.setText("Total Passenger : "+differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size.toString())
     }
 
     override fun getItemCount(): Int {

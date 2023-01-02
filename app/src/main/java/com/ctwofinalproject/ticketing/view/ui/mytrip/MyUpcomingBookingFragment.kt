@@ -56,8 +56,10 @@ class MyUpcomingBookingFragment : Fragment() {
                 binding.rvMyBookingUpcoming.adapter = adapterMyUpcomingBooking
                 binding.ivEmptyListFUpcomingBooking.visibility = View.GONE
                 binding.tvEmptyListFUpcomingBooking.visibility = View.GONE
+                binding.shimmerBarmyUpcomingBooking.visibility = View.GONE
             } else {
-
+                binding.ivEmptyListFUpcomingBooking.visibility = View.VISIBLE
+                binding.tvEmptyListFUpcomingBooking.visibility = View.VISIBLE
             }
         }
 

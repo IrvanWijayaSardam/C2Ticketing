@@ -58,6 +58,11 @@ class MyBookingFragment : Fragment() {
                 binding.rvMyBooking.adapter = adapterMyBooking
                 binding.ivEmptyListFMyBooking.visibility = View.GONE
                 binding.tvEmptyListFMyBooking.visibility = View.GONE
+                binding.shimmerBarmyBooking.visibility = View.GONE
+            } else {
+                binding.ivEmptyListFMyBooking.visibility = View.VISIBLE
+                binding.tvEmptyListFMyBooking.visibility = View.VISIBLE
+                binding.shimmerBarmyBooking.visibility = View.GONE
             }
         }
         adapterMyBooking.setOnItemClickListener(object : MyBookingAdapter.onItemClickListener{

@@ -263,13 +263,13 @@
                 android:fontFamily="@font/poppins_semibold"
                 android:text="Ticket Return Details"
                 android:textColor="@color/primary_blue_1"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clTicketReturenDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="visible"
+                android:visibility="gone"
                 >
                 <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmerTicketDetailsReturn"
@@ -302,7 +302,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <TableLayout
                         android:id="@+id/tlInformationFlightOneFragmentShowTicketReturn"
@@ -564,7 +564,7 @@
                         android:id="@+id/trTotalPassengerReturn"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="visible">
+                        android:visibility="gone">
 
                         <TextView
                             android:id="@+id/totalPassengerRowTwoUpcomingBookDetail"

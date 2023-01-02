@@ -14,6 +14,27 @@
         android:layout_height="match_parent"
         >
     </androidx.recyclerview.widget.RecyclerView>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerBarmyUpcomingBooking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_booking_shimmer"/>
+                <include layout="@layout/item_booking_shimmer"/>
+                <include layout="@layout/item_booking_shimmer"/>
+                <include layout="@layout/item_booking_shimmer"/>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ImageView
         android:id="@+id/ivEmptyListFUpcomingBooking"
@@ -22,6 +43,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="150dp"
         android:src="@drawable/ic_image_flit_nothing"
+        android:visibility="gone"
         />
     <TextView
         android:id="@+id/tvEmptyListFUpcomingBooking"
@@ -33,6 +55,7 @@
         android:gravity="center"
         android:textSize="18sp"
         android:fontFamily="@font/poppins_semibold"
+        android:visibility="gone"
         />
 
 </FrameLayout>

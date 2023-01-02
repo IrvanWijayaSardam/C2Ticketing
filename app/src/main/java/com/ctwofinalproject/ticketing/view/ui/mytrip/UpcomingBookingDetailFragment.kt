@@ -73,7 +73,8 @@ class UpcomingBookingDetailFragment : Fragment() {
                 binding.tvArrivalTerminalDeparture.text = it.data!!.flight!!.arrivalTerminal!!.name
                 binding.tvPriceDepartureFUpcomingBookDetail.setText("IDR "+DecimalSeparator.formatDecimalSeperators(it.data!!.price.toString()))
                 totalFareDeparture = totalPassenger * it.data!!.price!!.toInt()
-                binding.tvTotalFareDepartureUpcomingBookDetail.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalFareDeparture.toString()))
+                binding.tvPriceDepartureUpcomingBookDetail.setText("IDR "+DecimalSeparator.formatDecimalSeperators(it.data!!.price!!.toInt().toString()))
+                    binding.tvTotalFareDepartureUpcomingBookDetail.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalFareDeparture.toString()))
                 totalFare = totalFareReturn + totalFareDeparture
                 binding.tvTotalFareFDetailBooking.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalFare.toString()))
                 binding.shimmerBarTotalFare.visibility = View.GONE
@@ -121,6 +122,9 @@ class UpcomingBookingDetailFragment : Fragment() {
             binding.tvTicketReturnDetails.visibility = View.VISIBLE
             binding.clTicketReturenDetails.visibility = View.VISIBLE
             binding.trTotalPassengerReturn.visibility = View.VISIBLE
+            binding.shimmerTicketDetailsReturn.visibility = View.GONE
+            binding.cvTicketDetailsFpaymentReturn.visibility = View.VISIBLE
+
             binding.totalPassengerRowTwoUpcomingBookDetail.text = dataItemGetBooking!!.userBooking!!.booking!!.totalPassanger.toString()
             binding.tvFlightNumberReturnBookingSummary.text = dataItemGetBooking!!.userBooking!!.booking!!.ticketReturn!!.flightId.toString()
             binding.tvPriceReturnBsummaryUpcomingBookDetail.setText("IDR  "+DecimalSeparator.formatDecimalSeperators(dataItemGetBooking!!.userBooking!!.booking!!.ticketReturn!!.price.toString()))
