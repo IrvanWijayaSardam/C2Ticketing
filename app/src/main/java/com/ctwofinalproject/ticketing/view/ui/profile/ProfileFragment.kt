@@ -144,7 +144,6 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
-
     }
 
 

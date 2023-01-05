@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.ctwofinalproject.ticketing.R
 import com.ctwofinalproject.ticketing.data.*
 import com.ctwofinalproject.ticketing.databinding.FragmentTripSummaryPassengerBinding
-import com.ctwofinalproject.ticketing.model.DataTicketGetById
+import com.ctwofinalproject.ticketing.model.DataResponseGetTicketById
 import com.ctwofinalproject.ticketing.util.DecimalSeparator
 import com.ctwofinalproject.ticketing.util.LoadingDialog
 import com.ctwofinalproject.ticketing.util.ShowSnack
@@ -42,8 +42,8 @@ class TripSummaryPassengerFragment : Fragment() {
     private val binding get()                                              = _binding!!
     lateinit var adapterPassenger                                          : PassengerListAdapter
     private val passengerList                                              = arrayListOf<Passanger>()
-    private val ticketListDeparture                                        = arrayListOf<DataTicketGetById>()
-    private val ticketListReturn                                           = arrayListOf<DataTicketGetById>()
+    private val ticketListDeparture                                        = arrayListOf<DataResponseGetTicketById>()
+    private val ticketListReturn                                           = arrayListOf<DataResponseGetTicketById>()
     //private val contactDetailsList                                         = arrayListOf<ContactDetails>()
     private var positionItem : Int                                         = 0
     private val fragmentAddPassenger                                       = AddPassengerFragment()
