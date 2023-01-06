@@ -157,11 +157,14 @@ class TripSummaryPassengerFragment : Fragment() {
                         ))
                     )
 
+                    /*
                     binding.rvTicketReturnTripSummaryPassenger.layoutManager =  LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     binding.rvTicketReturnTripSummaryPassenger.adapter = adapterTicketByIdReturn
 
                     binding.rvTicketTripSummaryPassenger.layoutManager =  LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     binding.rvTicketTripSummaryPassenger.adapter = adapterTicketById
+
+                     */
 
 
                     binding.cvTicketReturnTripSummaryPassenger.visibility = View.VISIBLE
