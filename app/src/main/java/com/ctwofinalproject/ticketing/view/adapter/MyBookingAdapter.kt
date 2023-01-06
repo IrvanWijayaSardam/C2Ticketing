@@ -59,16 +59,16 @@ class MyBookingAdapter(): RecyclerView.Adapter<MyBookingAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if(differ.currentList[position].usersPayment!!.booking!!.ticketIdReturn == null){
             holder.binding.tvTripType.text = "One Way"
-            holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,9)
-            holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalDate!!.substring(0,9)
+            holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,10)
+            holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalDate!!.substring(0,10)
             holder.binding.tvDepartureDateItemBookingReturn.visibility = View.GONE
             holder.binding.tvArrivalDateItemBookingReturn.visibility = View.GONE
         } else {
             holder.binding.tvTripType.text = "Round Trip"
-            holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,9)
-            holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalDate!!.substring(0,9)
-            holder.binding.tvDepartureDateItemBookingReturn.text = differ.currentList[position].usersPayment!!.booking!!.ticketReturn!!.flight!!.departureDate!!.substring(0,9)
-            holder.binding.tvArrivalDateItemBookingReturn.text = differ.currentList[position].usersPayment!!.booking!!.ticketReturn!!.flight!!.arrivalDate!!.substring(0,9)
+            holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.departureDate!!.substring(0,10)
+            holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.arrivalDate!!.substring(0,10)
+            holder.binding.tvDepartureDateItemBookingReturn.text = differ.currentList[position].usersPayment!!.booking!!.ticketReturn!!.flight!!.departureDate!!.substring(0,10)
+            holder.binding.tvArrivalDateItemBookingReturn.text = differ.currentList[position].usersPayment!!.booking!!.ticketReturn!!.flight!!.arrivalDate!!.substring(0,10)
         }
         if(differ.currentList[position].isPayed == true){
             holder.binding.tvPaymentStatusItemBooking.text = "PAID"
@@ -80,6 +80,7 @@ class MyBookingAdapter(): RecyclerView.Adapter<MyBookingAdapter.ViewHolder>() {
         } else {
             holder.binding.tvFlightClassItemBooking.text = "Economy"
         }
+        holder.binding.tvPlaneNameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.planeName!!.namePlane
         holder.binding.tvBookingId.setText("Booking Code : ${differ.currentList[position].id.toString()}")
         holder.binding.tvTotalPriceItemBooking.setText("IDR. "+DecimalSeparator.formatDecimalSeperators(differ.currentList[position].totalPrice.toString()))
         holder.binding.tvFlightNumberDepItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketIdDeparture.toString()
@@ -90,7 +91,7 @@ class MyBookingAdapter(): RecyclerView.Adapter<MyBookingAdapter.ViewHolder>() {
         }
         holder.binding.tvTotalPassengerItemBooking.setText("Total Passenger : "+differ.currentList[position].usersPayment!!.booking!!.totalPassanger.toString())
 //        holder.binding.tvPlaneNameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.ticketDeparture!!.flight!!.planeName!!.namePlane
- //       holder.binding.tvUsernameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.passangerBooking!![0]!!.passanger!!.firstname
+        holder.binding.tvUsernameItemBooking.text = differ.currentList[position].usersPayment!!.booking!!.passangerBooking!![0]!!.passanger!!.firstname
     }
 
     override fun getItemCount(): Int {

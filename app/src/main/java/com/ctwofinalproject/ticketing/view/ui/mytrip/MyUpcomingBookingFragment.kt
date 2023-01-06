@@ -59,7 +59,7 @@ class MyUpcomingBookingFragment : Fragment() {
                 binding.shimmerBarmyUpcomingBooking.visibility = View.GONE
             } else {
                 binding.ivEmptyListFUpcomingBooking.visibility = View.VISIBLE
-                binding.tvEmptyListFUpcomingBooking.visibility = View.VISIBLE
+                binding.shimmerBarmyUpcomingBooking.visibility = View.GONE
             }
         }
 

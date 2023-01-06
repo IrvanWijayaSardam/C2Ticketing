@@ -8,10 +8,54 @@
     android:backgroundTint="#D4E0FF"
     >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMyBookingPast"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        >
+    </androidx.recyclerview.widget.RecyclerView>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerBarmyPastBooking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_booking_shimmer"/>
+                <include layout="@layout/item_booking_shimmer"/>
+                <include layout="@layout/item_booking_shimmer"/>
+                <include layout="@layout/item_booking_shimmer"/>
+
+
+            </LinearLayout>
+        </ScrollView>
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <ImageView
+        android:id="@+id/ivEmptyListFPastBooking"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/ic_image_flit_nothing"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tvEmptyListFPastBooking"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="320dp"
+        android:text="Oops , you do not have any orders"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:fontFamily="@font/poppins_semibold"
+        android:visibility="gone"
+        />
 
 </FrameLayout>
