@@ -43,7 +43,7 @@ data class FlightHistory(
 	val createdAt: String? = null,
 
 	@field:SerializedName("planeName")
-	val planeName: @RawValue Any? = null,
+	val planeName: @RawValue PlaneNameResponseGetHistory? = null,
 
 	@field:SerializedName("arrivalTime")
 	val arrivalTime: String? = null,
@@ -373,3 +373,19 @@ data class BookingHistory(
 	@field:SerializedName("passangerBooking")
 	val passangerBooking: List<PassangerBookingItemHistory?>? = null
 ) : Parcelable
+
+
+data class PlaneNameResponseGetHistory(
+
+	@field:SerializedName("createdAt")
+	val createdAt: String? = null,
+
+	@field:SerializedName("namePlane")
+	val namePlane: String? = null,
+
+	@field:SerializedName("id")
+	val id: Int? = null,
+
+	@field:SerializedName("updatedAt")
+	val updatedAt: String? = null
+)

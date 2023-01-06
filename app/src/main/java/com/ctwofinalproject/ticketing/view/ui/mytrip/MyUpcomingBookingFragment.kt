@@ -17,6 +17,11 @@ import com.ctwofinalproject.ticketing.view.adapter.MyBookingUpcomingAdapter
 import com.ctwofinalproject.ticketing.viewmodel.MyBookingViewModel
 import com.ctwofinalproject.ticketing.viewmodel.ProtoViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
+
+private const val TAG = "MyUpcomingBookingFragment"
+
 
 @AndroidEntryPoint
 class MyUpcomingBookingFragment : Fragment() {
@@ -26,6 +31,7 @@ class MyUpcomingBookingFragment : Fragment() {
     private val viewModelMyBookingViewModel                                          : MyBookingViewModel by viewModels()
     private var token                                                                = ""
     lateinit var adapterMyUpcomingBooking                                            : MyBookingUpcomingAdapter
+    private var formattedDate                                                        = ""
 
 
     override fun onCreateView(
@@ -40,6 +46,7 @@ class MyUpcomingBookingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapterMyUpcomingBooking                        = MyBookingUpcomingAdapter()
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US)
         viewModelProto.dataUser.observe(viewLifecycleOwner){
             if (it.isLogin){
                 token = it.token
@@ -51,7 +58,17 @@ class MyUpcomingBookingFragment : Fragment() {
 
         viewModelMyBookingViewModel.liveDataResponseGetHistory.observe(viewLifecycleOwner){
             if(it != null){
-                adapterMyUpcomingBooking.submitList(it.data)
+                val calendar = Calendar.getInstance()
+                val todayDateTime = calendar.time
+                var convertedDate : Date? = null
+
+                var filteredList = it.data!!.filter {
+                    convertedDate = it!!.userBooking!!.booking!!.ticketDeparture!!.flight!!.departureDate?.let { sdf.parse(it)}
+                    todayDateTime.before(convertedDate)
+                }
+                adapterMyUpcomingBooking.submitList(filteredList)
+                Log.d(TAG, "onViewCreated: filteredlist after ${filteredList.size}")
+
                 binding.rvMyBookingUpcoming.layoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
                 binding.rvMyBookingUpcoming.adapter = adapterMyUpcomingBooking
                 binding.ivEmptyListFUpcomingBooking.visibility = View.GONE

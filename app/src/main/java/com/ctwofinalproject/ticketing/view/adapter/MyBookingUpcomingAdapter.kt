@@ -64,49 +64,12 @@ class MyBookingUpcomingAdapter(): RecyclerView.Adapter<MyBookingUpcomingAdapter.
         var totalPriceDeparture = 0
         var totalPriceReturn    = 0
 
-        val today = LocalDate.now()
-        var dataDate = OffsetDateTime.parse(differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.flight!!.departureDate)
-        val todayDateTime = today.atStartOfDay()
-        val todayOffsetDateTime = todayDateTime.atOffset(ZoneOffset.UTC)
-
-        if(dataDate.isAfter(todayOffsetDateTime)) {
+            println("The given date is after today's date.")
             holder.binding.tvUsernameItemBooking.setText(differ.currentList[position].userBooking!!.users!!.firstname + differ.currentList[position].userBooking!!.users!!.lastname)
-            holder.binding.tvPlaneNameItemBooking.visibility = View.GONE
             holder.binding.tvBookingId.setText("BOOKING CODE : "+differ.currentList[position].id)
             holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.flight!!.departureDate.toString().substring(0,10)
             holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.flight!!.arrivalDate.toString().substring(0,10)
-            totalPriceDeparture = (differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.price!!.toInt() * differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size)
-
-            if(differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.classId!!.equals(1)) {
-                holder.binding.tvFlightClassItemBooking.text = "Business"
-            } else {
-                holder.binding.tvFlightClassItemBooking.text = "Economy"
-            }
-
-            if(differ.currentList[position].userBooking!!.booking!!.ticketIdReturn != null){
-                holder.binding.tvTripType.text = "Round Trip"
-                holder.binding.tvFlightNumberReturnItemBooking.text = differ.currentList[position].userBooking!!.booking!!.ticketIdReturn.toString()
-                holder.binding.tvDepartureDateItemBookingReturn.text = differ.currentList[position].userBooking!!.booking!!.ticketReturn!!.flight!!.departureDate.toString().substring(0,10)
-                holder.binding.tvArrivalDateItemBookingReturn.text = differ.currentList[position].userBooking!!.booking!!.ticketReturn!!.flight!!.arrivalDate.toString().substring(0,10)
-                totalPriceReturn = (differ.currentList[position].userBooking!!.booking!!.ticketReturn!!.price!!.toInt() * differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size)
-            } else {
-                holder.binding.tvTripType.text = "One Way"
-                holder.binding.tvFlightNumberReturnItemBooking.visibility = View.GONE
-                holder.binding.tvDepartureDateItemBookingReturn.visibility = View.GONE
-                holder.binding.tvArrivalDateItemBookingReturn.visibility = View.GONE
-            }
-            totalPrice = totalPriceDeparture + totalPriceReturn
-            holder.binding.tvTotalPriceItemBooking.setText("IDR "+DecimalSeparator.formatDecimalSeperators(totalPrice.toString()))
-            holder.binding.tvFlightNumberDepItemBooking.text = differ.currentList[position].userBooking!!.booking!!.ticketIdDeparture.toString()
-            holder.binding.tvTotalPassengerItemBooking.setText("Total Passenger : "+differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size.toString())
-        } else if(dataDate.isBefore(todayOffsetDateTime)) {
-            holder.binding.root.visibility = View.GONE
-        } else {
-            holder.binding.tvUsernameItemBooking.setText(differ.currentList[position].userBooking!!.users!!.firstname + differ.currentList[position].userBooking!!.users!!.lastname)
-            holder.binding.tvPlaneNameItemBooking.visibility = View.GONE
-            holder.binding.tvBookingId.setText("BOOKING CODE : "+differ.currentList[position].id)
-            holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.flight!!.departureDate.toString().substring(0,10)
-            holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.flight!!.arrivalDate.toString().substring(0,10)
+            holder.binding.tvPlaneNameItemBooking.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.flight!!.planeName!!.namePlane
             totalPriceDeparture = (differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.price!!.toInt() * differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size)
 
             if(differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.classId!!.equals(1)) {
@@ -132,9 +95,6 @@ class MyBookingUpcomingAdapter(): RecyclerView.Adapter<MyBookingUpcomingAdapter.
             holder.binding.tvFlightNumberDepItemBooking.text = differ.currentList[position].userBooking!!.booking!!.ticketIdDeparture.toString()
             holder.binding.tvTotalPassengerItemBooking.setText("Total Passenger : "+differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size.toString())
         }
-
-
-    }
 
     override fun getItemCount(): Int {
         return differ.currentList.size

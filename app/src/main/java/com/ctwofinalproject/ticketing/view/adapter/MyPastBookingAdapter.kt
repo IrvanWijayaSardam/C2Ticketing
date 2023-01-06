@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -58,23 +59,17 @@ class MyPastBookingAdapter (): RecyclerView.Adapter<MyPastBookingAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        var totalPrice          = 0
-        var totalPriceDeparture = 0
-        var totalPriceReturn    = 0
+            var totalPrice          = 0
+            var totalPriceDeparture = 0
+            var totalPriceReturn    = 0
 
-        val today = LocalDate.now()
-        var dataDate = OffsetDateTime.parse(differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.createdAt)
-        val todayDateTime = today.atStartOfDay()
-        val todayOffsetDateTime = todayDateTime.atOffset(ZoneOffset.UTC)
-
-        if (dataDate.isBefore(todayOffsetDateTime)) {
-            println("The given date is before today's date.")
             holder.binding.tvUsernameItemBooking.setText(differ.currentList[position].userBooking!!.users!!.firstname + differ.currentList[position].userBooking!!.users!!.lastname)
-            holder.binding.tvPlaneNameItemBooking.visibility = View.GONE
             holder.binding.tvBookingId.setText("BOOKING CODE : "+differ.currentList[position].id)
             holder.binding.tvDepartureDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.createdAt.toString().substring(0,10)
             holder.binding.tvArrivalDateItemBookingDeparture.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.createdAt.toString().substring(0,10)
+            holder.binding.tvPlaneNameItemBooking.text = differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.flight!!.planeName!!.namePlane
             totalPriceDeparture = (differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.price!!.toInt() * differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size)
+
 
             if(differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.classId!!.equals(1)) {
                 holder.binding.tvFlightClassItemBooking.text = "Business"
@@ -100,7 +95,7 @@ class MyPastBookingAdapter (): RecyclerView.Adapter<MyPastBookingAdapter.ViewHol
             holder.binding.tvTotalPassengerItemBooking.setText("Total Passenger : "+differ.currentList[position].userBooking!!.booking!!.passangerBooking!!.size.toString())
         }
         //if(differ.currentList[position].userBooking!!.booking!!.ticketDeparture!!.createdAt )
-    }
+
 
     override fun getItemCount(): Int {
         return differ.currentList.size
