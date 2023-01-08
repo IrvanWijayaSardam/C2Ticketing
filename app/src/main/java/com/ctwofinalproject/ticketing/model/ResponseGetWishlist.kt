@@ -17,7 +17,7 @@ data class ResponseGetWishlist(
 	val status: Boolean? = null
 )
 
-data class PlaneNameItem(
+data class PlaneNameResponseGetWishlist(
 
 	@field:SerializedName("createdAt")
 	val createdAt: String? = null,
@@ -80,7 +80,7 @@ data class FlightWishlist(
 	val createdAt: String? = null,
 
 	@field:SerializedName("planeName")
-	val planeName: List<PlaneNameItem?>? = null,
+	val planeName: PlaneNameResponseGetWishlist? = null,
 
 	@field:SerializedName("arrivalTime")
 	val arrivalTime: String? = null,

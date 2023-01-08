@@ -110,6 +110,7 @@ class ProfileFragment : Fragment() {
             if(it.isLogin){
                 isLogin = true
                 token = it.token
+                setProfile(it.pictures)
                 profileViewModel.whoami("bearer "+token)
             } else {
                 isLogin = false
@@ -122,7 +123,7 @@ class ProfileFragment : Fragment() {
         profileViewModel.liveDataResponseWhoami.observe(viewLifecycleOwner){
             Log.d(TAG, "onViewCreated: ${it}")
             if(it != null){
-                setProfile(it.currentUser!!.pictures.toString())
+                //setProfile(it.currentUser!!.pictures.toString())
                 Log.d(TAG, "onViewCreated: data response whoami ${it.currentUser!!.pictures.toString()}")
                 binding.tvNameFragmentProfile.setText(it.currentUser!!.firstname.toString()+" "+it.currentUser!!.lastname.toString())
             } else {
